@@ -51,7 +51,7 @@ public class TaskC {
      * @param toBeSortBak Буфер. Размер должен быть равен размеру toBeSort.
      * @param left        Начальный индекс в toBeSort для сортировки.
      * @param right       Конечный индекс в toBeSort для сортировки.
-     * @return
+     * @return result
      */
     private static double[] mergeSort(double[] toBeSort, double[] toBeSortBak, int left, int right) {
         if (left >= right - 1) {
