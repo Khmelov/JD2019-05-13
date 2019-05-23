@@ -11,7 +11,8 @@ public class TaskB {
                 y = (Math.pow(7, i)) - (Math.cos(j));
                 sum += y;
             }
-            System.out.println("a = " + i + " сумма = " + sum);
+            System.out.printf("%s%-1.2f%s=%-5.5f\n", "При a=", i, " Cумма y", sum);
+
         }
 
 
@@ -35,7 +36,8 @@ public class TaskB {
 
             a = Math.log10(Math.abs(b + 2.74));
 
-            System.out.println("При х/2 = " + x / 2 + " a = " + a);
+            System.out.printf("%s%-1.2f%s=%-5.10f\n", "При x/2=", x/2, " a", a);
+//            System.out.println("При х/2 = " + x / 2 + " a = " + a);
         }
 
 
