@@ -1,9 +1,7 @@
 package by.it.izaykoff.jd01_04;
 
-import by.it.izaykoff.jd01_03.Helper;
 import by.it.izaykoff.jd01_03.InOut;
 
-import java.util.Arrays;
 
 public class TaskC {
     public static void main(String[] args) {
@@ -12,7 +10,7 @@ public class TaskC {
 
     }
 
-    static void buildOneDimArray(String line) {
+    private static void buildOneDimArray(String line) {
         double[] array = InOut.getArray(line);
         InOut.printArray(array, "V", 5);
         double first = array[0];
@@ -22,8 +20,8 @@ public class TaskC {
 
         InOut.printArray(array);
         InOut.printArray(array, "V", 4);
-        int indexFirst = Arrays.binarySearch(array, first);
-        int indexLast = Arrays.binarySearch(array, last);
+        int indexFirst = binarySearch(array, first);
+        int indexLast = binarySearch(array, last);
         System.out.println("Index of first element=" + indexFirst);
         System.out.println("Index of last element=" + indexLast);
 
@@ -89,7 +87,7 @@ public class TaskC {
 //        return mergeArray;
 //    }
 
-    static int binarySearch(double[ ] array, double value){
+    private static int binarySearch(double[] array, double value){
         int res=0;
         int firstIndex  = 0;
         int lastIndex   = array.length - 1;
@@ -110,7 +108,7 @@ public class TaskC {
 
 
 
-    static void merge(double[] array, double[] arrayLeft, double[] arrayRight) {
+    private static void merge(double[] array, double[] arrayLeft, double[] arrayRight) {
         int elementArray = arrayLeft.length + arrayRight.length;
         int i, elementLeft, elementRight;
         i = elementLeft = elementRight = 0;
@@ -133,12 +131,10 @@ public class TaskC {
                         elementRight++;
                     }
                 }
-                if (elementRight >= arrayRight.length) {
-                    while (elementLeft < arrayLeft.length) {
-                        array[i] = arrayLeft[elementLeft];
-                        elementLeft++;
-                        i++;
-                    }
+                while (elementLeft < arrayLeft.length) {
+                    array[i] = arrayLeft[elementLeft];
+                    elementLeft++;
+                    i++;
                 }
             }
         }

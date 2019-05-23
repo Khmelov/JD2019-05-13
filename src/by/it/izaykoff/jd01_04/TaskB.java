@@ -34,15 +34,15 @@ public class TaskB {
             System.out.printf("%-9s ",lastName[i]);
 
             for (int j = 0; j < pay[i].length; j++) {
-                System.out.printf("%-9d ",pay[i][j]);;
+                System.out.printf("%-9d ",pay[i][j]);
             }
             System.out.printf("%-9d ",totalPay[i]);
             System.out.println();
         }
         System.out.println("-------------------------------------------------------");
         int total = 0;
-        for (int i = 0; i < totalPay.length; i++) {
-            total+=totalPay[i];
+        for (int value : totalPay) {
+            total += value;
         }
         System.out.printf("%-9s %-9d","Итого",total);
         double totalMid = Math.round(((double)total/(n*4))*10000.0)/10000.0 ;

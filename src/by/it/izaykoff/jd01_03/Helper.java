@@ -2,7 +2,7 @@ package by.it.izaykoff.jd01_03;
 
  public class Helper {
 
-   public static double findMin(double[ ] arr){
+   static double findMin(double[] arr){
         if (0 == arr.length){
             return  Double.MIN_VALUE;
         } else {
@@ -15,7 +15,7 @@ package by.it.izaykoff.jd01_03;
         }
 
     }
-   public static double findMax(double[ ] arr){
+   static double findMax(double[] arr){
         if (0 == arr.length){
             return  Double.MAX_VALUE;
         } else {
@@ -45,7 +45,7 @@ package by.it.izaykoff.jd01_03;
         }
         while (swap);
     }
-   public static double[] mul(double[][] matrix, double[] vector){
+   static double[] mul(double[][] matrix, double[] vector){
         double[] sum = new double[matrix.length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < vector.length; j++) {
@@ -54,7 +54,7 @@ package by.it.izaykoff.jd01_03;
         }
         return  sum;
     }
-   public static double[][] mul(double[][] matrixLeft, double[][] matrixRight){
+   static double[][] mul(double[][] matrixLeft, double[][] matrixRight){
         double[][] sum = new double[matrixLeft.length][matrixRight[0].length];
         for (int i = 0; i < matrixLeft.length; i++) {
             for (int j = 0; j < matrixRight[0].length; j++) {

@@ -13,15 +13,15 @@ public class TaskC {
         int sum = step2(mas);
         System.out.println(sum);
 
-   //   int[][] minmas = step3(mas);
+//        int[][] minmas = step3(mas);
 
 
 
     }
     private static int[ ][ ] step1(int in) {
         int[][] ar = new int[in][in];
-        boolean minNum = false;
-        boolean maxNum = false;
+        boolean minNum;
+        boolean maxNum;
         Random random = new Random(System.currentTimeMillis());
 
         while (true) {
@@ -46,13 +46,13 @@ public class TaskC {
 
     private static int step2(int[][] mas){
         int sum = 0;
-        for (int i = 0; i < mas.length; i++) {
-            for (int j = 0; j < mas.length; j++){
-                if (mas[i][j] > 0) {
+        for (int[] ma : mas) {
+            for (int j = 0; j < mas.length; j++) {
+                if (ma[j] > 0) {
                     for (int n = j + 1; n < mas.length; n++) {
-                        if (mas[i][n] <= 0) {
-                            sum = sum + mas[i][n];
-                        } else  break;
+                        if (ma[n] <= 0) {
+                            sum = sum + ma[n];
+                        } else break;
                     }
                     break;
                 }

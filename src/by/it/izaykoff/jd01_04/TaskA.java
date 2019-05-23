@@ -14,7 +14,7 @@ public class TaskA {
         buildOneDimArray(line);
     }
 
-    static void printMulTable(){
+    private static void printMulTable(){
         for (int i = 2; i < 10; i++) {
             for (int j = 2; j < 10; j++) {
                 System.out.printf("%1d*%1d=%-2d ", i,j,i*j);
@@ -23,7 +23,7 @@ public class TaskA {
         }
     }
 
-    static void buildOneDimArray(String line){
+    private static void buildOneDimArray(String line){
         double[] array =InOut.getArray(line);
         InOut.printArray(array,"V",5);
         double first = array[0];

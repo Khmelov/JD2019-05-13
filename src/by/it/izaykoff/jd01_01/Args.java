@@ -1,10 +1,10 @@
 package by.it.izaykoff.jd01_01;
 
-public class Args {
+class Args {
 
     private String[] args;
 
-    public Args(String[] args){
+    Args(String[] args){
         this.args = args;
     }
 

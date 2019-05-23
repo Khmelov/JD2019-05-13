@@ -31,13 +31,13 @@ package by.it.izaykoff.jd01_03;
     /**
      *  @param array входной двойной массив
      */
-   public static void printArray(double[][] array){
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                System.out.print(array[i][j] + " ");
-            }
-         System.out.println();
-        }
+   static void printArray(double[][] array){
+       for (double[] doubles : array) {
+           for (double aDouble : doubles) {
+               System.out.print(aDouble + " ");
+           }
+           System.out.println();
+       }
     }
      /**
       *  @param array входной массив

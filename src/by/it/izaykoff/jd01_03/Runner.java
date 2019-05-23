@@ -8,7 +8,7 @@ public class Runner {
         Scanner sc = new Scanner(System.in);
         String i = sc.nextLine();
 
-        double ent[] = InOut.getArray(i);
+        double[] ent = InOut.getArray(i);
         InOut.printArray(ent);
         InOut.printArray(ent,"x",4);
 

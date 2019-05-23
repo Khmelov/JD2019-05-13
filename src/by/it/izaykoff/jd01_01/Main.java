@@ -6,7 +6,7 @@ public class Main {
 
         Hello hello = new Hello();
         hello.prinSlogan();
-        hello.setSlogan("Привет мир!");
+        hello.setSlogan();
         hello.prinSlogan();
 
         Args argObject = new Args(args);

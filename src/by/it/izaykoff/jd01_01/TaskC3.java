@@ -41,7 +41,7 @@ class TaskC3 {
         System.out.println("Масса тела на Марсе: " + getWeight(i));
     }
 
-    public static double getWeight(int weight){
+    private static double getWeight(int weight){
         double p;
         p = Math.round(((weight / 9.81) * 3.86) * 100.0) / 100.0;
 
