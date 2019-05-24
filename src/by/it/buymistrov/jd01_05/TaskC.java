@@ -1,9 +1,10 @@
 package by.it.buymistrov.jd01_05;
 
 
+import java.util.Arrays;
+
 public class TaskC {
     private static void step1() {
-
 
 
         // массив а
@@ -57,12 +58,80 @@ public class TaskC {
 
         // среднее геометрическое
 
-        double n = (double  ) 1/masNew.length;
+        double n = (double) 1 / masNew.length;
 
 
-        double geom = Math.pow(proizv, n );
+        double geom = Math.pow(proizv, n);
         System.out.println();
         System.out.println("Среднее геометрическое массива В = " + geom);
+
+
+    }
+
+
+    private static void step2() {
+        double[] a = new double[30];
+
+        for (int i = 0; i < a.length; i++) {
+            a[i] = Math.round(103 + (Math.random() * 347));
+        }
+
+
+        int j = 0;
+        int g = 0;
+        System.out.println("╔═══════════════╦═══════════════╦═══════════════╦═══════════════╦═══════════════╗");
+        System.out.println("║ Massive А(i)  ║               ║               ║               ║               ║");
+        System.out.println("╠═══════════════╬═══════════════╬═══════════════╬═══════════════╬═══════════════╣");
+
+        for (int i = 0; i < a.length; i++) {
+            System.out.print("║");
+            System.out.printf(" %s[% -3d]=%-4.1f  ", "A", i, a[i]);
+
+
+            if (((i + 1) % 5 == 0) && (g < 5)) {
+                System.out.println("║");
+                System.out.println("╠═══════════════╬═══════════════╬═══════════════╬═══════════════╬═══════════════╣");
+                g++;
+            } else if (((i + 1) % 5 == 0) && (g >= 5)) {
+                System.out.println("║");
+
+            }
+
+
+        }
+        System.out.println("╚═══════════════╩═══════════════╩═══════════════╩═══════════════╩═══════════════╝");
+
+
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] * 0.1 > i)
+                j++;
+
+        }
+
+        System.out.println();
+
+        int t = 0;
+        double[] b = new double[j];
+
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] * 0.1 > i) {
+                b[t] = a[i];
+                t++;
+            }
+
+        }
+
+        Arrays.sort(b);
+
+        int h = b.length / 2;
+        System.out.println("╔═══════════════╦═══════════════╗");
+        System.out.println("║ Massive B(i)  ║               ║");
+        for (int i = 0; i < h; i++) {
+            System.out.println("╠═══════════════╬═══════════════╣");
+            System.out.printf("║ %s[% -3d]=%-4.1f  ║ %s[% -3d]=%-4.1f  ║%n", "B", i, b[i], "B", h + i, b[h + 1]);
+
+        }
+        System.out.println("╚═══════════════╩═══════════════╝");
 
 
     }
@@ -72,6 +141,7 @@ public class TaskC {
 
 
         step1();
+        step2();
     }
 
 }

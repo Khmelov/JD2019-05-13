@@ -26,7 +26,7 @@ class TaskB1 {
 
         Scanner sc = new Scanner(System.in);
         int i = sc.nextInt();
-        int x = i*i;
+        int x = i * i;
         System.out.println(x);
     }
 }

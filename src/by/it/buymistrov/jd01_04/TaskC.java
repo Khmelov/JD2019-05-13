@@ -9,7 +9,7 @@ public class TaskC {
      *
      * @param line строка, которая преобразуется в массив, отсортируется
      */
-    static void buildOneDimArray(String line) {
+    private static void buildOneDimArray(String line) {
         double[] array = InOut.getArray(line);
         InOut.printArray(array, "V", 5);
 
@@ -85,12 +85,12 @@ public class TaskC {
     }
 
 
-    static int binarySearch(double[] array, double value) {
+    private static int binarySearch(double[] array, double value) {
 
         return binarySearch(array, value, 0, array.length);
     }
 
-    static int binarySearch(double[] array, double value, int first, int last) {
+    private static int binarySearch(double[] array, double value, int first, int last) {
 
         if (first > last) return -1;
         int cent = first + (last - first) / 2;

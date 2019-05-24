@@ -48,10 +48,9 @@ public class TaskA {
         for (int value : m) {
             if (min > value) min = value;
         }
-        for (int i = m.length-1; i >=0; i--)
-        {
+        for (int i = m.length - 1; i >= 0; i--) {
             if (m[i] == min)
-                System.out.print(i+ " ");
+                System.out.print(i + " ");
 
         }
     }

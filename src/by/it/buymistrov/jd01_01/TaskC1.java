@@ -15,15 +15,12 @@ Sum = 60
 class TaskC1 {
     public static void main(String[] args) {
 
-            Scanner sc = new Scanner(System.in);
-            int i = sc.nextInt();
+        Scanner sc = new Scanner(System.in);
+        int i = sc.nextInt();
         int j = sc.nextInt();
-        int x = i+j;
-        System.out.println("Sum = "+x);
+        int x = i + j;
+        System.out.println("Sum = " + x);
     }
-
-
-
 
 
 }

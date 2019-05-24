@@ -1,7 +1,7 @@
 package by.it.buymistrov.jd01_04;
 
 
-public class Helper {
+ class Helper {
 
 
     /**
@@ -12,9 +12,9 @@ public class Helper {
     static double findMin(double[] array) {
         double min = Double.MAX_VALUE;
 
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] < min)
-                min = array[i];
+        for (double v : array) {
+            if (v < min)
+                min = v;
         }
         System.out.println(min);
         return min;
@@ -28,9 +28,9 @@ public class Helper {
     static double findMax(double[] array) {
         double max = Double.MIN_VALUE;
 
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] > max)
-                max = array[i];
+        for (double v : array) {
+            if (v > max)
+                max = v;
         }
         System.out.println(max);
         return max;

@@ -1,12 +1,13 @@
 package by.it.buymistrov.jd01_01;
 
-public class Hello {
-    private     String slogan = "Hello world";
+class Hello {
+    private String slogan = "Hello world";
 
-    public void setSlogan(String slogan) {
+    void setSlogan(String slogan) {
         this.slogan = slogan;
     }
-    void printSlogan(){
+
+    void printSlogan() {
         System.out.println(slogan);
     }
 }

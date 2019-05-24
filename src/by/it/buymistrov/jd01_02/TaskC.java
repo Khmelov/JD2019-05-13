@@ -41,7 +41,7 @@ public class TaskC {
         return mas;
     }
 
-    public static void printmas(int[][] mas) {
+    private static void printmas(int[][] mas) {
 
         for (int[] ma : mas) {
             System.out.println();
@@ -79,8 +79,7 @@ public class TaskC {
             for (int q = y + 1; q < y2; q++)
                 sum += ma[q];
         }
-        System.out.println(sum);
-        System.out.println();
+
         return sum;
 
 
@@ -126,10 +125,9 @@ public class TaskC {
             }
 
         }
-//        printmas(mask);
 
         int[][] mas2 = new int[n][n];
-        int x = 0;
+        int x;
         int y = 0;
         int maxX = 0;
         for (int i = 0; i < n; i++) {
@@ -147,14 +145,10 @@ public class TaskC {
             if (maxX < x)
                 maxX = x;
         }
-//        printmas(mas2);
 
         int[][] masOut = new int[y][maxX];
         for (int i = 0; i < y; i++) {
-            for (int j = 0; j < maxX; j++) {
-                masOut[i][j] = mas2[i][j];
-
-            }
+            System.arraycopy(mas2[i], 0, masOut[i], 0, maxX);
 
         }
 
@@ -169,7 +163,7 @@ public class TaskC {
         int n = sc.nextInt();
 
         int[][] mas = step1(n);
-        step2(mas);
+        System.out.println(step2(mas));
         step3(mas);
 
     }
