@@ -24,18 +24,12 @@ arr [i] = pow((pow(x,2)+4.5),1.0/3.0);
         System.out.println();
         return arr;
     }
+
     private static void math6step2(double[] z) {
+
         double key = 3.5;
-        double buffer = 0;
-        int j = 0;
-        for (int i = 0; i < z.length; i++) {
-            if (z[i]<=key) {
-                buffer = z[j];
-                z[j]=z[i];
-                z[i] = buffer;
-                j=j+1;
-            }
-        }
+        int j = search (z,key);
+        if (j<0) System.out.println("Все элементы ниже 3.5"); else {
         double[] result = new double [z.length-j];
         System.arraycopy(z,j,result,0,result.length);
         double middl = 0;
@@ -47,8 +41,19 @@ arr [i] = pow((pow(x,2)+4.5),1.0/3.0);
             if ((i+1)%5==0 ) System.out.println();
         }
         middl = pow ( mult, 1.0/result.length);
-        System.out.printf("\nсреднее геометрическое = %1f\n",middl);
+        System.out.printf("\nсреднее геометрическое = %1f\n",middl);}
     }
+    private static int search (double[] z, double key) {
+        int l=0;
+        int r = z.length-1;
+        while (l<=r) {
+            int m = (l + r) / 2;
+            if (z[m] > 3.5 && z[m - 1] <= 3.5) return m;
+            else if (z[m] == 3.5) return m + 1;
+            else if (z[m] > 3.5) r = m - 1;
+            else if (z[m] < 3.5) l = m + 1;
+        } return -(l+1);
+        }
     private static void math7step1() {
    int n= 31;
     int [] arr = new int [n];
