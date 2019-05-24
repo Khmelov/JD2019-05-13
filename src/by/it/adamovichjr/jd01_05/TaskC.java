@@ -13,7 +13,7 @@ public class TaskC {
         int i = 0;
         for (double x = 5.33; x <= 9; x = x + step) {
             first[i] = cbrt(x * x + 4.5);
-            System.out.printf("z[% -3d] = %-7.3f", i, first[i]);
+            System.out.printf("z[% -3d] = %-10.6f", i, first[i]);
             if ((i + 1) % 5 == 0) {
                 System.out.println();
             }
@@ -34,7 +34,7 @@ public class TaskC {
             if (elem > 3.5) {
                 second[j1] = elem;
                 sum *= second[j1];
-                System.out.printf("z1[% -3d] = %-7.3f", j1, second[j1]);
+                System.out.printf("z1[% -3d] = %-10.6f", j1, second[j1]);
                 if ((j1 + 1) % 5 == 0) {
                     System.out.println();
                 }
@@ -43,7 +43,7 @@ public class TaskC {
         }
         System.out.println();
         System.out.println();
-        double geom = pow(sum, 1 / second.length);
+        double geom = pow(sum, (1.0 / second.length));
         System.out.println("Среднее геометрическое =" + geom);
         System.out.println();
 
@@ -51,11 +51,11 @@ public class TaskC {
 
     private static void step2() {
         Random random = new Random();
-        int[] masM = new int[31];
+        double[] masM = new double[31];
         System.out.println("Massiv M <index to rows>");
         for (int i = 0; i < masM.length; i++) {
             masM[i] = random.nextInt(347) + 103;
-            System.out.printf("M[%2d] = %-6d", i, masM[i]);
+            System.out.printf("M[%2d] = %-6.2f", i, masM[i]);
             if ((i + 1) % 5 == 0) {
                 System.out.println();
             }
@@ -67,7 +67,7 @@ public class TaskC {
                 j++;
             }
         }
-        int[] masB = new int[j];
+        double[] masB = new double[j];
         j = 0;
         for (int i = 0; i < masM.length; i++) {
             if (masM[i] / 10 > i) {
@@ -81,16 +81,16 @@ public class TaskC {
         System.out.println("Massiv B <index to cols>");
         if (masB.length%2 == 0){
             for (int i = 0; i < masB.length/2; i++) {
-                System.out.printf("B[%2d] = %-4d B[%2d] = %-4d\n", i, masB[i],i + masB.length/2,masB[i+ masB.length/2]);
+                System.out.printf("B[%2d] = %-6.2f B[%2d] = %-6.2f\n", i, masB[i],i + masB.length/2,masB[i+ masB.length/2]);
             }
         }
         else {
             for (int i = 0; i < (masB.length+1)/2; i++) {
                 if(i < masB.length/2) {
-                    System.out.printf("B[%2d] = %-4d B[%2d] = %-4d\n", i, masB[i],i + masB.length/2+1,masB[i+ masB.length/2+1]);
+                    System.out.printf("B[%2d] = %-6.2f B[%2d] = %-6.2f\n", i, masB[i],i + masB.length/2+1,masB[i+ masB.length/2+1]);
                 }
                 else{
-                    System.out.printf("B[%2d] = %-4d\n",i,masB[i]);
+                    System.out.printf("B[%2d] = %-6.2f\n",i,masB[i]);
                     break;
                 }
 
