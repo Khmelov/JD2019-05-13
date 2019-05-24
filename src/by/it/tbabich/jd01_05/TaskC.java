@@ -74,7 +74,10 @@ public class TaskC {
     }
 
     static void formatPrint(int[] array, String name, int count, boolean isRows) {
-        System.out.printf("Massiv %s (index to rows)\n", name);
+        String s;
+        if (isRows) s = "rows";
+        else s = "cols";
+        System.out.printf("Massiv %s (index to %s)\n", name, s);
         printTop(count);
         if (isRows) printArrayBetweenTopAndBottomToRows(array, name, count);
         else printArrayBetweenTopAndBottomToCols(array, name);
