@@ -12,8 +12,9 @@ public class TaskA1 {
             int pos = matcher.start();
             text.setCharAt(pos + 3, '#');
             int len = matcher.end() - matcher.start();
-            if (len > 7)
+            if (len >= 7)
                 text.setCharAt(pos + 6, '#');
         }
+        System.out.println(text);
     }
 }
