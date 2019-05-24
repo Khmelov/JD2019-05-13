@@ -146,12 +146,6 @@ public class TaskC {
             System.out.print('\u2551');
 
         }
-        if (array.length % 2 != 0) {
-            for (int i = 2; i > array.length % 2; i--) {
-                System.out.printf("%10s", " ");
-                System.out.print('\u2551');
-            }
-        }
     }
 
     private static void printBottom(int count) {
