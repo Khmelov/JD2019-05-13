@@ -1,7 +1,6 @@
 package by.it.voitehovich.jd01_06;
 
 
-
 import org.junit.Test;
 
 import java.io.*;
