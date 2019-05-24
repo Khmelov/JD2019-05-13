@@ -25,8 +25,10 @@ public class TaskA {
     }
     static void task3(double x){
         for (double a = -5; a <= 12 ; a+=3.75) {
-            double f = Math.exp(a*x)-3.45*a;
-            System.out.printf("При а=%4.2f f=%g\n", a,f);
+            System.out.printf("При а=%4.2f f=%g\n", a,Math.exp(a*x)-3.45*a);
         }
     }
+
+
+
 }
