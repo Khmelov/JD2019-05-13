@@ -4,6 +4,7 @@ import static java.lang.Math.*;
 
 public class TaskC {
     public static void main(String[] args) {
+
         step7();
     }
 
