@@ -55,7 +55,7 @@ public class TaskC {
         System.out.println("Massiv M <index to rows>");
         for (int i = 0; i < masM.length; i++) {
             masM[i] = random.nextInt(347) + 103;
-            System.out.printf("M[%2d] = %-6.2f", i, masM[i]);
+            System.out.printf("M[%2d] = %-8.2f", i, masM[i]);
             if ((i + 1) % 5 == 0) {
                 System.out.println();
             }
