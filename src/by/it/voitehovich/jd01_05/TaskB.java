@@ -18,13 +18,12 @@ public class TaskB {
     }
 
     private static void step2() {
-        double a=0;
-        double b=0;
+        double a,b;
         for (double x = -5.5; x < 2; x+=0.5) {
             if( x/2<=-1 && x/2>-2) b = sin(x*x);
             else if( x/2 < 0.2 && x/2 >-1) b=cos(x*x);
             else if ( x/2 == 0.2) b= (double)1/tan(x*x);
-            else { b= 0;
+            else {
                 System.out.printf("При x/2=%-3.2f Вычисления не определены%n", x/2);
                 continue;
             }
