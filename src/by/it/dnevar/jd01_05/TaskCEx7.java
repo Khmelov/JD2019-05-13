@@ -56,7 +56,6 @@ public class TaskCEx7 {
             }else{
                 System.out.printf("B [ %2d]=%1.1f                    ",index1,arrayB[index1]);
             }
-
         }
 
     }
