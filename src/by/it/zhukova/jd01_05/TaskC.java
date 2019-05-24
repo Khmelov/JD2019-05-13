@@ -12,12 +12,12 @@ public class TaskC {
 
         int n = (int)(random()*20+20);
         double [ ] arr = new double[n];
-        double x = 0;
+        double x = 5.33;
+        double step = (9-5.33)/(n-1);
         System.out.println("Массив:");
-        for (int i = 0; i < n; i++) {
-do {x = random()*3.67+5.33;}
-while (x>9);
+        for (int i = 0; i < arr.length; i++) {
 arr [i] = pow((pow(x,2)+4.5),1.0/3.0);
+            x+=step;
             System.out.printf("z[% -3d]=%-8.5f", i, arr[i]);
             if ((i+1)%5==0 ) System.out.println();
         }
