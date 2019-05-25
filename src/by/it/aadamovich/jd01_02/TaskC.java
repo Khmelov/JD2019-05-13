@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class TaskC {
 
     public static void main(String[] args) {
-        
+
         Scanner sc = new Scanner(System.in);
         int[][] mas = step1(sc.nextInt());
         System.out.println(step2(mas) + "\n");
