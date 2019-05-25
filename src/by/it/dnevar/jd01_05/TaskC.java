@@ -6,12 +6,12 @@ import static java.lang.Math.*;
 
 public class TaskC {
     public static void main(String[] args) {
-        double[] array = new double[30];
+        double[] array = new double[(int) random()*40+20];
         double element = 5.33;
         System.out.println("Массив A[]");
         for (int i = 0; i < array.length; i++) {
             array[i] = cbrt(pow(element,2)+4.5);
-            element+=0.1;
+            element+=(9-5.33)/array.length;
 //            array[i] = cbrt(pow((random()*9+5.33),2)+4.5);
         }
 
