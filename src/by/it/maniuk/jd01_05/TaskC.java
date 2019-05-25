@@ -18,21 +18,26 @@ public class TaskC {
             z = cbrt(((x * x) + 4.5));
 
             array[i] = z;
-            System.out.println(array[i]);
+
             i++;
 
 
         }
-        for (double ar : array) {
-            System.out.format("%-6.4f ", ar);
+        for (int i1 = 0; i1 < array.length; i1++) {
+            double ar = array[i1];
+            if ((i1+1) %5 == 1) System.out.println();
+            if (i<=9)
+            System.out.format("M[%3d] =  %-1.5f ", i1, ar);
+            else System.out.format("M[%3d] =  %-1.5f ", i1, ar);
+
         }
     }
         private static void step2(){
             System.out.println(" ");
-            System.out.println("Massiv B:");
+            System.out.println("Massiv B: >3.5");
         int counter =0;
         int i=0;
-            double e= 0;
+
         for (int j = 0; j <array.length ; j++) {
 
             if (array[i] > 3.5){
@@ -53,15 +58,22 @@ public class TaskC {
                 }
 
             }
+            double e =1;
             for (double v : newArray) {
                 e *= v;
-            }
-            double midle = pow(e,newArray.length-1);
 
-        for (double ar : newArray) {
-            System.out.format("%-6.4f ", ar);
-        }
-            System.out.format("%-10s %-2.9f ", "Massiv >3.5" ,midle);
+            }
+            //double midle = pow(e,1/newArray.length-1);
+            double midle =  Math.exp(Math.log(e)/newArray.length-1);
+
+            for (int i1 = 0; i1 < newArray.length; i1++) {
+                double ar = newArray[i1];
+                if ((i1+1) %5 == 1) System.out.println();
+                if (i<=9)
+                    System.out.format("M[% -2d] =  %-1.1f ", i1, ar);
+                else System.out.format("M[%2d] =  %-1.1f ", i1, ar);
+            }
+            System.out.format("%10s %-2.2f ", "Middle" ,midle);
 
 
             }
