@@ -3,7 +3,7 @@ package by.it.voitehovich.jd01_02;
 import java.util.Scanner;
 
 public class TaskB {
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     private static void step1() {
         int[] mas = new int[25];

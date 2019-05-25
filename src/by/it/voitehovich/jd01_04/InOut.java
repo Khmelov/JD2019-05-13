@@ -2,7 +2,7 @@ package by.it.voitehovich.jd01_04;
 import java.util.Scanner;
 
 public class InOut {
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     /**
      * @param line входная строка чисел вводимая с клавиатуры

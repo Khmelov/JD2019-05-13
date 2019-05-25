@@ -6,7 +6,7 @@ public class TaskB {
         Scanner sc=new Scanner(System.in);
         int number = sc.nextInt();
         int sumSalary = 0;
-        double avg = 0;
+        double avg;
         String [] secondName = new String[number];
         for (int i = 0; i < number; i++) {
             secondName[i] = sc.next();
@@ -28,9 +28,9 @@ public class TaskB {
                         salary[i][1],salary[i][2],salary[i][3], sum );
         }
         System.out.println("---------------------------------------------------------");
-        for (int i = 0; i <salary.length ; i++) {
-            for (int j = 0; j <salary[0].length ; j++) {
-                sumSalary += salary[i][j];
+        for (int[] aSalary : salary) {
+            for (int j = 0; j < salary[0].length; j++) {
+                sumSalary += aSalary[j];
             }
         }
         avg = (double)sumSalary / (number *4);
