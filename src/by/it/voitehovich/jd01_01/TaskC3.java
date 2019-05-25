@@ -39,14 +39,14 @@ class TaskC3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите вес человека в килограммах:");
-        double weight = sc.nextDouble();
+        int weight = sc.nextInt();
         double weightMars = getWeight(weight);
         System.out.println(weightMars);
     }
 
-     private static double getWeight(double weight) {
-        double m = gMars * weight / gEarth;
-        return (double)Math.round(m * 100) / 100;
+     private static double getWeight(int weight) {
+        double m =  weight * gMars  / gEarth;
+        return (double) Math.round(m * 100) / 100;
     }
 
 }
