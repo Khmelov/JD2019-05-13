@@ -1,6 +1,9 @@
 *.class
 
 .idea
+*.DS_Store
+/*.xml
+/*/*.xml
 
 *.jar
 *.war
