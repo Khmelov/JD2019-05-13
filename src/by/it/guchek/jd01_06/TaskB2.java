@@ -8,7 +8,6 @@ public class TaskB2 {
 
     public static void main(String[] args) {
         String buffer;
-        //String buffer = new String();
         String [] sent= {};
         int[] count = {};
 
@@ -18,7 +17,6 @@ public class TaskB2 {
         //System.out.println(h);
         Pattern pattern = Pattern.compile("[а-яА-ЯЁё[^?!.]]+"); //pettern описывающий все слова русского языка
         Matcher matcher = pattern.matcher(p);
-        //String predl1=matcher.group().replaceAll("\\.3"," ");
 
                                                                     //int[] countchar = new int[14];
                                                                     //String [] maspredl;
@@ -26,11 +24,9 @@ public class TaskB2 {
         while (matcher.find()) {
             //String h =matcher.replaceAll("\\.3"," ");
             String predl = matcher.group().replaceAll("[\\s:;.,-]+", " ").trim();
-            //int k=poz(predl);
-            //sent[i]=predl;                                                    //System.out.println(predl);
             int last = sent.length;
             sent = Arrays.copyOf(sent, last+1);
-            sent[last] = predl;   //запишем искомое слово в массивArrays.copyOf()
+            sent[last] = predl;   //запишем искомое предложение в массив предложений
             //System.out.println(sent[last]);
             count = Arrays.copyOf(count, last+1);
             count[last] = sent[last].length();
