@@ -42,7 +42,7 @@ public class TaskC {
         int[] arrayA = new int[31];
         int countA = 0;
         System.out.println("Массив А");
-        System.out.print("┏━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━┓\n");
+        System.out.print("┏━━━━━━━━━━━━━┳━┳━━━━━━━━━━━━━┳━┳━━━━━━━━━━━━━┳━┳━━━━━━━━━━━━━┳━┳━━━━━━━━━━━━━┓\n");
 
         for (int i = 0; i < arrayA.length; i++) {
             arrayA[i] = (int) (random()*((450-103) + 1));
@@ -50,15 +50,15 @@ public class TaskC {
                 countA++;
             }
             if (i%5 == 0 && i != 0){
-                System.out.print("\n┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛\n");
-                System.out.print("┏━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━━┓\n");
+                System.out.print("\n┗━━━━━━━━━━━━━┻━┻━━━━━━━━━━━━━┻━┻━━━━━━━━━━━━━┻━┻━━━━━━━━━━━━━┻━┻━━━━━━━━━━━━━┛\n");
+                System.out.print("┏━━━━━━━━━━━━━┳━┳━━━━━━━━━━━━━┳━┳━━━━━━━━━━━━━┳━┳━━━━━━━━━━━━━┳━┳━━━━━━━━━━━━━┓\n");
                 System.out.printf("┃A [%-2d]=%-4d┃ ",i,arrayA[i]);
             }else{
                 System.out.printf("┃A [%-2d]=%-4d┃ ",i,arrayA[i]);
 
             }
         }
-        System.out.print("\n┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛\n");
+        System.out.print("\n┗━━━━━━━━━━━━━┻━┻━━━━━━━━━━━━━┻━┻━━━━━━━━━━━━━┻━┻━━━━━━━━━━━━━┻━┻━━━━━━━━━━━━━┛\n");
 
         System.out.println("\nМассив В");
         int[] arrayB = new int[countA];
@@ -83,7 +83,7 @@ public class TaskC {
         }else{
             forCount = index2 = array.length/2+1;
         }
-        System.out.print("┏━━━━━━━━━━━━┓ ┏━━━━━━━━━━━━┓\n");
+        System.out.print("┏━━━━━━━━━━━━┳━┳━━━━━━━━━━━━┓\n");
         for (int i = 0; i < forCount; i++) {
             if(i != array.length/2){
                 System.out.printf("┃B [%-2d]=%-3d┃ ",index1,array[index1]);
@@ -95,7 +95,7 @@ public class TaskC {
             }else   System.out.printf("┃B [%-2d]=%-3d┃ ",index1,array[index1]);
 
         }
-        System.out.print("\n┗━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━┛");
+        System.out.print("\n┗━━━━━━━━━━━━┻━┻━━━━━━━━━━━━┛");
     }
 
 }
