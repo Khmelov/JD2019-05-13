@@ -10,6 +10,7 @@ public class TaskB2 {
         String[]words = text.split("[.!?]");
         for (int i = 0; i < words.length; i++) {
             words[i] = words[i].replaceAll("[^а-яА-ЯёЁ ]"," ");
+            words[i] = words[i].replaceAll("[ ]{2,}"," ");
             words[i] = words[i].trim();
         }
         for (int i = 0; i < words.length; i++) {
