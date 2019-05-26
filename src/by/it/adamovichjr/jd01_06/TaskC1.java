@@ -12,7 +12,6 @@ public class TaskC1 {
         for (int i = 1; i < line.length; i++) {
             if(line[i].length() > maxLine) {
                 maxLine = line[i].length();
-
             }
         }
         StringBuilder finaly = bildText(line,maxLine);
