@@ -5,16 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskB2 {
-    //private static String [] sent= {};
-    //private static int[] count = {};
-
-    /*private static int poz(String predl){
-        for (int i = 0; i < sent.length; i++) {
-            if (sent[i].equals(predl))
-                return i;
-        }
-        return -1; //если не нашли дальше в тексте ни одно такое слово вернуть -1
-    }*/
 
     public static void main(String[] args) {
         String buffer;
@@ -44,19 +34,10 @@ public class TaskB2 {
             //System.out.println(sent[last]);
             count = Arrays.copyOf(count, last+1);
             count[last] = sent[last].length();
-
-                                            //System.out.print(countchar[i]);
-                                                               //maspredl[]=new String(predl);
         }
-                                                                //System.out.println(i);
-        //Arrays.sort(count);
-       // Arrays.sort(count);
-                                                                //Arrays.sort(maspredl);
-        //for (int i1 = 0; i1 < count.length; i1++)  System.out.println(count);
-
 
         boolean swap;
-        int last1=(sent.length-1);
+        int last1=(sent.length-1);            //СОРТИРОВКА СТРОК МАССИВА ПО ДЛИНЕ
         do {
             swap = false;   //устанавливаем булевский маркер
             for (int i = 0; i <last1; i++) {
@@ -67,27 +48,12 @@ public class TaskB2 {
                     swap=true;  //была хотя бы одна перестановка
                 }
             }
-            last1--; //за один проход самый большой элемент занял свое место в конце
+            last1--; //за один проход самый длинный элемент занял свое место в конце
         }
         while (swap); //как только перестановок не было - закончить цикл
 
         for (int x = 0; x < sent.length; x++) {
             System.out.printf("%s%n",sent[x]);
         }
-        /*String d=new String();
-        for (int i1 = 0; i1 < countchar.length; i1++) {
-            matcher.reset();
-            while (matcher.find()) {
-                String predl = matcher.group().replaceAll("[\\s:;.,-]+", " ").trim();
-                if (predl.length() == countchar[i1])
-                    if (!d.equals(predl)){
-                        d=predl;
-                        System.out.printf("%s%n",predl);
-                    } else {i1=i1+1;
-                      break;}
-
-            }
-        }*/
-
     }
 }
