@@ -1,11 +1,11 @@
 package by.it.izaykoff.jd01_01;
 
-public class Hello {
+class Hello {
 
     private String slogan = "Hello World!";
 
-    public void setSlogan(String slogan) {
-        this.slogan = slogan;
+    void setSlogan() {
+        this.slogan = "Привет мир!";
     }
 
     void prinSlogan(){

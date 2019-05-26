@@ -1,8 +1,8 @@
 package by.it.izaykoff.jd01_03;
 
-public class Helper {
+ public class Helper {
 
-    static double findMin(double[ ] arr){
+   static double findMin(double[] arr){
         if (0 == arr.length){
             return  Double.MIN_VALUE;
         } else {
@@ -15,7 +15,7 @@ public class Helper {
         }
 
     }
-    static double findMax(double[ ] arr){
+   static double findMax(double[] arr){
         if (0 == arr.length){
             return  Double.MAX_VALUE;
         } else {
@@ -28,7 +28,7 @@ public class Helper {
         }
 
     }
-    static void sort(double[ ] arr){
+   public static void sort(double[ ] arr){
         boolean swap;
         int last = arr.length -1;
         do {
@@ -45,9 +45,25 @@ public class Helper {
         }
         while (swap);
     }
-   // static double[ ] mul(double[ ][ ] matrix, double[ ] vector){
-
-   //}
-
+   static double[] mul(double[][] matrix, double[] vector){
+        double[] sum = new double[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < vector.length; j++) {
+                sum[i] = sum[i] + matrix[i][j] * vector[j];
+            }
+        }
+        return  sum;
+    }
+   static double[][] mul(double[][] matrixLeft, double[][] matrixRight){
+        double[][] sum = new double[matrixLeft.length][matrixRight[0].length];
+        for (int i = 0; i < matrixLeft.length; i++) {
+            for (int j = 0; j < matrixRight[0].length; j++) {
+                for (int k = 0; k < matrixRight.length; k++) {
+                    sum[i][j] = sum[i][j] + matrixLeft[i][k] * matrixRight[k][j];
+                }
+            }
+        }
+        return sum;
+    }
 
 }
