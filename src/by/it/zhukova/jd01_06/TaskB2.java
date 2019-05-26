@@ -43,7 +43,8 @@ public class TaskB2 {
     }
 
     private static String[] method1(String text) {
-               String[] strArray = text.split("\\.|\\!");
+        String text2 = text.replaceAll("\\.\\.\\.", " ");
+        String[] strArray = text2.split("\\.|\\!");
         for (int i = 0; i < strArray.length; i++) {
         //  StringBuilder sent = new StringBuilder(strArray[i]);
             Pattern p2 = Pattern.compile("\\p{Punct}+");
