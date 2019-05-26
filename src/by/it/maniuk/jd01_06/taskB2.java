@@ -1,6 +1,5 @@
 package by.it.maniuk.jd01_06;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,11 +15,11 @@ public class taskB2 {
 
     public static void split(String text) {
 
-        String textGenerate = null;
-        String string = null;
+        String textGenerate;
+        String string;
         Pattern compl = Pattern.compile("[^а-яА-ЯёЁ.]+");
         Matcher matcher = compl.matcher(text);
-        Pattern compl2 = Pattern.compile("[- ,\\\n]+");
+        Pattern compl2 = Pattern.compile("[- ,\n]+");
         Matcher matcher2 = compl2.matcher(text);
         string = matcher2.replaceAll(" ");
         string = string.trim();
@@ -48,10 +47,12 @@ public class taskB2 {
                     }
 
                 }
-        for (int i = 0; i < strArrayF.length; i++) {
+        for (int i = 2; i < strArrayF.length; i++) {
+            if (strArray[i].length()!=strArrayF[i].length()){
             String s = strArrayF[array[i]];
-            System.out.println(s.trim());
-            // System.out.println("\n");
+            System.out.println(s.trim());}
+
+
         }
 
 
