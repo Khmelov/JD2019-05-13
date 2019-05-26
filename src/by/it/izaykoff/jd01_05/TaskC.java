@@ -10,28 +10,6 @@ public class TaskC {
         task2();
     }
 
-//    private static void task1() {
-//        int elements = (int) (random()*((40-20) + 1))+20;
-//        double[] array = new double[elements];
-//        double[] arrayMiddle = new double[elements];
-//        int i = 0;
-//        int j = 0;
-//        double middleArf = 1.0;
-//        for (double x = 5.33; x <= 9; x++) {
-//            array[i] = cbrt(pow(x, 2) + 4.5);
-//            System.out.printf("M [%2d ] = %f\n", i, array[i]);
-//            if (array[i] > 3.5) {
-//                arrayMiddle[i] = array[i];
-//                middleArf *= arrayMiddle[i];
-//                j++;
-//            }
-//            i++;
-//        }
-//        double sum = pow(middleArf, 1.0 / j);
-//        System.out.println("средн. геометр. = " + sum);
-//    }
-
-
     private static void task1(){
 
         int elements = (int) (random()*((40-20) + 1))+20;
@@ -72,17 +50,11 @@ public class TaskC {
                 countA++;
             }
             if (i%5 == 0 && i != 0){
-//                System.out.printf("┏━━━━━━━━━━━━━┓\n");
                 System.out.println();
                 System.out.printf("┃A [%-2d]=%-4d┃ ",i,arrayA[i]);
-//                System.out.printf("┗━━━━━━━━━━━━━┛\n");
-
             }else{
-//                System.out.printf("┏━━━━━━━━━━━━━┓\n");
                 System.out.printf("┃A [%-2d]=%-4d┃ ",i,arrayA[i]);
-//                System.out.printf("┗━━━━━━━━━━━━━┛\n");
             }
-
         }
         System.out.print("\n┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛ ┗━━━━━━━━━━━━━┛\n");
 
@@ -95,19 +67,9 @@ public class TaskC {
                 arrayB[countB] = arrayA[i];
                 countB++;
             }
-
         }
         Arrays.sort(arrayB);
         printTwoRow(arrayB);
-
-//        for (int i = 0; i < arrayB.length; i++) {
-//            if (i%2 == 0 && i != 0){
-//                System.out.println();
-//                System.out.printf("B [%-2d]=%-5d ",i,arrayB[i]);
-//            }else System.out.printf("B [%-2d]=%-5d ",i,arrayB[i]);
-//        }
-
-
     }
 
     private static void printTwoRow(int[] array){
