@@ -54,6 +54,6 @@ public class taskB2 {
             // System.out.println("\n");
         }
 
-       
+
     }
 }
