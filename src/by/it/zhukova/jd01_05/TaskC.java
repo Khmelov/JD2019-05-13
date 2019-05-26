@@ -81,10 +81,7 @@ int k = 7;
                 System.out.printf("B[ %-3d]=%-8d", j, B[j]);
                 j+=k;
             }
-
             }
-
         }
-
     }
 
