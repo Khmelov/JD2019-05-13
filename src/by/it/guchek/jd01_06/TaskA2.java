@@ -19,7 +19,7 @@ public class TaskA2 {
 
 
     public static void main(String[] args) {
-        //StringBuilder sb = new StringBuilder(Poem.text);
+
         Pattern pattern = Pattern.compile("[а-яА-ЯЁё]+"); //pettern описывающий все слова русского языка
         Matcher matcher = pattern.matcher(Poem.text);
         while (matcher.find()) {
