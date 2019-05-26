@@ -22,23 +22,26 @@ public class TaskB2 {
         String [] sent= {};
         int[] count = {};
 
-        //StringBuilder sb = new StringBuilder(Poem.text);
+        StringBuilder sb = new StringBuilder(Poem.text);
+        int h=sb.lastIndexOf("...");
+        StringBuilder p=sb.replace(767, 770, " " );
+        //System.out.println(h);
         Pattern pattern = Pattern.compile("[а-яА-ЯЁё[^?!.]]+"); //pettern описывающий все слова русского языка
-                                                                //String [] mas = pattern.split("[а-яА-ЯЁё[^.?!]]+");
-        Matcher matcher = pattern.matcher(Poem.text);
+        Matcher matcher = pattern.matcher(p);
+        //String predl1=matcher.group().replaceAll("\\.3"," ");
 
                                                                     //int[] countchar = new int[14];
                                                                     //String [] maspredl;
 
         while (matcher.find()) {
-
+            //String h =matcher.replaceAll("\\.3"," ");
             String predl = matcher.group().replaceAll("[\\s:;.,-]+", " ").trim();
             //int k=poz(predl);
             //sent[i]=predl;                                                    //System.out.println(predl);
             int last = sent.length;
             sent = Arrays.copyOf(sent, last+1);
             sent[last] = predl;   //запишем искомое слово в массивArrays.copyOf()
-           // System.out.println(sent[last]);
+            //System.out.println(sent[last]);
             count = Arrays.copyOf(count, last+1);
             count[last] = sent[last].length();
 
