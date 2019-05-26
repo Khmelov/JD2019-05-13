@@ -31,16 +31,21 @@ public class TaskC1 {
     }
 
     static String printLine(String line) {
-        if (line.equals("И там я был, и мёд я пил,")) return "И   там   я   был,   и  мёд  я  пил,";
         StringBuilder sb = new StringBuilder(line);
         int count = max - line.length();
         Pattern pattern = Pattern.compile("[а-яА-ЯёЁ\\p{Punct}]{1}\\p{Blank}");
         Matcher matcher = pattern.matcher(sb);
+        int start = 0;
         for (int i = 0; i < count; i++) {
-            if (matcher.find()) sb.insert(matcher.start() + 1, " ");
+            if (matcher.find(start)) {
+                sb.insert(matcher.start() + 1, " ");
+                start = matcher.start() + 1;
+            }
             else {
                 matcher.reset();
-                matcher.find();
+                start = 0;
+                matcher.find(start);
+                start = matcher.start() + 1;
                 sb.insert(matcher.end(), " ");
 
             }
