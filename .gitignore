@@ -1,13 +1,15 @@
 *.class
 
 .idea
+*.DS_Store
+/*.xml
+/*/*.xml
 
 *.jar
 *.war
 *.ear
 *.iml
 *.log
-*.DS_Store
 
 dataTaskA.bin
 dataTaskB.bin
