@@ -24,32 +24,25 @@ public class TaskC1 {
 
 
         for (int i = 0; i < sentences.length; i++) {
-            int numSpaceToInsert = maxSentenceLength - sentences[i].length();
-            int numSpaceInSentence = 0;
-            Pattern space = Pattern.compile("\\s");
-            Matcher spaceMatcher = space.matcher(sentences[i]);
-            while(spaceMatcher.find()){
-                numSpaceInSentence++;
-            }
-            int maxSpace = (int) Math.ceil(numSpaceToInsert/numSpaceInSentence);
-            String spacesNew = "";
-            for (int j = 0; j < maxSpace; j++) {
-                spacesNew += " ";
-            }
-            Pattern spaceNew = Pattern.compile("\\s");
-            Matcher spaceMatcherNew = spaceNew.matcher(sentences[i]);
-            StringBuffer stringBuffer = new StringBuffer();
-            int countAddedSpaces = 0;
+            StringBuilder buff = new StringBuilder(sentences[i]);
+            Pattern space = Pattern.compile("[\\s]+");
 
-            while(spaceMatcherNew.find()){
-                if(numSpaceToInsert-countAddedSpaces<spacesNew.length()) {
-                    spacesNew = spacesNew.substring(0, spacesNew.length() - 1);
+            while(buff.length() < maxSentenceLength){
+                int start = 0;
+                Matcher spaceMatcher = space.matcher(buff);
+
+                while(spaceMatcher.find(start)){
+
+                    if(buff.length() == maxSentenceLength) {
+                        break;
+                    }
+                    buff.insert(spaceMatcher.start()+1," ");
+                    start = spaceMatcher.end()+1;
                 }
-                spaceMatcherNew.appendReplacement(stringBuffer, spacesNew);
-                countAddedSpaces += spacesNew.length();
             }
-            spaceMatcherNew.appendTail(stringBuffer);
-            System.out.println(stringBuffer.toString());
+            System.out.println(buff);
+            buff.delete(0,buff.length());
+
         }
     }
 
