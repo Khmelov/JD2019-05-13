@@ -19,15 +19,15 @@ public class taskB2 {
         String string;
         Pattern compl = Pattern.compile("[^а-яА-ЯёЁ.]+");
         Matcher matcher = compl.matcher(text);
-        Pattern compl2 = Pattern.compile("[- ,\n]+");
+        Pattern compl2 = Pattern.compile("[- ,\\n]+");
         Matcher matcher2 = compl2.matcher(text);
         string = matcher2.replaceAll(" ");
         string = string.trim();
         String[] strArrayF = string.trim().split("\\.");
         int[] array = new int[strArrayF.length];
-        for (int i = 0; i <strArrayF.length ; i++) {
+        for (int i = 0; i <strArrayF.length ; i++)
             array[i] = i;
-        }
+
         textGenerate = matcher.replaceAll(" ");
         textGenerate = textGenerate.trim();
 
@@ -45,7 +45,6 @@ public class taskB2 {
                         array[j+1] = ind;
                         }
                     }
-
                 }
         for (int i = 2; i < strArrayF.length; i++) {
             if (strArray[i].length()!=strArrayF[i].length()){
