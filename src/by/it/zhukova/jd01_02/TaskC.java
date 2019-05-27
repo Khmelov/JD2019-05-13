@@ -17,7 +17,6 @@ public class TaskC {
             for (int j = 0; j < matwithoutmax.length; j++) {
                                 System.out.print(matwithoutmax[i][j]+" ");
             }
-
             System.out.println();}
     }
 
@@ -32,14 +31,14 @@ public class TaskC {
                 for (int j = 0; j < mas[0].length; j++) {
                     mas[i][j] = random.ints(-n, (n + 1)).findFirst().getAsInt();
                     if (mas[i][j] == n ) k++;
-                    if (mas[i][j] == n ) m++;
+                   else if (mas[i][j] == -n ) m++;
                 }
             }
         }
-        while (k == 0 || m ==0);
+        while (k == 0 && m ==0);
         for (int i = 0; i < mas.length; i++) {
             for (int j = 0; j < mas[0].length; j++)
-                System.out.print(mas[i][j] + " ");;
+                System.out.print(mas[i][j] + " ");
             System.out.print("\n");
         }
 return mas;
@@ -80,7 +79,6 @@ int [] strhelp = new int [mas.length];
                     max=mas[i][j];
             }
             }
-        System.out.println(max);
         //поиск строк и столбцов для удаления:
         boolean [] delRow = new boolean[mas.length];
         boolean [] delCol = new boolean[mas[0].length];
@@ -88,14 +86,29 @@ int [] strhelp = new int [mas.length];
             for (int j = 0; j < mas[0].length; j++) {
                 if (mas[i][j] == max) {
                     delRow[i]=true;
-                    delCol[i]=true;
+                    delCol[j]=true;
                     }
             }
             }
 
 int ir = mas.length;
-
-
-                return mas; //result;
+        for (boolean del : delRow)  if (del) ir--;
+                  int  jr =mas[0].length;
+                  for (boolean del : delCol) if (del) jr--;
+int [] [] res = new int [ir][jr];//задаем результат
+int indexRow=0;
+        for (int i = 0; i < mas.length; i++) {
+            if (!delRow[i]) {
+                int indexCol = 0;
+                for (int j = 0; j < mas[0].length; j++) {
+                    if (!delCol[j]) {
+                        res[indexRow][indexCol] = mas[i][j];
+                        indexCol++;
+                    }
+            }
+                indexRow++;
+            }
+        }
+        return res; //result;
     }
 }

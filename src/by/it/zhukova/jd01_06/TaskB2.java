@@ -12,7 +12,6 @@ public class TaskB2 {
             System.out.print(sentence[pos[i]]+"\n");
         }
     }
-
     private static int [] sort(String[]sent) {
         int [] len =  new int [sent.length];
         int [] pos =  new int [sent.length];
@@ -41,7 +40,6 @@ public class TaskB2 {
         } while (swap);
         return pos;
     }
-
     private static String[] method1(String text) {
         String text2 = text.replaceAll("\\.\\.\\.", " ");
         String[] strArray = text2.split("\\.|\\!");
@@ -70,6 +68,5 @@ public class TaskB2 {
         }
         return strArray;
     }
-
     }
 
