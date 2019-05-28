@@ -32,6 +32,12 @@ public class TaskB1 {
                 }
             }
         }
+        StringBuilder sb = new StringBuilder(Poem.text);
+
+
+        System.out.println(sb.indexOf("дуб"));
+
+
     }
 
 
