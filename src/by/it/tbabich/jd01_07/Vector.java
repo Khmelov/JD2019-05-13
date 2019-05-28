@@ -2,19 +2,19 @@ package by.it.tbabich.jd01_07;
 
 import java.util.Arrays;
 
-public class Vector extends Var {
+class Vector extends Var {
 
     private double[] value;
 
-    public Vector(double[] value) {
+    Vector(double[] value) {
         this.value = Arrays.copyOf(value, value.length);
     }
 
-    public Vector(Vector vector) {
+    Vector(Vector vector) {
         this(vector.value);
     }
 
-    public Vector(String strVector) {
+    Vector(String strVector) {
         String[] arrayString = strVector.replace("{","").replace("}","").split(",");
         double[] arrayDouble = new double[arrayString.length];
         for (int i = 0; i < arrayString.length; i++) {

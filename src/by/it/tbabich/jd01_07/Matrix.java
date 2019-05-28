@@ -6,24 +6,24 @@ class Matrix extends Var {
 
     private double[][] value;
 
-    public Matrix(double[][] value) {
+    Matrix(double[][] value) {
         this.value = Arrays.copyOf(value, value.length);
     }
 
-    public Matrix(Matrix matrix) {
+    Matrix(Matrix matrix) {
         this(matrix.value);
     }
 
-    public Matrix(String strMatrix) {
+    Matrix(String strMatrix) {
         String[] arrayString = strMatrix.replace("{","").replace("},"," ").replace("}", "").split(" ");
-        double[][] arrayDouble = new double[arrayString.length][arrayString[0].length()];
+        double[][] arrayDouble = new double[arrayString.length][(arrayString[0].length() + 1) / 2];
         for (int i = 0; i < arrayString.length; i++) {
             String[] arrayStringElement = arrayString[i].split(",");
             double[] arrayDoubleElement = new double[arrayStringElement.length];
             for (int j = 0; j < arrayDoubleElement.length; j++) {
                 arrayDoubleElement[j] = Double.parseDouble(arrayStringElement[j]);
             }
-            arrayDouble[i] = Arrays.copyOf(arrayDoubleElement, arrayDouble.length);
+            arrayDouble[i] = Arrays.copyOf(arrayDoubleElement, arrayDoubleElement.length);
         }
         this.value = Arrays.copyOf(arrayDouble, arrayDouble.length);
     }
@@ -40,13 +40,13 @@ class Matrix extends Var {
                     sb.append("}");
                     break;
                 }
-                sb.append(",");
+                sb.append(", ");
             }
             if (i == value.length - 1){
                 sb.append("}");
                 break;
             }
-            sb.append(",");
+            sb.append(", ");
         }
         return sb.toString();
     }
