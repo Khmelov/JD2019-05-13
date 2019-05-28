@@ -26,7 +26,7 @@ public class Runner {
         Matrix matrixM = new Matrix(matrixD);
         System.out.println(matrixM);
 
-        Matrix matrixS = new Matrix("{ { 1.0, 2.0 }, { 3.0, 4.0 } }");
+        Matrix matrixS = new Matrix("{ { 1.0, 2.0, 4.0, 5.0 }, { 3.0, 4.0 } }");
         System.out.println(matrixS);
     }
 }

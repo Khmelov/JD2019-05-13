@@ -11,15 +11,14 @@ public class Matrix extends Var{
         this.value = matrix.value;
     }
     Matrix(String str){
-        str = str.replaceAll("[^\\d.]+"," ").trim();
-        String[]split = str.split("[ ]+");
-        int lenght = (int) Math.sqrt(split.length);
-        double[][]mas = new double[lenght][lenght];
-        int count = 0;
+        str = str.replaceAll("[^\\d.] ?"," ").trim();
+        String[]line = str.split("[ ]{2,}");
+        double[][] mas = new double[line.length][];
         for (int i = 0; i < mas.length; i++) {
-            for (int j = 0; j < mas.length; j++) {
-                mas[i][j] = Double.parseDouble(split[count]);
-                count++;
+            String[] count = line[i].split(" ");
+            mas[i] = new double[count.length];
+            for (int j = 0; j < mas[i].length; j++) {
+                mas[i][j] = Double.parseDouble(count[j]);
             }
         }
         this.value = mas;
@@ -30,7 +29,7 @@ public class Matrix extends Var{
         StringBuilder sb = new StringBuilder("{{");
         String delimetr = "";
         for (int i = 0; i < value.length; i++) {
-            for (int j = 0; j < value[0].length; j++) {
+            for (int j = 0; j < value[i].length; j++) {
                 sb.append(delimetr).append(value[i][j]);
                 delimetr = ", ";
                 if(j == value[0].length-1 && i != value.length-1)
