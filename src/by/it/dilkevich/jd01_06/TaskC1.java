@@ -10,71 +10,35 @@ public class TaskC1 {
 
     private static void printTextAlign(String text) {
         StringBuilder sb = new StringBuilder(text);
-        Pattern pattern = Pattern.compile("[А-ЯЁ].+");
-        Matcher matcher = pattern.matcher(sb);
-        Matcher matcher1 = pattern.matcher(sb);
-        StringBuilder s = new StringBuilder("");
+        String[] mas = text.split("\\n");
+        int [] countOfSpaces = new int[mas.length];
+        Pattern pattern = Pattern.compile("\\s");
 
         int maxLenght = 0;
-        int tabCount = 0;
-        int neededTabCount = 0;
-        int start = 0;
-        int middle =0;
-        int end =0;
+        int neededSpaces = 0;
 
-        while (matcher.find()){
-            if(matcher.group().length() > maxLenght)
-               maxLenght = matcher.group().length();
+        for (int i = 0; i < mas.length; i++) {
+            if(mas[i].length() > maxLenght)
+                maxLenght = mas[i].length();
         }
-        while (matcher1.find()){
-            Pattern pattern2 = Pattern.compile(" ");
-            Matcher matcher2 = pattern2.matcher(matcher1.group());
-            while (matcher2.find()){
-                ++tabCount;
+
+        for (int i = 0; i < mas.length; i++) {
+            Matcher matcher = pattern.matcher(mas[i]);
+            while (matcher.find()){
+                countOfSpaces[i]++;
             }
-            Matcher matcher3 = pattern2.matcher(matcher1.group());
-            neededTabCount = maxLenght  - matcher1.group().length();
-            if(tabCount > neededTabCount){
-                middle = 1;
-                while (matcher3.find() && maxLenght != (tabCount+matcher1.group().length())){
-                    sb = sb.insert(matcher3.end(), " ");
-                    tabCount++;
-                }
-            }
-            if(tabCount < neededTabCount && neededTabCount%tabCount == 0){
-                int temp = neededTabCount / tabCount;
-                while (matcher3.find() && maxLenght != (tabCount+matcher1.group().length())){
-                    for (int i = 0; i < temp; i++) {
-                        sb = sb.insert(matcher3.end(), " ");
-                        tabCount++;
-                    }
-                }
-            }
-            if(tabCount < neededTabCount && neededTabCount%tabCount != 0){
-                int temp = (neededTabCount-1) / tabCount;
-                int tempP = temp + 1;
-                while (matcher3.find() && maxLenght != (tabCount+matcher1.group().length())){
-                    if(tempP !=0){
-                    for (int i = 0; i < tempP; i++) {
-                        sb = sb.insert(matcher3.end(), "  ");
-                        tempP--;
-                    }
-                    }
-                    if(tempP == 0){
-                    for (int i = 0; i < temp; i++) {
-                        sb = sb.insert(matcher3.end(), "  ");
-                        tabCount++;
-                    }
-                    }
-                }
+        }
+
+        for (int i = 0; i < countOfSpaces.length; i++) {
+            Matcher matcher = pattern.matcher(mas[i]);
+            while (matcher.find() && countOfSpaces[i] != 0){
+                int end = matcher.end();
+                int start = matcher.start();
+                sb = sb.append(mas[i]).insert(start, "  ");
+                countOfSpaces[i]--;
+
             }
 
-
-            tabCount = 0;
-            neededTabCount = 0;
         }
         System.out.println(sb);
-    }
-
-
-}
+    }}
