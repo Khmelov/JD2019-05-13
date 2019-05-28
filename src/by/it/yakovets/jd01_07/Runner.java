@@ -7,5 +7,9 @@ public class Runner {
         Var v2 = new Scalar(v);
         Var v3 = new Scalar("3.1415926");
         System.out.println(v3);
+        String vv="{1.0, 2.0, 4.0}";
+
+
+
     }
 }
