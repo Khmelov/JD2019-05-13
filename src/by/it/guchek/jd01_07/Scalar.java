@@ -11,16 +11,15 @@ class Scalar extends Var{                                    //убрала пу
 
 
     Scalar(String strScalar){
-        this.value = Double.parseDouble(strScalar);  //преобразует строковое значение к double
+        this.value = Double.parseDouble(strScalar); //преобразует строковое значение к double
     }
 
     Scalar (Scalar scalar){           //принимает на вход экземпляр этого класса
-
         this.value = scalar.value; // заполним поле value в this,  а берем это значение из класса scalar
     }
 
     @Override
     public String toString() {
-        return Double.toString(value);   //переопределили метод String toString, чтобы он
+        return Double.toString(value);   //переопределили метод String toString, чтобы он печатал любое значение
     }
 }
