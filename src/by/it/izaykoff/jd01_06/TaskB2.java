@@ -4,10 +4,12 @@ public class TaskB2 {
     public static void main(String[] args) {
         String poema = Poem.text;
 
-        poema = poema.replaceAll("[^а-яА-ЯёЁ\\.!]"," ");
-        String[] text = poema.split("[\\.!]");
+        poema = poema.replaceAll("[^а-яА-ЯёЁ.!]"," ");
+        poema = poema.replaceAll("[.]{2,}"," ");
+
+        String[] text = poema.split("[.!]");
         for (int i = 0; i < text.length; i++) {
-            text[i] = text[i].replaceAll("[\\.!]+"," ");
+            text[i] = text[i].replaceAll("[.!]+"," ");
             text[i] = text[i].replaceAll("[ ]{2,}"," ");
             text[i] = text[i].trim();
         }
