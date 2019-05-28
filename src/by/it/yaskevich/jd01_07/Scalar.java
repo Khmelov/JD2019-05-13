@@ -4,15 +4,15 @@ public class Scalar extends Var {
 
     private double value;
 
-    public Scalar(double value) {
+    Scalar(double value) {
         this.value = value;
     }
 
-    public Scalar(Scalar scalar) {
+    Scalar(Scalar scalar) {
         this.value = scalar.value;
     }
 
-    public Scalar(String strValue) {
+    Scalar(String strValue) {
         this.value = Double.parseDouble(strValue);
     }
 
