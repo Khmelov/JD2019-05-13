@@ -29,16 +29,33 @@ public class TaskC1 {
             }
         }
 
-        for (int i = 0; i < countOfSpaces.length; i++) {
-            Matcher matcher = pattern.matcher(mas[i]);
-            while (matcher.find() && countOfSpaces[i] != 0){
-                int end = matcher.end();
-                int start = matcher.start();
-                sb = sb.append(mas[i]).insert(start, "  ");
-                countOfSpaces[i]--;
+        for (int i = 0; i < mas.length; i++) {
+            String [] mas1 = mas[i].split(" ");
+            int length = 0;
+            for (int i1 = 0; i1 < mas1.length; i1++) {
+                length += mas1[i1].length();
+            }
+            while (length <maxLenght){
+                for (int j = 0; j < mas1.length-1; j++) {
+                    mas1[j] = mas1[j].concat(" ");
+                    length = length + 1;
+                    if(length == maxLenght)
+                        break;
+                }
+            }
+            mas[i] = "";
+            for (int j = 0; j < mas1.length; j++) {
+
+                mas[i] = mas[i].concat(mas1[j]);
+            }
 
             }
 
+        for (String s :
+             mas) {
+            System.out.println(s);
+
         }
-        System.out.println(sb);
-    }}
+        }
+
+    }
