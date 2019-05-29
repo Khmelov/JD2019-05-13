@@ -19,13 +19,20 @@ class Vector extends Var  {
         this.value = vector.value;
     }
 
-    /* Vector(String strVector){
-        StringBuilder str = new StringBuilder(strVector);
-        str.delete(0,0).delete(4,4).delete(9,9).delete(14,14);
-        strVector=str.toString();
-        this.value=Double.parseDouble(strVector);
-    }*/
-
+    Vector(String strVector){
+        String sVect=strVector.replaceAll("[{},\\s]"," ").trim();
+        String[] str = sVect.split("  ");
+        //StringBuilder str = new StringBuilder(strVector);
+        //str.delete(0,0).delete(4,4).delete(9,9).delete(14,14);
+        //strVector=str.toString();
+        double [] strArrDoub = new double[str.length];
+        for (int i = 0; i < str.length; i++) {
+            strArrDoub[i] = Double.parseDouble(str[i]);
+          //  this.value[i]=Double.parseDouble(str));
+    }
+        value = strArrDoub;
+        this.value=value;
+    }
     @Override
     public String toString() {
 
@@ -39,4 +46,6 @@ class Vector extends Var  {
         sb.append("}");
         return sb.toString();
     }
+
+
 }
