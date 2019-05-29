@@ -11,6 +11,10 @@ public class Matrix extends Var {
         this.value= Arrays.copyOf(value, value.length);
     }
 
+    public Matrix(Matrix matrix){
+        this.value=matrix.value;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
