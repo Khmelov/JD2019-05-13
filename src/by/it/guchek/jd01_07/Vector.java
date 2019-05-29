@@ -20,15 +20,18 @@ class Vector extends Var  {
     }
 
     Vector(String strVector){
-        String sVect=strVector.replaceAll("[{},\\s]"," ").trim();
-        String[] str = sVect.split("  ");
-        //StringBuilder str = new StringBuilder(strVector);
-        //str.delete(0,0).delete(4,4).delete(9,9).delete(14,14);
-        //strVector=str.toString();
+        String sVect=strVector.replaceAll("[{}\\s]","").trim();
+        String[] str = sVect.split(",");
+        for (String s : str) {
+            int i=0;
+            str[i].trim();
+            i++;
+        }
+
         double [] strArrDoub = new double[str.length];
         for (int i = 0; i < str.length; i++) {
             strArrDoub[i] = Double.parseDouble(str[i]);
-          //  this.value[i]=Double.parseDouble(str));
+
     }
         value = strArrDoub;
         this.value=value;
