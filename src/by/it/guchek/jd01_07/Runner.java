@@ -7,12 +7,17 @@ public class Runner {
 
         Var v3 = new Vector(new double[]{1, 2, 4});
         Var v4 = v3;
-        Var v5 = new Vector("{1, 2, 4.0}");
+        Var v5 = new Vector("{1.0, 2.0, 4.0}");
+        Var v6 = new Vector("{1,2,4}");
         //Var v2 = new Vector();
         System.out.println(v1);
         System.out.println(v2);
         System.out.println(v3);
         System.out.println(v4);
         System.out.println(v5);
+        System.out.println(v6);
+
+        Var v7=new Matrix(new double[][]{{1.0, 2.0},{3.0, 4.0}});
+        System.out.println(v7);
     }
 }
