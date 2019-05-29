@@ -19,5 +19,7 @@ public class Runner {
 
         Var v7=new Matrix(new double[][]{{1.0, 2.0},{3.0, 4.0}});
         System.out.println(v7);
+        Var v8=v7;
+        System.out.println(v8);
     }
 }
