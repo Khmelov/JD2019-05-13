@@ -1,8 +1,14 @@
 package by.it.izaykoff.jd01_08;
 
+import java.util.Arrays;
+
 public class Matrix extends Var{
 
     private double[][] value;
+
+    public double[][] getValue() {
+        return value;
+    }
 
     Matrix(double[][] value){
         this.value = value;
@@ -34,11 +40,71 @@ public class Matrix extends Var{
 
     @Override
     public Var add(Var other) {
-        if(other instanceof Scalar){
+        if (other instanceof Matrix){
+            double[][] result = Arrays.copyOf(value,value.length);
 
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] = result[i][j] + ((Matrix) other).getValue()[i][j];
+                }
+            }
+            return new Matrix(result);
+        }else if(other instanceof Scalar) {
+//            double[][] result = Arrays.copyOf(value,value.length);
+//            for (int i = 0; i < result.length; i++) {
+//                for (int j = 0; j < result[i].length; j++) {
+//                    result[i][j] = result[i][j] + ((Scalar) other).getValue();
+//                }
+            return super.add(other);
+        }else
+            return super.add(other);
         }
 
-        return super.add(other);
+    @Override
+    public Var sub(Var other) {
+        if (other instanceof Matrix){
+            double[][] result = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] = result[i][j] - ((Matrix) other).getValue()[i][j];
+                }
+            }
+            return new Matrix(result);
+        }else if(other instanceof Scalar){
+            return super.sub(other);
+        }else
+            return super.sub(other);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Matrix){
+            double[][] result = Arrays.copyOf(value,value.length);
+            double[][] sum = new double[result.length][value[0].length];
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < value[0].length; j++) {
+                    for (int g = 0; g < value.length; g++) {
+                        sum[i][j] = sum[i][j] + result[i][g] * ((Matrix) other).getValue()[g][j];
+                    }
+                }
+            }
+            return new Matrix(sum);
+        }else if(other instanceof Vector){
+            double[][] result = Arrays.copyOf(value,value.length);
+            double[] resVec = new double[value.length];
+            double[] copyVec = Arrays.copyOf(((Vector) other).getValue(),((Vector) other).getValue().length);
+            for (int i = 0; i < value.length; i++) {
+                for (int j = 0; j < copyVec.length; j++) {
+                    resVec[i] = resVec[i] + result[i][j] * copyVec[j];
+                }
+            }return new Vector(resVec);
+        }else
+            return super.mul(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        return super.div(other);
     }
 
     @Override
