@@ -1,6 +1,8 @@
 package by.it.dilkevich.jd01_08;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Matrix extends Var {
 
@@ -19,37 +21,26 @@ public class Matrix extends Var {
     }
 
     public Matrix(String strMatrix){
-        String [] mas = strMatrix.split("},");
-        String [] firstMas = mas[0].split(",");
-        String [] secondMas = mas[1].split(",");
-
-        for (int i = 0; i < firstMas.length; i++) {
-            firstMas[i] = firstMas[i].replace("{", "").replace("}", "");
+        int countStrings = 0;
+        int countColumns;
+        Pattern pattern = Pattern.compile("\\{\\d");
+        Matcher matcher = pattern.matcher(strMatrix);
+        while (matcher.find()){
+            countStrings++;
         }
-        for (int j = 0; j < secondMas.length; j++) {
-            secondMas[j] = secondMas[j].replace("{", "").replace("}", "");
+        String [] helper = strMatrix.split(",");
+        for (int i = 0; i < helper.length; i++) {
+            helper[i] = helper[i].replace("{", "").replace("}", "").replace(",", "").trim();
         }
-
-        double [] tempMasFirst = new double[firstMas.length];
-        for (int i = 0; i < firstMas.length; i++) {
-            tempMasFirst[i] = Double.parseDouble(firstMas[i]);
+        countColumns = helper.length / countStrings;
+        double[][] result = new double[countStrings][countColumns];
+        int temp = 0;
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[0].length; j++) {
+                result[i][j] = Double.parseDouble(helper[temp++]);
+            }
         }
-        double [] tempMasSecond = new double[secondMas.length];
-        for (int j = 0; j < secondMas.length; j++) {
-            tempMasSecond[j] = Double.parseDouble(secondMas[j]);
-        }
-
-        double[][] tempForMatrixMas = new double[firstMas.length][secondMas.length];
-
-
-            for (int j = 0; j < secondMas.length; j++) {
-            tempForMatrixMas[0][j] = tempMasFirst[j];
-        }
-            for (int j = 0; j < secondMas.length; j++) {
-            tempForMatrixMas[1][j] = tempMasSecond[j];
-        }
-        this.value = tempForMatrixMas;
-
+        this.value = result;
     }
 
     @Override
@@ -169,16 +160,16 @@ public class Matrix extends Var {
         }
 
         else if(other instanceof Matrix){
-                double [] [] z = new double[value.length][value[0].length];
-                for (int i = 0; i < value.length; i++) {
-                    for (int j = 0; j < value[0].length; j++) {
-                        for (int k = 0; k < value.length; k++) {
-                            z[i][j] = z[i][j] + value[i][k] * ((Matrix) other).value[k][j];
-                        }
+            double [] [] z = new double[value.length][((Matrix) other).value[0].length];
+            for (int i = 0; i < value.length; i++) {
+                for (int j = 0; j < ((Matrix) other).value[0].length; j++) {
+                    for (int k = 0; k < ((Matrix) other).value.length; k++) {
+                        z[i][j] = z[i][j] + value[i][k] * ((Matrix) other).value[k][j];
                     }
-
-                return new Matrix(z);
+                }
             }
+            return new Matrix(z);
+
         }
         return super.mul(other);
     }
