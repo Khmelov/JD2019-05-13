@@ -20,12 +20,12 @@ public class Matrix extends Var {
     }
 
     Matrix(String strMatrix) {
-        Matcher matcher = Pattern.compile("^\\{(?<arrays>((,)?\\{(((,)?(\\d+(\\.\\d)?))+)\\})+)\\}$").matcher(strMatrix);
+        Matcher matcher = Pattern.compile("^\\{(?<arrays>((, ?)?\\{(((, ?)?(\\d+(\\.\\d)?))+)\\})+)\\}$").matcher(strMatrix);
         if (!matcher.find())
             throw new IllegalArgumentException("Incorrect format: " + strMatrix);
 
         String rawData = matcher.group("arrays");
-        matcher = Pattern.compile("(?<array>((,)?(\\d+(\\.\\d)?))+)").matcher(rawData);
+        matcher = Pattern.compile("\\{(?<array>((, ?)?(\\d+(\\.\\d)?))+)\\}").matcher(rawData);
 
         int counter = 0;
         while (matcher.find()) {
@@ -65,5 +65,96 @@ public class Matrix extends Var {
         }
         result.append("}");
         return result.toString();
+    }
+
+    private double[][] copyOfValue() {
+        double[][] result = new double[value.length][];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = Arrays.copyOf(value[i], value[i].length);
+        }
+        return result;
+    }
+
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double s = ((Scalar)other).getValue();
+            double[][] result = copyOfValue();
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] += s;
+                }
+            }
+            return new Matrix(result);
+        } else if (other instanceof Matrix) {
+            double[][] m = ((Matrix)other).value;
+            double[][] result = copyOfValue();
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] += m[i][j];
+                }
+            }
+            return new Matrix(result);
+        } else
+            return super.add(other);
+    }
+
+    @Override
+    public Var sub(Var other) {
+        if (other instanceof Scalar) {
+            double s = ((Scalar)other).getValue();
+            double[][] result = copyOfValue();
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] -= s;
+                }
+            }
+            return new Matrix(result);
+        } else if (other instanceof Matrix) {
+            double[][] m = ((Matrix)other).value;
+            double[][] result = copyOfValue();
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] -= m[i][j];
+                }
+            }
+            return new Matrix(result);
+        } else
+            return super.sub(other);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Scalar) {
+            double s = ((Scalar)other).getValue();
+            double[][] result = copyOfValue();
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] *= s;
+                }
+            }
+            return new Matrix(result);
+        } else if (other instanceof Vector) {
+            double[] v = ((Vector)other).getValue();
+            double[] result = new double[v.length];
+            for (int i = 0; i < value.length; i++) {
+                for (int j = 0; j < value[i].length; j++) {
+                    result[i] += value[i][j] * v[j];
+                }
+            }
+            return new Vector(result);
+        } else if (other instanceof Matrix) {
+            double[][] m = ((Matrix)other).value;
+            double[][] result = new double[value.length][value[0].length];
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    for (int k = 0; k < result[i].length; k++) {
+                        result[i][j] += value[i][k] * m[k][j];
+                    }
+                }
+            }
+            return new Matrix(result);
+        } else
+            return super.mul(other);
     }
 }
