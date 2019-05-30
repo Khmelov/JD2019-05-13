@@ -8,7 +8,13 @@ public class Matrix extends Var {
     private double[][] value;
 
     public Matrix(double[][] value) {
-        this.value = Arrays.copyOf(value, value.length);
+        double copy[][] = new double[value.length][value[0].length];
+        for ( int i = 0 ; i < value.length; ++i)
+        {
+            System.arraycopy(value[i], 0, copy[i], 0, value[i].length);
+        }
+
+        this.value = copy;
     }
 
     public Matrix(Matrix matrix) {
