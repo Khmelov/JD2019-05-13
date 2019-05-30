@@ -49,7 +49,8 @@ class Matrix extends Var {
             }
             return new Matrix(sum);
 
-        } else if (other instanceof Matrix) {
+        } else if (other instanceof Matrix && this.value.length == ((Matrix) other).value.length
+                && this.value[0].length == ((Matrix) other).value[0].length) {
             double[][] sum = new double[this.value.length][this.value[0].length];
 
             for (int i = 0; i < sum.length; i++) {
@@ -73,7 +74,8 @@ class Matrix extends Var {
             }
             return new Matrix(sub);
 
-        } else if (other instanceof Matrix) {
+        } else if (other instanceof Matrix && this.value.length == ((Matrix) other).value.length
+                && this.value[0].length == ((Matrix) other).value[0].length) {
             double[][] sub = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < sub.length; i++) {
                 for (int j = 0; j < sub[0].length; j++) {
@@ -96,7 +98,7 @@ class Matrix extends Var {
             }
             return new Matrix(mul);
 
-        } else if (other instanceof Vector) {
+        } else if (other instanceof Vector && this.value[0].length == ((Vector) other).getValue().length) {
             double[] mul = new double[this.value.length];
             for (int i = 0; i < this.value.length; i++) {
                 for (int j = 0; j < this.value[0].length; j++) {
@@ -105,13 +107,12 @@ class Matrix extends Var {
             }
             return new Vector(mul);
 
-        } else if (other instanceof Matrix) {
+        } else if (other instanceof Matrix && this.value[0].length == ((Matrix) other).value.length) {
             double[][] mul = new double[this.value.length][((Matrix) other).value[0].length];
             for (int i = 0; i < mul.length; i++) {
                 for (int j = 0; j < mul[0].length; j++) {
                     for (int k = 0; k < this.value[0].length; k++) {
                         mul[i][j] = mul[i][j] + this.value[i][k] * ((Matrix) other).value[k][j];
-
                     }
                 }
             }
@@ -124,7 +125,7 @@ class Matrix extends Var {
 
     @Override
     public Var div(Var other) {
-        if (other instanceof Scalar) {
+        if (other instanceof Scalar && ((Scalar) other).getValue() != 0) {
             double[][] div = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < div.length; i++) {
                 for (int j = 0; j < div[0].length; j++) {
