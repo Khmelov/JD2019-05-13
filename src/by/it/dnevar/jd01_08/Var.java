@@ -1,20 +1,28 @@
 package by.it.dnevar.jd01_08;
 
-abstract class Var {
+abstract class Var implements Operation {
 
-    Var add(Var other) {
+    @Override
+    public Var add(Var other) {
+        System.out.println("Операция "+this+" + "+other+" невозможна");
         return null;
     }
 
-    Var sub(Var other) {
+    @Override
+    public Var sub(Var other) {
+        System.out.println("Операция "+this+" - "+other+" невозможна");
         return null;
     }
 
-    Var mul(Var other) {
+    @Override
+    public Var mul(Var other) {
+        System.out.println("Операция "+this+" * "+other+" невозможна");
         return null;
     }
 
-    Var div(Var other) {
+    @Override
+    public Var div(Var other) {
+        System.out.println("Операция "+this+" / "+other+" невозможна");
         return null;
     }
 
