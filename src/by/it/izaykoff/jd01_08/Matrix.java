@@ -1,6 +1,4 @@
-package by.it.izaykoff.jd01_07;
-
-import java.util.Arrays;
+package by.it.izaykoff.jd01_08;
 
 public class Matrix extends Var{
 
@@ -32,6 +30,15 @@ public class Matrix extends Var{
                 value[i][j] = Double.parseDouble(strTwoAr[i][j]);
             }
         }
+    }
+
+    @Override
+    public Var add(Var other) {
+        if(other instanceof Scalar){
+
+        }
+
+        return super.add(other);
     }
 
     @Override
