@@ -81,16 +81,17 @@ class Vector extends Var {
             }
             return new Scalar(sum);
         }else
-            return super.add(other);
+            return super.mul(other);
     }
 
     @Override
     public Var div(Var other) {
         if (other instanceof Scalar){
-            return super.div(other);
-        }
-        else if (other instanceof Vector){
-            return super.div(other);
+            double[] result = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < result.length; i++) {
+                result[i] = result[i] / ((Scalar) other).getValue();
+            }
+            return new Vector(result);
         }else
         return super.div(other);
     }
