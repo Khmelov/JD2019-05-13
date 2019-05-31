@@ -26,6 +26,7 @@ public class Runner {
         print(s.add(v));
         print(v.sub(s));
         //print(s.sub(v));
+        print(v.div(s));
 
     }
 }

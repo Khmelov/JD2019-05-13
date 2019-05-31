@@ -15,6 +15,10 @@ public class Matrix extends Var {
         this.value=matrix.value;
     }
 
+   // public Matrix(String strMatrix){
+
+   // }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");

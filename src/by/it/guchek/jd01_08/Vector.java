@@ -84,29 +84,43 @@ class Vector extends Var  {
         if (other instanceof Vector) {
             double mulAll=0;
             double[] mulArr = Arrays.copyOf(value, value.length);
-            for (int i = 0; i < value.length; i++) mulAll+= mulArr[i] * ((Vector) other).value[i];
+            double[] mulVal = new double[1];
+            for (int i = 0; i < value.length; i++) mulVal[0]+= mulArr[i] * ((Vector) other).value[i];
 
-            return new Vector(mulArr);}
+            return new Vector(mulVal);}
+
         else if (other instanceof Scalar) {
             double[] mulArr = Arrays.copyOf(value, value.length);
             for (int i = 0; i < value.length; i++) mulArr[i] = mulArr[i] * ((Scalar) other).getValue();
             return new Vector(mulArr);
         }
-
         return super.mul(other);
+    }
+
+
+    @Override
+    public Var div(Var other) {
+        if (other instanceof Scalar) {
+            double[] divArr = Arrays.copyOf(value, value.length);
+                        for (int i = 0; i < value.length; i++) divArr[i] = divArr[i] / ((Scalar) other).getValue();
+            return new Vector(divArr);
+        }
+        return super.div(other);
     }
 
     @Override
     public String toString() {
 
-        StringBuilder sb = new StringBuilder("{");
-        String delimetr = "";
+        StringBuilder sb = new StringBuilder("");
+        if (value.length==1) {sb.append(value[0]); return sb.toString();}
+        else{String delimetr = "";
+        sb.append("{");
         for (double element : value) {
             sb.append(delimetr).append(element);
             delimetr=", ";
         }
         sb.append("}");
-        return sb.toString();
+        return sb.toString();}
     }
 
 
