@@ -7,6 +7,9 @@ class Vector extends Var {
 
     private double[] v1;
 
+    public double[] getValue() {
+        return v1;
+    }
 
     public Vector(double[] v1){
         this.v1 = v1;
