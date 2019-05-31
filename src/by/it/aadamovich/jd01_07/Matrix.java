@@ -7,16 +7,23 @@ class Matrix extends Var {
     private double[][] value;
 
     Matrix(double[][] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value, value.length);
+        for (int i = 0; i < value.length; i++) {
+            this.value[i] = Arrays.copyOf(value[i], value[i].length);
+        }
     }
 
     Matrix(Matrix matrix) {
         this.value = Arrays.copyOf(matrix.value, matrix.value.length);
+        for (int i = 0; i < matrix.value.length; i++) {
+            this.value[i] = Arrays.copyOf(matrix.value[i], matrix.value.length);
+
+        }
     }
 
     Matrix(String strMatrix) {
 
-        String matrixProcessed = strMatrix.replaceAll("[({|})].?[({|})]", "  ").trim();
+        String matrixProcessed = strMatrix.replaceAll("[({|})].{0,2}[({|})]", "  ").trim();
         String[] linesOfMatrix = matrixProcessed.split("[ ]{2,}");
 
         double[][] buffer = new double[linesOfMatrix.length][];
@@ -30,7 +37,6 @@ class Matrix extends Var {
             }
         }
         this.value = buffer;
-
     }
 
     @Override

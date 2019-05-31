@@ -1,6 +1,6 @@
 package by.it.aadamovich.jd01_07;
 
-public class Runner {
+public class OldRunner {
     public static void main(String[] args) {
 
         Scalar s1 = new Scalar(1);
