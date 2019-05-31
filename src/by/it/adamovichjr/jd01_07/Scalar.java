@@ -13,7 +13,8 @@ class Scalar extends Var {
     }
 
     Scalar (Scalar scalar){
-        this.value = scalar.value;
+        double buffer = scalar.value;
+        this.value = buffer;
     }
     @Override
     public String toString() {

@@ -1,5 +1,7 @@
 package by.it.adamovichjr.jd01_07;
 
+import java.util.Arrays;
+
 public class Vector extends Var {
 
     private double []value;
@@ -9,7 +11,8 @@ public class Vector extends Var {
     }
 
     Vector(Vector vector) {
-        this.value = vector.value;
+        double[] buffer = Arrays.copyOf(vector.value,vector.value.length);
+        this.value = buffer;
     }
 
     Vector(String str){

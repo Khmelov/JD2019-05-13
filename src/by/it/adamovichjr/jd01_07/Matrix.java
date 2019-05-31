@@ -1,6 +1,8 @@
 package by.it.adamovichjr.jd01_07;
 
 
+import java.util.Arrays;
+
 public class Matrix extends Var{
     private double [][] value;
 
@@ -8,7 +10,8 @@ public class Matrix extends Var{
         this.value = value;
     }
     Matrix(Matrix matrix){
-        this.value = matrix.value;
+        double [][]buffer = Arrays.copyOf(matrix.value,matrix.value.length);
+        this.value = buffer;
     }
     Matrix(String str){
         str = str.replaceAll("[^\\d.] ?"," ").trim();
