@@ -13,7 +13,6 @@ class Matrix extends Var {
     }
 
     Matrix(Matrix matrix) {
-        Arrays.copyOf(value,value.length);
         this.value = matrix.value;
     }
 
