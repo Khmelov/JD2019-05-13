@@ -15,6 +15,27 @@ public class Matrix extends Var {
         this.value=matrix.value;
     }
 
+
+    public Matrix(String strMatrix){
+
+        String [] sMatr=strMatrix.split("},\\{|},\\n\\{");
+        double [][] matr1 = new double[sMatr.length][ sMatr[0].replaceAll("[{}\\s]","").trim().split(",").length];
+        //String[] str = sVect.split(",");
+        for (int i = 0; i <sMatr.length ; i++) {
+            String[] sMatrFull = sMatr[i].replaceAll("[{}]","").split(",");
+
+            for (int j = 0; j <sMatrFull.length ; j++) {
+                matr1[i][j]=Double.parseDouble(sMatrFull[j]);
+
+            }
+        }
+        value = matr1;
+        this.value=value;
+
+    }
+
+
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
