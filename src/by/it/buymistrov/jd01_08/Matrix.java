@@ -19,14 +19,15 @@ public class Matrix extends Var {
     Matrix(String strMatrix) {
 
 
-        String[] stringMatrix = strMatrix.split("},\\{");
+        String[] stringMatrix = strMatrix.split("},");
+//        String[] stringMatrix1 = strMatrix.split("},\\{");
         String[] strLine = new String[stringMatrix.length];
         String[][] splittedStrLine = new String[strLine.length][strLine.length];
 
 
         for (int i = 0; i < strLine.length; i++) {
-            strLine[i] = (stringMatrix[i].replaceAll("[\\,\\{\\}]", " ").trim());
-            splittedStrLine[i] = strLine[i].split(" ");
+            strLine[i] = (stringMatrix[i].replaceAll("[\\,\\{\\} ]", " ").trim());
+            splittedStrLine[i] = strLine[i].split(" +");
 
         }
 
@@ -187,11 +188,9 @@ public class Matrix extends Var {
     public String toString() {
 
 
-        String out = Arrays.deepToString(value)
+        return Arrays.deepToString(value)
                 .replaceAll("\\[", "{")
                 .replaceAll("\\]", "}");
-
-        return out;
 
     }
 
