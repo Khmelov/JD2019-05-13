@@ -13,6 +13,7 @@ class Matrix extends Var {
     }
 
     Matrix(Matrix matrix) {
+        Arrays.copyOf(value,value.length);
         this.value = matrix.value;
     }
 
@@ -60,7 +61,7 @@ class Matrix extends Var {
         if (other instanceof Scalar) {
             double[][] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res.length; j++) {
+                for (int j = 0; j < res[i].length; j++) {
                     res[i][j] = res[i][j] + ((Scalar) other).getValue();
                 }
             }
@@ -69,7 +70,7 @@ class Matrix extends Var {
         else if (other instanceof Matrix) {
             double[][] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res.length; j++) {
+                for (int j = 0; j < res[i].length; j++) {
                     res[i][j] = res[i][j] +  ((Matrix) other).value[i][j];
                 }
             }
