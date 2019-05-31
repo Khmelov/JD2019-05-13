@@ -34,7 +34,7 @@ public class Runner {
         Var matrix2 = new Matrix(matrix);
         System.out.println(matrix2);
 
-        Var matrix3 = new Matrix("{{1,2},{3,4}}");
+        Var matrix3 = new Matrix("{{1,2,3,4},{3,4,4,4},{5,6,7,4},{2,3,1,3.3}}");
         System.out.println(matrix3);
 
 

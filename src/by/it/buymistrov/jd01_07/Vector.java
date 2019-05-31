@@ -37,16 +37,6 @@ public class Vector extends Var {
 
 
     @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder("{");
-//        for (int i = 0; i < value.length - 1; i++) {
-//            sb.append(value[i] + ", ");
-//        }
-//
-//        sb.append(value[value.length - 1]);
-//        sb.append("}");
-//        return sb.toString();
-//    }
 
     public String toString() {
         String out = Arrays.toString(value)

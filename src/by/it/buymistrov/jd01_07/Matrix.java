@@ -2,6 +2,7 @@ package by.it.buymistrov.jd01_07;
 
 import java.util.Arrays;
 
+
 public class Matrix extends Var {
 
     private double[][] value;
@@ -18,21 +19,27 @@ public class Matrix extends Var {
     Matrix(String strMatrix) {
 
 
-        String[] str = strMatrix.split("},\\{");
-        String[] first = str[0].replaceAll("[\\{\\}]", " ").trim().split(",");
-        String[] second = str[1].replaceAll("[]\\{\\}]", " ").trim().split(",");
-
-        double[][] strArray = new double[str.length][str.length];
+        String[] stringMatrix = strMatrix.split("},\\{");
+        String[] strLine = new String[stringMatrix.length];
+        String[][] splittedStrLine = new String[strLine.length][strLine.length];
 
 
-        strArray[0][0] = Double.parseDouble(first[0]);
-        strArray[1][0] = Double.parseDouble(second[0]);
+        for (int i = 0; i < strLine.length; i++) {
+            strLine[i] = (stringMatrix[i].replaceAll("[\\,\\{\\}]", " ").trim());
+            splittedStrLine[i] = strLine[i].split(" ");
+
+        }
+
+        double[][] strOut = new double[splittedStrLine.length][splittedStrLine.length];
+        for (int i = 0; i < splittedStrLine.length; i++) {
+            for (int j = 0; j < splittedStrLine.length; j++) {
+
+                strOut[i][j] = Double.parseDouble(splittedStrLine[i][j]);
+            }
+        }
 
 
-        strArray[0][1] = Double.parseDouble(first[1]);
-        strArray[1][1] = Double.parseDouble(second[1]);
-
-        this.value = strArray;
+        this.value = strOut;
 
     }
 
