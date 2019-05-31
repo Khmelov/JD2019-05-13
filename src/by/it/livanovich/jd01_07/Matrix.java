@@ -18,18 +18,19 @@ class Matrix extends Var{
         StringBuilder sbmatrix = new StringBuilder(strMatrix);
         Pattern p = Pattern.compile("}");
         Matcher m = p.matcher(strMatrix);
-        while (m.find()) {
-            int middle = m.start();
-            String[] first = strMatrix.substring(0, middle).replace("\\D+", " ").trim().split(" ");
-            String[] second = strMatrix.substring(middle+3, strMatrix.length() - 1).replace("\\D+", " ").trim().split(" ");
-            double[][] temp = new double[first.length][second.length];
-            for (int i = 0; i < first.length; i++) {
-                for (int j = 0; j < second.length; j++) {
-                    temp[j][j] = Double.parseDouble(second[j]);
-                }
-            }
-            this.value = temp;
+        m.find();
+        int middle = m.start();
+        String[] first = strMatrix.substring(0, middle).replace("{{", " ").trim().split(",");
+        String[] second = strMatrix.substring(middle + 3, strMatrix.length() - 1).replace("}", "").replace("{","").trim().split(",");
+        double[][] temp = new double[first.length][second.length];
+        for (int i = 0; i < first.length; i++) {
+            temp[0][i] = Double.parseDouble(first[i]);
         }
+        for (int i = 0; i < second.length; i++) {
+            temp[1][i] = Double.parseDouble(second[i]);
+        }
+        this.value = temp;
+
     }
 
     @Override
