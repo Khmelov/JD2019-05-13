@@ -118,39 +118,40 @@ public class Matrix extends Var {
             return new Matrix(copy);
         } else if (other instanceof Matrix) {
             double[][] mat = ((Matrix) other).value;
-
+            double[][] res = new double[copy.length][mat[0].length];
             for (int i = 0; i < copy.length; i++) {
-                for (int j = 0; j < copy[0].length; j++) {
-                    copy[i][j] = copy[i][j] - mat[i][j];
+                for (int j = 0; j < mat[0].length; j++) {
+                    for (int k = 0; k < mat.length; k++) {
+                        res[i][j] += copy[i][k] * mat[k][j];
+                    }
                 }
             }
-            return new Matrix(copy);
+            return new Matrix(res);
         } else {
             double[] mat = ((Vector) other).value;
-            double[][]res=new double[copy.length][mat.length];
-            int icount=0;
-            int jcount=0;
-            for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res [0].length; j++) {
-                    res[i][j] = copy[i][j]*mat[j];
+            double[]res=new double[copy[0].length];
+            for (int i = 0; i < copy[0].length; i++) {
+                for (int j = 0; j < mat.length; j++) {
+                    res[i] += copy[i][j] * mat[j];
                 }
             }
-            return new Vector(mat);
+            return new Vector(res);
 
         }
     }
-        @Override
-        public String toString () {
-            StringBuilder sb = new StringBuilder("{{");
-            String del = "";
-            for (int i = 0; i < value.length; i++) {
-                for (int i1 = 0; i1 < value[0].length; i1++) {
-                    sb.append(del).append(value[i][i1]);
-                    del = ", ";
-                }
-                del = "}, {";
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("{{");
+        String del = "";
+        for (int i = 0; i < value.length; i++) {
+            for (int i1 = 0; i1 < value[0].length; i1++) {
+                sb.append(del).append(value[i][i1]);
+                del = ", ";
             }
-            sb.append("}}");
-            return sb.toString();
+            del = "}, {";
         }
+        sb.append("}}");
+        return sb.toString();
     }
+}
