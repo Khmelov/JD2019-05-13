@@ -58,6 +58,7 @@ class Vector extends Var  {
             return super.add(other);
         }
 
+
     @Override
     public Var sub(Var other) {
         if (other instanceof Vector) {
@@ -75,6 +76,24 @@ class Vector extends Var  {
                 return new Vector(razArr);
             }
          return super.sub(other);
+    }
+
+
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Vector) {
+            double mulAll=0;
+            double[] mulArr = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < value.length; i++) mulAll+= mulArr[i] * ((Vector) other).value[i];
+
+            return new Vector(mulArr);}
+        else if (other instanceof Scalar) {
+            double[] mulArr = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < value.length; i++) mulArr[i] = mulArr[i] * ((Scalar) other).getValue();
+            return new Vector(mulArr);
+        }
+
+        return super.mul(other);
     }
 
     @Override
