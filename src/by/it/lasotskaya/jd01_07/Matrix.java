@@ -1,7 +1,7 @@
 package by.it.lasotskaya.jd01_07;
 
 public class Matrix extends Var {
-    private double mas[][];
+    private double[][] mas;
 
      Matrix(double[][] mas) {
         this.mas = mas;
@@ -12,7 +12,7 @@ public class Matrix extends Var {
     public  Matrix(String strMas){
 String [] matrix1 =strMas.replaceAll("[{}]","").split(",");
         String [] matrix2 =strMas.replaceAll("[{}+]","").split(",");
-        double mas[][]=new double[matrix1.length][matrix2.length];
+        double[][] mas = new double[matrix1.length][matrix2.length];
         for (int i = 0; i < matrix1.length; i++) {
             for (int i1 = 0; i1 < matrix2.length; i1++) {
                 mas[i][i1]=Double.parseDouble(strMas);
@@ -28,10 +28,10 @@ String [] matrix1 =strMas.replaceAll("[{}]","").split(",");
         for (int i = 0; i < mas.length; i++) {
            for (int j = 0; j <mas[0].length ; j++) {
                 stringBuilder.append(delimeter).append(mas[i][j]);
-                delimeter = ", ";
-                if (mas[i][j]==mas[0][1]){
-                    delimeter = "}, {";
+                if (j<mas.length-1){
+                    delimeter = ", ";
                 }
+                else delimeter= "}, {";
             }
         }
         stringBuilder.append("}}");
