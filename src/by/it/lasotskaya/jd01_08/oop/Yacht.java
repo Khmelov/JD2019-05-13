@@ -1,23 +1,35 @@
 package by.it.lasotskaya.jd01_08.oop;
 
 public class Yacht extends CommonShip{
-    @Override
-    public boolean swim() {
-        return false;
+private int yachtSpeed;
+private String yachtCountry;
+
+private boolean yachtSwim;
+
+    Yacht(int speed) {
+     this.yachtSpeed=speed;
+    }
+     Yacht (String country){
+        this.yachtCountry=country;
+    }
+    Yacht (boolean swim){
+        this.yachtSwim=swim;
+    }
+
+    boolean canGoToTrip(){
+        return true;
     }
 
     @Override
-    public int speed() {
-        return 0;
+    public String country(String country) {
+    return this.yachtCountry;
     }
 
     @Override
-    public int year() {
-        return super.year();
+    public String toString() {
+        return Integer.toString(yachtSpeed);
     }
 
     @Override
-    public String country() {
-        return super.country();
-    }
+    public boolean swim() { return this.yachtSwim; }
 }
