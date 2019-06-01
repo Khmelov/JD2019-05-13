@@ -45,26 +45,24 @@ public class Matrix extends Var {
 
     @Override
     public String toString() {
-        StringBuilder sb1 = new StringBuilder("{{");
-        StringBuilder sb2 = new StringBuilder("{");
-
-        String delimeter = "";
-        for (double x :
-                this.value[0]) {
-            sb1.append(delimeter).append(x);
-            delimeter = ", ";
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        String delimetr = "";
+        for (int i = 0; i < value.length; i++) {
+            sb.append("{");
+            for (int j = 0; j < value[0].length; j++) {
+                sb.append(delimetr).append(value[i][j]);
+                delimetr = ", ";
+            }
+            if((i + 1) == value.length)
+                sb.append("}");
+            else
+            sb.append("}, ");
+            delimetr = "";
         }
-        sb1.append("}, ");
+        sb.append("}");
 
-        delimeter = "";
-        for (double x :
-                this.value[1]) {
-            sb2.append(delimeter).append(x);
-            delimeter = ", ";
-        }
-        sb2.append("}}");
-
-        return sb1.append(sb2).toString();
+        return sb.toString();
     }
 
     @Override
@@ -136,15 +134,15 @@ public class Matrix extends Var {
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar){
-            double [][] result = new double[value.length][value[1].length];
+            double [][] result = new double[value.length][value[0].length];
             for (int i = 0; i < result.length; i++) {
-                for (int j = 0; j < result[1].length; j++) {
+                for (int j = 0; j < result[0].length; j++) {
                     result[i][j] = this.value[i][j];
                 }
             }
             for (int i = 0; i < result.length; i++) {
-                for (int j = 0; j < result[1].length; j++) {
-                    result[i][j] = result[i][j] * ((Matrix) other).value[i][j];
+                for (int j = 0; j < result[0].length; j++) {
+                    result[i][j] = result[i][j] * ((Scalar) other).getValue();
                 }
             }
             return new Matrix(result);
