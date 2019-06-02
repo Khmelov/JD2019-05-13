@@ -10,6 +10,8 @@ public class Matrix extends Var {
         return value;
     }
 
+
+
     Matrix(double[][] value) {
         this.value = value;
     }
@@ -65,7 +67,7 @@ public class Matrix extends Var {
             }
             return new Matrix(res);
         }
-        else if(other instanceof Matrix && this.value.length == ((Matrix)other).value[0].length && this.value[0].length == ((Matrix)other).value[0].length){
+        else if(other instanceof Matrix && this.value.length == ((Matrix)other).value.length && this.value[0].length == ((Matrix)other).value[0].length){
             double[][] res = new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
