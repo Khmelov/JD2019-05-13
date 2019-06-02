@@ -1,4 +1,4 @@
-package by.it.tbabich.jd01_08;
+package by.it.tbabich.jd01_09;
 
 import java.util.Arrays;
 
@@ -19,11 +19,7 @@ class Matrix extends Var {
     }
 
     Matrix(String strMatrix) {
-        String[] arrayString = strMatrix
-                .replaceAll("\\{", "")
-                .replaceAll(" ", "")
-                .replace("}}", "")
-                .split("},");
+        String[] arrayString = strMatrix.replace("{", "").replace("},", " ").replace("}", "").split(" ");
         double[][] arrayDouble = new double[arrayString.length][(arrayString[0].length() + 1) / 2];
         for (int i = 0; i < arrayString.length; i++) {
             String[] arrayStringElement = arrayString[i].split(",");
@@ -39,16 +35,17 @@ class Matrix extends Var {
     @Override
     public Var add(Var other) {
         if (other instanceof Scalar) {
-            Double s = ((Scalar) other).getValue();
+            Scalar s = (Scalar) other;
             double[][] res = copyArray(value);
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
-                    res[i][j] += s;
+                    res[i][j] += s.getValue();
                 }
             }
             return new Matrix(res);
         } else if (other instanceof Matrix) {
-            double[][] array = copyArray(((Matrix) other).getValue());
+            Matrix matrix = (Matrix) other;
+            double[][] array = copyArray(matrix.getValue());
             double[][] res = copyArray(value);
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
@@ -104,7 +101,7 @@ class Matrix extends Var {
             for (int i = 0; i < array2.length; i++) {
                 for (int j = 0; j < array2[0].length; j++) {
                     for (int k = 0; k < array2.length; k++) {
-                        res[i][j] += array2[i][k] * array[k][j];
+                        res[i][j] += array2[i][k] * array[k][i];
                     }
                 }
             }
