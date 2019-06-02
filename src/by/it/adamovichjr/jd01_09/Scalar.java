@@ -4,7 +4,6 @@ class Scalar extends Var {
 
     private double value;
 
-
     public double getValue() {
         return value;
     }
