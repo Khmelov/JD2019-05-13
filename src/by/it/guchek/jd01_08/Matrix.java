@@ -78,10 +78,55 @@ public class Matrix extends Var {
         return super.add(other);
     }
 
+    @Override
+    public Var mul(Var other) {
+        if (other instanceof Matrix) {
+            double[][] mulMatrRes = new double[this.value.length][((Matrix) other).value[0].length];  //инициирую резельтирующий массив
+            for (int i = 0; i < mulMatrRes.length; i++)
+                for (int j = 0; j < mulMatrRes[0].length; j++)
+                    for (int k = 0; k < ((Matrix) other).value.length; k++)
+                        mulMatrRes[i][j] = mulMatrRes[i][j] + this.value[i][k] * ((Matrix) other).value[k][j];
+            return new Matrix(mulMatrRes);
+        }
+
+        else if (other instanceof Vector){
+            double [][] mulMatrVectRes = new double [1][this.value.length];  //инициирую резельтирующий массив
+            for (int i = 0; i <this.value.length ; i++)
+                for (int j = 0; j <((Vector) other).getValue().length; j++) {
+                    mulMatrVectRes [0][i]=mulMatrVectRes[0][i] + this.value[i][j]*((Vector) other).getValue()[j];
+                }
+
+            return new Matrix(mulMatrVectRes);
+        }
+        else {
+            double[][] mulMatrScalarRez = new double[this.value.length][this.value[0].length];
+
+            for (int i = 0; i < this.value.length; i++)
+                for (int j = 0; j <this.value[0].length ; j++) {
+                mulMatrScalarRez[i][j] = this.value[i][j] * ((Scalar) other).getValue();
+            }
+            return new Matrix(mulMatrScalarRez);
+        }
+    }
+
 
 
     @Override
     public String toString() {
+        //StringBuilder sb = new StringBuilder();
+        if (value.length==1) {
+            StringBuilder sb = new StringBuilder("");
+           String delimetr = "";
+                sb.append("{");
+            for (int i = 0; i < value[0].length; i++) {
+                double doubles = value[0][i];
+                sb.append(delimetr).append(doubles);
+                delimetr = ", ";
+            }
+                sb.append("}");
+                return sb.toString();
+        }
+        else {
         StringBuilder sb = new StringBuilder("{");
         String delimetr1 = "{", delimetr2 = "}";
         for (int i=0; i<value.length; i++) {
@@ -101,6 +146,7 @@ public class Matrix extends Var {
             sb.append(", ");
         }
         return sb.toString();
+    }
     }
 
 }
