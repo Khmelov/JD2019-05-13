@@ -31,6 +31,19 @@ public class Runner {
         print(s.sub(v));  //3.0, 6.0, 9.0
         print(v.div(s));
         print(m.mul(s));
+        System.out.println("Матрица на скалар:");
+        print(m.div(s));
+        System.out.println("Матрица на вектор:");
+        print(m.div(v));
+        System.out.println("Матрица на матрицу:");
+        print(m.div(m));
+        print(m.sub(s));
+        print(v.sub(s));
+        print(v.sub(m));
+        print(v.div(v));
+        print(v.div(m));
+
+
 
     }
 }
