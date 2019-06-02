@@ -15,7 +15,6 @@ class Vector extends Var  {
         this.value = Arrays.copyOf(value,value.length);//во внутреннее поле
 
     }
-
                                             //void reset(){value[0]=0;}
 
     Vector(Vector vector){
@@ -25,12 +24,6 @@ class Vector extends Var  {
     Vector(String strVector){
         String sVect=strVector.replaceAll("[{}\\s]","").trim();
         String[] str = sVect.split(",");
-        //for (String s : str) {
-        //    int i=0;
-        //    str[i].trim();
-        //    i++;
-        //}
-
         double [] strArrDoub = new double[str.length];
         for (int i = 0; i < str.length; i++) {
             strArrDoub[i] = Double.parseDouble(str[i]);

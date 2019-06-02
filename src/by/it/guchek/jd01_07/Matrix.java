@@ -20,7 +20,7 @@ public class Matrix extends Var {
 
         String [] sMatr=strMatrix.split("},\\{|},\\n\\{");
         double [][] matr1 = new double[sMatr.length][ sMatr[0].replaceAll("[{}\\s]","").trim().split(",").length];
-        //String[] str = sVect.split(",");
+
         for (int i = 0; i <sMatr.length ; i++) {
             String[] sMatrFull = sMatr[i].replaceAll("[{}]","").split(",");
 
@@ -29,8 +29,8 @@ public class Matrix extends Var {
 
             }
         }
-        value = matr1;
-        this.value=value;
+        //value = matr1;
+        this.value=matr1;
 
     }
 
