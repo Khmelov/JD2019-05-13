@@ -1,5 +1,7 @@
 package by.it.yakimovich.jd01_07;
 
+import java.util.Arrays;
+
 public class Matrix extends Var {
 
     double[][] value;
@@ -14,21 +16,21 @@ public class Matrix extends Var {
 
 
     Matrix(String strMatrix){
-        strMatrix=strMatrix.replaceAll("\\{","");
-        strMatrix=strMatrix.replaceAll("\\}","");
-        String[] stre=strMatrix.split(",");
-        double[][] strM=new double[stre.length][1];
+        strMatrix=strMatrix.replace("{","");
+        strMatrix=strMatrix.replace("},"," ");
+        strMatrix=strMatrix.replace("}","");
+        String[] stre=strMatrix.split(" ");
+        double[][] strM=new double[stre.length][stre[0].length()/2];
         for (int i = 0; i <stre.length ; i++) {
-            for (int j = 0; j <stre[i].length() ; j++) {
-                strM[i][j]=Double.parseDouble(stre[i]);
-
-
+        String[]  elemString=stre[i].split(",");
+        double[] elemDouble= new double[elemString.length];
+            for (int j = 0; j < elemDouble.length; j++) {
+                elemDouble[j] = Double.parseDouble(elemString[j]);
             }
-
-        }
+            strM[i]=Arrays.copyOf(elemDouble,elemDouble.length);
+       }
         this.value= strM;
     }
-
 
 
 
@@ -37,7 +39,7 @@ public class Matrix extends Var {
 
             StringBuilder sb=new StringBuilder("{{");
             String delimeter="";
-            
+
             for (double[] element:value) {
                 for (double em:element) {
 
