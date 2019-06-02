@@ -5,45 +5,53 @@ import java.util.Scanner;
 
 public class TaskC {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String line = scanner.nextLine();
+       // Scanner scanner = new Scanner(System.in);
+       // String line = scanner.nextLine();
+        String line = "12 43 21 43 65 75 23 53 61 74";
         buildOneDimArray(line);
     }
 
     static void buildOneDimArray(String line) {
         double[] array = InOut.getArray(line);
 
-        //InOut.printArray(array, "V", 5);
-        //mergeSort(array);
-        quickSort(array);
-        InOut.printArray(array, "V", 4);
-
         double first = array[0];
         double last = array[array.length - 1];
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == first) {
-                System.out.println("Index of first element=" + i);
-                break;
-            }
-        }
+        //InOut.printArray(array, "V", 5);
+        mergeSort(array);
+        //quickSort(array);
+        InOut.printArray(array, "V", 4);
 
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == last) {
-                System.out.println("Index of last element=" + i);
-                break;
-            }
-        }
+
+//        for (int i = 0; i < array.length; i++) {
+//            if (array[i] == first) {
+//                System.out.println("Index of first element=" + i);
+//                break;
+//            }
+//        }
+//
+//        for (int i = 0; i < array.length; i++) {
+//            if (array[i] == last) {
+//                System.out.println("Index of last element=" + i);
+//                break;
+//            }
+//        }
+        InOut.printArray(array, "V", 4);
+        int first2 = binarySearch(array,first);
+        System.out.println("Index of first element="+first2);
+        int last2 = binarySearch(array,last);
+        System.out.println("Index of last element="+last2);
+
 
     }
 
-    static void quickSort(double[] array){
+    static void quickSort(double[] array) {
         int low = 0;
         int high = array.length - 1;
         if (array.length == 0)
             return;
         if (low >= high)
             return;
-        doSort(array, low, high );
+        doSort(array, low, high);
 
     }
 
@@ -76,72 +84,81 @@ public class TaskC {
 
 
 
-    static void mergeSort(double[] array) {
-        int start = 0;
-        int end = array.length - 1;
-        if (array.length > 1) {
-            if (array[0]<array.length) {
 
-                mergeSort(array, start,  end);
-            }
+    private static void mergeSort(double[] array) {
 
-            }
+        if(array == null){
+            return;
+        }
+
+        if(array.length <2){
+            return;
+        }
+        double[] leftArray = new double[array.length/2];
+        System.arraycopy(array,0,leftArray,0,array.length/2);
+
+        double[] rightArray = new double[array.length - array.length/2];
+        System.arraycopy(array,array.length/2,rightArray,0,array.length-array.length/2);
+        mergeSort(leftArray);
+        mergeSort(rightArray);
+        merge(array, leftArray, rightArray);
 
     }
 
-    private static double[] mergeSort (double[] array, int left, int right){
-        int q = array.length / 2;
-        double[] leftArray = Arrays.copyOfRange(array, 0, q - 1);
-        double[] rightArray = Arrays.copyOfRange(array, q, array.length-1);
-        mergeSort(leftArray, 0, leftArray.length - 1);
-        mergeSort(rightArray, rightArray.length - 1, array.length);
-        array = merge(array, leftArray, rightArray);
-        return array;
-    }
-
-    private static double[] merge(double[] array, double[] part1, double[] part2){
-            int totElem = part1.length + part2.length;
-            int i, li, ri;
-            i = li = ri = 0;
-            while (i < totElem) {
-                if ((li < part1.length) && (ri < part2.length)) {
-                    if (part1[li] < part2[ri]) {
-                        array[i] = part1[li];
-                        i++;
-                        li++;
-                    } else {
+    private static double[] merge(double[] array, double[] part1, double[] part2) {
+        int totElem = part1.length + part2.length;
+        int i, li, ri;
+        i = li = ri = 0;
+        while (i < totElem) {
+            if ((li < part1.length) && (ri < part2.length)) {
+                if (part1[li] < part2[ri]) {
+                    array[i] = part1[li];
+                    i++;
+                    li++;
+                } else {
+                    array[i] = part2[ri];
+                    i++;
+                    ri++;
+                }
+            } else {
+                if (li >= part1.length) {
+                    while (ri < part2.length) {
                         array[i] = part2[ri];
                         i++;
                         ri++;
                     }
-                } else {
-                    if (li >= part1.length) {
-                        while (ri < part2.length) {
-                            array[i] = part2[ri];
-                            i++;
-                            ri++;
-                        }
-                    }
-                    if (ri >= part2.length) {
-                        while (li < part1.length) {
-                            array[i] = part1[li];
-                            li++;
-                            i++;
-                        }
+                }
+                if (ri >= part2.length) {
+                    while (li < part1.length) {
+                        array[i] = part1[li];
+                        li++;
+                        i++;
                     }
                 }
             }
-            return array;
         }
-
-//    private static double[] mergeSort(double[] array, int left, int right){
-//
-//        }
-
-
-
-
-
+        return array;
     }
+    static int binarySearch(double[ ] array, double value){
+        int res=0;
+        int firstIndex  = 0;
+        int lastIndex   = array.length - 1;
+        int middleIndex = (firstIndex + lastIndex)/2;
+        while( firstIndex <= lastIndex ) {
+            if ( array[middleIndex] < value ){
+                firstIndex = middleIndex + 1;
+            } else if ( array[middleIndex] == value ) {
+                res = middleIndex;
+                break;
+            } else{
+                lastIndex = middleIndex - 1;
+            }
+            middleIndex = (firstIndex + lastIndex)/2;
+        }
+        return res;
+    }
+
+
+}
 
 
