@@ -109,6 +109,18 @@ public class Matrix extends Var {
         }
     }
 
+    @Override
+    public Var div(Var other) {
+        if (other instanceof Scalar){
+            double[][] divMatrScalarRez = new double[this.value.length][this.value[0].length];
+
+        for (int i = 0; i < this.value.length; i++)
+            for (int j = 0; j <this.value[0].length ; j++) {
+                divMatrScalarRez[i][j] = this.value[i][j] / ((Scalar) other).getValue();
+            }
+        return new Matrix(divMatrScalarRez);
+    } else return super.div(other);
+    }
 
 
     @Override
