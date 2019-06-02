@@ -4,6 +4,7 @@ import static java.lang.Math.*;
 
 public class TaskC {
     private static double[] array = new double[37];
+
     public static void main(String[] args) {
         step1();
         step2();
@@ -18,52 +19,143 @@ public class TaskC {
             z = cbrt(((x * x) + 4.5));
 
             array[i] = z;
-            System.out.println(array[i]);
+
             i++;
 
 
         }
-        for (double ar : array) {
-            System.out.format("%-6.4f ", ar);
+        for (int i1 = 0; i1 < array.length; i1++) {
+            double ar = array[i1];
+            if ((i1 + 1) % 5 == 1) System.out.println();
+            if (i <= 9)
+                System.out.format("M[%3d] =  %-1.5f ", i1, ar);
+            else System.out.format("M[%3d] =  %-1.5f ", i1, ar);
+
         }
     }
-        private static void step2(){
-            System.out.println(" ");
-            System.out.println("Massiv B:");
-        int counter =0;
-        int i=0;
-            double e= 0;
-        for (int j = 0; j <array.length ; j++) {
 
-            if (array[i] > 3.5){
+    private static void step2() {
+        System.out.println(" ");
+        System.out.println("Massiv B: >3.5");
+        int counter = 0;
+        int i = 0;
 
-                counter ++;
+        for (int j = 0; j < array.length; j++) {
+
+            if (array[i] > 3.5) {
+
+                counter++;
             }
             i++;
 
         }
-        i=0;
+        i = 0;
         double[] newArray = new double[counter];
-            for (double value : array) {
+        for (double value : array) {
 
-                if (value > 3.5) {
+            if (value > 3.5) {
 
-                    newArray[i] = value;
-                    i++;
-                }
-
+                newArray[i] = value;
+                i++;
             }
-            for (double v : newArray) {
-                e *= v;
-            }
-            double midle = pow(e,newArray.length-1);
 
-        for (double ar : newArray) {
-            System.out.format("%-6.4f ", ar);
         }
-            System.out.format("%-10s %-2.9f ", "Massiv >3.5" ,midle);
+        double e = 1;
+        for (double v : newArray) {
+            e *= v;
+
+        }
+        //double midle = pow(e,1/newArray.length-1);
+        double midle = Math.exp(Math.log(e) / newArray.length - 1);
+
+        for (int i1 = 0; i1 < newArray.length; i1++) {
+            double ar = newArray[i1];
+            if ((i1 + 1) % 5 == 1) System.out.println();
+            if (i <= 9)
+                System.out.format("M[% -3d] =  %-1.5f ", i1, ar);
+            else System.out.format("M[%3d] =  %-1.5f ", i1, ar);
+        }
+        System.out.format("%10s %-2.2f ", "Middle", midle);
+
+        System.out.println();
+        System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "╔", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╦");
+       int p=0;
+        while (p < 3) {
+            System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╦");
+            p++;
+        }
+        System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s\n", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╗");
+        int j=0;
+       while ( j != (newArray.length-1)) {
+
+           if (j == 0) System.out.format("%1sM[% -3d]=%3.1f%1s", "║", j, newArray[j], "║");
+           j++;
+           System.out.format("M[% -3d]=%3.1f%1s", j, newArray[j], "║");
+           if (j == 4) {
+               System.out.println();
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "╠", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s\n", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╣");
+               j++;
+               System.out.format("%1sM[% -3d]=%3.1f%1s", "║", j, newArray[j], "║");
+
+           }
+           if (j == 9) {
+               System.out.println();
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "╠", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s\n", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╣");
+               j++;
+               System.out.format("%1sM[% -3d]=%3.1f%1s", "║", j, newArray[j], "║");
+           }
+           if (j == 14) {
+               System.out.println();
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "╠", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s\n", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╣");
+               j++;
+               System.out.format("%1sM[% -3d]=%3.1f%1s", "║", j, newArray[j], "║");
+           }
+           if (j == 19) {
+               System.out.println();
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "╠", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s\n", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╣");
+               i++;
+               System.out.format("%1sM[% -3d]=%3.1f%1s", "║", j, newArray[j], "║");
+           }
+           if (j == 23) {
+               System.out.println();
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "╠", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╬");
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s\n", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╣");
+               i++;
+               System.out.format("%1sM[% -3d]=%3.1f%1s", "║", j, newArray[j], "║");
+           }
+       }
+        System.out.println();
+           System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "╚", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╩");
+           int u=0;
+           while (u < 3) {
+               System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╩");
+               u++;
+           }
+           System.out.format("%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s%1s\n", "═", "═", "═", "═", "═", "═", "═", "═", "═", "═", "╝");
+
+        }
 
 
-            }
-    }
+}
+
+
 
