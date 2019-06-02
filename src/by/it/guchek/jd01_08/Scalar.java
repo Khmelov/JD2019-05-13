@@ -12,6 +12,17 @@ class Scalar extends Var{                                    //убрала пу
         this.value = value;
     }
 
+
+    Scalar (Scalar scalar){           //принимает на вход экземпляр этого класса
+        this.value = scalar.value; // заполним поле value в this,  а берем это значение из класса scalar
+    }
+
+
+    Scalar(String strScalar){
+        this.value = Double.parseDouble(strScalar); //преобразует строковое значение к double
+    }
+
+
     @Override
     public Var add(Var other) {
         if (other instanceof Scalar){
@@ -50,13 +61,6 @@ class Scalar extends Var{                                    //убрала пу
         }else return super.div(other);
     }
 
-    Scalar (Scalar scalar){           //принимает на вход экземпляр этого класса
-        this.value = scalar.value; // заполним поле value в this,  а берем это значение из класса scalar
-    }
-
-    Scalar(String strScalar){
-        this.value = Double.parseDouble(strScalar); //преобразует строковое значение к double
-    }
 
     @Override
     public String toString() {

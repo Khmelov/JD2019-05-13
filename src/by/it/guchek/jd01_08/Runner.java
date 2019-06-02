@@ -28,8 +28,9 @@ public class Runner {
         print(v.add(s));
         print(s.add(v));
         print(v.sub(s));
-        //print(s.sub(v));
+        print(s.sub(v));  //3.0, 6.0, 9.0
         print(v.div(s));
+        print(m.mul(s));
 
     }
 }

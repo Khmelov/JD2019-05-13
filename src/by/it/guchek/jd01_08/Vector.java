@@ -6,9 +6,9 @@ class Vector extends Var  {
 
     private double [] value;
 
-    //public double[] getValue() {
-     //return value;
-    //}
+    public double[] getValue() { return value; }
+
+
 
     Vector(double[] value) {
                                          //конструктор будет принимать какое то значение value и заносить это значение
