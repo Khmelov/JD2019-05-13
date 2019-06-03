@@ -1,4 +1,4 @@
-package by.it.orlov.jd01_08;
+package by.it.orlov.jd01_09;
 
 
 import java.util.Arrays;
@@ -7,6 +7,9 @@ class Vector extends Var {
 
     private double[] v1;
 
+    public double[] getValue() {
+        return v1;
+    }
 
     public Vector(double[] v1){
         this.v1 = v1;
