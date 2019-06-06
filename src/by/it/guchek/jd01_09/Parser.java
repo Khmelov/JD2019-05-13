@@ -17,10 +17,10 @@ public class Parser {                //Принимает на вход неко
       if (m.find()){
          String operation = m.group();
          switch (operation){
-            case "+": one.add(two);
-            case "-": one.sub(two);
-            case "*": one.mul(two);
-            case "/": one.div(two);
+            case "+": return one.add(two);
+            case "-": return one.sub(two);
+            case "*": return one.mul(two);
+            case "/": return one.div(two);
          }
       }
 
