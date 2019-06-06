@@ -6,7 +6,7 @@ class Matrix extends Var {
 
     private double[][] value;
 
-    private Matrix(double[][] value) {
+    Matrix(double[][] value) {
         this.value = Arrays.copyOf(value, value.length);
         for (int i = 0; i < value.length; i++) {
             this.value[i] = Arrays.copyOf(value[i], value[i].length);
