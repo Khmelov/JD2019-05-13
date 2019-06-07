@@ -1,7 +1,6 @@
-package by.it.trudnitski.jd01_08;
+package by.it.trudnitski.jd01_09;
 
 import java.util.Arrays;
-import java.util.stream.DoubleStream;
 
 public class Matrix extends Var {
     private double[][] value;
@@ -19,15 +18,15 @@ public class Matrix extends Var {
     public Matrix(String strMatrix){
         strMatrix = strMatrix.replaceAll("[^\\d.] ?"," ").trim();
         String[]line = strMatrix.split("[ ]{2,}");
-        double[][] mas = new double[line.length][];
-        for (int i = 0; i < mas.length; i++) {
+        double[][] res = new double[line.length][];
+        for (int i = 0; i < res.length; i++) {
             String[] count = line[i].split(" ");
-            mas[i] = new double[count.length];
-            for (int j = 0; j < mas[i].length; j++) {
-                mas[i][j] = Double.parseDouble(count[j]);
+            res[i] = new double[count.length];
+            for (int j = 0; j < res[i].length; j++) {
+                res[i][j] = Double.parseDouble(count[j]);
             }
         }
-        this.value = mas;
+        this.value = res;
     }
     @Override
     public String toString() {
@@ -96,7 +95,7 @@ public class Matrix extends Var {
             }
             return new Matrix(res);
         }
-        else if (other instanceof Matrix&&value.length==((Matrix)other).getValue().length){
+        else if (other instanceof Matrix &&value.length==((Matrix)other).getValue().length){
            double[][]m=((Matrix) other).getValue();
            double[][] res=new double[value.length][value[0].length];
             for (int i = 0; i <value.length ; i++) {
@@ -123,7 +122,7 @@ public class Matrix extends Var {
             }
             return new Matrix(res);
         }
-        else if(other instanceof Matrix&&value.length==((Matrix)other).getValue().length){
+        else if(other instanceof Matrix &&value.length==((Matrix)other).getValue().length){
             double[][] m=((Matrix) other).getValue();
             double [][]res=new double[value.length][value[0].length];
             for (int i = 0; i <value.length ; i++) {
