@@ -11,7 +11,7 @@ public class TaskC {
         buildOneDimArray(line);
     }
 
-    static void buildOneDimArray(String line) {
+    private static void buildOneDimArray(String line) {
         double[] array = InOut.getArray(line);
 
         double first = array[0];
@@ -22,19 +22,6 @@ public class TaskC {
         InOut.printArray(array, "V", 4);
 
 
-//        for (int i = 0; i < array.length; i++) {
-//            if (array[i] == first) {
-//                System.out.println("Index of first element=" + i);
-//                break;
-//            }
-//        }
-//
-//        for (int i = 0; i < array.length; i++) {
-//            if (array[i] == last) {
-//                System.out.println("Index of last element=" + i);
-//                break;
-//            }
-//        }
         InOut.printArray(array, "V", 4);
         int first2 = binarySearch(array,first);
         System.out.println("Index of first element="+first2);
@@ -141,8 +128,8 @@ public class TaskC {
     }
     static int binarySearch(double[ ] array, double value){
         int res=0;
-        int firstIndex  = 0;
-        int lastIndex   = array.length - 1;
+        int firstIndex = 0;
+        int lastIndex = array.length - 1;
         int middleIndex = (firstIndex + lastIndex)/2;
         while( firstIndex <= lastIndex ) {
             if ( array[middleIndex] < value ){
