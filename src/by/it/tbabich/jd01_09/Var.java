@@ -25,4 +25,10 @@ abstract class Var implements Operation {
         System.out.printf("Операция %s / %s невозможна%n", this, other);
         return null;
     }
+
+    static Var createVar(String s){
+        if (s.matches(Patterns.MATRIX)) return new Matrix(s);
+        else if (s.matches(Patterns.VECTOR)) return new Vector(s);
+        else return new Scalar(s);
+    }
 }
