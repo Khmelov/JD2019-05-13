@@ -3,7 +3,7 @@ package by.it.yaskevich.jd01_09;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+class Parser {
     Var calc(String expression) {
         expression = expression.replaceAll("\\s+", "");
         String[] part = expression.split(Patterns.OPERATION);

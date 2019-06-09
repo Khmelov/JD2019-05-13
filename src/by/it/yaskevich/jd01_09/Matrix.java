@@ -20,12 +20,13 @@ public class Matrix extends Var {
     }
 
     Matrix(String strMatrix) {
-        Matcher matcher = Pattern.compile("^\\{(?<arrays>((, ?)?\\{(((, ?)?(\\d+(\\.\\d)?))+)\\})+)\\}$").matcher(strMatrix);
+        strMatrix = strMatrix.replaceAll("\\s+", "");
+        Matcher matcher = Pattern.compile(Patterns.MATRIX).matcher(strMatrix);
         if (!matcher.find())
             throw new IllegalArgumentException("Incorrect format: " + strMatrix);
 
         String rawData = matcher.group("arrays");
-        matcher = Pattern.compile("\\{(?<array>((, ?)?(\\d+(\\.\\d)?))+)\\}").matcher(rawData);
+        matcher = Pattern.compile(Patterns.VECTOR).matcher(rawData);
 
         int counter = 0;
         while (matcher.find()) {
