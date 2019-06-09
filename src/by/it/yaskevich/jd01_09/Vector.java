@@ -21,7 +21,8 @@ public class Vector extends Var {
     }
 
     Vector(String strVector) {
-        Matcher matcher = Pattern.compile("^\\{(((,)?(\\d+(\\.\\d)?))+)\\}$").matcher(strVector);
+        strVector = strVector.replaceAll("\\s+", "");
+        Matcher matcher = Pattern.compile(Patterns.VECTOR).matcher(strVector);
         if (!matcher.find())
             throw new IllegalArgumentException("Incorrect format: " + strVector);
 
