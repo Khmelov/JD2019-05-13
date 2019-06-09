@@ -19,25 +19,19 @@ public class Matrix extends Var {
     }
 
     public Matrix(String strMatrix) {
-        String line = strMatrix.replaceAll("\\s", "");
-        line = line.replaceAll("[\\{}]{2}", "");
 
-        String[] masNstr = line.split("},\\{");
-        int count = 0;
-
-        for (int i = 0; i < masNstr.length; i++) {
-            String arr[] = masNstr[i].split(",");
-            count = arr.length;
-        }
-        double[][] mass = new double[masNstr.length][count];
-        for (int i = 0; i < masNstr.length; i++) {
-            String arr[] = masNstr[i].split(",");
-
-            for (int i1 = 0; i1 < arr.length; i1++) {
-                mass[i][i1] = Double.parseDouble(arr[i1]);
+            String[] arrStr = strMatrix.replaceAll("\\s", "")
+                    .replaceAll("[{}]{2}", "")
+                    .split("},\\{");
+            double[][] res = new double[arrStr.length][];
+            for (int i = 0; i < arrStr.length; i++) {
+                String[] arrDig = arrStr[i].split(",");
+                res[i] = new double[arrDig.length];
+                for (int j = 0; j < arrDig.length; j++) {
+                    res[i][j] = Double.parseDouble(arrDig[j]);
+                }
             }
-        }
-        this.value = Arrays.copyOf(mass, mass.length);
+            value = Arrays.copyOf(res, res.length);
     }
 
     @Override
@@ -127,7 +121,7 @@ public class Matrix extends Var {
             return new Matrix(res);
         } else {
             double[] mat = ((Vector) other).value;
-            double[]res=new double[copy[0].length];
+            double[] res = new double[copy[0].length];
             for (int i = 0; i < copy[0].length; i++) {
                 for (int j = 0; j < mat.length; j++) {
                     res[i] += copy[i][j] * mat[j];
