@@ -18,16 +18,16 @@ public class Parser {
             Matcher matcher=pattern.matcher(expression);
             if(matcher.find()){
                 String operation =matcher.group();
-//                switch (operation){
-//                    case +:return one.add(two);
-//                    case -:return one.sub(two);
-//                    case *;return one.mul(two);
-//                    case /;return one.div(two);
-//                }
+                switch (operation){
+                    case "+":return one.add(two);
+                    case "-":return one.sub(two);
+                    case "*":return one.mul(two);
+                    case "/":return one.div(two);
+                }
             }
 
 
         }
-        return result;
+        return null;
     }
 }
