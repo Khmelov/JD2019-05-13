@@ -49,55 +49,52 @@ class Vector extends Var {
     @Override
     public Var sub(Var other) {
         if (other instanceof Scalar) {
-            Scalar s = (Scalar) other;
+            double s = ((Scalar) other).getValue();
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
-                res[i] -= s.getValue();
+                res[i] -= s;
             }
             return new Vector(res);
-        } else if (other instanceof Vector && this.value == ((Vector) other).value) {
+        } else if (other instanceof Vector) {
             double[] v = ((Vector) other).value;
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i] -= v[i];
             }
             return new Vector(res);
-        } else
-            return super.sub(other);
+        } else return super.add(other);
     }
 
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar) {
-            Scalar s = (Scalar) other;
+            Double s = ((Scalar) other).getValue();
             double[] res = Arrays.copyOf(value, value.length);
-            double result = 0;
             for (int i = 0; i < res.length; i++) {
-                result += res[i] * s.getValue();
+                res[i] *= s;
             }
             return new Vector(res);
-        } else if (other instanceof Vector && this.value == ((Vector) other).value) {
-            double[] v = ((Vector) other).value;
-            double[] res = Arrays.copyOf(value, value.length);
+        } else if (other instanceof Vector && this.value.length == ((Vector) other).value.length) {
+            double[] vector1 = ((Vector) other).value;
+            double[] vector2 = Arrays.copyOf(value, value.length);
             double result = 0;
-            for (int i = 0; i < res.length; i++) {
-                result += res[i] * v[i];
+            for (int i = 0; i < vector2.length; i++) {
+                result += vector2[i] * vector1[i];
             }
             return new Scalar(result);
-        } else
-            return super.mul(other);
+        } else return super.mul(other);
     }
 
     @Override
     public Var div(Var other) {
         if (other instanceof Scalar) {
-            Scalar s = (Scalar) other;
+            Double s = ((Scalar) other).getValue();
             double[] res = Arrays.copyOf(value, value.length);
-            double result = 0;
+//            double result = 0;
             for (int i = 0; i < res.length; i++) {
-                result += res[i] / s.getValue();
+                res[i] /= s;
             }
-            return new Scalar(result);
+            return new Vector(res);
         }
         return super.div(other);
     }
