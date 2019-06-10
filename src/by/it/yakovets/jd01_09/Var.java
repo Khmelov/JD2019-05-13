@@ -3,9 +3,12 @@ package by.it.yakovets.jd01_09;
 abstract class Var implements Operation {
     public static Var createVar(String strVar) {
         strVar = strVar.replaceAll("\\s+", "");
-        if (strVar.matches(Patterns.SCALAR)) return new Scalar(strVar);
-        if (strVar.matches(Patterns.VECTOR)) return new Vector(strVar);
-        if (strVar.matches(Patterns.MATRIX)) return new Matrix(strVar);
+        if (strVar.matches(Patterns.SCALAR))
+            return new Scalar(strVar);
+        if (strVar.matches(Patterns.VECTOR))
+            return new Vector(strVar);
+        if (strVar.matches(Patterns.MATRIX))
+            return new Matrix(strVar);
         else return null;
     }
 
