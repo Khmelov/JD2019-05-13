@@ -9,9 +9,6 @@ public class PrintMath {
 
     public static void main(String[] args) {
         Class<Math> aClass = Math.class;
-
-        Package aPackage = aClass.getPackage();
-
         Method[] methods = aClass.getDeclaredMethods();
         StringBuilder stringMethod = new StringBuilder();
         for (Method method : methods) {
