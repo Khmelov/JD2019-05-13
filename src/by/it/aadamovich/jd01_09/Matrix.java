@@ -1,4 +1,4 @@
-package by.it.aadamovich.jd01_08;
+package by.it.aadamovich.jd01_09;
 
 import java.util.Arrays;
 
@@ -19,8 +19,7 @@ class Matrix extends Var {
 
     Matrix(String strMatrix) {
 
-        String[] linesOfMatrix = strMatrix
-                .replaceAll("[({|})].{0,2}[({|})]", "  ")
+        String[] linesOfMatrix = strMatrix.replaceAll("[({|})].{0,2}[({|})]", "  ")
                 .trim().split("[ ]{2,}");
 
         double[][] buffer = new double[linesOfMatrix.length][];
