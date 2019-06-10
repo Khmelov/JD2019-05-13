@@ -13,9 +13,9 @@ public class TaskB2 {
             words[i] = words[i].replaceAll("[ ]{2,}"," ");
             words[i] = words[i].trim();
         }
-        for (int i = 0; i < words.length; i++) {
-            for (int j = 0; j < words.length; j++) {
-                if(words[i].length() < words[j].length()){
+        for (int i = 0; i < words.length-1; i++) {
+            for (int j = i + 1; j < words.length; j++) {
+                if(words[i].length() > words[j].length()){
                     String buffer = words[i];
                     words[i] = words[j];
                     words[j] = buffer;
