@@ -42,7 +42,7 @@ class TaskC3 {
         System.out.println(a);
     }
 
-        public static double getWeight (int weight) {
+        private static double getWeight(int weight) {
 
             return ( (double)(Math.round(weight*G_Mars/G_Earth*100))/100);
         }

@@ -11,9 +11,11 @@ public class TaskB2 {
         text=text.replace(","," ");
         text=text.replace("\n"," ");
         String [] poem=text.split("\\.");
+        Arrays.sort(poem);
         for (String s : poem) {
             System.out.println(s);
         }
         }
-    }
+        }
+
 
