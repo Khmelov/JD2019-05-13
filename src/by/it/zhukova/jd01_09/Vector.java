@@ -90,18 +90,12 @@ class Vector extends Var {
         this.value=vector.value;
     }
     Vector(String strVector) {
-        Pattern p2 = Pattern.compile("-?\\d+(\\.\\d+)?");
-        Matcher m2 = p2.matcher(strVector);
-        int k=0;
-        while (m2.find()){
-            k++;
-        }
-        m2.reset();
-        double [ ] vectorResult = new double[k];
-        int j=0;
-        while (m2.find()){
-            vectorResult[j]=Double.parseDouble(m2.group());
-            j++;
+        String [] vector = strVector.replace("{","")
+                .replace("}","")
+                .split(",");
+        double [] vectorResult = new double [vector.length];
+        for (int i = 0; i < vector.length; i++) {
+            vectorResult[i] =Double.parseDouble(vector[i]);
         }
         this.value= vectorResult;
     }
