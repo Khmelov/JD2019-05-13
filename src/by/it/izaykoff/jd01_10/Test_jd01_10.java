@@ -1,4 +1,4 @@
-package by.it._tasks_.jd01_10;
+package by.it.izaykoff.jd01_10;
 
 
 import org.junit.Test;
