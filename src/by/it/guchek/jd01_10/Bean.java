@@ -14,7 +14,7 @@ public class Bean {
     double min(int a, int b){
         return a<b?a:b;
     }
-    
+
     @Param(a=14, b=10)
     static double avg(int a, int b){
         return (a+b)/2.0;
