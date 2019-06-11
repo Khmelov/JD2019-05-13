@@ -11,11 +11,12 @@ class Vector extends Var {
     }
 
     Vector(Vector vector) {
-        this.value = Arrays.copyOf(vector.value, vector.value.length);
+        this.value = vector.value;
     }
 
     Vector(String strVector) {
-        String[] elements = strVector.replaceAll("[^\\d.]+", " ")
+        String[] elements = strVector
+                .replaceAll("[^\\d.]+", " ")
                 .trim().split(" ");
 
         double[] buffer = new double[elements.length];
