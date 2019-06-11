@@ -9,13 +9,13 @@ public class Bean {
     static double max(int one, int two) {
         return one > two ? one : two;
     }
-    @Param(a=4,b=6)
+
     double min(int one, int two) {
         return one < two ? one : two;
     }
     @Param(a=4,b=6)
     double avg(int one, int two) {
-        return (one + two)/2;
+        return (one + two)/2.0;
     }
 
 }
