@@ -5,39 +5,47 @@ import java.lang.reflect.Modifier;
 
 public class PrintMath {
 
-
     public static void main(String[] args) {
-        Class<Math> aClass = Math.class;
-        Method[] methods = aClass.getDeclaredMethods();
-        StringBuilder stringMethod = new StringBuilder();
-        for (Method method : methods) {
-            stringMethod.setLength(0);
 
-            int modifiers = method.getModifiers();
+        Class<Math> mathClass = Math.class;
+        Method[] declaredMethods = mathClass.getDeclaredMethods();
+        StringBuilder str = new StringBuilder();
 
-            if (Modifier.isPublic(modifiers))
-                stringMethod.append("public ");
-            if (Modifier.isPrivate(modifiers))
-                stringMethod.append("private ");
-            if ((Modifier.STATIC & modifiers) == Modifier.STATIC)
-                stringMethod.append("static ");
-            String returnName = method.getReturnType().getSimpleName();
-            stringMethod.append(returnName)
-                    .append(' ')
-                    .append(method.getName())
-                    .append('(');
+        for (Method method : declaredMethods) {
 
-            Class<?>[] parameterTypes = method.getParameterTypes();
-            String delimiter="";
-            for (Class<?> parameterType : parameterTypes) {
-                stringMethod.append(delimiter).append(parameterType.getSimpleName());
-                delimiter=",";
+            if ((method.getModifiers() & Modifier.PUBLIC) != 0) {
+                str.append("public static ")
+                        .append(method.getReturnType())
+                        .append(" ")
+                        .append(method.getName())
+                        .append("(");
+
+                Class<?>[] parameterTypes = method.getParameterTypes();
+                String delimeter = "";
+
+                for (Class<?> type : parameterTypes) {
+                    str.append(delimeter).append(type);
+                    delimeter = ",";
+                }
+                str.append(")");
+                System.out.println(str);
+                str.delete(0, str.length());
             }
-
-            stringMethod.append(')');
-            System.out.println(stringMethod);
-
         }
 
+        Field[] dFields = mathClass.getDeclaredFields();
+
+        for (Field f : dFields) {
+
+            if ((f.getModifiers() & Modifier.PUBLIC) != 0) {
+                str.append("public static final ")
+                        .append(f.getType())
+                        .append(" ")
+                        .append(f.getName());
+
+                System.out.println(str);
+                str.delete(0, str.length());
+            }
+        }
     }
 }
