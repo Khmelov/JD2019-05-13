@@ -1,7 +1,5 @@
 package by.it.dnevar.jd01_10;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Method;
 
 public class BeanTester {
