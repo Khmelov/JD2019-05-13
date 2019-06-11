@@ -11,6 +11,7 @@ public class Bean {
     static double max(int a, int b){
         return a>b?a:b;
     }
+
     double min(int a, int b){
         return a<b?a:b;
     }

@@ -11,6 +11,7 @@ public class PrintString {
         for (Method method : methodsStr) {
 
             int modifiers = method.getModifiers();
+
             if (!Modifier.isStatic(modifiers)) {           //если модификатор нестатический
                 System.out.println(method.getName());
             }
