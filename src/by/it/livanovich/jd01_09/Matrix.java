@@ -16,28 +16,15 @@ class Matrix extends Var {
     }
 
     Matrix (String strMatrix) {
-        StringBuilder sbmatrix = new StringBuilder(strMatrix);
-        Pattern p = Pattern.compile("}");
-        Matcher m = p.matcher(strMatrix);
+        String [] part=strMatrix.split("},");
+        double [][]temp=new double[part.length][part[0].replaceAll("\\{\\{|}|\\{|\\s","").split(",").length];
+        for (int i = 0; i < part.length; i++) {
+            String [] col=part[i].replaceAll("\\{\\{|}|\\{|\\s","").split(",");
+            for (int j=0; j<col.length; j++){
+                temp [i][j]=Double.parseDouble(col[j]);
+            }
+        }
 
-        m.find();
-        int middle = m.start();
-        String[] first = strMatrix.substring(0, middle)
-                .replace("{{", " ")
-                .trim()
-                .split(",");
-        String[] second = strMatrix.substring(middle + 3, strMatrix.length() - 1)
-                .replace("}", "")
-                .replace("{","")
-                .trim()
-                .split(",");
-        double[][] temp = new double[first.length][second.length];
-        for (int i = 0; i < first.length; i++) {
-            temp[0][i] = Double.parseDouble(first[i]);
-        }
-        for (int i = 0; i < second.length; i++) {
-            temp[1][i] = Double.parseDouble(second[i]);
-        }
         this.value = temp;
 
     }
