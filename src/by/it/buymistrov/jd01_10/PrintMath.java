@@ -6,63 +6,56 @@ import java.lang.reflect.Modifier;
 
 public class PrintMath {
 
+
     public static void main(String[] args) {
-        Class<Math> mathClass = Math.class;
-
-        Field[] fields = mathClass.getFields();
-
-        for (Field field : fields) {
-            System.out.println(field);
-        }
-
-        Method[] methods = mathClass.getMethods();
-        for (Method method : methods) {
-            System.out.println(method);
-        }
-
-        StringBuilder name = new StringBuilder();
+        Class<Math> aClass = Math.class;
+        Method[] methods = aClass.getMethods();
+        StringBuilder stringMethod = new StringBuilder();
+        Field[] field = aClass.getFields();
 
         for (Method method : methods) {
-
-            name.setLength(0);
-
+            stringMethod.setLength(0);
 
             int modifiers = method.getModifiers();
-            if ((Modifier.isPublic(modifiers))) {
-                name.append("public ");
-                if ((Modifier.isPrivate(modifiers))) {
-                    name.append("private ");
-                    if ((Modifier.isStatic(modifiers))) {
-                        name.append("static ");
-
-                        String returnName = method.getReturnType().getSimpleName();
-
-                        name.append(returnName).append(' ').append(method.getName());
-
-                        Class<?>[] parameterTypes = method.getParameterTypes();
-                        String delimeter = "";
-
-                        for (Class<?> parameterType : parameterTypes) {
-                            name.append(delimeter).append(parameterType.getSimpleName());
-                            delimeter = ",";
-                        }
 
 
 
-                    }
+            if (Modifier.isPublic(modifiers))
+                stringMethod.append("public ");
+            if (Modifier.isPrivate(modifiers))
+                stringMethod.append("private ");
+            if ((Modifier.STATIC & modifiers) == Modifier.STATIC)
+                stringMethod.append("static ");
 
 
+            String returnName = method.getReturnType().getSimpleName();
+            stringMethod.append(returnName)
+                    .append(' ')
+                    .append(method.getName())
+                    .append('(');
 
-
-
-                }
-
-
+            Class<?>[] parameterTypes = method.getParameterTypes();
+            String delimiter="";
+            for (Class<?> parameterType : parameterTypes) {
+                stringMethod.append(delimiter).append(parameterType.getSimpleName());
+                delimiter=",";
             }
-            System.out.println(name);
 
+            stringMethod.append(')');
+            System.out.println(stringMethod);
 
         }
+
+        StringBuilder getfield = new StringBuilder();
+        for (Field field1 : field) {
+            getfield.setLength(0);
+            getfield.append(field1.getType()).append(" ").append(field1.getName());
+
+            System.out.println(getfield);
+
+        }
+
+
+
     }
 }
-

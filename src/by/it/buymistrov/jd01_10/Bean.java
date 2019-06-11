@@ -1,6 +1,6 @@
 package by.it.buymistrov.jd01_10;
 
-public class Bean {
+class Bean {
 
     @Param(a=4, b=70)
     double sum(int one, int two){
