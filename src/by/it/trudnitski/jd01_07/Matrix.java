@@ -12,6 +12,7 @@ public class Matrix extends Var {
         this.value=matrix.value;
     }
     public Matrix(String strMatrix){
+<<<<<<< HEAD
         strMatrix=strMatrix.replaceAll("[^\\d.]+"," ").trim();
         String []line=strMatrix.split("[ ]+");
         double [][] res=new double[line.length/2][line.length/2];
@@ -23,6 +24,19 @@ public class Matrix extends Var {
             }
             this.value=res;
         }
+=======
+        strMatrix = strMatrix.replaceAll("[^\\d.] ?"," ").trim();
+        String[]line = strMatrix.split("[ ]{2,}");
+        double[][] mas = new double[line.length][];
+        for (int i = 0; i < mas.length; i++) {
+            String[] count = line[i].split(" ");
+            mas[i] = new double[count.length];
+            for (int j = 0; j < mas[i].length; j++) {
+                mas[i][j] = Double.parseDouble(count[j]);
+            }
+        }
+        this.value = mas;
+>>>>>>> 3abf1a8c53a58aa3c04bb02acc8bea4f6e0447df
     }
     @Override
     public String toString() {

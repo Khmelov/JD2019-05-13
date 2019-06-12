@@ -28,6 +28,11 @@ class Matrix extends Var {
         this.value = Arrays.copyOf(arrayDouble, arrayDouble.length);
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3abf1a8c53a58aa3c04bb02acc8bea4f6e0447df
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
