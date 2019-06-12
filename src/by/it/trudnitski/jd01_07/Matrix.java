@@ -12,17 +12,17 @@ public class Matrix extends Var {
         this.value=matrix.value;
     }
     public Matrix(String strMatrix){
-        strMatrix=strMatrix.replaceAll("[^\\d.]+"," ").trim();
-        String []line=strMatrix.split("[ ]+");
-        double [][] res=new double[line.length/2][line.length/2];
-        int k=0;
-        for (int i = 0; i <res.length ; i++) {
-            for (int j = 0; j <res[0].length ; j++) {
-                res[i][j]=Double.parseDouble(line[k]);
-                k++;
+        strMatrix = strMatrix.replaceAll("[^\\d.] ?"," ").trim();
+        String[]line = strMatrix.split("[ ]{2,}");
+        double[][] mas = new double[line.length][];
+        for (int i = 0; i < mas.length; i++) {
+            String[] count = line[i].split(" ");
+            mas[i] = new double[count.length];
+            for (int j = 0; j < mas[i].length; j++) {
+                mas[i][j] = Double.parseDouble(count[j]);
             }
-            this.value=res;
         }
+        this.value = mas;
     }
     @Override
     public String toString() {
