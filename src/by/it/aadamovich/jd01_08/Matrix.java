@@ -14,13 +14,24 @@ class Matrix extends Var {
     }
 
     Matrix(Matrix matrix) {
+<<<<<<< HEAD
+        this.value = Arrays.copyOf(matrix.value, matrix.value.length);
+        for (int i = 0; i < matrix.value.length; i++) {
+            this.value[i] = Arrays.copyOf(matrix.value[i], matrix.value.length);
+        }
+=======
         this.value = matrix.value;
+>>>>>>> 3abf1a8c53a58aa3c04bb02acc8bea4f6e0447df
     }
 
     Matrix(String strMatrix) {
 
+<<<<<<< HEAD
+        String[] linesOfMatrix = strMatrix.replaceAll("[({|})].{0,2}[({|})]", "  ")
+=======
         String[] linesOfMatrix = strMatrix
                 .replaceAll("[({|})].{0,2}[({|})]", "  ")
+>>>>>>> 3abf1a8c53a58aa3c04bb02acc8bea4f6e0447df
                 .trim().split("[ ]{2,}");
 
         double[][] buffer = new double[linesOfMatrix.length][];

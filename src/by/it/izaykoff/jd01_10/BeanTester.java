@@ -1,36 +1,24 @@
 package by.it.izaykoff.jd01_10;
 
-import by.it._examples_.jd01_10.sample_service.Init;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class BeanTester {
     public static void main(String[] args)throws Exception {
 
-        Class<Bean> beanClass = Bean.class;
+        Class<Bean> aClass = Bean.class;
+        Object obj = aClass.getConstructor().newInstance();
 
-        Bean bean = Bean.class.newInstance();
-        
-
-
-        Method[] methods = beanClass.getMethods();
-        for (Method method : methods) {
-            System.out.println(method.getName());
+        Method[] methods = aClass.getDeclaredMethods();
+        for (Method method : methods){
+            if (method.isAnnotationPresent(Param.class))
+            {
+                Param p = method.getAnnotation(Param.class);
+                double res = (double) method.invoke(obj,p.a(),p.b());
+                System.out.println(method.getName() + res);
+            }
         }
 
-//        Object bean=null;
-//        for (Method method : methods) {
-//            if (method.isAnnotationPresent(Param.class))
-//            {
-//             if (bean==null)
-//                 bean=beanClass.newInstance();
-//
-////             method.invoke(bean);
-//             System.out.println(method.invoke(bean));
-//
-//            }
-//        }
 
     }
 }

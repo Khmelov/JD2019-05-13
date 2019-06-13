@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package by.it.dnevar.jd01_01;
 /*
 напишите программу которая выводит на экран
@@ -15,3 +16,22 @@ class TaskA1 {
 
     }
 }
+=======
+package by.it.dnevar.jd01_01;
+/*
+напишите программу которая выводит на экран
+Hello world!
+
+(строка должа быть одна, ошибки в тексте не допускаются)
+Для ручной проверки запустите программу Ctrl+Shift+F10
+Для автоматической проверки откройте и запустите класс Testing
+*/
+
+class TaskA1 {
+    public static void main(String[] args) {
+
+        System.out.println("Hello world!");
+
+    }
+}
+>>>>>>> 3abf1a8c53a58aa3c04bb02acc8bea4f6e0447df
