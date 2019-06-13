@@ -7,7 +7,7 @@ public class BeanTester {
     public static void main(String[] args)throws Exception {
 
         Class<Bean> aClass = Bean.class;
-        Object obj = aClass.newInstance();
+        Object obj = aClass.getConstructor().newInstance();
 
         Method[] methods = aClass.getDeclaredMethods();
         for (Method method : methods){
