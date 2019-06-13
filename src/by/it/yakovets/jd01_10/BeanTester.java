@@ -6,11 +6,12 @@ public class BeanTester {
     public static void main(String[] args) throws Exception {
         Class<Bean> beanClass = Bean.class;
         Method[] methods = beanClass.getMethods();
-        Object o = null;
         for (Method method : methods) {
+            Object o = beanClass.newInstance();
             if (method.isAnnotationPresent(Param.class)) {
-                o = beanClass.newInstance();
-//                method.invoke(o, Pa);
+                Param p=method.getAnnotation(Param.class);
+                double res=(double)method.invoke(o, p.a(),p.b());
+                System.out.println(method.getName()+res);
 
             }
 
