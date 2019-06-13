@@ -1,7 +1,9 @@
 package by.it.yaskevich.jd01_11.calc11;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public abstract class Var implements Operation {
     private static Map<String, Var> vars = new HashMap<>();
@@ -50,7 +52,24 @@ public abstract class Var implements Operation {
             return null;
     }
 
+    public static void printVar() {
+        if (!vars.isEmpty()) {
+            for (Map.Entry<String, Var> varEntry : vars.entrySet()) {
+                System.out.printf("%s=%s\n", varEntry.getKey(), varEntry.getValue());
+            }
+        }
+    }
+
     public static void save(String s, Var two) {
         vars.put(s, two);
+    }
+
+    public static void sortVar() {
+        if (!vars.isEmpty()) {
+            Map<String, Var> dictionary = new TreeMap<>(vars);
+            for (Map.Entry<String, Var> varEntry : dictionary.entrySet()) {
+                System.out.printf("%s=%s\n", varEntry.getKey(), varEntry.getValue());
+            }
+        }
     }
 }

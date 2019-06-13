@@ -10,7 +10,8 @@ public class ConsoleRunner {
         Printer printer = new Printer();
         while (!(expession = scanner.nextLine()).equals("end")) {
             Var var = parser.calc(expession);
-            printer.print(var);
+            if (var != null)
+                printer.print(var);
         }
     }
 }

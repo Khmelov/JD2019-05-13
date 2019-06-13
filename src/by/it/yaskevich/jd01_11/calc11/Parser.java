@@ -9,11 +9,14 @@ class Parser {
         String[] part = expression.split(Patterns.OPERATION);
         Var result = null;
         if (part.length == 1) {
-            Var.createVar(part[0]);
+            if (part[0].equals(Patterns.PRINTVAR))
+                Var.printVar();
+            else if (part[0].equals(Patterns.SORTVAR))
+                Var.sortVar();
+            else
+                Var.createVar(part[0]);
         } else if (part.length == 2) {
-            //Var one = Var.createVar(part[0]);
             Var two = Var.createVar(part[1]);
-
             Pattern pattern = Pattern.compile(Patterns.OPERATION);
             Matcher matcher = pattern.matcher(expression);
 

@@ -2,8 +2,7 @@ package by.it.yaskevich.jd01_11;
 
 import java.util.*;
 
-public class ListA<E> implements List<E>{
-
+public class ListB<E> implements List<E> {
     private E[] elements = (E[])new Object[100];
     private int size = 0;
 
@@ -17,11 +16,6 @@ public class ListA<E> implements List<E>{
     }
 
     @Override
-    public E get(int index) {
-        return elements[index];
-    }
-
-    @Override
     public E remove(int index) {
         E element = elements[index];
         System.arraycopy(elements, index + 1, elements, index, size - 1 - index);
@@ -30,36 +24,71 @@ public class ListA<E> implements List<E>{
     }
 
     @Override
-    public String toString() {
-        StringBuilder txt = new StringBuilder("[");
-        String delimiter = "";
-        for (int i = 0; i < size; i++) {
-            txt
-                    .append(delimiter)
-                    .append(elements[i]);
-            delimiter = ", ";
-        }
-        txt.append("]");
-        return txt.toString();
+    public E get(int index) {
+        return elements[index];
+    }
+
+    @Override
+    public E set(int index, E element) {
+        E result = elements[index];
+        elements[index] = element;
+        return result;
     }
 
     @Override
     public void add(int index, E element) {
-
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements , elements.length * 3 / 2 + 1);
+        }
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
+        size++;
     }
 
     @Override
-    public int size() {
-        return 0;
+    public boolean addAll(Collection<? extends E> c) {
+        for (E e : c) {
+            add(e);
+        }
+        return true;
     }
 
     @Override
-    public boolean isEmpty() {
-        return false;
+    public String toString() {
+        StringBuilder builder = new StringBuilder("[");
+        String delimiter = "";
+        for (int i = 0; i < size; i++) {
+            builder
+                    .append(delimiter)
+                    .append(elements[i]);
+            delimiter = ", ";
+        }
+        builder.append("]");
+        return builder.toString();
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (((o == null) && (elements[i] == null)) || ((o != null) && o.equals(elements[i]))) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public boolean contains(Object o) {
+        return indexOf(o) > -1;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public boolean isEmpty() {
         return false;
     }
 
@@ -89,11 +118,6 @@ public class ListA<E> implements List<E>{
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         return false;
     }
@@ -111,16 +135,6 @@ public class ListA<E> implements List<E>{
     @Override
     public void clear() {
 
-    }
-
-    @Override
-    public E set(int index, E element) {
-        return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
     }
 
     @Override

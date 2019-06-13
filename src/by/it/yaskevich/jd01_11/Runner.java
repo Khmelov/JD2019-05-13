@@ -1,7 +1,9 @@
 package by.it.yaskevich.jd01_11;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Runner {
     public static void main(String[] args) {
@@ -25,5 +27,28 @@ public class Runner {
         my.remove(1);
         System.out.println(my);
 
+        Set<Short> set = new HashSet<Short>(){
+            {
+                add((short) 1);
+                add((short) 2);
+                add((short) 3);
+                add((short) 1);
+            }
+        };
+        System.out.println(set.toString());
+        set.remove(2);
+        System.out.println(set.toString());
+
+        Set<Short> set2 = new SetC<Short>(){
+            {
+                add((short) 1);
+                add((short) 2);
+                add((short) 3);
+                add((short) 1);
+            }
+        };
+        System.out.println(set2.toString());
+        set2.remove(2);
+        System.out.println(set2.toString());
     }
 }
