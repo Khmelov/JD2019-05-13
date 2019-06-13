@@ -1,4 +1,4 @@
-package by.it.adamovichjr.jd01_08_v2;
+package by.it.adamovichjr.jd01_09_v2;
 
 public class Runner{
     private static void print(Var var) {System.out.println(var);}
