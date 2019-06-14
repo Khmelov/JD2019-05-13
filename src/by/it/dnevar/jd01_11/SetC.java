@@ -93,4 +93,17 @@ public class SetC <E> implements Set<E> {
     public void clear() {
         elements.clear();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        String delimiter = "";
+        Iterator<E> iterator = elements.iterator();
+        while(iterator.hasNext()){
+            sb.append(delimiter).append(iterator.next());
+            delimiter = ", ";
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }
