@@ -14,10 +14,11 @@ public class TaskC {
         InOut.printArray(arr,"V",5);
         double first = arr[0];
         double last = arr[arr.length-1];
-        Sort(arr);
+        System.out.println(first+" "+last);
+        double[] sort = Sort(arr);
 
-        int infirst = binarySearch(arr, first);
-        int inlast = binarySearch(arr, last);
+        int infirst = binarySearch(sort, first);
+        int inlast = binarySearch(sort, last);
 
         System.out.println("Index of first element="+infirst);
         System.out.println("Index of last element="+inlast);
@@ -30,7 +31,7 @@ public class TaskC {
             int m = (l+r)/2;
             double mid = array[m];
             if (mid < value) l=m+1;
-            if (mid > value) r=m-1;
+            else if (mid > value) r=m-1;
             else return m;
         }
         return -(l+1);
