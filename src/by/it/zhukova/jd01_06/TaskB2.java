@@ -12,7 +12,6 @@ public class TaskB2 {
             System.out.print(sentence[pos[i]]+"\n");
         }
     }
-
     private static int [] sort(String[]sent) {
         int [] len =  new int [sent.length];
         int [] pos =  new int [sent.length];
@@ -41,7 +40,6 @@ public class TaskB2 {
         } while (swap);
         return pos;
     }
-
     private static String[] method1(String text) {
         String text2 = text.replaceAll("\\.\\.\\.", " ");
         String[] strArray = text2.split("\\.|\\!");
@@ -53,16 +51,18 @@ public class TaskB2 {
                 String sign = m2.group();
                 strArray[i] = strArray[i].replaceAll(sign, " ");
             }
+            m2.reset();
             Pattern p3 = Pattern.compile("\\n");
-            Matcher m3 = p3.matcher(strArray[i]);
-            while (m3.find()) {
-                String sign = m3.group();
+            m2 = p3.matcher(strArray[i]);
+            while (m2.find()) {
+                String sign = m2.group();
                 strArray[i] = strArray[i].replaceAll(sign, " ");
             }
+            m2.reset();
             Pattern p4 = Pattern.compile("\\p{Blank}+");
-            Matcher m4 = p4.matcher(strArray[i]);
-            while (m4.find()) {
-                String sign = m4.group();
+            m2 = p4.matcher(strArray[i]);
+            while (m2.find()) {
+                String sign = m2.group();
                 strArray[i] = strArray[i].replaceAll(sign, " ");
             }
             strArray[i] = strArray[i].trim();
@@ -70,6 +70,5 @@ public class TaskB2 {
         }
         return strArray;
     }
-
     }
 
