@@ -2,7 +2,6 @@ package by.it.akhmelev.jd01_12;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class TaskA2 {
