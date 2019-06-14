@@ -4,83 +4,29 @@ import java.util.*;
 
 public class SetC <E> implements Set<E> {
 
-    private E[] elements = (E[]) new Set[]{};
-    private int size = 0;
-
-
-    @Override
-    public boolean add(E element) {
-        if(size == elements.length){
-            elements = Arrays.copyOf(elements,size*3/2+1);
-        }
-        for (E elem : elements) {
-            if(!elem.equals(element)) {
-                elements[size++] = element;
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-
-        return false;
-    }
+    private HashSet<E> elements = new HashSet<>();
 
     @Override
     public int size() {
-        return elements.length;
+        return elements.size();
     }
 
     @Override
     public boolean isEmpty() {
-        if(elements.length==0){
+        boolean empt = elements.isEmpty();
+        return empt;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        if(elements.contains(o)){
             return  true;
-        }else{
-            return false;
         }
-
-    }
-
-    @Override
-    public boolean addAll(Collection c) {
         return false;
     }
 
     @Override
-    public boolean containsAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("[");
-        String delimiter = "";
-        for (int i = 0; i < size; i++) {
-            sb.append(delimiter).append(elements[i]);
-            delimiter = ", ";
-
-        }
-        sb.append("]");
-        return sb.toString();
-    }
-
-    //-----------------------------------------------------------
-
-    @Override
-    public Iterator iterator() {
+    public Iterator<E> iterator() {
         return null;
     }
 
@@ -90,17 +36,61 @@ public class SetC <E> implements Set<E> {
     }
 
     @Override
-    public void clear() {
-
+    public <T> T[] toArray(T[] a) {
+        return null;
     }
 
     @Override
-    public boolean retainAll(Collection c) {
+    public boolean add(E element) {
+        if(!elements.contains(element)){
+            elements.add(element);
+            return true;
+        }
         return false;
     }
 
     @Override
-    public Object[] toArray(Object[] a) {
-        return new Object[0];
+    public boolean remove(Object o) {
+        if (elements.contains(o)) {
+            elements.remove(o);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        for (Object o : c) {
+            elements.contains(o);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        for (E elem : c) {
+            elements.add(elem);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        for (Object o : c) {
+            if (elements.contains(o)) {
+                elements.remove(o);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void clear() {
+        elements.clear();
     }
 }
