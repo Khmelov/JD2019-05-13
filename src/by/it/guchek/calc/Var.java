@@ -31,6 +31,10 @@ abstract class Var implements Operation {                 //реализовыв
 
     }
 
+    //public static void readVar() {
+
+    //}
+
 
     @Override
     public Var add(Var other) {
