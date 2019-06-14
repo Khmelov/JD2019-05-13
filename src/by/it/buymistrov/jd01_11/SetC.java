@@ -73,7 +73,7 @@ public class SetC<E> implements Set<E> {
         return false;
     }
 
-
+//////костыли. когда-нибудь поправлю
     @Override
     public boolean addAll(Collection<? extends E> c) {
 
