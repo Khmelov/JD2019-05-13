@@ -9,8 +9,7 @@ public class Printer {
     }
 
     void printvar() {
-        Set<Map.Entry<String, Var>> sett = Var.vars.entrySet();
-        Iterator<Map.Entry<String, Var>> i = sett.iterator();
+        Iterator<Map.Entry<String, Var>> i = Var.vars.entrySet().iterator();
         while (i.hasNext()) {
             Map.Entry<String, Var> me = i.next();
             System.out.println(me.getKey() + " = " + me.getValue());

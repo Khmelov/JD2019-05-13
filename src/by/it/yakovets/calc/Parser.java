@@ -10,25 +10,33 @@ public class Parser {
         Var result = null;
         if (part.length == 1) {
             result = Var.createVar(part[0]);
-
         } else if (part.length == 2) {
-            Var one = Var.createVar(part[0]);
             Var two = Var.createVar(part[1]);
-            Pattern pattern=Pattern.compile(Patterns.OPERATION);
-            Matcher matcher=pattern.matcher(expression);
-            if(matcher.find()){
-                String operation =matcher.group();
-                switch (operation){
-                    case "+":return one.add(two);
-                    case "-":return one.sub(two);
-                    case "*":return one.mul(two);
-                    case "/":return one.div(two);
-                    case "=":return Var.saveVar(part[0], two);
-                }
+            Pattern pattern = Pattern.compile(Patterns.OPERATION);
+            Matcher matcher = pattern.matcher(expression);
+
+            matcher.find();
+            String operation = matcher.group();
+            if (operation.equals("=")) {
+                String name=part[0];
+                Var.saveVar(name, two);
+                return two;
             }
 
-
+            Var one = Var.createVar(part[0]);
+            switch (operation) {
+                case "+":
+                    return one.add(two);
+                case "-":
+                    return one.sub(two);
+                case "*":
+                    return one.mul(two);
+                case "/":
+                    return one.div(two);
+            }
         }
-        return null;
+
+
+        return result;
     }
 }
