@@ -102,14 +102,19 @@ public class Runner {
         System.out.println("Integer[] c = {1,5} ");
         System.out.println("javaHas.removeAll(Arrays.asList(c)) " + javaHas);
         System.out.println("myHash.removeAll(Arrays.asList(c)) " + myHash);
+        javaHas.toString();
 
-        /*Integer[] b2 = {10,2,3,25,17};
+        Integer[] b2 = {10,2,3,25,17};
         System.out.println("Integer[] b2 = {10,2,3,25,17}");
-        javaHas.addAll(Arrays.asList(b2));
-        System.out.println(javaHas);
-        for (Integer ha : javaHas) {
-            System.out.println(ha.hashCode());
-        }
-        javaHas.equals(myList);*/
+        System.out.println("javaHas.addAll(Arrays.asList(b2)) " + javaHas.addAll(Arrays.asList(b2)));
+        System.out.println("myHash.addAll(Arrays.asList(b2)) " + myHash.addAll(Arrays.asList(b2)));
+        System.out.println("javaHas " + javaHas);
+        System.out.println("myHash " + myHash);
+        System.out.println();
+
+        System.out.println("javaHas.containsAll(Arrays.asList(b2)) " +javaHas.containsAll(Arrays.asList(b2)));
+        System.out.println("myHash.containsAll(Arrays.asList(b2)) " + myHash.containsAll(Arrays.asList(b2)));
+
+
     }
 }

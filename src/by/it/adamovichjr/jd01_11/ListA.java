@@ -2,21 +2,21 @@ package by.it.adamovichjr.jd01_11;
 
 import java.util.*;
 
-public class ListA<T> implements List {
+public class ListA<T> implements List<T> {
 
     private T[] elements = (T[]) new Object[]{};
     private int size = 0;
 
     @Override
-    public boolean add(Object o) {
+    public boolean add(T o) {
         if (size == elements.length)
             elements = Arrays.copyOf(elements,(size*3)/2+1);
-        elements[size++] = (T) o;
+        elements[size++] = o;
         return false;
     }
 
     @Override
-    public Object remove(int index) {
+    public T remove(int index) {
         if(index < size){
             T remElement = elements[index];
             System.arraycopy(elements,index+1,elements,index,size-index);
@@ -27,11 +27,11 @@ public class ListA<T> implements List {
     }
 
     @Override
-    public Object get(int index) {
+    public T get(int index) {
 
         if(index < size)
             return elements[index];
-        return "Выход за пределы листа";
+        return null;
     }
 
     @Override

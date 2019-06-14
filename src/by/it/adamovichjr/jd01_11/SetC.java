@@ -2,11 +2,9 @@ package by.it.adamovichjr.jd01_11;
 
 import java.util.*;
 
-public class SetC<T> implements Set<T> {
-    private T[] elements = (T[]) new Object[]{};
+public class SetC<E> implements Set<E> {
 
-    private int size = 0;
-   /* private HashMap<E, Object> hashMap = new HashMap<>();
+    private HashMap<E, Object> hashMap = new HashMap<>();
 
     @Override
     public int size() {
@@ -44,105 +42,67 @@ public class SetC<T> implements Set<T> {
             }
         }
         return added;
-    }*/
-
-    @Override
-    public boolean add(Object o) {
-        boolean find = false;
-        for (T element : elements) {
-            if(element == (T)o)
-                find = true;
-        }
-        if(find == false && size == elements.length){
-            elements = Arrays.copyOf(elements,(size*3)/2+1);
-        }
-        if(find == false){
-            elements[size++] = (T) o;
-        }
-        return find;
-    }
-
-    @Override
-    public boolean addAll(Collection c) {
-        return false;
     }
 
     @Override
     public boolean remove(Object o) {
-        for (int i = 0; i < size; i++) {
-            if(elements[i] == (T)o){
-                System.arraycopy(elements,i+1,elements,i,size-i-1);
-                size--;
-                return true;
-            }
-
-        }
-        return false;
-    }
-    @Override
-    public boolean removeAll(Collection c) {
-        Iterator<T> it = c.iterator();
-        while (it.hasNext()){
-            for (int i = 0; i < size; i++) {
-                if(it == elements[i]){
-                    System.arraycopy(elements,i+1,elements,i,size-i-1);
-                    size--;
-                }
-            }
+        if(contains(o)){
+            hashMap.remove(o);
+            return true;
         }
         return false;
     }
 
     @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        boolean find = false;
-        for (T element : elements) {
-            if(element == (T)o){
-                find = true;
-                break;
+    public boolean removeAll(Collection<? > c) {
+        boolean removed = false;
+        for (Object o : c) {
+            if(remove(o)){
+                removed = true;
             }
         }
-        return find;
+        return removed;
     }
 
     @Override
-    public boolean containsAll(Collection c) {
+    public boolean containsAll(Collection<?> c) {
+        boolean contains = false;
+        for (Object o : c) {
+            if(contains(o)){
+                contains = true;
+            }
+        }
+        return contains;
+    }
 
-        return false;
+    @Override
+    public void clear() {
+        hashMap.clear();
+
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("[");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
         String delimetr = "";
-        for (int i = 0; i < size; i++) {
-            sb.append(delimetr).append(elements[i]);
+        Iterator<Map.Entry<E, Object>> iterator = hashMap.entrySet().iterator();
+        while (iterator.hasNext()){
+            sb.append(delimetr).append(iterator.next().getKey());
             delimetr = ", ";
         }
         sb.append("]");
         return sb.toString();
     }
 
-
-
     @Override
-    public Spliterator spliterator() {
+    public Spliterator<E> spliterator() {
         return null;
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<E> iterator() {
         return null;
     }
 
@@ -152,17 +112,14 @@ public class SetC<T> implements Set<T> {
     }
 
     @Override
-    public Object[] toArray(Object[] a) {
-        return new Object[0];
+    public <T> T[] toArray(T[] a) {
+        return null;
     }
 
     @Override
-    public boolean retainAll(Collection c) {
+    public boolean retainAll(Collection<?> c) {
         return false;
     }
-
-    @Override
-    public void clear() {
-
-    }
 }
+
+
