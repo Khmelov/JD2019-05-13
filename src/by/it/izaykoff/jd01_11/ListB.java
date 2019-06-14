@@ -73,20 +73,20 @@ public class ListB<E> implements List<E> {
         return true;
     }
 
+    @Override
+    public boolean contains(Object o) {
+        return false;
+    }
+
 //    -----------------------------------
 
 @Override
 public boolean isEmpty() {
     return false;
 }
-
     @Override
     public int size() {
         return 0;
-    }
-    @Override
-    public boolean contains(Object o) {
-        return false;
     }
 
     @Override

@@ -29,15 +29,15 @@ public class Runner {
         myList.add("thirty");
         myList.add("forty");
         myList.add("ten");
+        myList.add("eleven");
         myList.add("twenty");
         myList.add("thirty");
         myList.add("forty");
 
-        myList.addAll(myList);
 
         System.out.println(myList);
-        myList.remove(1);
-        System.out.println(myList);
+//        myList.remove(1);
+//        System.out.println(myList);
 
     }
 }
