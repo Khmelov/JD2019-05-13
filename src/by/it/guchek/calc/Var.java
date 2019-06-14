@@ -1,6 +1,17 @@
 package by.it.guchek.calc;
 
+import java.util.HashMap;
+import java.util.Map;
+
 abstract class Var implements Operation {                 //реализовывает интерфейс Operation
+
+    private static Map<String, Var> vars= new HashMap<>();
+
+    static Var saveVar (String name, Var var){
+
+        vars.put(name, var);  //метод сохраняет переменные во внутреннюю карту vars
+        return var;
+    }
 
     static Var createVar(String operand) {
         operand = operand.trim().replace("\\s", "");
@@ -12,6 +23,9 @@ abstract class Var implements Operation {                 //реализовыв
 
         if (operand.matches(Patterns.MATRIX))
             return new Matrix(operand);
+
+        if (vars.containsKey(operand))
+            return vars.get(operand);
 
         return null;
 
