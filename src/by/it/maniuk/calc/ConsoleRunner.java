@@ -1,7 +1,7 @@
 package by.it.maniuk.calc;
 
 
-import java.util.Map;
+
 import java.util.Scanner;
 
 public class ConsoleRunner {
