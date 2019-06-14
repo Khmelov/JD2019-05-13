@@ -2,38 +2,13 @@ package by.it.buymistrov.jd01_11;
 
 import java.util.*;
 
-public class ListA<E> implements List<E> {
+public class ListB<E> implements List<E> {
+
+
 
     private E[] elements = (E[]) new Object[100];
     private int size = 0;
-
-    @Override
-    public boolean add(E e) {
-        if (size == elements.length) {
-            elements = Arrays.copyOf(elements, elements.length * 2 / 3 + 1);
-
-        }
-        elements[size++] = e;
-
-
-        return true;
-    }
-
-
-    @Override
-    public E get(int index) {
-        return elements[index];
-    }
-
-
-    @Override
-    public E remove(int index) {
-        E element = elements[index];
-        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
-        size--;
-        return element;
-    }
-
+    ///////////////////////////////////////////////
 
     @Override
     public String toString() {
@@ -49,10 +24,104 @@ public class ListA<E> implements List<E> {
         return txt.toString();
     }
 
+
+    ////////////////////////////////////
+
+
+    @Override
+    public boolean add(E e) {
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 2 / 3 + 1);
+
+        }
+        elements[size++] = e;
+
+
+        return true;
+    }
+
+    /////////////////////////////////////
+
+    @Override
+    public E remove(int index) {
+        E element = elements[index];
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
+        size--;
+        return element;
+    }
+
+
+    ///////////////////////////////////////
+
+
+    @Override
+    public E get(int index) {
+        return elements[index];
+    }
+
+
+    ////////////////////////////////////////
+
+
+    @Override
+    public E set(int index, E element) {
+
+        E retEl = (E) elements[index];
+
+        elements[index] = element;
+
+
+        return retEl;
+
+
+    }
+
+    ///////////////////////////////////////
+
+
     @Override
     public void add(int index, E element) {
 
+        E[] elem = (E[]) new Object[elements.length + 1];
+        elements = Arrays.copyOf(elements, elements.length + 1);
+        System.arraycopy(elements, 0, elem, 0, index);
+        elem[index] = element;
+        System.arraycopy(elements, index, elem, index + 1, elements.length - index - 1);
+        System.arraycopy(elem, 0, elements, 0, elem.length);
+
+
+        size++;
+
     }
+
+
+    /////////////////////////////////////
+
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+
+
+        Object[] objects = c.toArray();
+        E[] elem = (E[]) new Object[elements.length + objects.length];
+
+        System.arraycopy(elements, 0, elem, 0, elements.length);
+
+
+        System.arraycopy(objects, 0, elem, size, objects.length);
+
+
+        elements = Arrays.copyOf(elements, elements.length + objects.length);
+        System.arraycopy(elem, 0, elements, 0, elem.length);
+
+
+        size += objects.length;
+
+        return false;
+    }
+
+
+    //////////////////////////////////////////////////////
 
 
     @Override
@@ -96,10 +165,6 @@ public class ListA<E> implements List<E> {
         return false;
     }
 
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        return false;
-    }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
@@ -119,12 +184,6 @@ public class ListA<E> implements List<E> {
     @Override
     public void clear() {
 
-    }
-
-
-    @Override
-    public E set(int index, E element) {
-        return null;
     }
 
 
