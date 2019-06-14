@@ -11,16 +11,15 @@ public class ConsoleRunner {
         Parser parser = new Parser();  //вычисления
         Printer printer = new Printer(); //и результат
 
-        if (sc.nextLine().equals("printvar")){
-
-            //Var.readVar();
-
-        }
 
         while (!(line = sc.nextLine()).equals("end")) {  //будем читать линии из консоли
                                                             //до тех пор пока не введут это выражение
-          Var result = parser.calc(line);
-          printer.print(result);
+            if (!(sc.nextLine().equals("printvar"))){
+            Var result = parser.calc(line);
+            printer.print(result);}
+
+            else printer.printMap();
+
         }
 
     }

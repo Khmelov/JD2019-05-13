@@ -28,6 +28,7 @@ public class Parser {                //Принимает на вход неко
             case "-": return one.sub(two);
             case "*": return one.mul(two);
             case "/": return one.div(two);
+            //case "=": return Var.saveVar(operand[0], two);
          }
       }
 

@@ -5,7 +5,7 @@ import java.util.Map;
 
 abstract class Var implements Operation {                 //реализовывает интерфейс Operation
 
-    private static Map<String, Var> vars= new HashMap<>();
+    static Map<String, Var> vars= new HashMap<>();
 
     static Var saveVar (String name, Var var){
 
@@ -18,16 +18,16 @@ abstract class Var implements Operation {                 //реализовыв
         if (operand.matches(Patterns.SCALAR))          //если операнд соответствует рег. выр. СКАЛАР
         return new Scalar(operand);                   //должны вернуть новый скалар в конструктор
                                                                             // которого этот операнд передан
-        if (operand.matches(Patterns.VECTOR))
+        else if (operand.matches(Patterns.VECTOR))
             return new Vector(operand);
 
-        if (operand.matches(Patterns.MATRIX))
+        else if (operand.matches(Patterns.MATRIX))
             return new Matrix(operand);
 
-        if (vars.containsKey(operand))
+        else if (vars.containsKey(operand))
             return vars.get(operand);
 
-        return null;
+        else return null;
 
     }
 
