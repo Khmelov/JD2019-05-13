@@ -23,6 +23,7 @@ public class Parser {
                     case "-":return one.sub(two);
                     case "*":return one.mul(two);
                     case "/":return one.div(two);
+                    case "=":return Var.saveVar(part[0], two);
                 }
             }
 

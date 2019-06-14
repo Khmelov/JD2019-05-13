@@ -4,14 +4,17 @@ import java.util.Scanner;
 
 public class ConsoleRunner {
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String expression;
-        Parser parser=new Parser();
-        Printer printer=new Printer();
-        while(!(expression=sc.nextLine()).equals("end")){
-            Var var = parser.calc(expression);
-            printer.print(var);
+        Parser parser = new Parser();
+        Printer printer = new Printer();
 
+        while (!(expression = sc.nextLine()).equals("end")) {
+            if (!expression.equals("printvar")) {
+                Var var = parser.calc(expression);
+                printer.print(var);
+
+            } else Printer.printvar();
         }
     }
 }
