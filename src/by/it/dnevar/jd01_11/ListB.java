@@ -73,16 +73,20 @@ public class ListB <E> implements List <E> {
 
     @Override
     public int size() {
-        return 0;
+        return elements.length;
     }
 
     @Override
     public boolean isEmpty() {
+        if(elements.length==0){
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean contains(Object o) {
+
         return false;
     }
 

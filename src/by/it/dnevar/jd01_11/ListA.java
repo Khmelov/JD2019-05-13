@@ -52,11 +52,15 @@ public class ListA <E> implements List<E> {
 
     @Override
     public int size() {
-        return 0;
+        int len = elements.length;
+        return len;
     }
 
     @Override
     public boolean isEmpty() {
+        if(elements.length==0){
+            return  true;
+        }
         return false;
     }
 
@@ -82,6 +86,12 @@ public class ListA <E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
+        if(size == elements.length){
+            elements = Arrays.copyOf(elements,size*3/2+1);
+        }
+        System.arraycopy(elements,index,elements,index+1,size-index);
+        elements[index] = element;
+        size++;
     }
 
     @Override
