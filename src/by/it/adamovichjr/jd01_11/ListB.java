@@ -2,22 +2,22 @@ package by.it.adamovichjr.jd01_11;
 
 import java.util.*;
 
-public class ListB<T> implements List {
+public class ListB<T> implements List<T> {
 
     private T[] elements = (T[]) new Object[]{};
 
     private int size = 0;
 
     @Override
-    public boolean add(Object o) {
+    public boolean add(T o) {
         if (size == elements.length)
             elements = Arrays.copyOf(elements,(size*3)/2+1);
-        elements[size++] = (T) o;
+        elements[size++] =  o;
         return false;
     }
 
     @Override
-    public Object remove(int index) {
+    public T remove(int index) {
         if(index < size){
             T remElement = elements[index];
             System.arraycopy(elements,index+1,elements,index,size-index);
@@ -28,11 +28,11 @@ public class ListB<T> implements List {
     }
 
     @Override
-    public Object get(int index) {
+    public T get(int index) {
 
         if(index < size)
             return elements[index];
-        return "Выход за пределы листа";
+        return null;
     }
 
     @Override
@@ -48,31 +48,33 @@ public class ListB<T> implements List {
     }
 
     @Override
-    public Object set(int index, Object element) {
+    public T set(int index, T element) {
+
         if(index < size){
             T setElement = elements[index];
-            elements[index] = (T) element;
+            elements[index] =  element;
             return setElement;
         }
-        return "Индекс больше размера листа";
+        return null;
     }
 
     @Override
-    public void add(int index, Object element) {
+    public void add(int index, T element) {
         if (size == elements.length) {
             elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
         }
         System.arraycopy(elements,index,elements,index+1,size-index);
-        elements[index] = (T) element;
+        elements[index] = element;
         size++;
     }
 
+
     @Override
-    public boolean addAll(Collection c) {
+    public boolean addAll(Collection<? extends T> c) {
         if(elements.length <= size + c.size()){
             elements = Arrays.copyOf(elements,size+c.size());
         }
-        Iterator<T>iterator = c.iterator();
+        Iterator<T>iterator = (Iterator<T>) c.iterator();
         while (iterator.hasNext()){
             elements[size] = iterator.next();
             size++;
@@ -80,6 +82,7 @@ public class ListB<T> implements List {
 
         return true;
     }
+
 
     @Override
     public int size() {

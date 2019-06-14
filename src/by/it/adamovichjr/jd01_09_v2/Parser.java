@@ -3,7 +3,6 @@ package by.it.adamovichjr.jd01_09_v2;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static by.it.adamovichjr.jd01_09_v2.Var.createVar;
 
 public class Parser {
     Var calc(String expression) {

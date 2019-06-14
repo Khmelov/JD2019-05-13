@@ -2,10 +2,49 @@ package by.it.adamovichjr.jd01_11;
 
 import java.util.*;
 
-public class SetC<T> implements Set {
+public class SetC<T> implements Set<T> {
     private T[] elements = (T[]) new Object[]{};
 
     private int size = 0;
+   /* private HashMap<E, Object> hashMap = new HashMap<>();
+
+    @Override
+    public int size() {
+        return hashMap.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return hashMap.isEmpty();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+
+        return hashMap.containsKey(o);
+    }
+
+    @Override
+    public boolean add(E e) {
+        if (contains(e)) {
+            return false;
+        } else {
+            hashMap.put(e, null);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+
+        boolean added = false;
+        for (E e : c) {
+            if (add(e)) {
+                added = true;
+            }
+        }
+        return added;
+    }*/
 
     @Override
     public boolean add(Object o) {
