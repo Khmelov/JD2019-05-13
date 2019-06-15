@@ -14,11 +14,13 @@ public class ConsoleRunner {
 
         while (!(line = sc.nextLine()).equals("end")) {  //будем читать линии из консоли
                                                             //до тех пор пока не введут это выражение
-            if (!(sc.nextLine().equals("printvar"))){
+            //if (line.equals("sortvar"))
+
+            if (!line.equals("printvar")){
             Var result = parser.calc(line);
             printer.print(result);}
+            else printer.printMap();   //{System.out.println("еще не реализован");};
 
-            else printer.printMap();
 
         }
 

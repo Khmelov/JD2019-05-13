@@ -11,14 +11,13 @@ public class Printer {
         }
     }
 
-    static void printMap() {
+   static void printMap() {
 
         Set<Map.Entry<String, Var>> setv = Var.vars.entrySet();
-        //System.out.println(setv);
         Iterator<Map.Entry<String, Var>> i = setv.iterator();
         while (i.hasNext()) {
             Map.Entry<String, Var> ne = i.next();
-            System.out.println(ne.getKey() + " : " + ne.getValue());
+            System.out.println(ne.getKey() + " = " + ne.getValue());
         }
 
     }
