@@ -33,19 +33,21 @@ public class SetC <T> implements Set<T> {
         if (size==elements.length)
             elements= Arrays.copyOf(elements, (size*3/2)+1);  //увеличим длину массива по такой формуле как в станд JDK
         //теперь последний индекс точно больше чем переменная size
-
-        if (size==0) {elements[0]=t;countSize++;}
-        else for (int i = 0; i <size ; i++) {
-        if (!elements[i].equals(t)){
+        boolean foundT = false;
+        for (T e: elements) {
+            if (t.equals(e)) {
+                foundT = true;
+            }
+        }
+        if(!foundT){
             elements[size]=t;
-            countSize = size++;
-        }
-            //size=countSize;
+            size++;
         }
 
-        size=countSize;
-
-        //return map.put(t, elrments)==null;
+        // if(!contains(t)) {
+        // elements[size]=t;
+        // size++;
+        // }
 
         return false;
     }
@@ -57,6 +59,11 @@ public class SetC <T> implements Set<T> {
 
     @Override
     public boolean contains(Object o) {
+        for (T e: elements) {
+            if (Objects.equals(o, e)) {
+                return true;
+            }
+        }
         return false;
     }
 
