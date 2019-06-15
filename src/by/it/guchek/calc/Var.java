@@ -5,7 +5,11 @@ import java.util.Map;
 
 abstract class Var implements Operation {                 //реализовывает интерфейс Operation
 
-    static Map<String, Var> vars= new HashMap<>();
+    private static Map<String, Var> vars= new HashMap<>();
+
+    public static Map<String, Var> getVars() {
+        return vars;
+    }
 
     static Var saveVar (String name, Var var){
 

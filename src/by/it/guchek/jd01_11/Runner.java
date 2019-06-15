@@ -3,6 +3,7 @@ package by.it.guchek.jd01_11;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Runner {
     public static void main(String[] args) {
@@ -10,6 +11,11 @@ public class Runner {
         List <String> mylist = new ListA<>(); //my A
         List <String> list = new ArrayList<>(); //настоящий
         List <String> mylist2 = new ListB<>();
+
+        Set<String> set = new HashSet<>();
+        Set<String> myHashset = new SetC<>();
+
+
 
         //проверим добавление
         mylist.add("one"); list.add("one");
@@ -42,6 +48,22 @@ public class Runner {
 
         mylist2.addAll(5, list);
         System.out.println("AddAll index 5:"+mylist2);
+        //
+        System.out.println("Переписываем HashSet");
+        myHashset.add("Привет");
+        myHashset.add("Пока");
+        myHashset.add("Как дела");
+        myHashset.add("Как тебя зовут");
+        myHashset.add("Как дела");
+        System.out.println("add:"+myHashset);
+
+        set.add("Привет");
+        set.add("Пока");
+        set.add("Как дела");
+        set.add("Как тебя зовут");
+        set.add("Как дела");
+        System.out.println("add:"+set);
+
 
 
 
