@@ -101,11 +101,6 @@ public class ListB<T> implements List<T> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> c) {
-        return false;
-    }
-
-    @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         return false;
     }
@@ -132,15 +127,26 @@ public class ListB<T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
-
-        T bufer= elements[size];
-        for (int i = size; i > index; i--) {
-            elements[i]=elements[i-1];
-
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
         }
-        add(bufer);
-        elements[index]=element;
+        System.arraycopy(elements,index,elements,index+1,size-index);
+        elements[index] = element;
+        size++;
+    }
 
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        if(elements.length <= size + c.size()){
+            elements = Arrays.copyOf(elements,size+c.size());
+        }
+        Iterator<T>iterator = (Iterator<T>) c.iterator();
+        while (iterator.hasNext()){
+            elements[size] = iterator.next();
+            size++;
+        }
+
+        return true;
     }
 
 
