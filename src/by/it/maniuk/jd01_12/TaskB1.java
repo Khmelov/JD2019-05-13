@@ -12,16 +12,15 @@ public class TaskB1 {
         Map<String, Integer> map = new HashMap<>();
         while (!(s = scanner.nextLine()).equals("end")){
             s = s.trim();
-           for (String str: s.split("[ /,+.;]")){
-              if (map.containsKey(str))
-               map.put(str, map.get(str)+1);
-              else {map.put(str,1);}
+            for (String str: s.split("[ /,+.;]")){
+                if (map.containsKey(str))
+                    map.put(str, map.get(str)+1);
+                else {map.put(str,1);}
             }
-           map.remove("");
-            }
-        System.out.print(map);
+            map.remove("");
         }
-
-
+        System.out.print(map);
     }
 
+
+}
