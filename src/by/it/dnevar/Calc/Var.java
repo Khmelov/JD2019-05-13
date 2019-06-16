@@ -1,7 +1,6 @@
 package by.it.dnevar.Calc;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 abstract class Var implements Operation {
 
@@ -24,6 +23,19 @@ abstract class Var implements Operation {
             return vars.get(operand);
         } else {
             return  null;
+        }
+    }
+
+    public static void printVar() {
+        for(Map.Entry<String, Var> entry: vars.entrySet()){
+            System.out.println(entry.getKey()+"="+entry.getValue());
+        }
+    }
+
+    public static void printSortVar() {
+        Map<String, Var> sortVars = new TreeMap<>(vars);
+        for(Map.Entry<String, Var> entry: vars.entrySet()){
+            System.out.println(entry.getKey()+"="+entry.getValue());
         }
     }
 

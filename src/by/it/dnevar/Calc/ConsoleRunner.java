@@ -12,8 +12,14 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
         while(!(line = sc.nextLine()).equals("end")){
-            Var result = parser.calc(line);
-            printer.print(result);
+            if(line.equals("printvar")){
+                Var.printVar();
+            }else if(line.equals("sortvar")) {
+                Var.printSortVar();
+            }else{
+                Var result = parser.calc(line);
+                printer.print(result);
+            }
         }
 
 
