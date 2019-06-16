@@ -28,11 +28,17 @@ public class TaskB2 {
 
         System.out.println(listArr);
         System.out.println(listLink);
+        boolean second=false;
 
         ListIterator<String> strListIt = listLink.listIterator();
         while (strListIt.hasNext()){
-            String next = strListIt.next();
-            strListIt.remove();
+            String  next = strListIt.next();
+            System.out.println(next);
+            //System.out.println(next);
+            //{if (next%2==0)
+            if (second){strListIt.remove();
+                    second=false;}
+        else second=true;
         }
         System.out.println(listLink);
         ListIterator<String> strArrListIt = listArr.listIterator();
