@@ -6,7 +6,7 @@ public class TaskC1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s;
-        Map<Integer, String> map = new TreeMap<>();
+        Map<Integer, String> map = new HashMap<>();
         while (! (s = scanner.nextLine()).equals("end")) {
             s = s.trim();
             for (String str : s.split("[ \"/,+.;]")) {
