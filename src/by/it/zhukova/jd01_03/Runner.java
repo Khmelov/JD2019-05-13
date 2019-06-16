@@ -30,7 +30,7 @@ public class Runner {
         System.out.println("Результат умножения матрицы на матрицу:");
                 String name = "c";
         for (int i = 0; i < mul2.length; i++) {
-            for (int j = 0; j < mul2[1].length ; j++) {
+            for (int j = 0; j < mul2[0].length ; j++) {
             System.out.printf("%s[% -3d,% -3d]=%-7.2f ", name, i, j, mul2[i][j]);
             }
                 System.out.println();
