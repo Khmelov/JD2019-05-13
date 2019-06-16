@@ -11,9 +11,8 @@ public class BeanTester {
         for (Method method : methods) {
             if (method.isAnnotationPresent(Param.class)){
             anatation = method.getAnnotation (Param.class);
-
-              //  double res = (double) (method.invoke(beanClass, anatation.a(), anatation.b()));
-           //     System.out.println("Имя метода: " + method.getName() + " Результат: " + res);
+                double res = (double) (method.invoke(beanClass.newInstance(), anatation.a(), anatation.b()));
+               System.out.println("Имя метода: " + method.getName() + " Результат: " + res);
             }
         }
 
