@@ -20,4 +20,17 @@ public class Runner {
         System.out.println(my.get(1));
         my.remove(1);
         System.out.println(my);
+
+
+        List <String> due=new ListB<>();
+        due.add("one");due.add("two");due.add("three");due.add("three");due.add("three");due.add("three");
+        System.out.println("due"+due);
+        System.out.println(due.get(1));
+        due.remove(1);
+        System.out.println(due);
+        due.add(2,"two");
+        System.out.println(due);
+                System.out.println(due);
+        due.set(0,"r");
+        System.out.println(due);
 }}
