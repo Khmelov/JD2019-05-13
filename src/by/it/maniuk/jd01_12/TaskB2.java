@@ -13,7 +13,7 @@ public class TaskB2 {
         LinkedList<String> linkedList = new LinkedList<>();
         int[] ar= new int[n];
         for (int i = 0; i <n ; i++) {
-            ar[i]=generator.nextInt(10);
+            ar[i]=generator.nextInt(100);
         }
         for (int i = 0; i < n; i++) {
             arrayList.add("n" + ar[i]);
