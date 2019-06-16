@@ -8,11 +8,8 @@ public class SetC <T> implements Set<T> {
     private int[] ints = new int[]{};
     private int size = 0;
     private int threshold = 0;
-    HashMap<T,Object> map;
+    private HashMap<T, Object> hashMap = new HashMap<>();
 
-    public SetC() {
-        map = new HashMap<>();
-    }
 
     @Override
     public String toString(){
@@ -28,34 +25,38 @@ public class SetC <T> implements Set<T> {
 
     @Override
     public boolean add(T t) {
-        int s = t.hashCode();
-        if (size == elements.length) {
-            elements = Arrays.copyOf(elements, (size*3)/2+1);
+        if (contains(t)) {
+            return false;
+        } else {
+            hashMap.put(t, null);
+            return true;
         }
-        elements[size++] = t;
-    return true;
     }
 
     @Override
     public boolean remove(Object o) {
 
-        return false;
-    }
+            if (contains(o)) {
+                hashMap.remove(o);
+                return true;
+            }
+            return false;
+        }
 
 
     @Override
     public int size() {
-        return size;
+        return hashMap.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return hashMap.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        return hashMap.containsKey(o);
     }
 
     @Override
@@ -76,13 +77,27 @@ public class SetC <T> implements Set<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        boolean contains = false;
+        for (Object o : c) {
+            if(contains(o)){
+                contains = true;
+            }
+        }
+        return contains;
+
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+         boolean added = false;
+        for (T arr : c) {
+            if (add(arr)) {
+                added = true;
+            }
+        }
+        return added;
     }
+
 
     @Override
     public boolean retainAll(Collection<?> c) {
@@ -91,11 +106,18 @@ public class SetC <T> implements Set<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        boolean removed = false;
+        for (Object o : c) {
+            if(remove(o)){
+                removed = true;
+            }
+        }
+        return removed;
     }
+
 
     @Override
     public void clear() {
-
+        hashMap.clear();
     }
 }
