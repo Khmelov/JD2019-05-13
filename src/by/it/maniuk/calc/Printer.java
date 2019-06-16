@@ -13,10 +13,10 @@ class Printer {
             System.out.println(result);
     }
     static void printVar(){
-
-        String res = Var.getVars().toString();
-        System.out.println(res);
-
+        Set<Map.Entry<String, Var>> entrySet = Var.getVars().entrySet();
+        for (Map.Entry<String, Var> varEntry : entrySet) {
+            System.out.println(varEntry.getKey() + "=" + varEntry.getValue());
+        }
 
     }
     static void sortVar(){
