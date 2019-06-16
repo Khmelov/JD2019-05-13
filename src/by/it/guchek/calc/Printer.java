@@ -1,9 +1,6 @@
 package by.it.guchek.calc;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Printer {
 
@@ -28,7 +25,7 @@ public class Printer {
 
     void sortvar() {
         Map<String, Var> sortedForKeys = Var.getVars();
-        Set<Map.Entry<String, Var>> setv = sortedForKeys.entrySet();
+        Set<SortedMap.Entry<String, Var>> setv = sortedForKeys.entrySet();
         Iterator<Map.Entry<String, Var>> i = setv.iterator();
 
         while (i.hasNext()) {
