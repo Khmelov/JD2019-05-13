@@ -25,20 +25,25 @@ public class SetC<E> implements Set<E> {
     @Override
     public boolean add(E e) {
 
+        for (int i = 0; i < size; i++) {
 
-        if (size == elements.length) {
-            elements = Arrays.copyOf(elements, elements.length * 2 / 3 + 1);
+            if (e == null && e == elements[i]) {
 
-        }
-        for (E element : elements) {
-            if (element == e) {
-                break;
+                return false;
+            }
+
+            if (e != null && e.equals(elements[i])) {
+
+                return false;
             }
         }
+
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, (size * 3 / 2 + 1));
+        }
         elements[size++] = e;
-
-
         return true;
+
     }
 
 
@@ -51,12 +56,14 @@ public class SetC<E> implements Set<E> {
     @Override
     public boolean contains(Object o) {
 
-        for (E element : elements) {
-            if (element == o) {
+        for (int i = 0; i < size; i++) {
+
+            if (elements[i] != null && elements[i].equals(o)) {
+                return true;
+            } else if (elements[i] == null && o == null) {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -73,46 +80,29 @@ public class SetC<E> implements Set<E> {
         return false;
     }
 
-//////костыли. когда-нибудь поправлю
     @Override
     public boolean addAll(Collection<? extends E> c) {
 
-        E[] objects = (E[]) c.toArray();
-        System.out.println(Arrays.toString(objects));
+        boolean added = false;
+        for (E e : c) {
+            if (add(e)) {
+                added = true;
+            }
+        }
+        return added;
 
-        E[] elem = (E[]) new Object[elements.length + objects.length];
-
-        System.arraycopy(elements, 0, elem, 0, elements.length);
-
-
-        System.arraycopy(objects, 0, elem, size, objects.length);
-
-        elements = Arrays.copyOf(elements, elements.length + objects.length);
-        System.arraycopy(elem, 0, elements, 0, elem.length);
-
-
-        size += objects.length - 2;
-
-
-        return false;
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
 
-        E[] objects = (E[]) c.toArray();
-        boolean r = true;
+        for (Object o : c) {
 
-
-        for (int i = 0; i < objects.length; i++) {
-            for (int i1 = 0; i1 < size; i1++) {
-                if (objects[i] != elements[i1]) {
-                    r = true;
-                } else r = false;
-            }
+            if (!contains(o))
+                return false;
         }
+        return true;
 
-        return r;
     }
 
 
