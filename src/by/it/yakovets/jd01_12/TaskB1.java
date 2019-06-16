@@ -27,7 +27,7 @@ public class TaskB1 {
                 }
             }
         }
-//        System.out.println(words);
+
         Set<Map.Entry<String, Integer>> setv = words.entrySet();
 
         Iterator<Map.Entry<String, Integer>> iter = setv.iterator();
