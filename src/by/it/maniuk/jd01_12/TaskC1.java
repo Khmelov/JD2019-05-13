@@ -10,7 +10,7 @@ public class TaskC1 {
         while (! (s = scanner.nextLine()).equals("end")) {
             s = s.trim();
             for (String str : s.split("[ \"/,+.;]")) {
-                map.put((str.hashCode() & 0xfffffff) + new Random().nextInt(100), str);
+                map.put((str.hashCode() & 0xfffffff) + new Random().nextInt(999), str);
             }
         }
         System.out.print(map);
@@ -23,7 +23,6 @@ public class TaskC1 {
             }
         }
         System.out.println(map);
-
 
 
         Set<Map.Entry<Integer, String>> entrySet = map.entrySet();
