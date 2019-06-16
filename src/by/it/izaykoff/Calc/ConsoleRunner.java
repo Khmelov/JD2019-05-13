@@ -12,7 +12,9 @@ public class ConsoleRunner {
 
         while (!(line = scan.nextLine()).equals("end")){
             if (line.equals("printvar")){
-                
+                printer.printvar(Var.getVars());
+            } else if(line.equals("sortvar")){
+                printer.sortvar();
             }
             Var result = parcer.calc(line);
             printer.print(result);

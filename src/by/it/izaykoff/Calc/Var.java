@@ -12,6 +12,11 @@ abstract class Var implements Operation {
         return var;
     }
 
+    public static Map<String, Var> getVars() {
+        return vars;
+    }
+
+
     static Var creatVar(String operand){
 
         operand = operand.trim().replaceAll("\\s","");
