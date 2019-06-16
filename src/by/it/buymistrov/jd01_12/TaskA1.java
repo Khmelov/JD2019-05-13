@@ -11,10 +11,10 @@ public class TaskA1 {
 
     private List<Integer> gredes = new ArrayList<>();
 
-    void clearBad(List<Integer> grades){
+    void clearBad(List<Integer> grades) {
         Iterator<Integer> iterator = grades.iterator();
-        while (iterator.hasNext()){
-            if (iterator.next()<4){
+        while (iterator.hasNext()) {
+            if (iterator.next() < 4) {
                 iterator.remove();
             }
         }
@@ -37,8 +37,6 @@ public class TaskA1 {
 
         instance.clearBad(instance.gredes);
         System.out.println(instance.gredes);
-
-
 
 
     }
