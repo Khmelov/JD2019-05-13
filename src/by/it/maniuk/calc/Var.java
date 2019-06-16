@@ -9,32 +9,15 @@ abstract class Var implements Operation {
 
    private static Map<String, Var> vars = new HashMap<>();
 
-
-   static  void printVar(){
-       for (int i = 0; i < vars.size(); i++) {
-           System.out.println(vars.get(i) + " : " + vars.get(i));
-       }
-
-
-       }
-
-
-   static Var saveVar(String name, Var var){
+      static Var saveVar(String name, Var var){
         vars.put(name, var);
 
         return  var;
    }
 
-   static void sortVar(){
-       // вывод хэш-таблицы с помощью методов интерфейса Map.Entry<K,V>
-       Set<Map.Entry<String, Var>> setv = vars.entrySet();
-       Iterator<Map.Entry<String, Var>> i = setv.iterator();
-       while (i.hasNext()) {
-           Map.Entry<String, Var> me = i.next();
-           System.out.println(me.getKey() + " : " + me.getValue());
-       }
-   }
-
+    static Map<String, Var> getVars() {
+        return vars;
+    }
 
     static Var createVar(String strVar) {
         strVar = strVar.replaceAll("\\s+", "");
