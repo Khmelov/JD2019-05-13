@@ -10,22 +10,43 @@ public class TaskC1 {
         while (! (s = scanner.nextLine()).equals("end")) {
             s = s.trim();
             for (String str : s.split("[ \"/,+.;]")) {
-                map.put(str.hashCode() & 0xfffffff, str);
+                map.put((str.hashCode() & 0xfffffff) + new Random().nextInt(100), str);
             }
         }
-
-
         System.out.print(map);
-        TreeMap<Integer, String> list = new TreeMap<>(map);
-       Comparator c = new Comparator<Map.Entry<Integer, String>>() {
-            @Override
-            public int compare(Map.Entry<Integer, String> o1, Map.Entry<Integer, String> o2) {
-                return o1.getValue().compareToIgnoreCase(o2.getValue());
+        Set<String> mySet = new HashSet<>();
+        for (Iterator itr = map.entrySet().iterator(); itr.hasNext(); ) {
+            Map.Entry<String, String> entrySet = (Map.Entry) itr.next();
+            String value = entrySet.getValue();
+            if (! mySet.add(value)) {
+                itr.remove();
             }
-        };
+        }
+        System.out.println(map);
 
 
-    }}
+
+        Set<Map.Entry<Integer, String>> entrySet = map.entrySet();
+        for (Map.Entry<Integer, String> me : entrySet) {
+            System.out.println(me.getKey() + " : " + me.getValue());
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
