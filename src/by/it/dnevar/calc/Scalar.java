@@ -1,4 +1,4 @@
-package by.it.dnevar.Calc;
+package by.it.dnevar.calc;
 
 class Scalar extends Var {
 
