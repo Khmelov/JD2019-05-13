@@ -23,6 +23,7 @@ public class TaskC2 {
     }
 
 
+    @SafeVarargs
     private static <T> Set<T> getUnion (Set<T>... n){
         Set<T> resultSet=new HashSet<>(n[0]);
         for (int i = 1; i < n.length-1; i++) {
@@ -32,6 +33,7 @@ public class TaskC2 {
     }
 
 
+    @SafeVarargs
     private static <T> Set<T> getCross (Set<T>... n){
         Set<T> resultSet=new HashSet<>(n[0]);
         for (int i = 1; i < n.length-1; i++) {

@@ -18,15 +18,16 @@ public class TaskA1 {
         System.out.println(instance.grades);
         instance.clearBad(instance.grades);
         System.out.println(instance.grades);
-
     }
 
     private void clearBad (List<Integer> grades){
-        Iterator<Integer> iterator = grades.iterator();
-        while(iterator.hasNext()){
-            if(iterator.next()<4){
-                iterator.remove();
-            }
-        }
+        grades.removeIf(integer -> integer < 4);
+//        первоначальная версия кода Raplace the loop with Collection.removeif
+//        Iterator<Integer> iterator = grades.iterator();
+//        while(iterator.hasNext()){
+//            if(iterator.next()<4){
+//                iterator.remove();
+//            }
+//        }
     }
 }

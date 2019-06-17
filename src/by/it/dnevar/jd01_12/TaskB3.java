@@ -5,11 +5,11 @@ import java.util.*;
 public class TaskB3 {
     public static void main(String[] args) {
         Random names = new Random(39);
-        Integer size = 4096;
+        int size = 4096;
         String[] peoplesAll = new String[size];
         for (int i = 0; i < size; i++) {
-            Integer name = 1 + names.nextInt(size);
-            peoplesAll[i]=name.toString();
+            int name = 1 + names.nextInt(size);
+            peoplesAll[i]= Integer.toString(name);
         }
 
         ArrayList<String> peoples1 = new ArrayList<>(Arrays.asList(peoplesAll));
@@ -24,7 +24,7 @@ public class TaskB3 {
 
     }
 
-    static String process(ArrayList<String> peoples){
+    private static String process(ArrayList<String> peoples){
         int count=1;
         for (;peoples.size() > 1;){
             Iterator<String> iterator = peoples.iterator();
@@ -41,7 +41,7 @@ public class TaskB3 {
         return peoples.get(0);
     }
 
-    static String process(LinkedList<String> peoples){
+    private static String process(LinkedList<String> peoples){
 // время сопостовимое с работой эго же метода с ArrayList
 
 //        int count=1;
@@ -58,11 +58,11 @@ public class TaskB3 {
 //            }
 //        }
 //----------------------------------------------------------------------
-// данная реализация работает в примерно 3 раза быстрее
+// данная реализация работает в примерно 4-5 раза быстрее
         while(peoples.size()>1){
             for (int i = 0; i < peoples.size(); i++) {
                 if(i%2!=0){
-                    peoples.remove(i);
+                    String removedPerson = peoples.remove(i);
                 }
             }
         }

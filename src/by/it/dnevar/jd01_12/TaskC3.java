@@ -13,13 +13,15 @@ public class TaskC3 {
 
         String[] arrBracets = line.split("[^(){}\\[\\]]+");
         List<String> lineBracets = new ArrayList<>(Arrays.asList(arrBracets));
-        Iterator<String> iterator = lineBracets.iterator();
-        while (iterator.hasNext()){
-            String element = iterator.next();
-            if(element.equals("")){
-                iterator.remove();
-            }
-        }
+        lineBracets.removeIf(element -> element.equals(""));
+
+//        первоначальная версия кода Raplace the loop with Collection.removeif
+//        while (iterator.hasNext()){
+//            String element = iterator.next();
+//            if(element.equals("")){
+//                iterator.remove();
+//            }
+//        }
         System.out.println(bracetsCorrect(lineBracets));
 
     }
@@ -30,31 +32,29 @@ public class TaskC3 {
             }
 
             LinkedList<String> buffer = new LinkedList<>();
-            for (int i = 0; i < lineBracets.size(); i++) {
+        for (String current : lineBracets) {
 
-                String current = lineBracets.get(i);
-                if (current.equals("{") || current.equals("(") || current.equals("[")) {
-                    buffer.push(current);
-                }
-
-
-                if (current.equals("}") || current.equals(")") || current.equals("]")) {
-                    if (buffer.isEmpty()) {
-                        return false;
-                    }
-
-                    String last = buffer.peek();
-                    if (current.equals("}") && last.equals("{")
-                            || current.equals(")") && last.equals("(")
-                            || current.equals("]") && last.equals("[")) {
-                        buffer.pop();
-                    }
-                    else {
-                        return false;
-                    }
-                }
-
+            if (current.equals("{") || current.equals("(") || current.equals("[")) {
+                buffer.push(current);
             }
+
+
+            if (current.equals("}") || current.equals(")") || current.equals("]")) {
+                if (buffer.isEmpty()) {
+                    return false;
+                }
+
+                String last = buffer.peek();
+                if (current.equals("}") && last.equals("{")
+                        || current.equals(")") && last.equals("(")
+                        || current.equals("]") && last.equals("[")) {
+                    buffer.pop();
+                } else {
+                    return false;
+                }
+            }
+
+        }
 
             return buffer.isEmpty();
 

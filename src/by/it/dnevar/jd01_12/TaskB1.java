@@ -16,7 +16,7 @@ public class TaskB1 {
             list.addAll(Arrays.asList(line.split(" ")));
         }
         for (String word : list) {
-            if(word == "don't" || word == "isn't"){
+            if(word.equals("don't") || word.equals("isn't")){
                 word = "don't or isn't";
                 res.put(word, res.containsKey(word) ? res.get(word)+1 : 1);
             }
