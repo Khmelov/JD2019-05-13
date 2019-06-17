@@ -17,21 +17,16 @@ class Matrix extends Var {
     }
 
     Matrix (String strMatrix) {
-        StringBuilder sbmatrix = new StringBuilder(strMatrix);
-        Pattern p = Pattern.compile("}");
-        Matcher m = p.matcher(strMatrix);
-        m.find();
-        int middle = m.start();
-        String[] first = strMatrix.substring(0, middle).replace("{{", " ").trim().split(",");
-        String[] second = strMatrix.substring(middle + 3, strMatrix.length() - 1).replace("}", "").replace("{","").trim().split(",");
-        double[][] temp = new double[first.length][second.length];
-        for (int i = 0; i < first.length; i++) {
-            temp[0][i] = Double.parseDouble(first[i]);
+        String [] part=strMatrix.split("},");
+        double [][]temp=new double[part.length][part[0].replaceAll("\\{\\{|}|\\{|\\s","").split(",").length];
+        for (int i = 0; i < part.length; i++) {
+            String [] col=part[i].replaceAll("\\{\\{|}|\\{|\\s","").split(",");
+            for (int j=0; j<col.length; j++){
+                temp [i][j]=Double.parseDouble(col[j]);
+            }
         }
-        for (int i = 0; i < second.length; i++) {
-            temp[1][i] = Double.parseDouble(second[i]);
-        }
-        this.value = temp;
+
+            this.value = temp;
 
     }
 
@@ -58,19 +53,19 @@ class Matrix extends Var {
     @Override
     public Var add(Var other) {
         if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(value, value.length);
+            double[][] res =new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[i].length; j++) {
-                    res[i][j] = res[i][j] + ((Scalar) other).getValue();
+                    res[i][j] = value[i][j] + ((Scalar) other).getValue();
                 }
             }
             return new Matrix(res);
         }
         else if (other instanceof Matrix) {
-            double[][] res = Arrays.copyOf(value, value.length);
+            double[][] res =new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[i].length; j++) {
-                    res[i][j] = res[i][j] +  ((Matrix) other).value[i][j];
+                    res[i][j] = value[i][j] +  ((Matrix) other).value[i][j];
                 }
             }
                 return new Matrix(res);
@@ -84,16 +79,75 @@ class Matrix extends Var {
 
     @Override
     public Var sub(Var other) {
-        return super.sub(other);
+        if (other instanceof Scalar) {
+            double[][] res =new double[value.length][value[0].length];
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[i].length; j++) {
+                    res[i][j] = value[i][j] - ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(res);
+        }
+        else if (other instanceof Matrix) {
+            double[][] res =new double[value.length][value[0].length];
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[i].length; j++) {
+                    res[i][j] = value[i][j] -  ((Matrix) other).value[i][j];
+                }
+            }
+            return new Matrix(res);
+        }
+        else
+            return super.sub(other);
     }
 
     @Override
     public Var mul(Var other) {
-        return super.mul(other);
+        if (other instanceof Scalar) {
+            double[][] res =new double[value.length][value[0].length];
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[i].length; j++) {
+                    res[i][j] = value[i][j] * ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(res);
+        }
+        else if (other instanceof Vector){
+            double [] res=new double[value.length];
+            for (int i = 0; i < value.length; i++) {
+                for (int j = 0; j < ((Vector) other).getValue().length; j++) {
+                    res [i]=res [i] + value[i][j]* ((Vector) other).getValue()[j];
+                }
+            }
+            return new Vector(res);
+        }
+        else if (other instanceof Matrix) {
+            double[][] res =new double[value.length][value[0].length];
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < ((Matrix) other).value[0].length; j++) {
+                    for (int k = 0; k < ((Matrix) other).value.length; k++) {
+                        res[i][j] = res[i][j] + value[i][k] * ((Matrix) other).value[k][j];
+                    }
+                }
+            }
+            return new Matrix(res);
+        }
+        else
+           return super.mul(other);
     }
 
     @Override
     public Var div(Var other) {
+        if (other instanceof Scalar) {
+            double[][] res = new double[value.length][value[0].length];
+            for (int i = 0; i < res.length; i++) {
+                for (int j = 0; j < res[i].length; j++) {
+                    res[i][j] = value[i][j] * ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(res);
+        }
+        else
         return super.div(other);
     }
 }
