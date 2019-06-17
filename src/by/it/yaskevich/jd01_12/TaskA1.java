@@ -1,9 +1,6 @@
 package by.it.yaskevich.jd01_12;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class TaskA1 {
 
@@ -17,7 +14,7 @@ public class TaskA1 {
             Integer grade = 1 + generator.nextInt(10);
             instance.grades.add(grade);
         }
-
+        
         System.out.println(instance.grades);
         instance.clearBad(instance.grades);
         System.out.println(instance.grades);
