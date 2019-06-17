@@ -9,7 +9,7 @@ public class TaskC3 {
     public static void main(String[] args) {
        //String text =  "«(», «)»,«[», «]», «{», «}»";
       //  String text =  "()[]{}";
-  String text =  "()[]{}";
+  String text =  "([]{}(";
 
         System.out.println(validation(text));
 
