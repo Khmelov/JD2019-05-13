@@ -4,8 +4,8 @@ import java.util.*;
 
 public class TaskB3 {
     public static void main(String[] args) {
-        Random names = new Random();
-        Integer size = 100;
+        Random names = new Random(39);
+        Integer size = 4096;
         String[] peoplesAll = new String[size];
         for (int i = 0; i < size; i++) {
             Integer name = 1 + names.nextInt(size);
