@@ -11,12 +11,7 @@ public class TaskC1 {
         System.out.printf("Before(%2d): %s\n" , map.size(), map);
 
         Set<String> uniqueObjectsNames = new HashSet<>();
-        Iterator<Map.Entry<Integer, String>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            if (!uniqueObjectsNames.add(iterator.next().getValue())) {
-                iterator.remove();
-            }
-        }
+        map.entrySet().removeIf(entry -> !uniqueObjectsNames.add(entry.getValue()));
 
         System.out.printf("After (%2d): %s\n" , map.size(), map);
     }

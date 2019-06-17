@@ -29,7 +29,7 @@ public class TaskB3 {
             Iterator<String> iterator = peoplesCopy.iterator();
             while (iterator.hasNext()) {
                 iterator.next();
-                if (nextSecond == true) {
+                if (nextSecond) {
                     iterator.remove();
                 }
                 nextSecond = !nextSecond;

@@ -17,7 +17,7 @@ public class TaskB2 {
             Iterator<String> iterator = peoplesCopy.iterator();
             while (iterator.hasNext()) {
                 iterator.next();
-                if (nextSecond == true) {
+                if (nextSecond) {
                     iterator.remove();
                 }
                 nextSecond = !nextSecond;

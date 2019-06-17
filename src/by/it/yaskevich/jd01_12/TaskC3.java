@@ -13,7 +13,6 @@ public class TaskC3 {
                 put('(', ')');
                 put('[', ']');
                 put('{', '}');
-                put('<', '>');
             }
         };
         Set<Character> closeBrackets = new HashSet<>(brackets.values());
