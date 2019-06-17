@@ -1,8 +1,4 @@
-package by.it.livanovich.jd01_08;
-
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package by.it.livanovich.calc;
 
 class Matrix extends Var {
     private double[][] value;
@@ -26,7 +22,7 @@ class Matrix extends Var {
             }
         }
 
-            this.value = temp;
+        this.value = temp;
 
     }
 

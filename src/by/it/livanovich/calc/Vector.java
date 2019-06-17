@@ -1,4 +1,4 @@
-package by.it.livanovich.jd01_08;
+package by.it.livanovich.calc;
 
 import java.util.Arrays;
 
