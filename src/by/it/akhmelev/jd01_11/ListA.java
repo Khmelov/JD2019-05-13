@@ -8,7 +8,7 @@ import java.util.ListIterator;
 
 public class ListA<E> implements List<E> {
 
-    private E[] elements = (E[]) new Object[100];
+    private E [] elements = (E[]) new Object[100];
     private int size = 0;
 
     @Override
