@@ -2,18 +2,26 @@ package by.it.izaykoff.jd01_12;
 
 import java.util.*;
 
-public class TaskB2 {
+public class TaskB3 {
     public static void main(String[] args) {
 
-        String[] testPeolpe = {"one","two","three","four","five","six"};
-        String[] testPeolpe2 = {"one","two","three","four","five","six","seven"};
+        Random random = new Random();
+        String[] testStr = new String[4096];
+        for (int i = 0; i < 4096; i++) {
+            Integer number = 1 + random.nextInt(100);
+            testStr[i] = number.toString();
 
-        List<String> peoplesArrayList = new ArrayList<>(Arrays.asList(testPeolpe));
-        List<String> peoplesLinkedList = new LinkedList<>(Arrays.asList(testPeolpe2));
+        }
 
-        System.out.println(process((ArrayList<String>) peoplesArrayList));
-        System.out.println(process((LinkedList<String>) peoplesLinkedList));
+        ArrayList<String> peoplesArrayList = new ArrayList<>(Arrays.asList(testStr));
+        LinkedList<String> peoplesLinkedList = new LinkedList<>(Arrays.asList(testStr));
 
+        Timer timer = new Timer();
+
+        System.out.println(process(peoplesArrayList));
+        System.out.println("Время работы peoplesArrayList" + timer);
+        System.out.println(process(peoplesLinkedList));
+        System.out.println("Время работы peoplesLinkedList" + timer);
 
     }
 
