@@ -1,4 +1,4 @@
-package by.it.orlov.Calc;
+package by.it.orlov.calculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
