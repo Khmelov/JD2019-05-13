@@ -20,13 +20,8 @@ public class TaskB1 {
 
             for (String elem : list) {
                 map.put(elem, map.containsKey(elem) ? map.get(elem) + 1 : 1);
-
             }
-
         }
-
         System.out.println(map);
-
-
     }
 }

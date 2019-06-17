@@ -5,14 +5,14 @@ import java.util.*;
 public class TaskB2 {
     public static void main(String[] args) {
 
-        String[] testPeolpe = {"one","two","three","four","five","six"};
-        String[] testPeolpe2 = {"one","two","three","four","five","six","seven"};
+        String[] testPeople = {"one","two","three","four","five","six"};
+        String[] testPeople2 = {"one","two","three","four","five","six","seven"};
 
-        List<String> peoplesArrayList = new ArrayList<>(Arrays.asList(testPeolpe));
-        List<String> peoplesLinkedList = new LinkedList<>(Arrays.asList(testPeolpe2));
+        ArrayList<String> peoplesArrayList = new ArrayList<>(Arrays.asList(testPeople));
+        LinkedList<String> peoplesLinkedList = new LinkedList<>(Arrays.asList(testPeople2));
 
-        System.out.println(process((ArrayList<String>) peoplesArrayList));
-        System.out.println(process((LinkedList<String>) peoplesLinkedList));
+        System.out.println(process(peoplesArrayList));
+        System.out.println(process(peoplesLinkedList));
 
 
     }
@@ -50,5 +50,7 @@ public class TaskB2 {
         }
         return peoples.get(0);
     }
+
+
 
 }

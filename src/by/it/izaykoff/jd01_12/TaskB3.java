@@ -8,8 +8,8 @@ public class TaskB3 {
         Random random = new Random();
         String[] testStr = new String[4096];
         for (int i = 0; i < 4096; i++) {
-            Integer number = 1 + random.nextInt(100);
-            testStr[i] = number.toString();
+            int number = 1 + random.nextInt(100);
+            testStr[i] = Integer.toString(number);
 
         }
 
@@ -42,21 +42,34 @@ public class TaskB3 {
         return peoples.get(0);
     }
 
+//    static String process(LinkedList<String> peoples) {
+//        int count = 1;
+//        while (peoples.size() > 1) {
+//            Iterator<String> iterator = peoples.iterator();
+//
+//            if (count != 1) {
+//                count = count - peoples.size();
+//            }
+//            while (iterator.hasNext()) {
+//                if (peoples.indexOf(iterator.next()) == count) {
+//                    iterator.remove();
+//                    count++;
+//                }
+//            }
+//        }
+//        return peoples.get(0);
+//    }
+
     static String process(LinkedList<String> peoples) {
-        int count = 1;
         while (peoples.size() > 1) {
-            Iterator<String> iterator = peoples.iterator();
-            if (count != 1) {
-                count = count - peoples.size();
-            }
-            while (iterator.hasNext()) {
-                if (peoples.indexOf(iterator.next()) == count) {
-                    iterator.remove();
-                    count++;
+            for (int i = 0; i < peoples.size(); i++) {
+                if (i % 2 != 0){
+                    peoples.remove(i);
                 }
             }
         }
         return peoples.get(0);
     }
+
 
 }
