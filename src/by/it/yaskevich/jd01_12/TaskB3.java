@@ -43,7 +43,7 @@ public class TaskB3 {
         LinkedList<String> linkedList = new LinkedList<>();
         for (int i = 1; i <= 4096; i++) {
             arrayList.add("n" + i);
-            linkedList.add("n" + 1);
+            linkedList.add("n" + i);
         }
 
         long time = System.nanoTime();
