@@ -19,6 +19,9 @@ public class TaskB1 {
         String[] rawWords = text.toString().split("[\\s,:.;—/\"-]");
         for (String word : rawWords) {
             if (!word.isEmpty()) {
+                if ("isn't".equals(word)) {
+                    word = "don’t";
+                }
                 words.put(word, words.getOrDefault(word, 0) + 1);
             }
         }
