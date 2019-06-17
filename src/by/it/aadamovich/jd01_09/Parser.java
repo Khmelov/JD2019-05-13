@@ -7,7 +7,7 @@ class Parser {
 
     Var calc(String expression) {
         String[] operands = expression
-                .replaceAll(" ", "")
+                .replaceAll("\\s+", "")
                 .split(Patterns.OPERATION);
         Var operand1 = Var.createVar(operands[0]);
         Var operand2 = Var.createVar(operands[1]);
