@@ -20,7 +20,7 @@ public class TaskC1 {
         Scanner sc = new Scanner(System.in);
         String name;
         while (!(name = sc.nextLine()).equals("end")) {
-            int gen = 1 + generator.nextInt(99) + generator.nextInt(9999);
+            int gen = 1 + generator.nextInt(999) + generator.nextInt(999999);
             nameMap.put(Integer.toString(gen), name);
         }
 
@@ -41,7 +41,7 @@ public class TaskC1 {
 
         //вывод результата без дубликатов
         // НЕ БУДЕТ РАБОТАТЬ БЕЗ КОЛЛЕКЦИЙ ОТ ГУГЛА!(но это не точно)
-        System.out.println("Result");
+        System.out.println("Result: ");
         for (String s : resultSet) {
             System.out.println(s + " - " + resultBiMap.get(s));
         }
