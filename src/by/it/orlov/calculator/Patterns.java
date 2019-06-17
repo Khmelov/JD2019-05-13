@@ -1,4 +1,4 @@
-package by.it.orlov.Calc;
+package by.it.orlov.calculator;
 
 interface Patterns {
     String SCALAR = "((-?)([0-9.]+))";
