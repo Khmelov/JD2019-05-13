@@ -11,9 +11,8 @@ public class ConsoleRunner {
         Printer printer = new Printer();
         Parser parser = new Parser();   //вычисления
                                         //и результат
-        
-        while (!(line = sc.nextLine()).equals("end")) {  //будем читать линии из консоли
 
+        while (!(line = sc.nextLine()).equals("end")) {  //будем читать линии из консоли
 
              try {
                     if (line.equals("printvar")){
