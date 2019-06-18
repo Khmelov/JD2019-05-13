@@ -17,17 +17,17 @@ public class TaskC {
     private static int[][] step1(int n) {
         int[][] mas = new int[n][n];
         boolean flag = false;
-        while (!flag) {
+        while (! flag) {
             for (int i = 0; i < mas.length; i++) {
                 for (int j = 0; j < mas.length; j++) {
                     //Min + (int)(Math.random() * ((Max - Min) + 1))
-                    mas[i][j] = -n + (int) (Math.random() * ((n - (-n)) + 1));
+                    mas[i][j] = - n + (int) (Math.random() * ((n - (- n)) + 1));
                 }
 
             }
             for (int i = 0; i < mas.length; i++) {
                 for (int j = 0; j < mas.length; j++) {
-                    if (mas[i][j] == n || mas[i][j] == -n) flag = true;
+                    if (mas[i][j] == n || mas[i][j] == - n) flag = true;
                 }
             }
         }
@@ -81,9 +81,9 @@ public class TaskC {
         return rowSum;
     }
 
-    private static int[][] step3(int[][] massiv) {
+    private static int[][] step3(int[][] mass) {
         int[][] mas = {
-                {3, -5, -5, 5},
+                {3, - 5, - 5, 5},
                 {3, 4, 99, 6},
                 {99, 8, 8, 9},
                 {1, 8, 9, 1}
@@ -116,19 +116,32 @@ public class TaskC {
                 if (mas2[q][j] > 0) {
                     row--;
                 }
-            }}
+            }
+        }
         for (int w = 0; w < mas2.length; w++) {
-                for (int j = 0; j < mas2[w].length; j++) {
-                    if (mas2[w][j] > 0) {
-                        stolb--;
+            for (int j = 0; j < mas2[w].length; j++) {
+                if (mas2[w][j] > 0) {
+                    stolb--;
+                }
+            }
+        }
+        int[][] mas3 = new int[row][stolb];
+        boolean[][] mas4 = new boolean[mas.length][mas[0].length];
+        for (int g = 0; g < mas2.length; g++) {
+            for (int h = 0; h < mas2[g].length; h++) {
+                if (mas2[g][h] > 0)
+                    mas4[g][h] = true;
+                else mas4[g][h] = false;
+            }
+        }
+        for (int i = 0; i < mas.length; i++) {
+            for (int j = 0; j < mas[0].length; j++) {
+                if (mas4[i][j]) {
+                    for (int i1 = j; i1 < mas.length; i1++) {
+                    mas2[i][i1] = mas[i][i1=1];
+
+
                     }
-                }}
-            int[][] mas3 = new int[row][stolb];
-        for (int g = 0; g <mas2.length; g++ ){
-        for (int h = 0; h < mas2[g].length; h++){
-            if (mas2[g][h] > 0)
-                for(int e = 0; e<mas2.length; e++){
-                    mas3[g][h] = mas[g][h];
                 }
 
 
@@ -136,23 +149,9 @@ public class TaskC {
         }
 
 
-
-            for (int i = 0; i < mas3.length; i++) {
-                for (int j = 0; j < mas3[i].length; j++) {
-                    System.out.print(mas3[i][j] + "\t");
-                }
-            }
-
-
-
         return mas;
     }
 }
-
-
-// for (String[][] strings : stringArray) {
-//         for (String[] strings2 : strings) {
-//         for (String string : strings2) {
 
 
 
