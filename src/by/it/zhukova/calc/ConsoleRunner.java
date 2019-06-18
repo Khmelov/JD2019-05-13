@@ -16,9 +16,6 @@ public class ConsoleRunner {
                     sortvar(); continue;}
                 Var result = parser.calc(expression);
                     printer.print(result);
-              //  if ((sorted =scanner.nextLine()).equals("sortvar")) Var.sortvar();
-
-
             }
     }
             }

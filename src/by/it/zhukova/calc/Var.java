@@ -23,7 +23,6 @@ if (strVar2.matches(Patterns.SCALAR)) return new Scalar(strVar2);
 
     static void printvar (){
         Set<Map.Entry<String, Var>> set = vars.entrySet();
-        System.out.println(set);
         Iterator<Map.Entry<String, Var>> iterator = set.iterator();
         while (iterator.hasNext()){
             Map.Entry<String, Var> next = iterator.next();
