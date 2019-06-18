@@ -1,4 +1,4 @@
-package by.it.yaskevich.jd01_13;
+package by.it.yaskevich.calc;
 
 
 import org.junit.Test;
