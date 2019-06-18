@@ -43,6 +43,8 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             double [] sumArr=Arrays.copyOf(value, value.length);
+            if (sumArr.length!=((Vector) other).value.length)
+                throw new CalcException(" Несоответствие размеров векторов");
             for (int i = 0; i <value.length ; i++) {
                 sumArr[i]=sumArr[i]+((Vector) other).value[i];
             }
@@ -56,6 +58,8 @@ class Vector extends Var {
     public Var sub(Var other) throws CalcException{
         if (other instanceof Vector) {
             double[] razArr = Arrays.copyOf(value, value.length);
+            if (razArr.length!=((Vector) other).value.length)
+                throw new CalcException(" Несоответствие размеров векторов");
             for (int i = 0; i < value.length; i++) {
                 razArr[i] = razArr[i] - ((Vector) other).value[i];
             }

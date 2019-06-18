@@ -8,15 +8,13 @@ public class ConsoleRunner {
         Scanner sc = new Scanner(System.in);
         String line;
         //создаем экземпляры
-        Parser parser = new Parser();  //вычисления
-        Printer printer = new Printer(); //и результат
-
-
+        Printer printer = new Printer();
+        Parser parser = new Parser();   //вычисления
+                                        //и результат
+        
         while (!(line = sc.nextLine()).equals("end")) {  //будем читать линии из консоли
 
-           // if (line.equals("printvar")){
-             //   printer.printMap();
-            //} else if (line.equals("sortvar")) printer.sortvar();
+
              try {
                     if (line.equals("printvar")){
                         printer.printMap();
