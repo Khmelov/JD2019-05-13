@@ -12,8 +12,6 @@ public class TaskB3 {
 
         LinkedList<String> linkedPeople = new LinkedList<>(arrayPeople);
         LinkedList<String> linkedPeople2 = new LinkedList<>(arrayPeople);
-        LinkedList<String> linkedPeople3 = new LinkedList<>(arrayPeople);
-
 
         long timer = System.nanoTime();
         System.out.printf("Last Array: %s, Время: %d микросекунд%n", process(arrayPeople), (System.nanoTime() - timer) / 1000);
