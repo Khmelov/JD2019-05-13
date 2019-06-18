@@ -14,7 +14,7 @@ public class CalcException extends Exception{
     }
 
     public CalcException(Throwable cause) {
-        super(cause);
+        super("ERROR:"+cause);
     }
 
     public CalcException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
