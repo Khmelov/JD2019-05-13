@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {                //Принимает на вход некоторое выражение и в соответствие с ним
-   Var calc(String expression) {                   //в своем внутреннем методе calc должен вычислить значение готовой переменной
+   Var calc(String expression) throws CalcException {                   //в своем внутреннем методе calc должен вычислить значение готовой переменной
 
       //2.0*2.0
       expression=expression.replaceAll("\\s", "");

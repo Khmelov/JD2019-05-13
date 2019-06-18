@@ -13,14 +13,20 @@ public class ConsoleRunner {
 
 
         while (!(line = sc.nextLine()).equals("end")) {  //будем читать линии из консоли
-                                                            //до тех пор пока не введут это выражение
-            if (line.equals("printvar")){
-                printer.printMap();
-            } else if (line.equals("sortvar")) printer.sortvar();
-            else {
-            Var result = parser.calc(line);
-            printer.print(result);}
 
+           // if (line.equals("printvar")){
+             //   printer.printMap();
+            //} else if (line.equals("sortvar")) printer.sortvar();
+             try {
+                    if (line.equals("printvar")){
+                        printer.printMap();
+                    } else if (line.equals("sortvar")) printer.sortvar();
+                            else {Var result = parser.calc(line);
+                                  printer.print(result);}
+                } catch (CalcException e) {
+                    System.out.println(e.getMessage());
+                    //e.printStackTrace();
+                }
         }
 
     }
