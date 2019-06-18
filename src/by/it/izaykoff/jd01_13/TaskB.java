@@ -14,11 +14,11 @@ public class TaskB {
                 sum += number;
                 System.out.println(number);
                 if (sum <= 0)
-                    throw new ArithmeticException("fuc k");
+                    throw new ArithmeticException();
 
                 System.out.println(Math.sqrt(sum));
 
-            } catch (NumberFormatException | NullPointerException e) {
+            } catch (ArithmeticException | NumberFormatException | NullPointerException e) {
                 String name = e.getClass().getName();
                 String className = TaskB.class.getName();
                 StackTraceElement[] stackTrace = e.getStackTrace();
