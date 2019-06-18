@@ -24,9 +24,9 @@ public class Printer {
     }
 
     void sortvar() {
-        Map<String, Var> sortedForKeys = Var.getVars();
-        Set<SortedMap.Entry<String, Var>> setv = sortedForKeys.entrySet();
-        Iterator<Map.Entry<String, Var>> i = setv.iterator();
+        Map<String, Var> sortedForKeys = new TreeMap<>(Var.getVars());
+        //Set<SortedMap.Entry<String, Var>> setv = sortedForKeys.entrySet();
+        Iterator<Map.Entry<String, Var>> i = sortedForKeys.entrySet().iterator();
 
         while (i.hasNext()) {
             Map.Entry<String, Var> ne = i.next();
