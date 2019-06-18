@@ -1,11 +1,11 @@
 package by.it.maniuk.jd01_13;
 
 
-import java.io.IOException;
+
 import java.util.Scanner;
 
 public class TaskB {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s;
         double sum = 0;
