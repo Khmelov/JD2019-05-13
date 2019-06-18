@@ -17,7 +17,7 @@ public class Parser {                //Принимает на вход неко
       Var one = Var.createVar(operand[0]);
       if ( one==null || two==null )  //TODO create error
       {
-         return null;
+         throw new CalcException("Пустая переменная");
       }
       Pattern p = Pattern.compile(Patterns.OPERATION);
       Matcher m = p.matcher(expression);      //выщимливаем знаки
@@ -32,7 +32,7 @@ public class Parser {                //Принимает на вход неко
          }
       }
 
-      return null;
+      throw new CalcException("Ошибка парсинга выражений");
 
    }
 }
