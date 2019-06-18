@@ -117,7 +117,7 @@ public class Matrix extends Var {
         } else if (other instanceof Matrix) {
             double[][] m = ((Matrix)other).value;
             double[][] result = copyOfValue();
-            if ((result[0].length == m.length)) {
+            if ((result.length != m.length) || (result[0].length != m[0].length)) {
                 throw new CalcException("Неверная размерность массивов");
             }
             for (int i = 0; i < result.length; i++) {
