@@ -36,7 +36,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException{
         if (other instanceof Scalar) {
             double[][] sum = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < sum.length; i++) {
@@ -61,7 +61,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException{
         if (other instanceof Scalar) {
             double[][] sub = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < sub.length; i++) {
@@ -85,7 +85,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException{
         if (other instanceof Scalar) {
             double[][] mul = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < mul.length; i++) {
@@ -121,8 +121,9 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
-        if (other instanceof Scalar && ((Scalar) other).getValue() != 0) {
+    public Var div(Var other) throws CalcException{
+        if (other instanceof Scalar) {
+            if (((Scalar) other).getValue() == 0) throw new CalcException("Деление на ноль невозможно");
             double[][] div = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < div.length; i++) {
                 for (int j = 0; j < div[0].length; j++) {

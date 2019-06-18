@@ -5,10 +5,11 @@ import java.util.regex.Pattern;
 
 class Parser {
 
-    Var calc(String expression) {
+    Var calc(String expression) throws CalcException{
         String[] stringOperands = expression
                 .replaceAll("\\s+", "")
                 .split(Patterns.OPERATION);
+        if (stringOperands.length==1) throw new CalcException("Получена только одна переменная: " + stringOperands[0]);
 
         Var varOperand2 = Var.createVar(stringOperands[1]);
 
