@@ -20,7 +20,7 @@ public class Runner  {
 
     Matrix v7 = new Matrix(new  double[][] {{1.0, 2.0},{3.0, 4.0}});
     Matrix v8 = new Matrix(v7);
-    Matrix v9 = new Matrix("{{1.0, 2.0}, {3.0, 4.0}}");
+    Matrix v9 = new Matrix("{{1,2},{3,4}}");
 
         System.out.println(v7);
         System.out.println(v8);
