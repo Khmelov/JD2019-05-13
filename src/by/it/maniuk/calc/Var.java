@@ -1,9 +1,8 @@
 package by.it.maniuk.calc;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
+
 
 abstract class Var implements Operation {
 
@@ -19,8 +18,9 @@ abstract class Var implements Operation {
         return vars;
     }
 
-    static Var createVar(String strVar) {
-        strVar = strVar.replaceAll("\\s+", "");
+    static Var createVar(String strVar) throws CalcException {
+          strVar = strVar.replaceAll("\\s+", "");
+
         if (strVar.matches(Patterns.SCALAR))
             return new Scalar(strVar);
         if (strVar.matches(Patterns.VECTOR))
@@ -29,31 +29,31 @@ abstract class Var implements Operation {
             return new Matrix(strVar);
         if (vars.containsKey(strVar))
             return vars.get(strVar);
-        return null;
+      throw  new CalcException("ERROR: Не возможно создать " + strVar);
     }
 
     @Override
-    public Var add(Var other) {
-        System.out.println("Операция сложения "+this+ "+" + other + " невозможна");
-        return null;
+    public Var add(Var other) throws CalcException {
+        throw  new CalcException(("ERROR: Операция сложения "+this+ "+" + other + " невозможна"));
+
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Операция вычитания  "+this+ "-" + other + " невозможна");
-        return null;
+    public Var sub(Var other) throws CalcException {
+       throw new CalcException ("ERROR: Операция вычитания  "+this+ "-" + other + " невозможна");
+
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Операция умножения "+this+ "*" + other + " невозможна");
-        return null;
+    public Var mul(Var other) throws CalcException {
+       throw  new CalcException("ERROR: Операция умножения "+this+ "*" + other + " невозможна");
+
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Операция деления "+this+ "/" + other + " невозможна");
-        return null;
+    public Var div(Var other) throws CalcException {
+        throw  new CalcException("ERROR: Операция деления "+this+ "/" + other + " невозможна");
+
     }
 
     @Override

@@ -12,11 +12,14 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
         while (!(s = scanner.nextLine()).equals("end")){
-            if (s.equals("sortvar")) {Printer.sortVar(); continue;}
-            if(s.equals("printvar")){Printer.printVar(); continue;}
-
-            Var result = parser.calc(s.trim());
-            printer.print(result);
+            try {
+                if (s.equals("sortvar")) {Printer.sortVar(); continue;}
+                if(s.equals("printvar")){Printer.printVar(); continue;}
+                Var result = parser.calc(s);
+                printer.print(result);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
 
         }
 
