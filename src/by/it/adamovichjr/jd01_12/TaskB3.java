@@ -36,7 +36,7 @@ public class TaskB3 {
 
     static boolean firstDelete = false;
     static boolean odd;
-    static String result2 = "";
+    static String result = "";
 
     static String process(LinkedList<String> peoples){
 
@@ -79,7 +79,7 @@ public class TaskB3 {
                     }
                 }
             }
-            else if(odd && !firstDelete){
+            else if(odd && !firstDelete){//copy and remove first and last
                 firstDelete = true;
                 for (int i = 0; i < halfSize;i++) {
                     if(inArrayCount % 2 ==1){
@@ -96,6 +96,7 @@ public class TaskB3 {
                         inArrayCount++;
                         if(peoples.size() ==1){
                             survivors.add(startAdd,peoples.get(0));
+                            peoples.remove(0);
                         }
                     }
 
@@ -107,6 +108,7 @@ public class TaskB3 {
                     inArrayCount++;
                     if(peoples.size() ==1){
                         survivors.add(startAdd,peoples.get(0));
+                        peoples.remove(0);
                     }
                 }
                 else if(inArrayCount %2 == 0){
@@ -127,9 +129,9 @@ public class TaskB3 {
             process(survivors);
         }
         else if(survivors.size() == 1){
-            result2 = survivors.get(0);
+            result = survivors.get(0);
         }
-        return result2;
+        return result;
     }
 
 }
