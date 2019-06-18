@@ -21,7 +21,7 @@ public class TaskC {
 
                 list.add(Double.parseDouble(reader.readLine()));
 
-            } catch (NumberFormatException exe) {
+            } catch (Exception exe) {
 
                 Thread.sleep(100);
                 for (int i = list.size() - 1; i >= 0; i--) {
