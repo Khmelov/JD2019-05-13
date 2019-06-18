@@ -7,18 +7,25 @@ public class TaskB3 {
     public static void main(String[] args) {
 
         ArrayList<String> arrayPeople = new ArrayList<>();
-        fillList(arrayPeople);
+                fillList(arrayPeople);
+        ArrayList<String> arrayPeople2 = new ArrayList<>(arrayPeople);
+
         LinkedList<String> linkedPeople = new LinkedList<>(arrayPeople);
         LinkedList<String> linkedPeople2 = new LinkedList<>(arrayPeople);
+        LinkedList<String> linkedPeople3 = new LinkedList<>(arrayPeople);
 
 
-        System.out.println("ArrayList: " + arrayPeople);
+        long timer = System.nanoTime();
+        System.out.printf("Last Array: %s, Время: %d микросекунд%n", process(arrayPeople), (System.nanoTime() - timer) / 1000);
 
-        Timer timer = new Timer();
+        timer = System.nanoTime();
+        System.out.printf("Last ArrayRecursion: %s, Время: %d микросекунд%n", processRecursion(arrayPeople2), (System.nanoTime() - timer) / 1000);
 
-        System.out.println("Last to survive Array: " + process(arrayPeople) + timer);
-        System.out.println("Last to survive Linked: " + process(linkedPeople) + timer);
-        System.out.println("Last to survive MyLinked: " + processNoIterator(linkedPeople2) + timer);
+        timer = System.nanoTime();
+        System.out.printf("Last Linked: %s, Время: %d микросекунд%n", process(linkedPeople), (System.nanoTime() - timer) / 1000);
+
+        timer = System.nanoTime();
+        System.out.printf("Last My Linked: %s, Время: %d микросекунд%n", processNoIterator(linkedPeople2), (System.nanoTime() - timer) / 1000);
     }
 
     private static void fillList(List<String> list) {
@@ -29,10 +36,26 @@ public class TaskB3 {
 
     private static String process(ArrayList<String> peoples) {
 
+        boolean nextSecond = false;
+        while (peoples.size() > 1) {
+            Iterator<String> iterator = peoples.iterator();
+            while (iterator.hasNext()) {
+                iterator.next();
+                if (nextSecond) {
+                    iterator.remove();
+                }
+                nextSecond = !nextSecond;
+            }
+        }
+        return peoples.get(0);
+    }
+
+    private static String processRecursion(List<String> peoples) {
+
         Iterator<String> iterator = peoples.iterator();
         while (peoples.size() > 1) {
             if (!iterator.hasNext()) {
-                process(peoples);
+                processRecursion(peoples);
             } else if (count == 0) {
                 iterator.next();
                 count++;
@@ -48,56 +71,26 @@ public class TaskB3 {
 
     private static String process(LinkedList<String> peoples) {
 
-        ListIterator<String> iterator = peoples.listIterator();
+        boolean nextSecond = false;
         while (peoples.size() > 1) {
-            if (!iterator.hasNext()) {
-                process(peoples);
-            } else if (count == 0) {
+            Iterator<String> iterator = peoples.iterator();
+            while (iterator.hasNext()) {
                 iterator.next();
-                count++;
-            } else {
-                iterator.next();
-                iterator.remove();
-                count--;
+                if (nextSecond) {
+                    iterator.remove();
+                }
+                nextSecond = !nextSecond;
             }
         }
-        count = 0;
         return peoples.get(0);
     }
 
-    private static String processNoIterator(LinkedList<String> peoples) {
-
-        count = 1;
-
-        while (peoples.size() > 1) {
-            if (count > peoples.size()) {
-                count = 1;
-                processNoIterator(peoples);
-            } else if (count == peoples.size()) {
-                                count=0;
-                processNoIterator(peoples);
-            } else {
-                peoples.remove(count);
-                count++;
-            }
+    private static String processNoIterator(List<String> peoples) {
+        LinkedList<String> peoplesCopy = new LinkedList<>(peoples);
+        while (peoplesCopy.size() > 1) {
+            peoplesCopy.offer(peoplesCopy.poll());
+            peoplesCopy.poll();
         }
-        count = 0;
-        return peoples.get(0);
-    }
-
-    public static class Timer {
-        private long startTime;
-        private double workTime;
-
-        Timer() {
-            startTime = System.nanoTime();
-        }
-
-        @Override
-        public String toString() {
-            workTime = (double) ((System.nanoTime() - startTime) / 1000);
-            startTime = System.nanoTime();
-            return " Время работы: " + workTime + " микросекунд";
-        }
+        return peoplesCopy.get(0);
     }
 }
