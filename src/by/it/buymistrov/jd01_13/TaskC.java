@@ -5,15 +5,17 @@ import java.util.Scanner;
 
 public class TaskC {
 
+    private static Scanner scanner;
+
     private static ArrayList<Double> inWork = new ArrayList<>();
 
     private static void readData() throws RuntimeException, InterruptedException {
         Double number ;
         int errorCount = 0;
-        Scanner sc = new Scanner(System.in);
+
         while (true) {
             try {
-                number = Double.parseDouble(sc.nextLine());
+                number = Double.parseDouble(scanner.nextLine());
                 inWork.add(number);
                 System.out.println("add");
             } catch (NumberFormatException e) {
@@ -33,6 +35,8 @@ public class TaskC {
     }
 
     public static void main(String[] args) {
+
+       scanner = new Scanner(System.in);
         try {
             readData();
         } catch (NumberFormatException | InterruptedException e) {
