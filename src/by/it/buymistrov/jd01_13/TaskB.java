@@ -9,26 +9,21 @@ public class TaskB {
     public static void main(String[] args) throws RuntimeException {
         Scanner sc = new Scanner(System.in);
         String end;
-        double i = 0;
-        double j = 0;
-        double sq = 0;
+        double parse;
+        double sum = 0;
+        double sqrt;
 
         while (!(end = sc.nextLine()).equals("END")) {
             try {
-                i = Double.parseDouble(end);
-
-                j += i;
-                System.out.println("Сумма  " + j);
-
-
-                sq = Math.sqrt(j);
-
-                if (Double.isNaN(sq)) {
+                parse = Double.parseDouble(end);
+                sum += parse;
+                System.out.println("Сумма  " + sum);
+                sqrt = Math.sqrt(sum);
+                if (Double.isNaN(sqrt)) {
                     throw new ArithmeticException();
                 }
 
-
-                System.out.println("Корень последнего  " + sq);
+                System.out.println("Корень последнего  " + sqrt);
             } catch (NumberFormatException | ArithmeticException e) {
                 String name = e.getClass().getName();
                 String className = TaskB.class.getName();
