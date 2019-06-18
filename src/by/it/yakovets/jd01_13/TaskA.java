@@ -11,22 +11,19 @@ public class TaskA {
                 Integer.parseInt("привет");
         } catch (NumberFormatException | NullPointerException e) {
             String name = e.getClass().getName();
-            String className = TaskA.class.getClass().getName();
+            String className = TaskA.class.getName();
             StackTraceElement[] stackTrace = e.getStackTrace();
-            int line = 0;
-//            for (StackTraceElement element : stackTrace) {
-//                if(element.getClassName().equals(className))
-//                System.out.println(element);
-//                break;
-//
-//            System.out.printf(""+
-//                    "  name: %s\n"+
-//                    "  class: %s\n"+
-//                    "  line: %s\n",
-//                    name,className,element.getLineNumber());
-//        }
+            for (StackTraceElement element : stackTrace) {
+                if (element.getClassName().equals(className)) {
+                    System.out.printf("" +
+                            "  name: %s\n" +
+                            " class: %s\n" +
+                            "  line: %d\n" +
+                            "", name, className, element.getLineNumber());
+                    break;
+                }
+            }
+
         }
-
-
     }
 }
