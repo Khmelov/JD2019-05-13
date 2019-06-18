@@ -31,7 +31,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) throws CalcException{
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] sum = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < sum.length; i++) {
@@ -39,7 +39,12 @@ class Vector extends Var {
             }
             return new Vector(sum);
 
-        } else if (other instanceof Vector && this.value.length == ((Vector) other).value.length) {
+        } else if (other instanceof Vector) {
+
+            if (this.value.length != ((Vector) other).value.length)
+                throw new CalcException(String.format(
+                        "Сложение невозможно: векторы %s и %s имеют разную длину", this, other));
+
             double[] sum = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < sum.length; i++) {
                 sum[i] += ((Vector) other).value[i];
@@ -50,7 +55,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) throws CalcException{
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] sub = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < sub.length; i++) {
@@ -58,7 +63,12 @@ class Vector extends Var {
             }
             return new Vector(sub);
 
-        } else if (other instanceof Vector && this.value.length == ((Vector) other).value.length) {
+        } else if (other instanceof Vector) {
+
+            if (this.value.length != ((Vector) other).value.length)
+                throw new CalcException(String.format(
+                        "Вычитание невозможно: векторы %s и %s имеют разную длину", this, other));
+
             double[] sub = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < sub.length; i++) {
                 sub[i] -= ((Vector) other).value[i];
@@ -69,7 +79,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) throws CalcException{
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] mul = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < mul.length; i++) {
@@ -77,7 +87,12 @@ class Vector extends Var {
             }
             return new Vector(mul);
 
-        } else if (other instanceof Vector && this.value.length == ((Vector) other).value.length) {
+        } else if (other instanceof Vector) {
+
+            if (this.value.length != ((Vector) other).value.length)
+                throw new CalcException(String.format(
+                        "Умножение невозможно: векторы %s и %s имеют разную длину", this, other));
+
             double mul = 0;
             for (int i = 0; i < this.value.length; i++) {
                 mul += this.value[i] * ((Vector) other).value[i];
@@ -88,9 +103,11 @@ class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) throws CalcException{
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
+
             if (((Scalar) other).getValue() == 0) throw new CalcException("Деление на ноль невозможно");
+
             double[] div = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < div.length; i++) {
                 div[i] /= ((Scalar) other).getValue();

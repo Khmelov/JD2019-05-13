@@ -31,8 +31,7 @@ class Parser {
                         return varOperand1.div(varOperand2);
                 }
             }
-            // to do some error
         }
-        return null;
+        throw new CalcException ("Операция невозможна");
     }
 }
