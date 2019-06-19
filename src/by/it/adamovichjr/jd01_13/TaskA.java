@@ -10,8 +10,21 @@ public class TaskA {
                     HashMap<String, String>(null);
             else
                 Integer.parseInt("привет");
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            StackTraceElement [] stacktrace = e.getStackTrace();
+            for (StackTraceElement element : stacktrace) {
+                if(TaskA.class.getName().equals(element.getClassName())){
+                    String name = e.getClass().getName();
+                    String clname = element.getClassName();
+                    int number = element.getLineNumber();
+                    System.out.printf(
+                            " name: %s\n" +
+                            "class: %s\n" +
+                            " line: %d\n",
+                            name,clname,number);
+                    break;
+                }
+            }
         }
     }
 }

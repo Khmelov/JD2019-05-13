@@ -12,14 +12,13 @@ public class TaskB2 {
             array.add("n" + i);
             link.add("n" + i);
         }
-        String res = process(link);
-        System.out.println(res);
+        System.out.println(process(link));
         System.out.println(process(array));
     }
 
     static int count = 1;
 
-    static String process(LinkedList<String> peoples) {
+    private static String process(LinkedList<String> peoples) {
         Iterator<String> it = peoples.iterator();
         while (it.hasNext() && peoples.size() != 1) {
             if (TaskB2.count % 2 == 0) {
@@ -38,7 +37,7 @@ public class TaskB2 {
         return peoples.get(0);
     }
 
-    static String process(ArrayList<String> peoples) {
+   private static String process(ArrayList<String> peoples) {
         while (peoples.size() !=1) {
             for (int i = 0; i < peoples.size(); i++) {
                 if (TaskB2.count % 2 == 0) {
@@ -53,4 +52,5 @@ public class TaskB2 {
         count =1;
         return peoples.get(0);
     }
+
 }
