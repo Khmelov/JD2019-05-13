@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    Var calc (String expression){
+    Var calc (String expression)throws CalcException{
         String[] operand = expression.split(Operation.OPERATION);
 
         Var two = Var.createVar(operand[1]);
@@ -15,7 +15,7 @@ public class Parser {
         }
         Var one = Var.createVar(operand[0]);
         if(one == null||two == null){
-            return null;//TODO create error
+            throw new CalcException("Пустой ввод");
         }
         Pattern p = Pattern.compile(Operation.OPERATION);
         Matcher m = p.matcher(expression);
@@ -28,7 +28,7 @@ public class Parser {
                 case "/": return one.div(two);
             }
         }
-        return null;
+        throw new CalcException("Неправильный операнд");
     }
 
 }
