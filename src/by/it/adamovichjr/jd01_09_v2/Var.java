@@ -4,12 +4,19 @@ public class Var implements Operation {
 
     static Var createVar(String operand){
         operand = operand.trim().replaceAll("\\s+","");
-        if (operand.matches(Patterns.SCALAR))
-            return new Scalar(operand);
-        if(operand.matches(Patterns.VECTOR))
-            return new Vector(operand);
-        if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
+        if (operand.matches(Patterns.SCALAR)) {
+            Scalar sc = new Scalar(operand);
+            return sc;
+        }
+
+        if(operand.matches(Patterns.VECTOR)) {
+            Vector vector = new Vector(operand);
+            return vector;
+        }
+        if (operand.matches(Patterns.MATRIX)) {
+            Matrix matrix = new Matrix(operand);
+            return matrix;
+        }
         return null; // NEED create error
     }
     @Override
