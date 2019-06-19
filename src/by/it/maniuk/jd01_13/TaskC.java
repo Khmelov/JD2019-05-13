@@ -1,6 +1,5 @@
 package by.it.maniuk.jd01_13;
 
-import java.io.*;
 
 import java.util.*;
 
