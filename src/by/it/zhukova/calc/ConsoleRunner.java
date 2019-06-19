@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static by.it.zhukova.calc.Var.sortvar;
 
 public class ConsoleRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CalcException {
         Scanner scanner = new Scanner(System.in);
         String expression;
         Parser parser = new Parser();
@@ -14,8 +14,11 @@ public class ConsoleRunner {
               if (expression.equals("printvar")) {Var.printvar(); continue;}
                 if (expression.equals("sortvar")) {
                     sortvar(); continue;}
-                Var result = parser.calc(expression);
-                    printer.print(result);
+               try{ Var result = parser.calc(expression);
+                    printer.print(result);}
+               catch (CalcException e) {
+                   System.out.println(e.getMessage());
+               }
             }
     }
             }
