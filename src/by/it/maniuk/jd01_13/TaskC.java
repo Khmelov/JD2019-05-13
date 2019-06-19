@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 public class TaskC {
-    static Scanner reader;
+    private static Scanner reader;
 
     public static void main(String[] args) throws Exception {
         reader = new Scanner(System.in);
