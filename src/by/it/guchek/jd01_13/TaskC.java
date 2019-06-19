@@ -36,7 +36,8 @@ public class TaskC {
         Scanner sc = new Scanner(System.in);
         String line;
         Double var;
-        while (!(line = sc.nextLine()).equals("END")){
+        while (true){
+            line = sc.nextLine();
             //var=Double.parseDouble(line);
             listStr.addFirst(line);
             readData();
