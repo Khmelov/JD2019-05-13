@@ -6,13 +6,15 @@ import java.util.regex.Pattern;
 public class TaskA1 {
     public static void main(String[] args) {
         StringBuilder text = new StringBuilder(Poem.text);
-        Pattern compile = Pattern.compile("[а-яА-ЯёЁ]+");
-        Matcher matcher = compile.matcher(text);
+        Pattern compile = Pattern.compile("[а-яА-ЯёЁ]{4,}");
+        Matcher matcher = compile.matcher(Poem.text);
         while(matcher.find()){
-            int pos=matcher.start();
-
-
-
+            int start=matcher.start();
+            text.setCharAt(start+3,'#');
+            if(matcher.group().length()>=7){
+                text.setCharAt(start+6,'#');
+            }
         }
+        System.out.println(text);
     }
 }
