@@ -9,10 +9,6 @@ class Matrix extends Var {
         return value;
     }
 
-    public int getLenght(){
-        return value.length;
-    }
-
     Matrix(double[][] value){
         this.value = value;
     }
@@ -52,13 +48,12 @@ class Matrix extends Var {
             return new Matrix(res);
         }else if(other instanceof Matrix){
             double[][] res = new double[this.value.length][];
-            double[][] matrix = ((Matrix)other).value;
             for (int i = 0; i < this.value.length; i++) {
                 res[i] = Arrays.copyOf(this.value[i],this.value[i].length);
             }
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[i].length; j++) {
-                    if(res.length==matrix.length && res[i].length==matrix[i].length){
+                    if(res.length==((Matrix)other).value.length && res[i].length==((Matrix)other).value[i].length){
                         res[i][j] = res[i][j]+((Matrix)other).value[i][j];
                     }else{
                         throw new CalcException("Матрицы разной длинны");
@@ -87,13 +82,12 @@ class Matrix extends Var {
             return new Matrix(res);
         }else if(other instanceof Matrix){
             double[][] res = new double[this.value.length][];
-            double[][] matrix = ((Matrix)other).value;
             for (int i = 0; i < this.value.length; i++) {
                 res[i] = Arrays.copyOf(this.value[i],this.value[i].length);
             }
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res.length; j++) {
-                    if(res.length==matrix.length && res[i].length==matrix[i].length){
+                    if(res.length==((Matrix)other).value.length && res[i].length==((Matrix)other).value[i].length){
                         res[i][j] = res[i][j]-((Matrix)other).value[i][j];
                     }else{
                         throw new CalcException("Матрицы разной длинны");
@@ -139,7 +133,6 @@ class Matrix extends Var {
             return new Vector(sum);
         }else if(other instanceof Matrix){
             double[][] res = new double[this.value.length][];
-            double[][] matrix = ((Matrix)other).value;
             for (int i = 0; i < this.value.length; i++) {
                 res[i] = Arrays.copyOf(this.value[i],this.value[i].length);
             }
@@ -147,7 +140,7 @@ class Matrix extends Var {
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < ((Matrix)other).value[i].length; j++) {
                     for (int k = 0; k < ((Matrix)other).value.length; k++) {
-                        if(res.length==matrix.length && res[j].length==matrix[j].length) {
+                        if(res.length==((Matrix)other).value.length && res[j].length==((Matrix)other).value[j].length) {
                             result[i][j] = result[i][j] + res[i][k] * ((Matrix) other).value[k][j];
                         }else{
                             throw new CalcException("Матрицы разной длинны");

@@ -10,10 +10,6 @@ class Vector extends Var {
         return value;
     }
 
-    public int getLenght(){
-        return value.length;
-    }
-
     Vector (double[] value){
         this.value = value;
     }
@@ -42,7 +38,7 @@ class Vector extends Var {
         }else if(other instanceof Vector){
             double[] res = Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
-                if(res.length==((Vector)other).getLenght()){
+                if(res.length==((Vector)other).value.length){
                     res[i] = res[i] + ((Vector) other).value[i];
                 }else{
                     throw new CalcException("Векторы разной длинны");
@@ -65,7 +61,7 @@ class Vector extends Var {
         }else if(other instanceof Vector){
             double[] res = Arrays.copyOf(value,value.length);
             for (int i = 0; i < res.length; i++) {
-                if(res.length==((Vector)other).getLenght()){
+                if(res.length==((Vector)other).value.length){
                     res[i] = res[i] - ((Vector) other).value[i];
                 }else{
                     throw new CalcException("Векторы разной длинны");
@@ -89,7 +85,7 @@ class Vector extends Var {
             double[] res = Arrays.copyOf(value,value.length);
             double result = 0;
             for (int i = 0; i < res.length; i++) {
-                if(res.length==((Vector)other).getLenght()){
+                if(res.length==((Vector)other).value.length){
                     res[i] = res[i] * ((Vector)other).value[i];
                     result+=res[i];
                 }else{
