@@ -9,9 +9,13 @@ public class ConsoleRunner {
         Parsel parsel = new Parsel();
         Printer printer = new Printer();
         while (!(line = sc.nextLine()).equals("end")) {
+            try {
+                Var result = parsel.calc(line);
+                printer.print(result);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());;
+            }
 
-            Var result = parsel.calc(line);
-            printer.print(result);
             if (line.equals("printvar")) {
                 Var.print();}
             if (line.equals("sortvar")) {
