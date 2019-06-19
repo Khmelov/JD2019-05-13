@@ -5,21 +5,24 @@ import java.io.*;
 import java.util.*;
 
 public class TaskC {
+    static Scanner reader;
+
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
+        reader = new Scanner(System.in);
 
         readData();
 
     }
 
     static void readData() throws Exception {
+
         List<Double> list = new ArrayList<>();
         int count = 0;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         for (; ; ) {
             try {
 
-                list.add(Double.parseDouble(reader.readLine()));
+                list.add(Double.parseDouble(reader.nextLine()));
 
             } catch (Exception exe) {
 
