@@ -7,18 +7,19 @@ public class TaskB2 {
     private static List<?> arrayList =new ArrayList<>(Arrays.asList(arr));
     private static List<?> linkedList = new LinkedList<>(Arrays.asList(arr));
 
+
     static String process(ArrayList<String> peoples) {
         Iterator<String> iterator = peoples.iterator();
         if (peoples.size() == 1) return peoples.toString();
-            while (peoples.size() > 1) {
-                while (iterator.hasNext()) {
+        while (peoples.size() > 1) {
+            while (iterator.hasNext()) {
                     iterator.next();
                     if (iterator.hasNext()) {
                         iterator.remove();
                     }
                 }
             }
-        return peoples.toString();
+        return peoples.get(0);
     }
 
 
@@ -34,7 +35,7 @@ public class TaskB2 {
                     }
                 }
             }
-            return peoples.toString();
+            return peoples.get(0);
         }
 
 

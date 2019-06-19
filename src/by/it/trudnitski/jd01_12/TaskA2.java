@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 public class TaskA2 {
-    private Set<Integer> set=new HashSet<>();
 
     private static Set<Integer> getUnion(Set<Integer> first, Set<Integer> second){
         Set<Integer> resultSet=new HashSet<>(first);

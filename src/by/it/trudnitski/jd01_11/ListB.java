@@ -54,7 +54,7 @@ public class ListB<E> implements List<E> {
     public E set(int index, E element) {
        if(index>=0||index<=size){
            E e=elements[index];
-           Objects.checkIndex(index,size);
+          // Objects.checkIndex(index,size);
            elements[index]=element;
            return e;
        }
