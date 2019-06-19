@@ -1,7 +1,8 @@
-package by.it.izaykoff.Calc;
+package by.it.izaykoff.calc;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 abstract class Var implements Operation {
 
@@ -16,8 +17,20 @@ abstract class Var implements Operation {
         return vars;
     }
 
+//    public static void printVar() {
+//        for(Map.Entry<String, Var> entry: vars.entrySet()){
+//            System.out.println(entry.getKey()+"="+entry.getValue());
+//        }
+//    }
+//
+//    public static void printSortVar() {
+//        for(Map.Entry<String, Var> entry: vars.entrySet()){
+//            System.out.println(entry.getKey()+"="+entry.getValue());
+//        }
+//    }
 
-    static Var creatVar(String operand){
+
+    static Var createVar(String operand) throws CalcException {
 
         operand = operand.trim().replaceAll("\\s","");
         if (operand.matches(Var.SCALAR)){
@@ -32,31 +45,27 @@ abstract class Var implements Operation {
         if(vars.containsKey(operand)){
             return vars.get(operand);
         }
-        return null;
+        throw  new CalcException("Невозможно создать " + operand);
     }
 
     @Override
-    public Var add(Var other) {
-        System.out.printf("Операция %s + %s невозможна%n", this,other);
-        return null;
+    public Var add(Var other) throws CalcException{
+        throw new CalcException("Операция %s - %s невозможна%n", this,other);
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.printf("Операция %s - %s невозможна%n", this,other);
-        return null;
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException("Операция %s - %s невозможна%n", this,other);
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.printf("Операция %s * %s невозможна%n", this,other);
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException("Операция %s - %s невозможна%n", this,other);
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.printf("Операция %s / %s невозможна%n", this,other);
-        return null;
+    public Var div(Var other) throws CalcException {
+        throw new CalcException("Операция %s - %s невозможна%n", this,other);
     }
 
     @Override

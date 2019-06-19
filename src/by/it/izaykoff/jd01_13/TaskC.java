@@ -23,9 +23,9 @@ public class TaskC {
             } catch (NumberFormatException e) {
 
                 Thread.sleep(100);
-                ListIterator listerator = list.listIterator(list.size());
-                while (listerator.hasPrevious()) {
-                    System.out.print(listerator.previous() + " ");
+                ListIterator listIterator = list.listIterator(list.size());
+                while (listIterator.hasPrevious()) {
+                    System.out.print(listIterator.previous() + " ");
                 }
                 count++;
 

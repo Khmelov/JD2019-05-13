@@ -1,25 +1,24 @@
-package by.it.izaykoff.Calc;
+package by.it.izaykoff.calc;
 
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 class Printer {
-    void print(Var var){
-        if (var!=null)
+    void print(Var var) {
+        if (var != null)
             System.out.println(var);
     }
-    void printvar(Map<String, Var> operand){
-        Set<Map.Entry<String, Var>> enterSet = operand.entrySet();
-        Iterator<Map.Entry<String, Var>> iter = enterSet.iterator();
-        while (iter.hasNext()){
-            Map.Entry<String, Var> element = iter.next();
-            System.out.println(element.getKey() + " = " + element.getValue());
+
+    public static void printVar() {
+        for (Map.Entry<String, Var> entry : Var.getVars().entrySet()) {
+            System.out.println(entry.getKey() + "=" + entry.getValue());
         }
     }
 
-    void sortvar() {
-        Map<String, Var> sortOperand = Var.getVars();
-        printvar(sortOperand);
+    public static void printSortVar() {
+        for (Map.Entry<String, Var> entry : Var.getVars().entrySet()) {
+            System.out.println(entry.getKey() + "=" + entry.getValue());
+        }
     }
+
+
 }

@@ -1,4 +1,4 @@
-package by.it.izaykoff.Calc;
+package by.it.izaykoff.calc;
 
 import java.util.Arrays;
 
@@ -40,14 +40,18 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Matrix){
 
             double[][] result = Arrays.copyOf(value,value.length);
             double[][] sum = new double[result.length][this.value[0].length];
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    sum[i][j] = result[i][j] + ((Matrix) other).value[i][j];
+                    if (result[i].length == ((Matrix) other).getValue()[i].length){
+                        sum[i][j] = result[i][j] + ((Matrix) other).value[i][j];
+                    }else {
+                        throw new CalcException("Разная длина матриц");
+                    }
                 }
             }return new Matrix(sum);
         }
@@ -65,13 +69,17 @@ public class Matrix extends Var {
         }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Matrix){
             double[][] result = Arrays.copyOf(value,value.length);
             double[][] sum = new double[result.length][this.value[0].length];
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
+                    if (result[i].length == ((Matrix) other).getValue()[i].length){
                     sum[i][j] = result[i][j] - ((Matrix) other).getValue()[i][j];
+                    } else {
+                        throw new CalcException("Разный размер матриц");
+                    }
                 }
             }
             return new Matrix(sum);
@@ -88,14 +96,18 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Matrix){
             double[][] result = Arrays.copyOf(value,value.length);
             double[][] sum = new double[result.length][value[0].length];
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < value[0].length; j++) {
                     for (int g = 0; g < value.length; g++) {
-                        sum[i][j] = sum[i][j] + result[i][g] * ((Matrix) other).getValue()[g][j];
+                        if (result[i].length == ((Matrix) other).getValue()[i].length){
+                            sum[i][j] = sum[i][j] + result[i][g] * ((Matrix) other).getValue()[g][j];
+                        } else {
+                            throw new CalcException("Разный размер матриц");
+                        }
                     }
                 }
             }
@@ -115,7 +127,11 @@ public class Matrix extends Var {
             double[] copyVec = Arrays.copyOf(((Vector) other).getValue(),((Vector) other).getValue().length);
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < copyVec.length; j++) {
-                    resVec[i] = resVec[i] + result[i][j] * copyVec[j];
+                    if(result[i].length == copyVec.length){
+                        resVec[i] = resVec[i] + result[i][j] * copyVec[j];
+                    } else {
+                        throw new CalcException("Разный размер матрицы или вектора");
+                    }
                 }
             }return new Vector(resVec);
         }else
@@ -123,15 +139,20 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
-        if (other instanceof Scalar){
-            double[][] result = Arrays.copyOf(value,value.length);
+    public Var div(Var other) throws CalcException {
+        if (other instanceof Scalar) {
+            double[][] result = Arrays.copyOf(value, value.length);
             double[][] sum = new double[result.length][this.value[0].length];
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    sum[i][j] = result[i][j] + ((Scalar) other).getValue();
+                    if (((Scalar) other).getValue() == 0) {
+                        throw new CalcException("Деление на ноль");
+                    } else {
+                        sum[i][j] = result[i][j] + ((Scalar) other).getValue();
+                    }
                 }
-            }return new Matrix(sum);
+            }
+            return new Matrix(sum);
         }
         return super.div(other);
     }
