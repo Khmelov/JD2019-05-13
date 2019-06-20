@@ -1,46 +1,51 @@
 package by.it.izaykoff.jd01_14;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TaskB {
     public static void main(String[] args) {
 
         String fileText = getFilePath(TaskB.class, "text.txt");
+        String fileResult = getFilePath(TaskB.class, "resultTaskB.txt");
         StringBuilder strBuild = new StringBuilder();
 
-
-        //textRide
         textRide(fileText, strBuild);
-        
+
+        String mark = "[-.,:!]+";
+        String word = "[а-яА-ЯёЁ]+";
+
+        System.out.printf("words=%d", searchWord(strBuild, word));
+        System.out.printf("\npunctuation marks=%d\n", searchWord(strBuild, mark));
         System.out.println(strBuild);
 
+        printWrite(fileResult, strBuild);
+    }
 
-//        File file = new File(fileText);
-//        FileReader fileReader = null;
-//        try {
-//            fileReader = new FileReader(file);
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (fileReader != null) {
-//                    fileReader.close();
-//                }
-//            }catch(IOException e){
-//                e.printStackTrace();
-//            }
-//        }
+    private static void printWrite(String fileResult, StringBuilder strBuild) {
+        try (PrintWriter prw = new PrintWriter(new FileWriter(fileResult))) {
+            prw.write(String.valueOf(strBuild));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-
+    private static int searchWord(StringBuilder strBuild, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(strBuild);
+        int countWord = 0;
+        while (matcher.find()){
+            countWord++;
+        }
+        return countWord;
     }
 
     private static void textRide(String fileText, StringBuilder strBuild) {
         try ( BufferedReader bur = new BufferedReader(new FileReader(fileText))){
-            while (bur.read() > 0){
-                strBuild.append(bur.readLine());
+            String s;
+            while ((s=bur.readLine()) != null){
+                strBuild.append(s).append(" ");
             }
         } catch (IOException e) {
             e.printStackTrace();
