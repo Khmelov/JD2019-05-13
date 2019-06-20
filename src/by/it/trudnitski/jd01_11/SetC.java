@@ -3,17 +3,17 @@ package by.it.trudnitski.jd01_11;
 import java.util.*;
 
 public class SetC<E> implements Set<E> {
-    private HashSet<E> elements=new HashSet<>();
-    private int size=0;
+    private HashSet<E> elements = new HashSet<>();
+    private int size = 0;
 
     @Override
     public String toString() {
-        StringBuilder txt=new StringBuilder("[");
-        String delimeter="";
-        Iterator<E> iterator=elements.iterator();
-        while(iterator.hasNext()){
+        StringBuilder txt = new StringBuilder("[");
+        String delimeter = "";
+        Iterator<E> iterator = elements.iterator();
+        while (iterator.hasNext()) {
             txt.append(delimeter).append(iterator.next());
-            delimeter=", ";
+            delimeter = ", ";
         }
         txt.append("]");
         return txt.toString();
@@ -21,8 +21,8 @@ public class SetC<E> implements Set<E> {
 
     @Override
     public boolean add(E e) {
-       if(!elements.contains(e))
-           elements.add(e);
+        if (!elements.contains(e))
+            elements.add(e);
         return true;
     }
 
@@ -33,16 +33,16 @@ public class SetC<E> implements Set<E> {
 
     @Override
     public boolean isEmpty() {
-        boolean empty=elements.isEmpty();
+        boolean empty = elements.isEmpty();
         return empty;
     }
 
     @Override
     public boolean contains(Object o) {
-       if(elements.remove(o)) {
-           return true;
-       }
-       return false;
+        if (elements.remove(o)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -62,11 +62,11 @@ public class SetC<E> implements Set<E> {
 
     @Override
     public boolean remove(Object o) {
-     if(elements.contains(o)) {
-     elements.remove(o);
-    return true;
-}
-return false;
+        if (elements.contains(o)) {
+            elements.remove(o);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -99,6 +99,7 @@ return false;
         }
         return true;
     }
+
     @Override
     public void clear() {
 
