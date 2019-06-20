@@ -7,7 +7,7 @@ public class TaskB3 {
     public static void main(String[] args) {
 
         ArrayList<String> arrayPeople = new ArrayList<>();
-                fillList(arrayPeople);
+        fillList(arrayPeople);
         ArrayList<String> arrayPeople2 = new ArrayList<>(arrayPeople);
 
         LinkedList<String> linkedPeople = new LinkedList<>(arrayPeople);
@@ -30,23 +30,23 @@ public class TaskB3 {
         for (int i = 0; i < 4096; i++) list.add("N" + ((int) (Math.random() * 20) + 1));
     }
 
-    private static int count = 0;
-
     private static String process(ArrayList<String> peoples) {
 
-        boolean nextSecond = false;
+        boolean next = false;
         while (peoples.size() > 1) {
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
                 iterator.next();
-                if (nextSecond) {
+                if (next) {
                     iterator.remove();
                 }
-                nextSecond = !nextSecond;
+                next = !next;
             }
         }
         return peoples.get(0);
     }
+
+    private static boolean nextRec = false;
 
     private static String processRecursion(List<String> peoples) {
 
@@ -54,30 +54,29 @@ public class TaskB3 {
         while (peoples.size() > 1) {
             if (!iterator.hasNext()) {
                 processRecursion(peoples);
-            } else if (count == 0) {
-                iterator.next();
-                count++;
-            } else {
+            } else if (nextRec) {
                 iterator.next();
                 iterator.remove();
-                count--;
+            } else {
+                iterator.next();
             }
+            nextRec = !nextRec;
         }
-        count = 0;
         return peoples.get(0);
     }
 
+
     private static String process(LinkedList<String> peoples) {
 
-        boolean nextSecond = false;
+        boolean next = false;
         while (peoples.size() > 1) {
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
                 iterator.next();
-                if (nextSecond) {
+                if (next) {
                     iterator.remove();
                 }
-                nextSecond = !nextSecond;
+                next = !next;
             }
         }
         return peoples.get(0);
