@@ -9,21 +9,18 @@ public class TaskC {
         String str;
         List <Double> list= new ArrayList<>();
         int count=0;
-        while (!(str=sc.next()).equals("end")){
-            if (!sc.hasNextDouble()) {
-                readData();
-                if (count==5){throw new Exception();}
-                else {
-                    ListIterator<Double> iterator = list.listIterator();
-                    while (iterator.hasPrevious()) {
-                        System.out.println(iterator.previous());
-                    }
-                }
-                count++;
-            }
-            else {
+        while (!(str=sc.next()).equals("end")) {
+            if (count==5){throw new Exception();}
+            try {
                 double number=Double.valueOf(str);
                 list.add(number);
+            }
+            catch (NumberFormatException e){
+                readData();
+                for (int i = list.size()-1; i >= 0; i--) {
+                    System.out.println(list.get(i));
+                }
+                count++;
             }
         }
     }
@@ -31,7 +28,7 @@ public class TaskC {
         try {
             Thread.sleep(100);
         }
-        catch (NumberFormatException | InterruptedException e){
+        catch (InterruptedException e){
             System.out.println(e);
         }
     }
