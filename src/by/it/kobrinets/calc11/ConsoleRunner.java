@@ -11,7 +11,7 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
         while (!(line = scan.nextLine()).equals("end")) {
-            if (line.equals("printvar")){
+            if (line.equals("printvar")) {
                 Var.printvar();
                 continue;
             }
@@ -19,10 +19,12 @@ public class ConsoleRunner {
                 Var.sortvar();
                 continue;
             }
+            try {
                 Var result = parser.calc(line);
                 printer.print(result);
-
-
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
