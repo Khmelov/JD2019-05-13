@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class TaskC {
+
     private static String fileResultTxt = getFilePath(TaskC.class,"resultTaskC.txt");
+
     public static void main(String[] args) {
 
         File file = new File(System.getProperty("user.dir"));

@@ -8,13 +8,14 @@ public class TaskC {
 
     private static List<Double> list = new ArrayList<>();
     private static int countException=0;
+    private static Scanner sc;
 
     public static void main(String[] args) throws NumberFormatException, InterruptedException {
-        Scanner sc=new Scanner(System.in);
-        readData(sc);
+        sc=new Scanner(System.in);
+        readData();
     }
 
-    private static void readData(Scanner sc) throws NumberFormatException, InterruptedException {
+    private static void readData() throws NumberFormatException, InterruptedException {
         for(;;){
             try{
                 double num = Double.parseDouble(sc.nextLine());
@@ -22,13 +23,12 @@ public class TaskC {
                 list.add(num);
             } catch(NumberFormatException e){
                 countException++;
-                if(countException<=5){
-                    Thread.sleep(100);
-                    for (int i = list.size()-1; i >= 0; i--) {
-                        System.out.print(list.get(i) + " ");
-                    }
-                    System.out.println();
-                }else{
+                Thread.sleep(100);
+                for (int i = list.size()-1; i >= 0; i--) {
+                    System.out.print(list.get(i) + " ");
+                }
+                System.out.println();
+                if(countException==5){
                     throw e;
                 }
             }
