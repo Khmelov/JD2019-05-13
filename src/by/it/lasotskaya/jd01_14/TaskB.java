@@ -15,10 +15,11 @@ public class TaskB {
 
     public static void main(String[] args) {
         String path = System.getProperty("user.dir") + "/src/by/it/lasotskaya/jd01_14/";
-        int words = 0, marks = 0;
+        int words = 0, punct = 0;
         Pattern pattern = Pattern.compile("[.,:!]");
         Matcher matcher;
-        String string, text[];
+        String string;
+        String[] text;
         try (BufferedReader br = new BufferedReader(
                 new FileReader(
                         new File(path, "text.txt")))
@@ -32,10 +33,10 @@ public class TaskB {
                 words += text.length;
                 matcher = pattern.matcher(string);
                 while (matcher.find())
-                    marks++;
+                    punct++;
             }
-            System.out.println("words=" + words+"marks=" + marks);
-            bw.write("words=" + words + "marks=" + marks);
+            System.out.println("words=" + words+"marks=" + punct);
+            bw.write("words=" + words + "marks=" + punct);
         } catch (IOException e) {
             e.printStackTrace();
         }
