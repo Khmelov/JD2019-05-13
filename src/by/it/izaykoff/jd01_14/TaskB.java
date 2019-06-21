@@ -24,8 +24,8 @@ public class TaskB {
     }
 
     private static void printWrite(String fileResult, StringBuilder strBuild) {
-        try (PrintWriter prw = new PrintWriter(new FileWriter(fileResult))) {
-            prw.write(String.valueOf(strBuild));
+        try (PrintWriter out = new PrintWriter(new FileWriter(fileResult))) {
+            out.write(String.valueOf(strBuild));
         } catch (IOException e) {
             e.printStackTrace();
         }
