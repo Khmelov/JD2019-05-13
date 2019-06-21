@@ -11,7 +11,7 @@ public class TaskC {
 
     public static void main(String[] args) {
 
-        File file = new File(System.getProperty("user.dir"));
+        File file = new File(System.getProperty("user.dir")+ File.separator+"src"+ File.separator+"by"+ File.separator+"it"+ File.separator+"dnevar");
 
         printFilesConsole(file);
         printFilesTxt(file);
