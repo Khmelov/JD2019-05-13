@@ -1,23 +1,47 @@
 package by.it.yakovets.jd01_14;
 
-import java.io.File;
+import java.io.*;
 
 public class TaskA {
-    public static void main(String[] args) {
-        Class<TaskA> aClass = TaskA.class;
-        String path=getPath();
 
-
+    private static String dir(Class<?> cl) {
+        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
+        String classDir = cl.getName().replace(cl.getSimpleName(), "").replace(".", File.separator);
+        return path + classDir;
     }
 
-    private static String getPath() {
-        String root = System.getProperty("user.dir");
-        String name = TaskA.class.getName();
-        String simpleName = TaskA.class.getSimpleName();
-        String separator = File.separator;
-        String path = name.replace(simpleName, "").replace(".", separator);
-        path = root + separator + "src" + separator + path;
-        System.out.println(path);
-        return path;
+    public static void main(String[] args) {
+
+        try (DataOutputStream dos = new DataOutputStream(
+                new BufferedOutputStream(
+                        new FileOutputStream(dir(TaskA.class))))) {
+
+            {
+                for (int i = 0; i < 20; i++) {
+                    dos.writeInt((int) (Math.random() * 25));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try (DataInputStream inp = new DataInputStream(
+                new BufferedInputStream(
+                        new FileInputStream(dir(TaskA.class) + "dataTaskA.bin")));
+             PrintWriter out2 = new PrintWriter(new FileWriter(dir(TaskA.class) + "resultTaskA.txt"))) {
+            double sum = 0;
+            double count = 0;
+            while (inp.available() > 0) {
+                int i = inp.readInt();
+                System.out.print(i + " ");
+                out2.print(i + " ");
+                sum = sum + i;
+                count++;
+            }
+            System.out.println("\navg=" + sum / count);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
