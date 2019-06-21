@@ -10,12 +10,12 @@ public class TaskC {
         List <Double> list= new ArrayList<>();
         int count=0;
         while (!(str=sc.next()).equals("end")) {
-            if (count==5){throw new Exception();}
             try {
                 double number=Double.valueOf(str);
                 list.add(number);
             }
             catch (NumberFormatException e){
+                if (count==5){throw new Exception();}
                 readData();
                 for (int i = list.size()-1; i >= 0; i--) {
                     System.out.println(list.get(i));
