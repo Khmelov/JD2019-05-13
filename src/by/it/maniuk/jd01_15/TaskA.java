@@ -1,9 +1,6 @@
 package by.it.maniuk.jd01_15;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class TaskA {
     public static void main(String[] args) throws IOException {
@@ -22,16 +19,25 @@ public class TaskA {
                 }
             }
         } while (! min || ! max);
-        for (int[] ints : array) {
-            for (int anInt : ints) {
-                System.out.printf("%3d", anInt);
 
-            }
-
-        }
         try(PrintWriter out = new PrintWriter( new FileWriter(path))) {
+            for (int[] row : array) {
+                for (int e : row) {
+                    out.printf("%3d ", e);
+                }
+                out.println();
+            }
+        }
 
-        } 
+        try(BufferedReader in = new BufferedReader(
+                new FileReader(path))) {
+            for (; ; ) {
+                String line = in.readLine();
+                if (line == null)
+                    break;
+                System.out.println(line);
+            }
+        }
 
     }
     private static String getFilePath(Class<TaskA> aClass, String filename) {
