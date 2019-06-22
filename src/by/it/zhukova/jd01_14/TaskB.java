@@ -50,16 +50,15 @@ public class TaskB {
     }
 
     private static void readData(String fileData, StringBuilder text) {
-        int b;
         try (
-            FileReader fileReader = new FileReader(fileData);
-            final BufferedReader bufferedReader = new BufferedReader(fileReader)
+            BufferedReader buf = new BufferedReader(new FileReader(fileData))
         ) {
-            while ((b=bufferedReader.read())>0){
-            final String s = bufferedReader.readLine();
-            text.append((char)b).append(s).append(" ");
+            for ( ; ; ){
+                String s = buf.readLine();
+                if (s==null) break;
+                text.append(s).append(" ");
+            }
            }
-        }
         catch (IOException e) {
             e.printStackTrace();
         }
