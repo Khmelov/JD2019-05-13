@@ -15,8 +15,8 @@ import java.util.List;
 
 public class TaskA {
     public static void main(String[] args) {
-        String fileData = getFilePath(TaskA.class, "dataTaskA.bin");
-        String fileTxt = getFilePath(TaskA.class, "resultTaskA.txt");
+        String fileData = getPath(TaskA.class, "dataTaskA.bin");
+        String fileTxt = getPath(TaskA.class, "resultTaskA.txt");
 
         writeData(fileData);
         List<Integer> list = new ArrayList<>();
@@ -85,11 +85,11 @@ public class TaskA {
     }
 
 
-    private static String getFilePath(Class<TaskA> aClass, String filename) {
+    private static String getPath(Class<?> aClass, String filename) {
         return getPath(aClass) + filename;
     }
 
-    private static String getPath(Class<TaskA> aClass) {
+    private static String getPath(Class<?> aClass) {
         String root = System.getProperty("user.dir");
         String name = aClass.getName();
         String simpleName = aClass.getSimpleName();
