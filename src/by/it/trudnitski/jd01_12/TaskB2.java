@@ -9,34 +9,40 @@ public class TaskB2 {
 
 
     static String process(ArrayList<String> peoples) {
-        boolean answer=false;
-        if (peoples.size() == 1) return peoples.toString();
+        int count = 1;
         while (peoples.size() > 1) {
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
-                    iterator.next();
-                    if (answer) {
+                if (count != 1) {
+                    count = count - peoples.size();
+                }
+                while (iterator.hasNext()) {
+                    if (peoples.indexOf(iterator.next()) == count) {
                         iterator.remove();
+                        count++;
                     }
-                    answer=!answer;
                 }
             }
+        }
         return peoples.get(0);
     }
 
 
 
         static String process (LinkedList < String > peoples) {
-        boolean answer=false;
-            if (peoples.size() == 1) return peoples.toString();
+            int count = 1;
             while (peoples.size() > 1) {
                 Iterator<String> iterator = peoples.iterator();
                 while (iterator.hasNext()) {
-                    iterator.next();
-                    if (answer) {
-                        iterator.remove();
+                    if (count != 1) {
+                        count = count - peoples.size();
                     }
-                    answer=!answer;
+                    while (iterator.hasNext()) {
+                        if (peoples.indexOf(iterator.next()) == count) {
+                            iterator.remove();
+                            count++;
+                        }
+                    }
                 }
             }
             return peoples.get(0);
@@ -58,4 +64,5 @@ public class TaskB2 {
         }
 
     }
+
 

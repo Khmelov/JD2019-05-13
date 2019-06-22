@@ -6,30 +6,35 @@ public class TaskB3 {
 
 
     static String process(ArrayList<String> peoples) {
-        boolean answer = false;
-        if (peoples.size() == 1) return peoples.toString();
+        int count = 1;
         while (peoples.size() > 1) {
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
-                iterator.next();
-                if (answer) {
-                    iterator.remove();
+                if (count != 1) {
+                    count = count - peoples.size();
                 }
-                answer = !answer;
+                while (iterator.hasNext()) {
+                    if (peoples.indexOf(iterator.next()) == count) {
+                        iterator.remove();
+                        count++;
+                    }
+                }
             }
         }
-        return peoples.toString();
+        return peoples.get(0);
     }
 
 
     static String process(LinkedList<String> peoples) {
         while (peoples.size() > 1) {
             for (int i = 0; i < peoples.size(); i++) {
-                peoples.remove(i % 2);
+               if(i%2 != 0){
+                   peoples.remove(i);
+               }
             }
         }
 
-        return peoples.toString();
+        return peoples.get(0);
     }
 
 
