@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskC {
-
     private static Scanner scanner;
-
     private static ArrayList<Double> inWork = new ArrayList<>();
 
     private static void readData() throws RuntimeException, InterruptedException {
-        Double number ;
+        Double number;
         int errorCount = 0;
-
         while (true) {
             try {
                 number = Double.parseDouble(scanner.nextLine());
@@ -35,14 +32,11 @@ public class TaskC {
     }
 
     public static void main(String[] args) {
-
-       scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         try {
             readData();
         } catch (NumberFormatException | InterruptedException e) {
             e.printStackTrace();
-
         }
-
     }
 }

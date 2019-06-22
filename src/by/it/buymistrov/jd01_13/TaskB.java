@@ -1,18 +1,13 @@
 package by.it.buymistrov.jd01_13;
-
 import java.util.Scanner;
 
-
 public class TaskB {
-
-
     public static void main(String[] args) throws RuntimeException {
         Scanner sc = new Scanner(System.in);
         String end;
         double parse;
         double sum = 0;
         double sqrt;
-
         while (!(end = sc.nextLine()).equals("END")) {
             try {
                 parse = Double.parseDouble(end);
@@ -22,7 +17,6 @@ public class TaskB {
                 if (Double.isNaN(sqrt)) {
                     throw new ArithmeticException();
                 }
-
                 System.out.println("Корень последнего  " + sqrt);
             } catch (NumberFormatException | ArithmeticException e) {
                 String name = e.getClass().getName();
@@ -39,8 +33,6 @@ public class TaskB {
                     }
                 }
             }
-
-
         }
     }
 }
