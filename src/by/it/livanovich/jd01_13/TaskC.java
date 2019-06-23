@@ -15,12 +15,13 @@ public class TaskC {
                 list.add(number);
             }
             catch (NumberFormatException e){
-                if (count==5){throw new Exception();}
+
                 readData();
                 for (int i = list.size()-1; i >= 0; i--) {
-                    System.out.println(list.get(i));
+                    System.out.print(list.get(i)+" ");
                 }
                 count++;
+                if (count==5){throw new Exception();}
             }
         }
     }
