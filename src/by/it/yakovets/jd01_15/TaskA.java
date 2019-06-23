@@ -1,19 +1,40 @@
 package by.it.yakovets.jd01_15;
 
-import java.io.File;
+import java.io.*;
 
 public class TaskA {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int[][] array = new int[6][4];
         generate(array);
-        String patn=getPath(TaskA.class,"matrix.txt");
-        for (int[] ints : array) {
-            for (int anInt : ints) {
-                System.out.printf("%3d ", anInt);
+        String filename = getPath(TaskA.class, "matrix.txt");
+        printArray(array, filename);
+        showTxtFile(filename);
+    }
+    private static void printArray(int[][] array, String filename) throws IOException {
+        try (PrintWriter out = new PrintWriter(
+                new FileWriter(filename)
+        )) {
+            for (int[] row : array) {
+                for (int e : row) {
+                    out.printf("%3d ", e);
+                }
+                out.println();
             }
-            System.out.println();
         }
+    }
 
+
+    private static void showTxtFile(String filename) throws IOException {
+        try (BufferedReader in = new BufferedReader(
+                new FileReader(filename)
+        )) {
+            for (; ; ) {
+                String line = in.readLine();
+                if (line == null)
+                    break;
+                System.out.println(line);
+            }
+        }
     }
     private static String getPath(Class<?> aClass, String fileName){
         return getPath(aClass)+fileName;
@@ -29,7 +50,6 @@ public class TaskA {
         path = root + separator + "src" + separator + path;
         return path;
     }
-
     private static void generate(int[][] array) {
         boolean max;
         boolean min;
