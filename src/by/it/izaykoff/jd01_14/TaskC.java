@@ -11,7 +11,7 @@ public class TaskC {
 
     public static void main(String[] args) {
 
-        String fileResult = getFilePath(TaskC.class, "resultTaskC.txt");
+        String fileResult = getPath(TaskC.class, "resultTaskC.txt");
         File file = new File(System.getProperty("user.dir")
                 + File.separator
                 + "src"
@@ -51,11 +51,11 @@ public class TaskC {
         }
     }
 
-    private static String getFilePath(Class<TaskC> cClass, String filename) {
+    private static String getPath(Class<?> cClass, String filename) {
         return getPath(cClass) + filename;
     }
 
-    private static String getPath(Class<TaskC> cClass) {
+    private static String getPath(Class<?> cClass) {
         String root = System.getProperty("user.dir");
         String name = cClass.getName();
         String simpleName = cClass.getSimpleName();

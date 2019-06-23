@@ -6,12 +6,15 @@ import java.util.ListIterator;
 import java.util.Scanner;
 
 public class TaskC {
+    public static Scanner scan;
+
+
     public static void main(String[] args) throws Exception {
+        scan = new Scanner(System.in);
         readData();
     }
 
     static void readData() throws NumberFormatException, InterruptedException {
-        Scanner scan = new Scanner(System.in);
         ArrayList<Double> list = new ArrayList<>();
         int count = 0;
 

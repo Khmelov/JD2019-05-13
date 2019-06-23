@@ -8,8 +8,8 @@ import java.util.Locale;
 public class TaskA {
     public static void main(String[] args) {
 
-        String fileData = getFilePath(TaskA.class, "dataTaskA.bin");
-        String fileText = getFilePath(TaskA.class, "resultTaskA.txt");
+        String fileData = getPath(TaskA.class, "dataTaskA.bin");
+        String fileText = getPath(TaskA.class, "resultTaskA.txt");
         List<Integer> list = new ArrayList<>();
 
         writeData(fileData);
@@ -67,7 +67,7 @@ public class TaskA {
     }
 
 
-    private static String getFilePath(Class<TaskA> aClass, String filename) {
+    private static String getPath(Class<TaskA> aClass, String filename) {
         return getPath(aClass) + filename;
     }
 

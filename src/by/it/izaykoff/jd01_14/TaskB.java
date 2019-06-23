@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 public class TaskB {
     public static void main(String[] args) {
 
-        String fileText = getFilePath(TaskB.class, "text.txt");
-        String fileResult = getFilePath(TaskB.class, "resultTaskB.txt");
+        String fileText = getPath(TaskB.class, "text.txt");
+        String fileResult = getPath(TaskB.class, "resultTaskB.txt");
         StringBuilder strBuild = new StringBuilder();
 
         textRide(fileText, strBuild);
@@ -52,11 +52,11 @@ public class TaskB {
         }
     }
 
-    private static String getFilePath(Class<TaskB> bClass, String filename) {
+    private static String getPath(Class<?> bClass, String filename) {
         return getPath(bClass) + filename;
     }
 
-    private static String getPath(Class<TaskB> bClass) {
+    private static String getPath(Class<?> bClass) {
         String root = System.getProperty("user.dir");
         String name = bClass.getName();
         String simpleName = bClass.getSimpleName();
