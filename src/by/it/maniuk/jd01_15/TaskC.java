@@ -55,18 +55,11 @@ public class TaskC {
         }
     }
     private static int getFileDir(File item) {
-
         String[] list;
         list =item.list();
         return list.length;
- 
-
-
     }
-
-
-
-
+    
     private static String getFilePath(Class<TaskC> aClass, String filename) {
         return getPath(aClass) + filename;
     }
