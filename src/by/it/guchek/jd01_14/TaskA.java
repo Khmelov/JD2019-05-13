@@ -6,8 +6,8 @@ public class TaskA {
     private static String dir (Class<?> cl){
 
         String path=System.getProperty("user.dir")+File.separator+"src"+File.separator;
-        //определяет где находится каталог проекта
-        // D:\Drivers for Notebook\projects\JD2019-05-13_1
+              //определяет где находится каталог проекта
+              // D:\Drivers for Notebook\projects\JD2019-05-13_1
         String classDir =cl.getName().replace(cl.getSimpleName(), "").replace(".",File.separator);
         return path+classDir;
     }
@@ -20,7 +20,7 @@ public class TaskA {
         //String simpleName = TaskA.class.getSimpleName();
         //String separator = File.separator;
         //String path = name.replace(simpleName, "").replace(".", separator);
-        System.out.println(dir(TaskA.class));
+        //System.out.println(dir(TaskA.class));
         DataOutputStream dOuSt= null;
         try {//создадим файловый поток
             dOuSt=new DataOutputStream(
