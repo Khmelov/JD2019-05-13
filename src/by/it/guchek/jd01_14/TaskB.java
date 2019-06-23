@@ -26,6 +26,7 @@ public class TaskB {
                         new FileWriter(f2))
         ) {
 
+            System.out.println(dir(TaskB.class));
 
             prWrInFile.print("words="+words+", punctuation marks="+marks);
 
