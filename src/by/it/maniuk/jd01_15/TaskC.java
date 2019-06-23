@@ -50,7 +50,7 @@ public class TaskC {
                 System.out.printf("%-10s   <DIR>   %10d     %-10s\n", sdf.format(item.lastModified()),getFileDir(item), item.getName());
             } else {
                 SimpleDateFormat sdf =new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-                System.out.printf("%-10s            %10d         %-10s\n", sdf.format(item.lastModified()),item.length() ,item.getName());
+                System.out.printf("%-10s            %10d    %-10s\n", sdf.format(item.lastModified()),item.length() ,item.getName());
             }
         }
     }
