@@ -1,10 +1,13 @@
 package by.it.dnevar.calc;
 
+import java.io.File;
 import java.util.*;
 
 abstract class Var implements Operation {
 
     private static Map<String, Var> vars = new HashMap<>();
+
+    private static String varsTxt = getFilePath(Var.class,"vars.txt");
 
     static Var saveVar(String name, Var var){
         vars.put(name,var);
@@ -64,5 +67,19 @@ abstract class Var implements Operation {
         return "Этот класс Var";
     }
 
+    private static String getPath (Class<?> aClass){
+        String root = System.getProperty("user.dir")
+                + File.separator
+                +"src"
+                +File.separator;
+        String name = aClass.getName()
+                .replace(aClass.getSimpleName(),"")
+                .replace(".", File.separator);
+        return root+name;
+    }
+
+    private static String getFilePath(Class<?> aClass, String filename){
+        return getPath(aClass)+filename;
+    }
 
 }

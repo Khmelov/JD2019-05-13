@@ -2,8 +2,6 @@ package by.it.dnevar.jd01_15;
 
 import java.io.*;
 
-import static by.it.dnevar.jd01_15.TaskBFlagCommentes.*;
-
 public class TaskB {
 
     private static String fileTaskB = getFilePath(TaskA.class, "TaskB.java");
@@ -35,14 +33,18 @@ public class TaskB {
             boolean add = true;
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
-                if (line.contains(openComent[0]) || line.contains(openComent[1]) || line.contains(openComent[2])) {
-                    add = false;
+                if (line.contains("//") || line.contains("/*") || line.contains("/**")) {
+                    if(!line.contains("if")){
+                        add = false;
+                    }
                 }
                 if (add) {
                     text.append(line).append("\n");
                 }
-                if (line.contains(closeComent[0]) || line.contains(closeComent[1])) {
-                    add = true;
+                if (line.contains("//") || line.contains("*/")) {
+                    if(!line.contains("if")){
+                        add = true;
+                    }
                 }
             }
         } catch (IOException e) {
