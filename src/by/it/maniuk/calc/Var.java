@@ -1,5 +1,6 @@
 package by.it.maniuk.calc;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,8 @@ abstract class Var implements Operation {
 
    private static Map<String, Var> vars = new HashMap<>();
 
-      static Var saveVar(String name, Var var){
+
+    static Var saveVar(String name, Var var){
         vars.put(name, var);
 
         return  var;
@@ -61,4 +63,19 @@ abstract class Var implements Operation {
       return "abstract var";
   }
 
+    private static String getFilePath(Class<Var> aClass, String filename) {
+        return getPath(aClass) + filename;
+    }
+
+    private static String getPath(Class<Var> aClass) {
+        String root = System.getProperty("user.dir");
+        String name = Var.class.getName();
+        String simpleName = Var.class.getSimpleName();
+        String separator = File.separator;
+        String path = name.replace(simpleName, "").replace(".", separator);
+
+        path = root + separator + "src" + separator + path;
+        return path;
+    }
+  
 }

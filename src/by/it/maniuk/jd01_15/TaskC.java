@@ -8,11 +8,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class TaskC {
-    private static File dir;
 
     public static void main(String[] args) throws IOException {
 
-        dir = new File("D:/JD2019-05-13/src/by/it/maniuk/jd01_15/");
+        File dir = new File("D:/JD2019-05-13/src/by/it/maniuk/jd01_15/");
         dir = dir.getCanonicalFile();
         Scanner scanner = new Scanner(System.in);
         String s;
