@@ -43,10 +43,16 @@ public class TaskA {
         writeMatrOutFile(arrRand);
 
         try (BufferedReader readMatrInCons = new BufferedReader(new FileReader(fileName))){
-            while (!(readMatrInCons.read()==-1)){
+
+            for (; ; ) {
+                String line = readMatrInCons.readLine();
+                if (line == null)
+                    break;
+                System.out.println(line);}
+            /*while (!(readMatrInCons.read()==-1)){
                 String line = readMatrInCons.readLine();
                 System.out.println(line);
-            }
+            }*/
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
