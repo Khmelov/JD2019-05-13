@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class TaskC {
-    static File dir;
+    private static File dir;
 
     public static void main(String[] args) throws IOException {
 
