@@ -1,6 +1,6 @@
 package by.it.maniuk.calc;
 
-import java.io.File;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +10,41 @@ abstract class Var implements Operation {
    private static Map<String, Var> vars = new HashMap<>();
 
 
-    static Var saveVar(String name, Var var){
+    static Var saveVar(String name, Var var) throws IOException {
         vars.put(name, var);
+        String path = getFilePath(Var.class, "vars.txt"); // TODO Надо не забыть вынести все про IO в отельный класс
+        try(PrintWriter out = new PrintWriter( new FileWriter(path))) {
+                out.println(name+"="+var);
+                out.println();
 
+        } catch (IOException e) {
+            throw e;
+        }
         return  var;
    }
+   static void backToMap() throws CalcException {
+       String path = getFilePath(Var.class, "vars.txt");
+       try(BufferedReader in = new BufferedReader(new FileReader(path))) {
+           int count =0;
+           for (; ; ) {
+               String line = in.readLine();
+               count++;
+               if (line == null)
+                   break;
+               else if (count==1) System.out.println("В памяти хранятся следующие переменные:");
+               String[] lines = line.split("=");
+               String name = lines[0];
+               Var var = Var.createVar(lines[1]);
+               vars.put(name,var);
+
+               System.out.println(line);
+           }
+
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
+
 
     static Map<String, Var> getVars() {
         return vars;
@@ -77,5 +107,5 @@ abstract class Var implements Operation {
         path = root + separator + "src" + separator + path;
         return path;
     }
-  
+
 }

@@ -1,18 +1,19 @@
 package by.it.maniuk.calc;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
 
-    Var calc(String expression) throws CalcException {
+    Var calc(String expression) throws CalcException, IOException {
 
         Pattern p = Pattern.compile(Patterns.OPERATION);
          Matcher m =p.matcher(expression);
 
         if (m.find()){
             String[] operand = expression.split(Patterns.OPERATION);
-            Var two = Var.createVar(operand[1]);
+            Var two = Var.createVar(operand[1]); //TODO create error;
             String operation = m.group();
             if (expression.contains("=") ){
                 return Var.saveVar(operand[0], two);
@@ -20,7 +21,7 @@ class Parser {
 
             Var one = Var.createVar(operand[0]);
             if (one==null || two == null){
-                throw  new CalcException("ERROR: Вы ничего не ввели");} //TODO create error;
+                throw  new CalcException("ERROR: Вы ничего не ввели");}
             switch (operation){
                 case "+": return one.add(two);
                 case "-": return one.sub(two);
