@@ -22,10 +22,10 @@ public class TaskA {
     private static void readTxtConsole(String fileTxt) {
         try (BufferedReader red = new BufferedReader(
                 new FileReader(fileTxt))){
-            String s;
+            String line;
             while (red.read() > 0){
-                s = red.readLine();
-                System.out.println(s);
+                line = red.readLine();
+                System.out.println(line);
             }
 
         } catch (IOException e) {
