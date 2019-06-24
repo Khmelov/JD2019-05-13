@@ -5,8 +5,11 @@ import java.util.regex.Pattern;
 
 class Matrix extends Var {
    private double [] [] value;
+    public double[][] getValue() {
+        return value;
+    }
 
-   Matrix(double[ ][ ]  value) {
+    Matrix(double[ ][ ]  value) {
       double  [][] row= new double[value.length][value[0].length];
        for (int i = 0; i < row.length; i++) {
            for (int j = 0; j < row[0].length; j++) {
@@ -17,7 +20,7 @@ class Matrix extends Var {
    }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
             if (other instanceof Scalar){
                 double  [][] add= new double[value.length][value[0].length];
                 double s = ((Scalar) other).getValue();
@@ -31,6 +34,8 @@ class Matrix extends Var {
         else if (other instanceof Matrix){
                 double  [][] add= new double[value.length][value[0].length];
                 Matrix m = (Matrix) other;
+                if (this.value.length != m.value.length | this.value[0].length != m.value[0].length )
+                    throw new CalcException(" матрицы разных размеров");
                 for (int i = 0; i < add.length; i++) {
                 for (int j = 0; j < add[0].length; j++) {
                     add[i][j]= this.value[i][j]+ m.value[i][j];
@@ -42,15 +47,33 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
-        if (other instanceof Vector) {
-            return super.sub(other);
+    public Var sub(Var other) throws CalcException {
+        if (other instanceof Scalar){
+            double  [][] sub= new double[value.length][value[0].length];
+            double s = ((Scalar) other).getValue();
+            for (int i = 0; i < sub.length; i++) {
+                for (int j = 0; j < sub[0].length; j++) {
+                    sub[i][j]= this.value[i][j]-s;
+                }
+            }
+            return new Matrix(sub);
         }
-            return new Scalar(-1).mul(other).add(this);
+        else if (other instanceof Matrix){
+            double  [][] sub= new double[value.length][value[0].length];
+            Matrix m = (Matrix) other;
+            if (this.value.length != m.value.length | this.value[0].length != m.value[0].length )
+                throw new CalcException(" матрицы разных размеров");
+            for (int i = 0; i < sub.length; i++) {
+                for (int j = 0; j < sub[0].length; j++) {
+                    sub[i][j]= this.value[i][j]- m.value[i][j];
+                }
+            }
+            return new Matrix(sub);
+        }
+        return super.sub(other);
     }
-
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar){
             double  [][] mul= new double[value.length][value[0].length];
             double s = ((Scalar) other).getValue();
@@ -62,6 +85,8 @@ class Matrix extends Var {
             return new Matrix(mul);
         }
         else if (other instanceof Vector){
+            if (!(((Vector) other).getValue().length ==value[0].length))
+                throw new CalcException(" число столбцов в матрице должно быть равно длине вектора");
             double[] mul = new double[value.length];
             double[] v = ((Vector) other).getValue();
             for (int i = 0; i < mul.length; i++) {
@@ -74,6 +99,9 @@ class Matrix extends Var {
         else if (other instanceof Matrix){
             double[][] m = ((Matrix) other).value;
             double  [][] mul= new double[value.length][m[0].length];
+            if (this.value[0].length != m.length)
+                throw new CalcException(" число столбцов в первой матрице должно" +
+                        " быть равно числу строк во второй матрице");
             for (int i = 0; i < this.value.length; i++) {
                 for (int k = 0; k < m[0].length; k++) {
                     for (int j = 0; j < m.length; j++) {
@@ -87,7 +115,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         return super.div(other);
     }
 
@@ -96,27 +124,29 @@ class Matrix extends Var {
    }
 
     Matrix(String strMatrix) {
-        Pattern p1 = Pattern.compile("\\p{Punct}+\\p{Blank}*\\p{Punct}+\\p{Blank}*\\p{Punct}+");
+
+        Pattern p1 = Pattern.compile("}");
         Matcher m1 = p1.matcher(strMatrix);
         int posCol = 0;
         int k=0;
         while (m1.find()){
+            k++;
             if (posCol==0) {
                 posCol=m1.start();
             }
-            k++;
         }
         Pattern p2 = Pattern.compile("-?\\d+\\.*\\d*");
         Matcher m2 = p2.matcher(strMatrix);
         int m=0;//счетчик столбцов по элементам
         while (m2.find()){
+
             if (posCol<m2.start()) {
                 m2.reset();
                 break;
             }
             m++;
         }
-        double [ ][] matrixResult = new double[k+1][m];
+        double [ ][] matrixResult = new double[k-1][m];
         int i=0;
         int j=0;
         while (m2.find()){

@@ -33,7 +33,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar){
             double [] sumArr=Arrays.copyOf(value, value.length);
             for (int i = 0; i <value.length ; i++) {
@@ -43,6 +43,8 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             double [] sumArr=Arrays.copyOf(value, value.length);
+            if (sumArr.length!=((Vector) other).value.length)
+                throw new CalcException(" Несоответствие размеров векторов");
             for (int i = 0; i <value.length ; i++) {
                 sumArr[i]=sumArr[i]+((Vector) other).value[i];
             }
@@ -53,9 +55,11 @@ class Vector extends Var {
 
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException{
         if (other instanceof Vector) {
             double[] razArr = Arrays.copyOf(value, value.length);
+            if (razArr.length!=((Vector) other).value.length)
+                throw new CalcException(" Несоответствие размеров векторов");
             for (int i = 0; i < value.length; i++) {
                 razArr[i] = razArr[i] - ((Vector) other).value[i];
             }
@@ -73,7 +77,7 @@ class Vector extends Var {
 
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException{
         if (other instanceof Vector) {
             double mulAll=0;
             double[] mulArr = Arrays.copyOf(value, value.length);
@@ -92,8 +96,10 @@ class Vector extends Var {
 
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException{
         if (other instanceof Scalar) {
+            if (((Scalar) other).getValue() == 0)
+                throw new CalcException("Деление на ноль");
             double[] divArr = Arrays.copyOf(value, value.length);
                         for (int i = 0; i < value.length; i++) divArr[i] = divArr[i] / ((Scalar) other).getValue();
             return new Vector(divArr);
