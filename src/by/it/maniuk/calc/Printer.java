@@ -1,6 +1,7 @@
 package by.it.maniuk.calc;
 
 
+import java.io.*;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -8,10 +9,20 @@ import java.util.Set;
 
 class Printer {
 
-    void print(Var result){
-        if (result!=null)
+    void print(Var result) {
+        String path = getFilePath(Printer.class, "vars.txt");
+
+        if (result != null)
             System.out.println(result);
+        try(PrintWriter out = new PrintWriter( new FileWriter(path))) {
+            out.println(result);
+            out.println();
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
+
     static void printVar(){
         Set<Map.Entry<String, Var>> entrySet = Var.getVars().entrySet();
         for (Map.Entry<String, Var> varEntry : entrySet) {
@@ -28,5 +39,19 @@ class Printer {
             System.out.println(me.getKey() + " : " + me.getValue());
         }
 
+    }
+    private static String getFilePath(Class<Printer> aClass, String filename) {
+        return getPath(aClass) + filename;
+    }
+
+    private static String getPath(Class<Printer> aClass) {
+        String root = System.getProperty("user.dir");
+        String name = Printer.class.getName();
+        String simpleName = Printer.class.getSimpleName();
+        String separator = File.separator;
+        String path = name.replace(simpleName, "").replace(".", separator);
+
+        path = root + separator + "src" + separator + path;
+        return path;
     }
 }
