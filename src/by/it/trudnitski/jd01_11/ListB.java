@@ -3,16 +3,16 @@ package by.it.trudnitski.jd01_11;
 import java.util.*;
 
 public class ListB<E> implements List<E> {
-    private E[]elements=(E[])new Object[0];
-    private int size=0;
+    private E[] elements = (E[]) new Object[0];
+    private int size = 0;
 
     @Override
     public String toString() {
-        StringBuilder txt=new StringBuilder("[");
-        String delimeter="";
+        StringBuilder txt = new StringBuilder("[");
+        String delimeter = "";
         for (int i = 0; i < size; i++) {
             txt.append(delimeter).append(elements[i]);
-            delimeter=", ";
+            delimeter = ", ";
         }
         txt.append("]");
         return txt.toString();
@@ -20,27 +20,27 @@ public class ListB<E> implements List<E> {
 
     @Override
     public boolean add(E e) {
-        if(size==elements.length)
-            elements= Arrays.copyOf(elements,(size*3)/2+1);
-        elements[size]=e;
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
+        elements[size] = e;
         size++;
         return true;
     }
 
     @Override
     public void add(int index, E element) {
-        if(size==elements.length)
-            elements=Arrays.copyOf(elements,(size*3)/2+1);
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
 
-        System.arraycopy(elements,index,elements,index+1,size-index);
-        elements[index]=element;
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
         size++;
     }
 
     @Override
     public E remove(int index) {
         E element = elements[index];
-        System.arraycopy(elements,index+1,elements,index,size-1-index);
+        System.arraycopy(elements, index + 1, elements, index, size - 1 - index);
         size--;
         return element;
     }
@@ -52,25 +52,22 @@ public class ListB<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-       if(index>=0||index<=size){
-           E e=elements[index];
-           Objects.checkIndex(index,size);
-           elements[index]=element;
-           return e;
-       }
-       else return null;
+        E res = elements[index];
+        elements[index] = element;
+        return res;
     }
+
     E elements(int index) {
         return elements[index];
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        boolean mod=false;
+        boolean mod = false;
         for (E e : c)
-            if(add(e)) mod=true;
+            if (add(e)) mod = true;
 
-         return mod;
+        return mod;
     }
 
     @Override
@@ -105,9 +102,9 @@ public class ListB<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
-        int index=indexOf(o);
-        if(index>-1) remove(index);
-    return (index>-1);
+        int index = indexOf(o);
+        if (index > -1) remove(index);
+        return (index > -1);
     }
 
     @Override
@@ -137,17 +134,17 @@ public class ListB<E> implements List<E> {
 
     @Override
     public int indexOf(Object o) {
-        if(o==null) {
+        if (o == null) {
             for (int i = 0; i < size; i++)
                 if (elements[i] == null)
-                        return i;
+                    return i;
         } else {
-                for (int i = 0; i <size ; i++)
-                    if(o.equals(elements[i]))
-                        return i;
-            }
-            return -1;
+            for (int i = 0; i < size; i++)
+                if (o.equals(elements[i]))
+                    return i;
         }
+        return -1;
+    }
 
 
     @Override

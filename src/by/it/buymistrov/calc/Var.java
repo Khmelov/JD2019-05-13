@@ -2,7 +2,6 @@ package by.it.buymistrov.calc;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 abstract class Var implements Operation {
 
@@ -19,7 +18,7 @@ abstract class Var implements Operation {
         return var;
     }
 
-    static Var createVar(String strVar) {
+    static Var createVar(String strVar) throws CalcException {
         strVar = strVar.replaceAll("\\s+", "");
         if (strVar.matches(Patterns.SCALAR))
             return new Scalar(strVar);
@@ -29,37 +28,32 @@ abstract class Var implements Operation {
             return new Matrix(strVar);
         else if (vars.containsKey(strVar))
             return vars.get(strVar);
-        return null;
+        throw new CalcException(" не понимаю что такое "+strVar);
 
     }
 
     @Override
     public String toString() {
-        return "abstract 2";
-    }
-
-
-    @Override
-    public Var add(Var other) {
-        System.out.printf("Операция сложения %s + %s невозможна", this, other);
-        return null;
+        return "abstract Var";
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.printf("Операция вычитания  %s - %s невозможна", this, other);
-        return null;
+    public Var add(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s + %s невозможна%n", this, other));
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.printf("Операция умножения %s * %s невозможна", this, other);
-        return null;
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s - %s невозможна%n", this, other));
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.printf("Операция деления %s / %s невозможна", this, other);
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s * %s невозможна%n", this, other));
+    }
+
+    @Override
+    public Var div(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
     }
 }

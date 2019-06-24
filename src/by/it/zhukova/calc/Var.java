@@ -8,13 +8,13 @@ abstract class Var implements Operation {
     private static Map<String, Var> vars = new HashMap<>();
 
 
-    static Var createVar(String strVar){
+    static Var createVar(String strVar) throws CalcException {
         String strVar2=strVar.replaceAll("\\s+","");
 if (strVar2.matches(Patterns.SCALAR)) return new Scalar(strVar2);
     else    if (strVar2.matches(Patterns.VECTOR)) return new Vector(strVar2);
     else    if (strVar2.matches(Patterns.MATRIX)) return new Matrix(strVar2);
     else    if (vars.containsKey(strVar)) return vars.get(strVar);
-    else    return null;
+          throw new CalcException(" не понимаю что такое "+strVar);
     }
 
     static void save(String name, Var var) {
@@ -23,7 +23,6 @@ if (strVar2.matches(Patterns.SCALAR)) return new Scalar(strVar2);
 
     static void printvar (){
         Set<Map.Entry<String, Var>> set = vars.entrySet();
-        System.out.println(set);
         Iterator<Map.Entry<String, Var>> iterator = set.iterator();
         while (iterator.hasNext()){
             Map.Entry<String, Var> next = iterator.next();
@@ -36,26 +35,22 @@ if (strVar2.matches(Patterns.SCALAR)) return new Scalar(strVar2);
    }
 
     @Override
-    public Var add(Var other) {
-        System.out.println("Операция сложения " + this + "+" + other+ " невозможна");
-        return null;
+    public Var add(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Операция вычитания " + this + "-" + other+ " невозможна");
-        return null;
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Операция умножения " + this + "*" + other+ " невозможна");
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Операция деления " + this + "/" + other+ " невозможна");
-        return null;
+    public Var div(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
     }
 }

@@ -4,6 +4,7 @@ import java.util.*;
 
 
 public class ConsoleRunner {
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -11,9 +12,14 @@ public class ConsoleRunner {
         Parser parser = new Parser();
         Printer printer = new Printer();
         while (!(expression = scanner.nextLine()).equals("end")) {
+            Var var = null;
+            try {
+                var = parser.calc(expression);
+                printer.print(var);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
 
-            Var var = parser.calc(expression);
-            printer.print(var);
 
             if (expression.equals(("printvar"))) {
 

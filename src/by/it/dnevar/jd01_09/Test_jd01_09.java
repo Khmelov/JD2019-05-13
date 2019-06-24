@@ -1,4 +1,4 @@
-package by.it.buymistrov.calc;
+package by.it.dnevar.jd01_09;
 
 
 import org.junit.Test;
