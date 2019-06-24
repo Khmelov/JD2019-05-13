@@ -10,15 +10,24 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
         while (!(expression = sc.nextLine()).equals("end")) {
-            if (expression.equals("printvar")){
-                printer.printvar(); continue;}
-            if (expression.equals("sortvar")){
-                printer.sotrvar(); continue;}
+            if (expression.equals("printvar")) {
+                printer.printvar();
+                continue;
+            }
+            if (expression.equals("sortvar")) {
+                printer.sotrvar();
+                continue;
+            }
 
+
+            try {
                 Var var = parser.calc(expression);
                 printer.print(var);
-
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
             }
+
         }
     }
+}
 

@@ -2,8 +2,8 @@ package by.it.aadamovich.calc;
 
 interface Patterns {
 
-    String SCALAR = "[-]?[\\d.]+";
-    String VECTOR = "\\{([-]?[\\d.]+[,]?)+\\}";
-    String MATRIX = "\\{(\\{([-]?[\\d.]+[,]?)+\\}[,]?)+\\}";
+    String SCALAR = "-?\\d+(\\.\\d+)?";
+    String VECTOR = "\\{(-?\\d+(\\.\\d+)?,?)+\\}";
+    String MATRIX = "\\{(\\{(-?\\d+(\\.\\d+)?,?)+\\},?)+\\}";
     String OPERATION = "[-+*/=]";
 }
