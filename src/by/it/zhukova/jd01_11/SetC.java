@@ -9,6 +9,7 @@ public class SetC <E> implements Set<E> {
 
    @Override
     public boolean add(E e) {
+
                 if (size==elements.length){
            elements= Arrays.copyOf(elements,size*2/3+1);
        }

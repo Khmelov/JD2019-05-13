@@ -34,9 +34,13 @@ public class Matrix extends Var {
 
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException{
         if (other instanceof Matrix){  //будет идти сравнение длин
             double [] [] sumArr= new double[this.value.length][this.value[0].length];
+
+            if ((!(sumArr.length==((Matrix) other).value.length))||(!(sumArr[0].length==((Matrix) other).value[0].length)))
+                throw new CalcException("Несоответствие размеров матриц");
+
             for (int i = 0; i <sumArr.length ; i++) {
                 for (int j = 0; j <sumArr[0].length ; j++) {
                     sumArr[i][j] = this.value[i][j] + ((Matrix) other).value[i][j];
@@ -57,9 +61,13 @@ public class Matrix extends Var {
 
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException{
         if (other instanceof Matrix){  //будет идти сравнение длин
             double [] [] subArr= new double[this.value.length][this.value[0].length];
+
+            if ((!(subArr.length==((Matrix) other).value.length))||(!(subArr[0].length==((Matrix) other).value[0].length)))
+                throw new CalcException("Несоответствие размеров матриц");
+
             for (int i = 0; i <subArr.length ; i++) {
                 for (int j = 0; j <subArr[0].length ; j++) {
                     subArr[i][j] = this.value[i][j] - ((Matrix) other).value[i][j];
@@ -110,8 +118,10 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException{
         if (other instanceof Scalar){
+            if (((Scalar) other).getValue() == 0)
+                throw new CalcException("Деление на ноль");
             double[][] divMatrScalarRez = new double[this.value.length][this.value[0].length];
 
         for (int i = 0; i < this.value.length; i++)
