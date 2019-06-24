@@ -8,9 +8,11 @@ public class TaskB3 {
         boolean del = false;
         ArrayList<String> inWork = new ArrayList<>(peoples);
         while (inWork.size() > 1) {
-            for (int i = 0; i < inWork.size(); i++) {
+            Iterator iterator = inWork.iterator();
+            while (iterator.hasNext()) {
+                iterator.next();
                 if (del) {
-                    inWork.remove(i--);
+                    iterator.remove();
                 }
                 del = !del;
             }
@@ -19,17 +21,19 @@ public class TaskB3 {
     }
 
     private static String process(LinkedList<String> peoples) {
-        String out = peoples.get(0);
+
+        boolean del = false;
         while (peoples.size() > 1) {
             Iterator iterator = peoples.iterator();
-            for (int i = 0; iterator.hasNext(); i++, iterator.next()) {
-                if (i % 2 == 1) {
-                    i = 0;
+            while (iterator.hasNext()) {
+                iterator.next();
+                if (del) {
                     iterator.remove();
                 }
+                del = !del;
             }
         }
-        return out ;
+        return peoples.get(0);
     }
 
     public static void main(String[] args) {
@@ -42,7 +46,9 @@ public class TaskB3 {
             list.add(name);
             listArray.add(name);
         }
-        System.out.println(list);
+
+
+//        System.out.println(list);
 
         long t = System.nanoTime();
         System.out.println(process(listArray));
