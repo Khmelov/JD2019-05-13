@@ -6,7 +6,6 @@ public class TaskA {
     public static void main(String[] args) throws IOException {
         int[][] array = new int[6][4];
         generate(array);
-
         String path = getFilePath();
         try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
 
