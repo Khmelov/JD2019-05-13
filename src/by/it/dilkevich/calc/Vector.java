@@ -47,7 +47,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if(other instanceof Scalar){
             double [] result = Arrays.copyOf(value,value.length);
             for (int i = 0; i < result.length; i++) {
@@ -57,6 +57,8 @@ public class Vector extends Var {
         }
         else if(other instanceof Vector){
             double [] result = Arrays.copyOf(value,value.length);
+            if(((Vector) other).value.length != result.length)
+                throw new CalcException("ERROR: сложение векторов невозможно");
             for (int i = 0; i < result.length; i++) {
                 result[i] = result[i] + ((Vector) other).value[i];
             }
@@ -67,7 +69,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if(other instanceof Scalar){
             double [] result = Arrays.copyOf(value,value.length);
             for (int i = 0; i < result.length; i++) {
@@ -77,6 +79,8 @@ public class Vector extends Var {
         }
         else if (other instanceof Vector){
             double [] result = Arrays.copyOf(value,value.length);
+            if(((Vector) other).value.length != result.length)
+                throw new CalcException("ERROR: вычитание векторов невозможно");
             for (int i = 0; i < result.length; i++) {
                 result[i] = result[i] - ((Vector) other).value[i];
             }
@@ -86,7 +90,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if(other instanceof Scalar) {
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
@@ -108,10 +112,12 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar){
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
+                if(((Scalar) other).getValue() == 0)
+                    throw new CalcException("ERROR: деление на ноль");
                 result[i] = result[i] / ((Scalar) other).getValue();
             }
             return new Vector(result);
