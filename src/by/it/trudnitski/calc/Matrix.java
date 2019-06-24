@@ -47,7 +47,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcExeption {
         if(other instanceof Scalar){
             double s=((Scalar) other).getValue();
             double[][]res=new double[value.length][value[0].length];
@@ -60,10 +60,14 @@ public class Matrix extends Var {
         }
         else if(other instanceof Vector) {
             double[]res=new double[value[0].length];
+            double[]v=((Vector) other).getValue();
+            if(value[0].length!=res.length) {
+                throw new CalcExeption("Неверный размер");
+            }
             for (int i = 0; i <value.length ; i++) {
                 res[i]=0;
                 for (int j = 0; j <value[0].length ; j++) {
-                    res[i]+=this.value[i][j]*((Vector) other).getValue()[j];
+                    res[i]+=this.value[i][j]*v[j];
                 }
             }
             return new Vector(res);
@@ -71,6 +75,9 @@ public class Matrix extends Var {
         else if(other instanceof Matrix){
             double[][]m=((Matrix) other).getValue();
             double res[][]=new double[value[0].length][m[0].length];
+            if(res[0].length!=m.length) {
+                throw new CalcExeption("Неверный размер");
+            }
             for (int i = 0; i <value.length ; i++) {
                 for (int j = 0; j <value[0].length ; j++) {
                     for (int k = 0; k <value[0].length ; k++) {
@@ -84,7 +91,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcExeption {
         if(other instanceof Scalar){
             double s=((Scalar) other).getValue();
             double res[][]=new double[value.length][value[0].length];
@@ -98,6 +105,9 @@ public class Matrix extends Var {
         else if (other instanceof Matrix &&value.length==((Matrix)other).getValue().length){
            double[][]m=((Matrix) other).getValue();
            double[][] res=new double[value.length][value[0].length];
+           if(res[0].length!=m.length){
+               throw new CalcExeption("Неверный размер");
+           }
             for (int i = 0; i <value.length ; i++) {
                 for (int j = 0; j <value[0].length ; j++) {
 
@@ -111,7 +121,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcExeption {
         if(other instanceof Scalar){
             double s=((Scalar) other).getValue();
             double[][]res=new double[value.length][value[0].length];
@@ -125,6 +135,8 @@ public class Matrix extends Var {
         else if(other instanceof Matrix &&value.length==((Matrix)other).getValue().length){
             double[][] m=((Matrix) other).getValue();
             double [][]res=new double[value.length][value[0].length];
+            if(res[0].length==m.length)
+                throw new CalcExeption("Неверный размер");
             for (int i = 0; i <value.length ; i++) {
                 for (int j = 0; j <value[0].length ; j++) {
                     res[i][j]+=value[i][j]-m[i][j];

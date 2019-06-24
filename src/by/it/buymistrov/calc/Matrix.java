@@ -46,7 +46,7 @@ public class Matrix extends Var {
 
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
 
 
         if (other instanceof Scalar) {
@@ -86,7 +86,7 @@ public class Matrix extends Var {
 
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double s = ((Scalar) other).getValue();
 
@@ -103,8 +103,13 @@ public class Matrix extends Var {
 
             return super.sub(other);
 
-        } else if (other instanceof Matrix && value.length == ((Matrix) other).value.length) {
+        } else if (other instanceof Matrix) {
 
+
+            if (this.value.length == ((Matrix) other).value.length
+                    && this.value[0].length == ((Matrix) other).value[0].length){
+                throw new CalcException("Разный размер матриц");
+            }
             double[][] rez = new double[value.length][value.length];
 
             for (int i = 0; i < rez.length; i++) {
@@ -122,7 +127,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double s = ((Scalar) other).getValue();
 
@@ -167,7 +172,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar && ((Scalar) other).getValue() > 0) {
             double s = ((Scalar) other).getValue();
 

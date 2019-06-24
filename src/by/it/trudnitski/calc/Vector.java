@@ -40,16 +40,19 @@ public class Vector extends Var {
 
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcExeption {
         if(other instanceof Scalar){
             double s=((Scalar)other).getValue();
             double[]res=Arrays.copyOf(value,value.length);
+            if(s==0) throw new CalcExeption("Деление на ноль");
             for (int i = 0; i <res.length ; i++) {
                 res[i]+=s;
             }
             return new Vector(res);
         }
         else if(other instanceof Vector){
+            if(value.length!=((Vector)other).getValue().length)
+                throw new CalcExeption("Длины векторов не равны");
             double[] v=((Vector)other).value;
             double[]res=Arrays.copyOf(value,value.length);
             for (int i = 0; i <res.length ; i++) {
@@ -62,7 +65,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcExeption {
         if(other instanceof Scalar){
             double s=((Scalar)other).getValue();
             double[]res=Arrays.copyOf(value,value.length);
@@ -72,6 +75,8 @@ public class Vector extends Var {
             return new Vector(res);
         }
         else if(other instanceof Vector){
+            if(value.length!=((Vector)other).getValue().length)
+                throw new CalcExeption("Длины векторов не равны");
             double[] v=((Vector)other).getValue();
             double []res=Arrays.copyOf(value,value.length);
             for (int i = 0; i <res.length ; i++) {
@@ -85,7 +90,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcExeption {
         if(other instanceof Scalar){
             double s=((Scalar)other).getValue();
             double[]res=Arrays.copyOf(value,value.length);
@@ -95,6 +100,8 @@ public class Vector extends Var {
             return new Vector(res);
         }
         else if(other instanceof Vector && value.length==((Vector)other).getValue().length){
+            if(value.length!=((Vector)other).getValue().length)
+                throw new CalcExeption("Длины векторов не равны");
             double[] v=((Vector)other).value;
             double[]res=Arrays.copyOf(value,value.length);
             double sum=0;
@@ -109,7 +116,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcExeption {
         if(other instanceof Scalar){
             double s=((Scalar) other).getValue();
             double []sum=Arrays.copyOf(value,value.length);

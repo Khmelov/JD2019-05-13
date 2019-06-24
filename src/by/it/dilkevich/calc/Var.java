@@ -11,27 +11,27 @@ public abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) {
-        System.out.println("Операция сложения " + this + " + " + other + " невозможна");
-        return null;
+    public Var add(Var other) throws CalcException {
+
+        throw new CalcException("Операция сложения " + this + " + " + other + " невозможна");
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Операция вычитания " + this + " - " + other + " невозможна");
-        return null;
+    public Var sub(Var other) throws CalcException {
+
+        throw new CalcException("Операция сложения " + this + " - " + other + " невозможна");
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Операция умножения " + this + " * " + other + " невозможна");
-        return null;
+    public Var mul(Var other) throws CalcException {
+
+        throw new CalcException("Операция сложения " + this + " * " + other + " невозможна");
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Операция деления " + this + " / " + other + " невозможна");
-        return null;
+    public Var div(Var other) throws CalcException {
+
+        throw new CalcException("Операция сложения " + this + " + " + other + " невозможна");
     }
 
     private static Map<String, Var> vars = new HashMap<>();
@@ -46,7 +46,7 @@ public abstract class Var implements Operation {
         return  var;
     }
 
-    static Var createVar(String statement){
+    static Var createVar(String statement) throws CalcException {
 
         statement = statement.replaceAll(" ", "");
         Parser parser = new Parser();
@@ -66,7 +66,7 @@ public abstract class Var implements Operation {
             return vars.get(statement);
         }
 
-        return null;
+        throw new CalcException("ERROR: Невозможно создать" + statement);
     }
 
 }

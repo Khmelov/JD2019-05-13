@@ -8,19 +8,22 @@ public class ConsoleRunner {
         Scanner sc = new Scanner(System.in);
         String line;
         //создаем экземпляры
-        Parser parser = new Parser();  //вычисления
-        Printer printer = new Printer(); //и результат
-
+        Printer printer = new Printer();
+        Parser parser = new Parser();   //вычисления
+                                        //и результат
 
         while (!(line = sc.nextLine()).equals("end")) {  //будем читать линии из консоли
-                                                            //до тех пор пока не введут это выражение
-            if (line.equals("printvar")){
-                printer.printMap();
-            } else if (line.equals("sortvar")) printer.sortvar();
-            else {
-            Var result = parser.calc(line);
-            printer.print(result);}
 
+             try {
+                    if (line.equals("printvar")){
+                        printer.printMap();
+                    } else if (line.equals("sortvar")) printer.sortvar();
+                            else {Var result = parser.calc(line);
+                                  printer.print(result);}
+                } catch (CalcException e) {
+                    System.out.println(e.getMessage());
+                    //e.printStackTrace();
+                }
         }
 
     }
