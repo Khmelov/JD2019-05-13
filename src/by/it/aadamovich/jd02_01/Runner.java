@@ -26,7 +26,7 @@ public class Runner {
                 countBuyersInMarket++;
             }
             Util.sleep(1000, 100);
-            System.out.println("Time: " + (time + 1) + " Count: " + countBuyersInMarket);
+//            System.out.println("Time: " + (time + 1) + " Count: " + countBuyersInMarket);
         }
         for (Buyer buyer : buyers) {
             try {

@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
-    private int speed;
-
     private List<String> goods = new ArrayList<>();
 
+    private boolean pensioner = Util.getRandom(1, 4) == 1;  //every fourth buyer will be pensioner
+
+    //    private int speed = (pensioner) ? 150 : 100;                // standard (TaskB)
+    private int speed = (pensioner) ? 270 : 180;                // long timeout (TaskC)
+
     Buyer(int number) {
-        boolean pensioner = Util.getRandom(1, 4) == 1;  //every fourth buyer will be pensioner
-//        speed = (pensioner) ? 150 : 100;                // standard (TaskB)
-        speed = (pensioner) ? 240 : 160;                // long timeout (TaskC)
         setName("Buyer №" + number);
         start();
     }
