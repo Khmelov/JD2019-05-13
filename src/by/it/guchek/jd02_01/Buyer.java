@@ -1,8 +1,8 @@
 package by.it.guchek.jd02_01;
 
-public class Buyer extends Thread implements Runnable, IBuyer  {
+public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket  {
 
-    int num;  //номер покупателя
+    private int num;  //номер покупателя
 
               //конструктор покупателя с его номером
     public Buyer(int num){
@@ -14,7 +14,9 @@ public class Buyer extends Thread implements Runnable, IBuyer  {
     @Override
     public void run() {
         enterToMarket();
+        takeBacket();
         chooseGoods();
+        putGoodsToBacket();
         goOut();
     }
 
@@ -31,6 +33,14 @@ public class Buyer extends Thread implements Runnable, IBuyer  {
     }
 
     @Override
+    public void takeBacket() {
+        System.out.printf("%s Берёт корзину%n", this);
+        int pauseForBacket = RandCount.randFrTo(100, 200); //ждет корзину от 0,1 до 0,2 сек
+        RandCount.sleep(pauseForBacket);
+        System.out.println(this + " подождал "+ pauseForBacket+ " милисекунд");
+    }
+
+    @Override
     public void chooseGoods() {
 
             System.out.printf("%s  Выбирает товар%n", this);
@@ -38,6 +48,16 @@ public class Buyer extends Thread implements Runnable, IBuyer  {
             RandCount.sleep(pause);                              //ожидание до 2 сек
             System.out.printf("%s  Закончил выбор товара%n", this);
 
+
+    }
+
+    @Override
+    public void putGoodsToBacket() {
+
+        System.out.printf("%s Положил товар в корзину%n", this);
+        int pauseForBacket2 = RandCount.randFrTo(100, 200); //ждет корзину от 0,1 до 0,2 сек
+        RandCount.sleep(pauseForBacket2);
+        System.out.println(this + " ложил товар в корзину "+ pauseForBacket2+ " милисекунд");
 
     }
 
