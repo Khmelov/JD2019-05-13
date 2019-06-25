@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Runner {
-    static int сountBuyers;
+    private static int countBuyers;
 
     public static void main(String[] args) {
         List<Buyer> buyers=new ArrayList<>();
@@ -13,7 +13,7 @@ public class Runner {
         for (int time = 0; time < 120/60; time++) {
             int countEntered=RandCount.randFrTo(2);  //от 0 до 2 покупателей в сек
             for (int i = 0; i < countEntered; i++) {
-                Buyer buyer=new Buyer(++сountBuyers);
+                Buyer buyer=new Buyer(++countBuyers);
                 //buyer.start();
                 buyers.add(buyer);
             }
