@@ -26,19 +26,25 @@ public class Buyer extends Thread implements Runnable, IBuyer  {
     @Override
     public void enterToMarket() {
 
-        System.out.printf("%s вошёл в магазин%n", this);
+        System.out.printf("%s ВОШЁЛ в магазин%n", this);
 
     }
 
     @Override
     public void chooseGoods() {
 
+            System.out.printf("%s  Выбирает товар%n", this);
+            int pause=RandCount.randFrTo(500, 2000);  //вызываю генератор случайных чисел
+            RandCount.sleep(pause);                              //ожидание до 2 сек
+            System.out.printf("%s  Закончил выбор товара%n", this);
+
+
     }
 
     @Override
     public void goOut() {
 
-        System.out.printf("%s вышел из магазина%n", this);
+        System.out.printf("%s ВЫШЕЛ из магазина%n", this);
 
     }
 }
