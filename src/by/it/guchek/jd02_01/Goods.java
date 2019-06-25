@@ -22,11 +22,11 @@ public class Goods {
         //Map.Entry <String, Double> entry = (Map.Entry<String, Double>) goods.entrySet().iterator();
     static String getRandGood (){
         Iterator itGoods = goods.entrySet().iterator();
-        for (int i=0; i<(RandCount.randFrTo(1,7)); i++){
+        for (int i=0; i<(RandCount.randFrTo(1,goods.size())); i++){
         if (itGoods.hasNext()){
 
             Map.Entry <String, Double> entry = (Map.Entry<String, Double>) itGoods.next();
-            nameGood = entry.getKey()+" стоит "+entry.getValue();
+            nameGood = entry.getKey()+" цена "+entry.getValue()+"р.";
          }else break;
 
 

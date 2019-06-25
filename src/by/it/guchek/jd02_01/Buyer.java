@@ -1,6 +1,6 @@
 package by.it.guchek.jd02_01;
 
-public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket  {
+public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket/* Bucket*/  {
 
     private int num;  //номер покупателя
 
@@ -16,8 +16,9 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket  {
         enterToMarket();
         takeBacket();
         chooseGoods();
-        String str = Goods.getRandGood();
-        System.out.println("Товар"+str);
+        //String str = Goods.getRandGood();
+        //System.out.println("Товар"+str);
+        //goodsInBacket();
         putGoodsToBacket();
         goOut();
     }
@@ -39,16 +40,16 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket  {
         System.out.printf("%s Берёт корзину%n", this);
         int pauseForBacket = RandCount.randFrTo(100, 200); //ждет корзину от 0,1 до 0,2 сек
         RandCount.sleep(pauseForBacket);
-        System.out.println(this + " подождал "+ pauseForBacket+ " милисекунд");
+        //System.out.println(this + " подождал "+ pauseForBacket+ " милисекунд");
     }
 
     @Override
     public void chooseGoods() {
 
-            System.out.printf("%s  Выбирает товар%n", this);
+            System.out.printf("%s Выбирает товар%n", this);
             int pause=RandCount.randFrTo(500, 2000);  //вызываю генератор случайных чисел
             RandCount.sleep(pause);                              //ожидание до 2 сек
-            System.out.printf("%s  Закончил выбор товара%n", this);
+            System.out.printf("%s Закончил выбор товара%n", this);
 
 
     }
@@ -56,10 +57,11 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket  {
     @Override
     public void putGoodsToBacket() {
 
-        System.out.printf("%s Положил товар в корзину%n", this);
+        System.out.printf("%s Положил в корзину товар: %n", this);
+        Bucket.goodsInBacket();
         int pauseForBacket2 = RandCount.randFrTo(100, 200); //ждет корзину от 0,1 до 0,2 сек
         RandCount.sleep(pauseForBacket2);
-        System.out.println(this + " ложил товар в корзину "+ pauseForBacket2+ " милисекунд");
+        //System.out.println(this + " ложил товар в корзину "+ pauseForBacket2+ " милисекунд");
 
     }
 
@@ -69,4 +71,14 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket  {
         System.out.printf("%s ВЫШЕЛ из магазина%n", this);
 
     }
+
+   /* @Override
+    public void goodsInBacket() {
+        for (int i = 0; i <RandCount.randFrTo(1,4) ; i++) {
+
+            String newGood = Goods.getRandGood();
+            System.out.printf("%s Положил в корзину %s%n ", this, newGood);
+
+        }
+    }*/
 }
