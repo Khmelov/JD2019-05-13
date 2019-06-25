@@ -8,6 +8,8 @@ public class TaskB {
     private static String fileResultTxt = getFilePath(TaskA.class, "TaskB.txt");
     private static StringBuilder text = new StringBuilder();
 
+/*TODO сделать перебор bufferReader через символы (char)*/
+
     public static void main(String[] args){
 
         deleteComentsPrintToConsole();
