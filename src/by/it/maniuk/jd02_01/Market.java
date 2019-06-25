@@ -1,20 +1,23 @@
 package by.it.maniuk.jd02_01;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Market {
 
     public static void main(String[] args) {
         List<Buyer> buyers=new ArrayList<>();
+        List<String> taims=new ArrayList<>();
         System.out.println("Market opened");
         int countBuyer=0;
         for (int time = 0; time < 120; time++) {
-            int count=Util.rnd();
+            int count=Util.rnd(2);
             for (int i = 0; i < count; i++) {
                 Buyer buyer=new Buyer(++countBuyer);
                 buyer.start();
                 buyers.add(buyer);
+                taims.add(new Date().toString());
             }
             Util.sleep(1000);
         }
@@ -26,5 +29,9 @@ public class Market {
             }
         }
         System.out.println("Market closed");
+
+        for (String taim : taims) {
+            System.out.println(taim);
+        }
     }
 }

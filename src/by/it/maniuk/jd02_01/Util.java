@@ -3,17 +3,20 @@ package by.it.maniuk.jd02_01;
 class Util {
     private static int count = 0;
     private static int countTheed =0;
-    private static int  rnd = 0;
 
     static int rnd(){
         count++;
+        int rnd = rnd(2);
         // N >=t+10
-        if (count==1) countTheed = countTheed + (rnd=rnd(2));
-        if (countTheed >= count+10 && count < 30) countTheed = countTheed + (rnd=rnd(2));
+        if (count==1) {countTheed = countTheed + rnd; return rnd;}
+        if (countTheed >= count+10 && count < 30) { countTheed = countTheed + rnd; return rnd;}
         // N <=40+(30-t)
-        else if (countTheed >= 40+(30-count) && count < 60 && count >30) countTheed = countTheed + (rnd=rnd(2));{
-       }
-        return rnd;
+        else if (countTheed >= 40+(30-count) && count < 60 && count >30) {
+            countTheed = countTheed + rnd;
+            return rnd;
+        }
+
+        return 0;
     }
 
     static int rnd(int max){
