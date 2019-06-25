@@ -4,7 +4,7 @@ class Util {
     private static int count = 0;
     private static int countTheed =0;
 
-    static int rnd(){
+    static int rnd(){ // Не работает/ Does not work
         count++;
         int rnd = rnd(2);
         // N >=t+10
