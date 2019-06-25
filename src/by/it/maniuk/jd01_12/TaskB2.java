@@ -38,7 +38,7 @@ public class TaskB2 {
                 it = peoples.iterator();
             }
         }
-        return peoples.toString();
+        return peoples.get(0);
     }
     static String process(LinkedList<String> peoples) {
         int count = 0;
@@ -57,7 +57,7 @@ public class TaskB2 {
             }
         }
 
-        return peoples.toString();
+        return peoples.get(0);
     }
 }
 

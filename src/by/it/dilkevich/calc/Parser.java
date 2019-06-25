@@ -10,7 +10,7 @@ public class Parser {
     String VECTOR = "\\{(-?[0-9]+\\.?([0-9]+)?,?)+\\}";
     String MATRIX = "\\{(\\{(-?[0-9]+\\.?([0-9]+)?,?)+\\},?)+\\}";
 
-    Var calc(String expression){
+    Var calc(String expression) throws CalcException {
         String expressions [] = expression.split(OPERATION);
         Pattern pattern = Pattern.compile(OPERATION);
         Matcher matcher = pattern.matcher(expression);
