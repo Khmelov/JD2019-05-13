@@ -21,13 +21,15 @@ public class Goods {
 
         //Map.Entry <String, Double> entry = (Map.Entry<String, Double>) goods.entrySet().iterator();
     static String getRandGood (){
-        for (int i=0; i<RandCount.randFrTo(1,7); i++){
         Iterator itGoods = goods.entrySet().iterator();
+        for (int i=0; i<(RandCount.randFrTo(1,7)); i++){
         if (itGoods.hasNext()){
-            itGoods.next();
-            Map.Entry <String, Double> entry = (Map.Entry<String, Double>)itGoods.next();
-            String nameGood = entry.getKey()+" "+entry.getValue();
-        }else break;
+
+            Map.Entry <String, Double> entry = (Map.Entry<String, Double>) itGoods.next();
+            nameGood = entry.getKey()+" стоит "+entry.getValue();
+         }else break;
+
+
         }
 
         return nameGood;

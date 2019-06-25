@@ -16,6 +16,8 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket  {
         enterToMarket();
         takeBacket();
         chooseGoods();
+        String str = Goods.getRandGood();
+        System.out.println("Товар"+str);
         putGoodsToBacket();
         goOut();
     }
