@@ -1,16 +1,42 @@
 package by.it.maniuk.jd02_01;
 
-public class Buyer extends Thread implements IBuyer {
+import java.util.ArrayList;
 
-    public Buyer(int number) {
+import java.util.List;
+
+public class Buyer extends Thread implements IBuyer, IUseBacket {
+    private boolean pensioneer;
+
+    private List<String> goods =new ArrayList<>();
+
+    Buyer(int number) {
         super("Buyer №" + number);
     }
 
+     private void isPensionerHere() {
+         pensioneer= Util.rnd(4) == 1;
+     }
+
     @Override
     public void run() {
+       isPensionerHere();
         enterToMarket();
-        chooseGoods();
+        takeBacket();
+        shopping();
         goOut();
+    }
+
+    private void shopping() {
+        for (int i = 0; i < Goods.getRandomQuantityOfGoods() ; i++) {
+            chooseGoods();
+            putGoodsToBacket();
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String good : goods) {
+            sb.append(good).append(" ").append(Goods.getCost().get(good)).append(":");
+        }
+        if (pensioneer) sb.append(" pensionner ID's");
+        System.out.println(this + " stop choose goods: "+ sb.toString());
     }
 
     @Override
@@ -21,20 +47,38 @@ public class Buyer extends Thread implements IBuyer {
     @Override
     public void chooseGoods() {
         System.out.println(this + " start choose goods");
-        int timeout = Util.rnd(500, 2000);
+        int timeout = Util.rnd(500, 2000, pensioneer);
         Util.sleep(timeout);
         String good = Goods.getRandomGood();
         System.out.println(this + " choose " + good);
-        System.out.println(this + " stop choose goods");
+        goods.add(good);
     }
 
     @Override
     public void goOut() {
         System.out.println(this + " out from the market");
+
     }
 
     @Override
     public String toString() {
         return getName();
     }
+
+    @Override
+    public void takeBacket() {
+        int timeout = Util.rnd(100, 200,pensioneer);
+        Util.sleep(timeout);
+        System.out.println(this + " took the basket");
+    }
+
+    @Override
+    public void putGoodsToBacket() {
+            int timeout = Util.rnd(100, 200,pensioneer);
+            Util.sleep(timeout);
+            System.out.println(this + " put goods to the basket");
+
+
+    }
+
 }

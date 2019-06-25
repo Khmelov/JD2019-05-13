@@ -10,7 +10,7 @@ public class Market {
         System.out.println("Market opened");
         int countBuyer=0;
         for (int time = 0; time < 120; time++) {
-            int count=Util.rnd(2);
+            int count=Util.rnd();
             for (int i = 0; i < count; i++) {
                 Buyer buyer=new Buyer(++countBuyer);
                 buyer.start();
