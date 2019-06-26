@@ -1,6 +1,6 @@
 package by.it.guchek.jd01_15;
 
-import java.io.File;
+import java.io.*;
 
 public class TaskB {
     //этот комментарий надо удалить
@@ -8,6 +8,7 @@ public class TaskB {
     /*бла бла бла
     бла бла
      */
+    static StringBuilder sb= new StringBuilder();
     /*бла бла бла
     бла бла
      */
@@ -27,11 +28,40 @@ public class TaskB {
     }
 
     static String fileName = getPath(TaskB.class)+"TaskB.java";
+    static String fileName1 = getPath(TaskB.class)+"TaskB.txt";
     public static void main(String[] args) {
 
-        StringBuilder sb= new StringBuilder();
-        
+        try(BufferedReader bRead = new BufferedReader(new FileReader(fileName))){
+            String lineFrJava;
+            boolean ignoreLine = false;
 
+            while ((lineFrJava=bRead.readLine())!=null){
+
+                if (lineFrJava.contains("//")||lineFrJava.contains("/*")||lineFrJava.contains("/**")){
+                    sb.append("\n");
+                    if (lineFrJava.contains("//")){
+                        ignoreLine=false;
+                    } else ignoreLine = true;
+                } else if (lineFrJava.contains("*/")){
+                    sb.append("\n");
+                    ignoreLine = false;
+                } else if (!ignoreLine){
+                    sb.append(lineFrJava).append("/n");
+                }
+                else sb.append("/n");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (PrintWriter prWrite = new PrintWriter(new FileWriter(fileName1))){
+
+            prWrite.write(sb.toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
