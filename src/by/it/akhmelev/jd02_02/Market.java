@@ -8,7 +8,6 @@ public class Market {
     public static void main(String[] args) {
         List<Thread> threads=new ArrayList<>();
         System.out.println("Market opened");
-        int numberBuyer=0;
 
         for (int i = 0; i < 2; i++) {
             Thread thread = new Thread(new Cashier(i));
@@ -16,6 +15,7 @@ public class Market {
             thread.start();
         }
 
+        int numberBuyer=0;
         while (Dispatcher.marketIsOpened()){
             int count=Util.rnd(2);
             for (int i = 0; i < count && Dispatcher.marketIsOpened(); i++) {
@@ -25,6 +25,8 @@ public class Market {
             }
             Util.sleep(1000);
         }
+
+
         for (Thread thread : threads) {
             try {
                 thread.join();
