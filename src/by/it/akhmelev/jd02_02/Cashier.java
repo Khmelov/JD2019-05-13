@@ -6,11 +6,12 @@ public class Cashier implements Runnable {
 
     private String name;
 
-    public Cashier(int number) {
+    Cashier(int number) {
         name = "Cashier №" + number + " ";
     }
 
     @Override
+    @SuppressWarnings("all")
     public void run() {
         while (!Dispatcher.planComplete()) {
             Buyer buyer = Queue.extract();

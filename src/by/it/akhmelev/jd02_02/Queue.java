@@ -2,7 +2,6 @@ package by.it.akhmelev.jd02_02;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 class Queue {
 

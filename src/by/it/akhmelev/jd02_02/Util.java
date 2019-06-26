@@ -2,6 +2,9 @@ package by.it.akhmelev.jd02_02;
 
 class Util {
 
+
+    //max may be not only 2
+    @SuppressWarnings("all")
     static int rnd(int max){
         return rnd(0,max);
     }

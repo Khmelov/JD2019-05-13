@@ -3,9 +3,10 @@ package by.it.akhmelev.jd02_02;
 class Dispatcher {
 
     static final int K_SPEED = 100;
-    static final int PLAN = 100;
-    static int buyerInMarket = 0;
-    static int buyerCounter = 0;
+
+    private static final int PLAN = 100;
+    private static int buyerInMarket = 0;
+    private static int buyerCounter = 0;
 
 
     static boolean planComplete() {
