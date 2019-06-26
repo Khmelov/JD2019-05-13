@@ -1,17 +1,17 @@
 package by.it.trudnitski.jd01_15;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Timofei Rudnitski
  * @version 1.0
  */
 public class TaskB {
+    private static StringBuilder sb=new StringBuilder();
 
     public static void main(String[] args){
 readFile(getPath(TaskB.class,"TaskB.java"));
+writeFile(getPath(TaskB.class,"TaskB.txt"));
 
 
     }
@@ -22,14 +22,41 @@ readFile(getPath(TaskB.class,"TaskB.java"));
      * @throws IOException
      */
 
-    private static void readFile(String filename){
-        try(BufferedReader in=new BufferedReader(new FileReader((filename)));
-            PrintWriter out2 = new PrintWriter(new FileWriter(getPath(TaskA.class) + "TaskB.txt"))) {
-            List<String> file=new ArrayList<>();
-            StringBuilder sb=new StringBuilder();
+    private static void readFile(String filename) {
+        try(BufferedReader in=new BufferedReader(new FileReader((filename)))
+            ) {
+            boolean flag=true;
+            String line;
+            while((line=in.readLine())!=null) {
+                if (line.contains("/" + "/")) {
+                    sb.append(line, 0, line.indexOf("/" + "/")).append("\n");
+                } else if (line.contains("/" + "*")) {
+                    sb.append(line, 0, line.indexOf("/" + "*")).append("\n");
+                    flag = false;
+                } else if (line.contains("*" + "/")) {
+                    flag = false;
+                } else if (flag) {
+                    sb.append(line).append("\n");
+                }
+            }
 
 
 
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+    private static void writeFile(String filename){
+        try(PrintWriter print=new PrintWriter(new FileWriter(filename))){
+            print.write(sb.toString());
+            System.out.println(sb.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +73,6 @@ readFile(getPath(TaskB.class,"TaskB.java"));
 /*
 Этот метод getPath на вход получает
 заданный класс а возвращает
-путь к это классу
  */
     private static String getPath(Class<?> aClass) {
         String root = System.getProperty("user.dir");
