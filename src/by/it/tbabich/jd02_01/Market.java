@@ -19,9 +19,6 @@ public class Market {
                 visitorLaunch();
             }
             Util.sleep(1000);
-            System.out.println(counter);
-            System.out.println("Количество " + buyers.size());
-            System.out.println(countBuyer);
         }
         for (Buyer buyer : buyers) {
             try {
