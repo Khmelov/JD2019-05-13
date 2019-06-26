@@ -1,6 +1,6 @@
 package by.it.guchek.jd02_01;
 
-public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket/* Bucket*/  {
+public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket {
 
     private int num;  //номер покупателя
 
@@ -16,9 +16,6 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket/* Buck
         enterToMarket();
         takeBacket();
         chooseGoods();
-        //String str = Goods.getRandGood();
-        //System.out.println("Товар"+str);
-        //goodsInBacket();
         putGoodsToBacket();
         goOut();
     }
@@ -59,7 +56,7 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket/* Buck
 
         System.out.printf("%s Положил в корзину товар: %n", this);
         Bucket.goodsInBacket();
-        int pauseForBacket2 = RandCount.randFrTo(100, 200); //ждет корзину от 0,1 до 0,2 сек
+        int pauseForBacket2 = RandCount.randFrTo(100, 200); //кладет в корзину от 0,1 до 0,2 сек
         RandCount.sleep(pauseForBacket2);
         //System.out.println(this + " ложил товар в корзину "+ pauseForBacket2+ " милисекунд");
 
@@ -72,13 +69,4 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket/* Buck
 
     }
 
-   /* @Override
-    public void goodsInBacket() {
-        for (int i = 0; i <RandCount.randFrTo(1,4) ; i++) {
-
-            String newGood = Goods.getRandGood();
-            System.out.printf("%s Положил в корзину %s%n ", this, newGood);
-
-        }
-    }*/
 }

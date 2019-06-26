@@ -7,7 +7,7 @@ import java.util.Map;
 public class Goods {
     static String nameGood="";
 
-    static Map<String, Double> goods = new HashMap<>();
+    static Map<String, Double> goods = new HashMap<String, Double>();
 
     static {
         goods.put("Батон", 1.12);
