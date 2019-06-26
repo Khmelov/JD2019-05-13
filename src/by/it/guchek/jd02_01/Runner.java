@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Runner {
     private static int countBuyers;
+    boolean pensioneer=false;
 
     public static void main(String[] args) {
         List<Buyer> buyers=new ArrayList<>();
