@@ -6,6 +6,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     Buyer(int number) {
         super("Buyer №" + number);
+        Market.shoppingBuyers.add(this);
     }
 
     @Override
@@ -23,7 +24,6 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void enterToMarket() {
-        Market.shoppingBuyers.add(this);
         printState(this + " вошел в магазин");
     }
 
