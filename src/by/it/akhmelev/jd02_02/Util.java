@@ -4,7 +4,7 @@ class Util {
 
 
     //max may be not only 2
-    @SuppressWarnings("all")
+    @SuppressWarnings("SameParameterValue")
     static int rnd(int max){
         return rnd(0,max);
     }

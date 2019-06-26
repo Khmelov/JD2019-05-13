@@ -21,6 +21,7 @@ public class Buyer extends Thread implements IBuyer {
     }
 
     @Override
+    @SuppressWarnings("Duplicates") //method chooseGoods() need in jd02_01 too
     public void chooseGoods() {
         System.out.println(this + " start choose goods");
         int timeout = Util.rnd(500, 2000);
