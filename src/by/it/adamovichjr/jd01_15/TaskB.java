@@ -24,18 +24,23 @@ public class TaskB {
              */
             boolean copyNextLine = true;
             while ((line = br.readLine()) != null) {
-                if (line.contains("//") && !line.contains("\"//\"")) {
-                    int endIndex = line.indexOf("/");// все равно работать не будет
+                if (line.contains("/"+"/")) {
+                    int endIndex = line.indexOf("/"+"/");// все равно работать не будет
                     if (endIndex != 0) {
                         pw.write(sb.append(line, 0, endIndex).append("\n").toString());
                         sb.delete(0, sb.length());
                     }
-                } else if (line.contains("/*") && !line.contains("\"/*\"")) {
+                } else if (line.contains("/"+"*")) {
+                    int endIndex = line.indexOf("/");
+                    if (endIndex != 0) {
+                        pw.write(sb.append(line, 0, endIndex).append("\n").toString());
+                        sb.delete(0, sb.length());
+                    }
                     copyNextLine = !copyNextLine;
                 } else if (copyNextLine) {
                     pw.write(sb.append(line).append("\n").toString());
                     sb.delete(0, sb.length());
-                } else if (line.contains("*/") && !line.contains("\"*/\"")) {
+                } else if (line.contains("*"+"/")) {
                     copyNextLine = true;
                 }
             }
@@ -47,7 +52,6 @@ public class TaskB {
     /**
      * бла-бла
      */
-
     private static Class<TaskA> cls = TaskA.class;
 
     private static String getFilePath(String name) {
