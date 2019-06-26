@@ -12,24 +12,39 @@ public class TaskB {
         //однострочный комментарий1
         //односточный комментарий2
        /* многосторочный
-                комментраррий
-                номер один*/
+                комментраррий номер один*/
        /* многосторочный
-                комментраррий*/
-        /**номер два
+                комментраррий номер два*/
+        /** а это
                 комментрий JavaDoc*/
-        Files.lines(Paths.get(dir(TaskB.class)+"TaskB.java")).filter(s->!(s.contains("//"))).collect(Collectors.toList()).forEach(System.out::println);
+        //Files.lines(Paths.get(dir(TaskB.class)+"TaskB.java")).filter(s->!(s.contains("//"))).collect(Collectors.toList()).forEach(System.out::println);
         try (PrintWriter out=new PrintWriter(new FileWriter(dir(TaskB.class)+"TaskB.txt"));
              BufferedInputStream in =new BufferedInputStream(new FileInputStream(dir(TaskB.class)+"TaskB.java"))){
             int b=0;
+            char aschar;
             StringBuilder sb=new StringBuilder();
             while (in.available()>0){
                 b=in.read();
-                sb.append((char)b);
+                aschar=(char)b;
+                if (aschar=='/'){
+                    aschar=(char)in.read();
+                    if (aschar=='/'){
+                        do {
+                            aschar=(char)in.read();
+                        }
+                        while (aschar!='\n');
+                    }
+                    else if (aschar=='*'){
+                        do {
+                            aschar=(char)in.read();
+                        }
+                        while (aschar!='/');
+                        aschar=(char)in.read();
+                    }
+                    else sb.append('/');
+                }
+                sb.append(aschar);
             }
-            sb.replace(sb.indexOf("/*"),sb.indexOf("*/")+2,"")
-                    .replace(sb.indexOf("/*"),sb.indexOf("*/")+2,"")
-                    .replace(sb.indexOf("/**"),sb.indexOf("*/")+2,"");
             out.print(sb);
         } catch (IOException e) {
             e.printStackTrace();
