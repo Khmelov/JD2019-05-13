@@ -8,7 +8,7 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket {
     public Buyer(int num){
         this.num = num;
         this.setName(String.format("Покупатель № %d ", num));
-        start();
+        //start();
     }
 
     @Override
