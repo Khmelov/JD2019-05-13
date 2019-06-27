@@ -21,8 +21,12 @@ public class ConsoleRunner {
                     printer.printSortedVar();
                     break;
                 default:
-                    Var calc = parser.calc(line);
-                    printer.print(calc);
+                    try {
+                        Var calc = parser.calc(line);
+                        printer.print(calc);
+                    } catch (CalcException e) {
+                        System.out.println(e.getMessage());
+                    }
             }
         }
     }

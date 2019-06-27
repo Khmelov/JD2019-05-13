@@ -68,6 +68,14 @@ public class SetC <T> implements Set<T> {
     }
 
     @Override
+    public boolean addAll(Collection<? extends T> c) {
+       // for (T e : c) {
+         //   if (!contains(e))
+           // add(e);}
+        return false;
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return null;
     }
@@ -89,11 +97,6 @@ public class SetC <T> implements Set<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
