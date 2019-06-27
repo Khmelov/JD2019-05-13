@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Runner {
 
     static int countBuyersInMarket = 0;
-               
+
     public static void main(String[] args) {
 
         ArrayList<Buyer> buyers = new ArrayList<>();
@@ -20,14 +20,15 @@ public class Runner {
             } else {
                 limitBuyer = 40 + (30 - (time % 60));
             }
-            int count = Util.getRandom(0, 2) + (limitBuyer - countBuyersInMarket + 2);
-            for (int j = 0; j < count; j++) {
+            int count = Util.getRandom(0, 2) + (limitBuyer - countBuyersInMarket);
+            while (count > 0) {
                 Buyer buyer = new Buyer(++countBuyer);
                 buyers.add(buyer);
                 countBuyersInMarket++;
+                count--;
             }
+//            System.out.println("Time: " + (time) + " Count: " + countBuyersInMarket); // for testing
             Util.sleep(1000, 100);
-            System.out.println("Time: " + (time + 1) + " Count: " + countBuyersInMarket); // for testing
         }
         for (Buyer buyer : buyers) {
             try {

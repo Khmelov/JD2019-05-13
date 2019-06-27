@@ -10,8 +10,8 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     //every fourth buyer will be pensioner
     private boolean pensioner = Util.getRandom(1, 4) == 1;
 
-    // to control timeout for pensioners. For TaskB will be standard (private int speed = (pensioner) ? 150 : 100;)
-    private int speed = (pensioner) ? 270 : 180;                // long timeout (TaskC)
+    // set the difference in timeout for pensioners and control of buyers flow
+    private int speed = (pensioner) ? Dispatcher.SPEED_PENSIONER_TASKC : Dispatcher.SPEED_BUYER_TASKC;
 
     Buyer(int number) {
         if (!pensioner) setName("Buyer №" + number);
