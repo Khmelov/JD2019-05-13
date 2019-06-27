@@ -2,7 +2,7 @@ package by.it.maniuk.jd02_02;
 
 class Dispatcher {
 
-    static final int K_SPEED=1;
+    static final int K_SPEED=100;
     static final int PLAN=100;
     static int buyerInMarket=0;
     static int buyerCounter =0;

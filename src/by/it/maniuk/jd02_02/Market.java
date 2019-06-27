@@ -19,7 +19,7 @@ public class Market {
         }
 
         int numberBuyer=0;
-        while (!Dispatcher.marketIsOpened()){
+        while (Dispatcher.marketIsOpened()){
             int count = Util.rnd(2);
             for (int i = 0; i < count&& Dispatcher.marketIsOpened(); i++) {
                 Buyer buyer = new Buyer(++ numberBuyer);

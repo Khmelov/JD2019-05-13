@@ -23,6 +23,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         enterToMarket();
         takeBacket();
         shopping();
+        goToQueue();
         goOut();
     }
 
@@ -57,6 +58,9 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void goToQueue() {
         Queue.add(this);
+        synchronized (Cashier.monitor){
+            Cashier.monitor.notifyAll();
+        }
         synchronized (this){
             try {
                 this.wait();
@@ -69,6 +73,10 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void goOut() {
         System.out.println(this + " out from the market");
+        Dispatcher.completeBuyer();
+        synchronized (Cashier.monitor){
+            Cashier.monitor.notifyAll();
+        }
 
     }
 
