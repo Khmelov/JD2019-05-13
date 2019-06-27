@@ -27,9 +27,8 @@ public class Goods {
 
             Map.Entry <String, Double> entry = (Map.Entry<String, Double>) itGoods.next();
             nameGood = entry.getKey()+" цена "+entry.getValue()+"р.";
+
          }else break;
-
-
         }
 
         return nameGood;

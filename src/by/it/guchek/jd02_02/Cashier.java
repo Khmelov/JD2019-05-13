@@ -10,7 +10,7 @@ public class Cashier implements Runnable {
     }
 
     @Override
-    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
+    //SynchronizationOnLocalVariableOrMethodParameter/
     public void run() {
         while (!Dispatcher.planComplete()) {
             Buyer buyer = Queue.extract();

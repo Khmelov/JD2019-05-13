@@ -4,26 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Runner {
-    private static int countBuyers;
-    static boolean pensioneer=false;
+
 
     public static void main(String[] args) {
-        List<Buyer> buyers=new ArrayList<>();
+        List<Thread> threads=new ArrayList<>();
         System.out.println("Магазин открыт");
 
-        for (int time = 0; time < 120/60; time++) {           //запускаем в течении 2 минут
-            int countEntered= RandCount.randFrTo(2);  //от 0 до 2 покупателей в сек
-            for (int i = 0; i < countEntered; i++) {
-                Buyer buyer=new Buyer(++countBuyers);
-                if (countBuyers%4==0) pensioneer=true;
+        for (int i = 0; i < 2; i++) {                //запускаем поток кассиров
+            Thread thread = new Thread(new Cashier(i));
+            threads.add(thread);
+            thread.start();
+        }
+
+        int numberBuyer=0;
+        while (Dispatcher.marketIsOpened()){
+            int count=RandCount.randFrTo(2);
+            for (int i = 0; i < count && Dispatcher.marketIsOpened(); i++) { //добавили в условие проверку открыты ли
+                Buyer buyer=new Buyer(++numberBuyer);
                 buyer.start();
-                buyers.add(buyer);
+                threads.add(buyer);
             }
             RandCount.sleep(1000);
         }
-        for (Buyer buyer : buyers) {
+
+
+        for (Thread thread : threads) {
             try {
-                buyer.join();
+                thread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
