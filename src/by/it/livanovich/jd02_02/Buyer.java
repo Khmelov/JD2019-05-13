@@ -1,4 +1,4 @@
-package by.it.livanovich.jd02_01;
+package by.it.livanovich.jd02_02;
 
 import static by.it.livanovich.jd02_01.Basket.Basket;
 

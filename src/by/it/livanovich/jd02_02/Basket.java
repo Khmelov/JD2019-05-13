@@ -1,7 +1,6 @@
-package by.it.livanovich.jd02_01;
+package by.it.livanovich.jd02_02;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Basket {
