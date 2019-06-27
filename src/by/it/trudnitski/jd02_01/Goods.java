@@ -1,34 +1,28 @@
 package by.it.trudnitski.jd02_01;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Goods {
 
-    private static Map<Integer,String> goods=new HashMap<>();
-    private static Map<String,Double> cost=new HashMap<>();
+    private static Map<String,Double> goods=new HashMap<>();
     static {
-        goods.put(1,"Хлеб");
-        goods.put(2,"Молоко");
-        goods.put(3,"Масло");
-        goods.put(4,"Пиво");
-        goods.put(5,"Вино");
-
-        cost.put("Хлеб",1.20);
-        cost.put("Молоко",2.50);
-        cost.put("Масло",1.45);
-        cost.put("Пиво",2.30);
-        cost.put("Вино",7.20);
+        goods.put("Bread",1.50);
+        goods.put("Milk",1.80);
+        goods.put("Butter",2.30);
+        goods.put("Beer",2.50);
+        goods.put("Vine",7.10);
+        goods.put("Meat",12.25);
+        goods.put("Vegetables",5.60);
 
     }
     static String getRandomGood(){
-        int id= Helper.randomeGet(0,4);
-        return goods.get(id);
+        List<String> keys=new ArrayList<>(goods.keySet());
+        String key=keys.get(Helper.randomeGet(1,keys.size()-1));
+        Double value=goods.get(key);
+        return key + " with price " + value ;
     }
-    static int getRandomSomeGoods(){
-        return 1+((int)Math.random()*4);
-    }
-    static Map<String,Double> getCost(){
-        return cost;
-    }
+
 }
