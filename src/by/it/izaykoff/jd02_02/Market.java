@@ -14,15 +14,16 @@ public class Market {
         }
 
         int numberBuyer = 0;
-        for (int time = 0; time < 120; time++) {
+        while (Dispatcher.marketIsOpened()) {
             int count = Util.rnd(2);
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count && Dispatcher.marketIsOpened(); i++) {
                 Buyer buyer = new Buyer(++numberBuyer);
                 buyer.start();
                 threads.add(buyer);
             }
             Util.sleep(1000);
         }
+
         for (Thread buyer : threads) {
             try {
                 buyer.join();

@@ -5,7 +5,16 @@ import java.util.Map;
 
 public class Goods {
 
+    public static Map<Integer, String> getGoods() {
+        return goods;
+    }
+
     private static Map<Integer, String> goods = new HashMap<>();
+
+    public static Map<String, Double> getPriceOfTheGoods() {
+        return priceOfTheGoods;
+    }
+
     private static Map<String, Double> priceOfTheGoods = new HashMap<>();
 
     static {
@@ -25,4 +34,5 @@ public class Goods {
         int id = 1 + (int) (Math.random() * 5);
         return goods.get(id) + " " + priceOfTheGoods.get(goods.get(id));
     }
+
 }
