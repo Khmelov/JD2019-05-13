@@ -4,23 +4,23 @@ class Dispatcher {
 
     static final int K_SPEED=1;
     static final int PLAN=100;
-    static int buyerInMAarket=0;
+    static int buyerInMarket=0;
     static int buyerCounter =0;
 
      static boolean planComplete() {
         return (buyerCounter==PLAN )
-                    && (buyerInMAarket==0);
+                    && (buyerInMarket==0);
     }
-   synchronized static void addBuyer(){
-        buyerInMAarket++;
+    synchronized static void addBuyer(){
+        buyerInMarket++;
+    }
 
-    }
     synchronized static void completeBuyer(){
-        buyerInMAarket--;
+        buyerInMarket--;
         buyerCounter++;
-
     }
-   synchronized  static boolean marketIsOpend(){
-        return buyerInMAarket+buyerCounter <PLAN;
+
+    synchronized static boolean marketIsOpened(){
+        return buyerInMarket+buyerCounter<PLAN;
     }
 }

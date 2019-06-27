@@ -7,24 +7,25 @@ import java.util.List;
 public class Market {
 
     public static void main(String[] args) {
+        List<Thread> threads=new ArrayList<>();
         List<Buyer> buyers=new ArrayList<>();
-        List<String> taims=new ArrayList<>();
+        List<String> times=new ArrayList<>();
         System.out.println("Market opened");
-        int numberBuyer=0;
 
         for (int i = 0; i <2 ; i++) {
-           Thread thread = new Thread(new Cashier());
-
+           Thread thread = new Thread(new Cashier(i));
+            threads.add(thread);
+            thread.start();
         }
 
-
-        while (!Dispatcher.marketIsOpend()){
+        int numberBuyer=0;
+        while (!Dispatcher.marketIsOpened()){
             int count = Util.rnd(2);
-            for (int i = 0; i < count&& Dispatcher.marketIsOpend(); i++) {
+            for (int i = 0; i < count&& Dispatcher.marketIsOpened(); i++) {
                 Buyer buyer = new Buyer(++ numberBuyer);
                 buyer.start();
                 buyers.add(buyer);
-                taims.add(new Date().toString());
+                //times.add(new Date().toString());
             }
 
             Util.sleep(1000);
@@ -38,7 +39,7 @@ public class Market {
         }
         System.out.println("Market closed");
 
-        for (String taim : taims) {
+        for (String taim : times) {
             System.out.println(taim);
         }
     }
