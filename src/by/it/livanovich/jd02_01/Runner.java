@@ -5,44 +5,29 @@ import java.util.List;
 
 public class Runner {
     private static List<Buyer> buyerList = new ArrayList<>();
-    static int c = 0;
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println("Магазин открыт");
         int countBuyer = 0;
         for (int t = 1; t < 120; t++) {
-            if (t > 30 && t < 60) {
-                int count = Rnd.Rnd(2);
-                for (int i = 1; i <= count; i++) {
-                    countBuyer++;
-                    Buyer buyer = new Buyer(countBuyer);
-                    int d = coutStrem();
-                    if (buyerList.size() - d < 40 + (30 - t)) {
-                        buyer.start();
-                        buyerList.add(buyer);
-                    } else Thread.sleep(1000);
-                }
-            } else {
-                int count = Rnd.Rnd(2);
-                for (int i = 1; i <= count; i++) {
-                    countBuyer++;
-                    Buyer buyer = new Buyer(countBuyer);
+            int count = Rnd.Rnd(2);
+            for (int i = 0; i <= count; i++) {
+                countBuyer++;
+                Buyer buyer = new Buyer(countBuyer);
+                if (t > 30 && t < 60) {
+                    while (Thread.activeCount() >= 40 + (30 - t)) {
+                        Thread.sleep(1000);
+                    }
                     buyer.start();
                     buyerList.add(buyer);
-
-                }
+                } else
+                    buyer.start();
+                buyerList.add(buyer);
             }
         }
-    }
-
-    public static int coutStrem() {
-        for (Buyer el : buyerList) {
-            try {
-                el.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            c++;
+        for (Buyer buyer : buyerList) {
+            buyer.join();
         }
-        return c;
+        System.out.println("Магазин закрыт");
     }
 }
