@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class Runner {
 
     static int countBuyersInMarket = 0;
-
+               
     public static void main(String[] args) {
 
         ArrayList<Buyer> buyers = new ArrayList<>();
+
         int countBuyer = 0;
-        int limitBuyer;      // desired quantity of buyers in the market
+        int limitBuyer;      // desired quantity of buyers in the market at given second
 
         System.out.println("Market is opened");
         for (int time = 0; time < 120; time++) {
@@ -26,7 +27,7 @@ public class Runner {
                 countBuyersInMarket++;
             }
             Util.sleep(1000, 100);
-//            System.out.println("Time: " + (time + 1) + " Count: " + countBuyersInMarket);
+            System.out.println("Time: " + (time + 1) + " Count: " + countBuyersInMarket); // for testing
         }
         for (Buyer buyer : buyers) {
             try {

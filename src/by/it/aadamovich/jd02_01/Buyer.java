@@ -7,13 +7,15 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private List<String> goods = new ArrayList<>();
 
-    private boolean pensioner = Util.getRandom(1, 4) == 1;  //every fourth buyer will be pensioner
+    //every fourth buyer will be pensioner
+    private boolean pensioner = Util.getRandom(1, 4) == 1;
 
-    //    private int speed = (pensioner) ? 150 : 100;                // standard (TaskB)
+    // to control timeout for pensioners. For TaskB will be standard (private int speed = (pensioner) ? 150 : 100;)
     private int speed = (pensioner) ? 270 : 180;                // long timeout (TaskC)
 
     Buyer(int number) {
-        setName("Buyer №" + number);
+        if (!pensioner) setName("Buyer №" + number);
+        else setName("Buyer (pensioner) №" + number);
         start();
     }
 
@@ -43,7 +45,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public void chooseGoods() {
         System.out.println(this + " start choosing the goods");
         Util.sleep(Util.getRandom(500, 2000), speed);
-        goods.add(Util.getRandomGood());
+        goods.add(Goods.getRandomGood());
         System.out.println(this + " chose " + goods.get(goods.size() - 1));
         putGoodsToBacket();
     }
