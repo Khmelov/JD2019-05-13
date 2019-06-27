@@ -3,9 +3,7 @@ package by.it.guchek.jd01_15;
 import java.io.*;
 
 public class TaskB {
-
-    //этот комментарий надо удалить
-
+//этот комментарий надо удалить
 
     /*бла бла бла
     бла бла
@@ -37,11 +35,11 @@ public class TaskB {
             String lineFrJava;
             boolean ignoreLine = false;
 
-            while ((lineFrJava=bRead.readLine())!=null){
+            while (bRead.ready()){
+                lineFrJava=bRead.readLine();
 
                 if (lineFrJava.contains("/"+"/")||lineFrJava.contains("/"+"*")||lineFrJava.contains("/"+"**")){
                     sb.append("", 0, 0).append("\n");
-                    //sb.append("").append("\n");
                     if (lineFrJava.contains("/"+"/")){
                         ignoreLine=false;
                     } else ignoreLine = true;
@@ -62,7 +60,7 @@ public class TaskB {
 
         try (PrintWriter prWrite = new PrintWriter(new FileWriter(fileName1))){
 
-            prWrite.write(sb.toString());
+           //prWrite.print(sb);
 
         } catch (IOException e) {
             e.printStackTrace();
