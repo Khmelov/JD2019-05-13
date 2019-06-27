@@ -3,19 +3,17 @@ package by.it.guchek.jd01_15;
 import java.io.*;
 
 public class TaskB {
+
     //этот комментарий надо удалить
-    // этот комментарий надо удалить
+
+
     /*бла бла бла
     бла бла
      */
-    static StringBuilder sb= new StringBuilder();
+    private static StringBuilder sb= new StringBuilder();
     /*бла бла бла
     бла бла
      */
-    /**
-     * Это Джавадок
-     * Это Джавадок
-    */
 
     private static String getPath(Class<?> aClass) {
         String root = System.getProperty("user.dir");
@@ -26,9 +24,13 @@ public class TaskB {
         path = root + separator + "src" + separator + path;
         return path;
     }
-
-    static String fileName = getPath(TaskB.class)+"TaskB.java";
-    static String fileName1 = getPath(TaskB.class)+"TaskB.txt";
+    /**
+     * Это Джавадок
+     * Это Джавадок
+     */
+    private static String fileName = getPath(TaskB.class)+"TaskB.java";
+    private static String fileName1 = getPath(TaskB.class)+"TaskB.txt";
+    //этот комментарий надо удалить
     public static void main(String[] args) {
 
         try(BufferedReader bRead = new BufferedReader(new FileReader(fileName))){
@@ -37,23 +39,26 @@ public class TaskB {
 
             while ((lineFrJava=bRead.readLine())!=null){
 
-                if (lineFrJava.contains("//")||lineFrJava.contains("/*")||lineFrJava.contains("/**")){
-                    sb.append("\n");
-                    if (lineFrJava.contains("//")){
+                if (lineFrJava.contains("/"+"/")||lineFrJava.contains("/"+"*")||lineFrJava.contains("/"+"**")){
+                    sb.append("", 0, 0).append("\n");
+                    //sb.append("").append("\n");
+                    if (lineFrJava.contains("/"+"/")){
                         ignoreLine=false;
                     } else ignoreLine = true;
-                } else if (lineFrJava.contains("*/")){
-                    sb.append("\n");
+                } else if (lineFrJava.contains("*"+"/")){
+                    sb.append("", 0, 0).append("\n");
                     ignoreLine = false;
                 } else if (!ignoreLine){
-                    sb.append(lineFrJava).append("/n");
+                    sb.append(lineFrJava).append("\n");
                 }
-                else sb.append("/n");
+                else sb.append("", 0, 0).append("\n");
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println(sb.toString());
 
         try (PrintWriter prWrite = new PrintWriter(new FileWriter(fileName1))){
 
