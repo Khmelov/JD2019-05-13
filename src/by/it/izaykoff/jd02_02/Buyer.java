@@ -1,9 +1,10 @@
-package by.it.izaykoff.jd02_01;
+package by.it.izaykoff.jd02_02;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     public Buyer(int number) {
         super("Buyer №" + number);
+        Dispatcher.addBuyer();
     }
 
     @Override
@@ -12,6 +13,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         takeBasket();
         chooseGoods();
         putGoodsToBasket();
+        goToQueue();
         goOut();
     }
 
@@ -30,6 +32,25 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void goOut() {
         System.out.println(this + " out from the market");
+        Dispatcher.completeBuyer();
+        synchronized (Cashier.monitor){
+            Cashier.monitor.notifyAll();
+        }
+    }
+
+    @Override
+    public void goToQueue() {
+        Queue.add(this);
+        synchronized (Cashier.monitor){
+            Cashier.monitor.notifyAll();
+        }
+        synchronized (this){
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -49,6 +70,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             String good = Goods.getRandomGood();
             System.out.println(this + " choose " + count + " " + good + " put in the basket");
             System.out.println(this + " stop choose goods");
+
         }
     }
 }

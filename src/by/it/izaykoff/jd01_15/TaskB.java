@@ -27,23 +27,11 @@ public class TaskB {
 
         Stream<String> lineStream = Files.lines(Paths.get(fileJava));
 
-
-
         //читать файл TaskB.java
         readFileJava(fileJava, strBuilder);
 
-//        try (Stream<String> streamFromFiles = Files.lines(Paths.get(fileJava))) {
-//            streamFromFiles
-//                    .forEach(System.out::println);
-//
-//        }
-
-
         //писать в тхт
         writeFileTxt(fileTxt, strBuilder);
-
-
-
     }
 
     private static void writeFileTxt(String fileTxt, StringBuilder strBuilder) {
@@ -55,19 +43,24 @@ public class TaskB {
         }
     }
 
-    private static void readFileJava(String fileJava, StringBuilder strBuilder) {
+    private static void readFileJava(String fileJava, StringBuilder strBuilder) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileJava))) {
 
             while (reader.ready()){
-                char line = (char)(reader.read());
-                if (line == '/' || line == '*') {
-                    line=' ';
-                }
+                String line = reader.readLine();
+                int i = line.indexOf("/");
                 strBuilder.append(line);
+                if (i>=0){
+                    strBuilder.deleteCharAt(i);
+                }
+                strBuilder.append("\n");
+
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//                char line = (char) reader.read();
+//                if (line == '/') {
+//                    strBuilder.
+//                }
+            }
     }
 
 
