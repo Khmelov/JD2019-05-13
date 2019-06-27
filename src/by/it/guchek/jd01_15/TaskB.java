@@ -60,7 +60,7 @@ public class TaskB {
 
         try (PrintWriter prWrite = new PrintWriter(new FileWriter(fileName1))){
 
-           //prWrite.print(sb);
+           //prWrite.print(sb.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
