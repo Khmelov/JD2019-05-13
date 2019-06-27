@@ -18,7 +18,7 @@ public class Market {
 
     private static void startMarketWork() {
         for (int time = 0; time < 120; time++) {
-            int limitBuyers = getLimitBuyers(time+1);
+            int limitBuyers = getLimitBuyers(time);
             int additionalBuyers = (limitBuyers - countBuyerInMarket);
             int newBuyers = Time.fromTo(0, 2) + additionalBuyers;
             lettingInNewBuyers(newBuyers);
