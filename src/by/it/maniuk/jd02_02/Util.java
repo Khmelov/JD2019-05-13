@@ -8,7 +8,6 @@ class Util {
         count++;
         int rnd = rnd(2);
         // N >=t+10
-        if (count==1) {countTheed = countTheed + rnd; return rnd;}
         if (countTheed >= count+10 && count < 30) { countTheed = countTheed + rnd; return rnd;}
         // N <=40+(30-t)
         else if (countTheed >= 40+(30-count) && count < 60 && count >30) {
