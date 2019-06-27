@@ -7,7 +7,8 @@ public class Market {
 
     private static int numberOfBuyers = 1;
     private static List<Thread> threads = new ArrayList<>();
-private static int time = 1;
+    private static int time = 1;
+
     public static void main(String[] args) {
         System.out.println("Market opened");
         startCashierWork();
@@ -20,6 +21,8 @@ private static int time = 1;
         for (int i = 1; i <= Dispetcher.numberOfCashier; i++) {
             Cashier cashier = new Cashier(i);
             threads.add(cashier);
+
+            System.out.println("Cashier go to work place");
         }
     }
 
@@ -29,11 +32,10 @@ private static int time = 1;
             int limitBuyers = getLimitBuyers(time);
             int additionalBuyers = (limitBuyers - Dispetcher.countBuyerInMarket);
             int newBuyers = Time.fromTo(0, 2) + additionalBuyers;
-
             lettingInNewBuyers(newBuyers);
-            Time.sleep(1000);
+            System.out.println("Time " + (time) + " count buyers in market " + Dispetcher.countBuyerInMarket + " Cashiers wait " + Queue.dequeCashiersWait.size() + " Buyers in queue " +Queue.dequeBuyers.size() + " PENSIONERS in Q " + Queue.dequePensionerBuyer.size());
             time++;
-            System.out.println("Time " + (time) + " count buyers " + Dispetcher.countBuyerInMarket);
+            Time.sleep(1000);
 
         }
     }

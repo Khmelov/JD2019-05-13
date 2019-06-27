@@ -2,22 +2,33 @@ package by.it.adamovichjr.jd02_02;
 
 public class Buyer extends Thread implements IBuer, IUseBacket {
 
+
+
     Buyer(int number) {
-        super("Buyer № " + number + " ");
+        super("Buyer № " + number);
+        if(pensioner){
+            setName("Buyer № " + number + " PENSIONER ");
+        }
         Dispetcher.addBuyerInMarket();
         start();
 
     }
+
     Backet backet;
-    private boolean pensioner = Time.fromTo(1, 4) == 1;
+    boolean pensioner = Time.fromTo(1, 2) == 1;
+
     @Override
     public void goToQueue() {
-     //   System.out.println("go to queue");
-        synchronized (Cashier.monitor){
-            Queue.add(this);
-            Cashier.monitor.notifyAll();
+        System.out.println(this + " go to queue");
+
+        Queue.addBuyer(this);
+        synchronized (Cashier.monitor) {
+            if(Queue.checkCashierOfBuyer()){
+                Cashier.monitor.notify();
+                Queue.extractCashier();
+            }
         }
-        synchronized (this){
+        synchronized (this) {
             try {
                 this.wait();
             } catch (InterruptedException e) {
@@ -25,8 +36,11 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
             }
         }
     }
+
+
+
     private int valueOfchosesGoods = Time.fromTo(1, 4);
-    private int speedPensionerOrNormal = pensioner?150:100;
+    private int speedPensionerOrNormal = pensioner ? 150 : 100;
 
     @Override
     public void enterToMarket() {
@@ -35,11 +49,11 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
 
     @Override
     public String choseGoods() {
-        int pause = Time.fromTo(500, 1500) *speedPensionerOrNormal/100*Dispetcher.BUYERS_SPEED;
+        int pause = Time.fromTo(500, 1500) * speedPensionerOrNormal / 100 * Dispetcher.BUYERS_SPEED;
         Time.sleep(pause);
         String choisedGood = Goods.getGood();
 
- //       System.out.println(this.getName() + "chose " + choisedGood );
+        //       System.out.println(this.getName() + "chose " + choisedGood );
         return choisedGood;
     }
 
@@ -50,7 +64,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
 
         for (int i = 0; i < valueOfchosesGoods; i++) {
             String choisedGood = choseGoods();
-            putGoodsToBacet(choisedGood,backet);
+            putGoodsToBacet(choisedGood, backet);
         }
         goToQueue();
         goToOut();
@@ -59,28 +73,31 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
     @Override
     public void goToOut() {
         Dispetcher.completeBuyerInMarket();
-        synchronized (Cashier.monitor){
-            Cashier.monitor.notifyAll();
+        if (Dispetcher.planComplete()) {
+            synchronized (Cashier.monitor) {
+                Cashier.monitor.notifyAll();
+            }
         }
-        System.out.println(this.getName() + "Go home");
+        System.out.println(this.getName() + " Go home");
     }
 
     @Override
     public Backet takeBacket() {
-        int pause = Time.fromTo(100, 200)*speedPensionerOrNormal/100*Dispetcher.BUYERS_SPEED;
+        int pause = Time.fromTo(100, 200) * speedPensionerOrNormal / 100 * Dispetcher.BUYERS_SPEED;
         Backet backet = new Backet(getName());
         Time.sleep(pause);
-    //    System.out.println(this.getName() + "take backet ");
+        //    System.out.println(this.getName() + "take backet ");
         return backet;
     }
 
     @Override
     public void putGoodsToBacet(String good, Backet backet) {
-        int pause = Time.fromTo(100, 200)*speedPensionerOrNormal/100*Dispetcher.BUYERS_SPEED;
+        int pause = Time.fromTo(100, 200) * speedPensionerOrNormal / 100 * Dispetcher.BUYERS_SPEED;
         backet.backetWithGoods.add(good);
         Time.sleep(pause);
-  //      System.out.println(this.getName() + "put "+ good +" to backet");
+        //      System.out.println(this.getName() + "put "+ good +" to backet");
     }
+
     @Override
     public String toString() {
         return getName();

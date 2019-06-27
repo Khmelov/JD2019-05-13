@@ -17,13 +17,13 @@ public class Market {
     }
 
     private static void startMarketWork() {
-        for (int time = 0; time < 120; time++) {
+        for (int time = 0; time <= 120; time++) {
+            System.out.println("Time " + (time) +" count buyers " + countBuyerInMarket );
             int limitBuyers = getLimitBuyers(time);
             int additionalBuyers = (limitBuyers - countBuyerInMarket);
             int newBuyers = Time.fromTo(0, 2) + additionalBuyers;
             lettingInNewBuyers(newBuyers);
             Time.sleep(1000);
-            System.out.println("Time " + (time+1) +" count buyers " + countBuyerInMarket );
         }
     }
 
