@@ -3,8 +3,8 @@ package by.it.livanovich.calc;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parsel {
-    Var calc (String expression){
+public class Parsel  {
+    Var calc (String expression) throws CalcException{
         String [] operand=expression.split(Patterns.OPERATION);
         if (expression.equals("printvar")) {return null;}
         if (expression.equals("sortvar")) {return null;}

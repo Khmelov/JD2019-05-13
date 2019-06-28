@@ -31,10 +31,18 @@ public class Matrix extends Var {
 
     public double[][] getValue() {
         return value;
+
+    }
+    public int getMatrixHorizontalValue() {
+        return value[0].length;
+
+    }
+    public int getMatrixVerticallValue() {
+        return value.length;
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar){
             double[][] res =Arrays.copyOf(value, value.length) ;
             for (int i = 0; i < res.length; i++) {
@@ -47,6 +55,9 @@ public class Matrix extends Var {
         else if (other instanceof Matrix){
             double[][] res =Arrays.copyOf(value, value.length) ;
             int matrixLeight = ((Matrix) other).getValue().length;
+            if (res.length != matrixLeight){
+                throw new CalcException("ERROR: Размеры матриц должны быть одинаковыми");
+            }
             double[][] z = new double[res.length][matrixLeight];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j <res[0].length ; j++) {
@@ -61,7 +72,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -75,6 +86,11 @@ public class Matrix extends Var {
             double[][] res =Arrays.copyOf(value, value.length) ;
             int matrixLeight = ((Matrix) other).getValue().length;
             double[][] z = new double[res.length][matrixLeight];
+
+            if(res.length == getMatrixVerticallValue() ||                              //! Подумать про это еще раз
+                   res[0].length == getMatrixHorizontalValue())
+                throw  new CalcException("ERROR: Размеры матриц должны быть одинаковыми");
+
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j <res[0].length ; j++) {
                     z[i][j] = res[i][j]-((Matrix) other).getValue()[i][j];
@@ -87,7 +103,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -101,6 +117,9 @@ public class Matrix extends Var {
        else if (other instanceof Vector) {
             double[][] res = Arrays.copyOf(value, value.length);
             double[] z = new double[res.length];
+            if (res[0].length != z.length){
+                throw new CalcException("ERROR: Такие матрицы нельзя перемножить, так как количество столбцов матрицы не равно вектору");
+            }
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
                     z[i] = z[i] + res[i][j] * ((Vector) other).getValue()[j];
@@ -111,6 +130,9 @@ public class Matrix extends Var {
        else if (other instanceof Matrix) {
             double[][] res = Arrays.copyOf(value, value.length);
             int matrixLeight = ((Matrix) other).getValue().length;
+            if (res.length != matrixLeight){
+                throw new CalcException("ERROR: Количество столбцов первой матрицы должно равняться количеству строк второй.");
+            }
             double[][] z = new double[res.length][matrixLeight];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < matrixLeight; j++)
@@ -126,9 +148,11 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] res = Arrays.copyOf(value, value.length);
+            if (((Scalar) other).getValue()==0) {
+                throw new CalcException("ERROR: Деление на ноль");}
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
                     res[i][j] = res[i][j] / ((Scalar) other).getValue();
