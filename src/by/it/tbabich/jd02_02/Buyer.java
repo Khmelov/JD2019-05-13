@@ -10,6 +10,21 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         return pensioneer;
     }
 
+    @Override
+    public void goToQueue() {
+        Queue.add(this);
+        synchronized (Cashier.monitor){
+            Cashier.monitor.notifyAll();
+        }
+        synchronized (this){
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void setPensioneer(boolean pensioneer) {
         this.pensioneer = pensioneer;
         coefSpeed = Util.rnd(1, 2);
@@ -18,6 +33,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public Buyer(int number) {
         super("Buyer №" + number);
         coefSpeed = 1;
+        Dispatcher.addBuyer();
     }
 
     @Override
@@ -25,6 +41,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         enterToMarket();
         takeBacket();
         chooseGoods();
+        goToQueue();
         goOut();
     }
 
@@ -53,6 +70,9 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public void goOut() {
         System.out.println(this + " out from the market");
         Market.deleteBuyer(this);
+        synchronized (Cashier.monitor){
+            Cashier.monitor.notifyAll();
+        }
     }
 
     @Override
