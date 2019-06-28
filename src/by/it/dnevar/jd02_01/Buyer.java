@@ -42,7 +42,7 @@ public class Buyer extends Thread implements IBuyer, Runnable {
     }
 
     @Override
-    public void goOut() {
+    synchronized public void goOut() {
         System.out.println(this + " вышел из магазина");
     }
 
