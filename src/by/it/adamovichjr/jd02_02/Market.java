@@ -21,7 +21,6 @@ public class Market {
         for (int i = 1; i <= Dispetcher.numberOfCashier; i++) {
             Cashier cashier = new Cashier(i);
             threads.add(cashier);
-
             System.out.println("Cashier go to work place");
         }
     }
@@ -33,7 +32,7 @@ public class Market {
             int additionalBuyers = (limitBuyers - Dispetcher.countBuyerInMarket);
             int newBuyers = Time.fromTo(0, 2) + additionalBuyers;
             lettingInNewBuyers(newBuyers);
-            System.out.println("Time " + (time) + " count buyers in market " + Dispetcher.countBuyerInMarket + " Cashiers wait " + Queue.dequeCashiersWait.size() + " Buyers in queue " +Queue.dequeBuyers.size() + " PENSIONERS in Q " + Queue.dequePensionerBuyer.size());
+            System.out.println("Time = " + (time) + " count buyers in market = " + Dispetcher.countBuyerInMarket + " Cashiers wait = " + Queue.dequeCashiersWait.size() + " Buyers in queue = " +Queue.dequeBuyers.size() + " PENSIONERS in Q = " + Queue.dequePensionerBuyer.size());
             time++;
             Time.sleep(1000);
 

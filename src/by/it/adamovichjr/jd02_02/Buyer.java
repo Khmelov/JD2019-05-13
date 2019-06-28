@@ -3,10 +3,9 @@ package by.it.adamovichjr.jd02_02;
 public class Buyer extends Thread implements IBuer, IUseBacket {
 
 
-
     Buyer(int number) {
         super("Buyer № " + number);
-        if(pensioner){
+        if (pensioner) {
             setName("Buyer № " + number + " PENSIONER ");
         }
         Dispetcher.addBuyerInMarket();
@@ -15,7 +14,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
     }
 
     Backet backet;
-    boolean pensioner = Time.fromTo(1, 2) == 1;
+    boolean pensioner = Time.fromTo(1, 4) == 1;
 
     @Override
     public void goToQueue() {
@@ -23,7 +22,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
 
         Queue.addBuyer(this);
         synchronized (Cashier.monitor) {
-            if(Queue.checkCashierOfBuyer()){
+            if (Queue.checkCashierOfBuyer()) {
                 Cashier.monitor.notify();
                 Queue.extractCashier();
             }
@@ -36,7 +35,6 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
             }
         }
     }
-
 
 
     private int valueOfchosesGoods = Time.fromTo(1, 4);
@@ -53,7 +51,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
         Time.sleep(pause);
         String choisedGood = Goods.getGood();
 
-        //       System.out.println(this.getName() + "chose " + choisedGood );
+        System.out.println(this.getName() + "chose " + choisedGood);
         return choisedGood;
     }
 
@@ -86,7 +84,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
         int pause = Time.fromTo(100, 200) * speedPensionerOrNormal / 100 * Dispetcher.BUYERS_SPEED;
         Backet backet = new Backet(getName());
         Time.sleep(pause);
-        //    System.out.println(this.getName() + "take backet ");
+        System.out.println(this.getName() + "take backet ");
         return backet;
     }
 
@@ -95,7 +93,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
         int pause = Time.fromTo(100, 200) * speedPensionerOrNormal / 100 * Dispetcher.BUYERS_SPEED;
         backet.backetWithGoods.add(good);
         Time.sleep(pause);
-        //      System.out.println(this.getName() + "put "+ good +" to backet");
+        System.out.println(this.getName() + "put " + good + " to backet");
     }
 
     @Override

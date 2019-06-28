@@ -13,6 +13,7 @@ class Queue {
     static Deque<Buyer> dequePensionerBuyer = new LinkedList<>();
     static Deque<Cashier> dequeCashiersWait = new LinkedList<>();
 
+
     synchronized static void addBuyer(Buyer buyer) {
         if (!buyer.pensioner) {
             dequeBuyers.addLast(buyer);

@@ -10,6 +10,7 @@ class Dispetcher {
     private static final int PLAN = 100;
 
 
+
     synchronized static void addBuyerInMarket(){
         countBuyerInMarket++;
     }
