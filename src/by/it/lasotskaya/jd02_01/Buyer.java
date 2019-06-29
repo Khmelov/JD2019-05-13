@@ -2,7 +2,8 @@ package by.it.lasotskaya.jd02_01;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
-    public Buyer(int number) {
+     Buyer(int number) {
+
         super("Buyer №" + number);
     }
 

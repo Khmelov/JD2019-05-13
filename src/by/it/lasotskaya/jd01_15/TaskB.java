@@ -1,23 +1,18 @@
 package by.it.lasotskaya.jd01_15;
-
 // hello
 // first comment
     /*
     one more comment
-     */
+    */
     /*
     another one
      */
-
 import java.io.*;
-
 /**
  * JavaDoc
  */
-
 public class TaskB {
     private static StringBuilder stringBuilder = new StringBuilder();
-    private static boolean delete = false;
 
     public static void main(String[] args) {
         File input = new File(getRoot(), "TaskB.java");
@@ -30,15 +25,13 @@ public class TaskB {
     }
 
     private static void readFile(File file) {
-        try (BufferedReader br = new BufferedReader(
-                new FileReader(file))
-        ) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                stringBuilder.append(delete(line+("\n")));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        int start;
+        int finish;
+        while ((start = stringBuilder.indexOf("/\u002f")) >= 0 && (finish = stringBuilder.indexOf("\n",start)) >= 0 ) {
+            stringBuilder.delete(start,finish+1);
+        }
+        while ((start = stringBuilder.indexOf("\u002f*")) >= 0 && (finish = stringBuilder.indexOf("*\u002f")) >= 0 ) {
+            stringBuilder.delete(start,finish+2);
         }
     }
 
@@ -60,33 +53,5 @@ public class TaskB {
             e.printStackTrace();
         }
     }
-    private static String delete(String line) {
-        while (delete) {
-            for (int i = 0; i < line.length(); i++) {
-                if ((line.charAt(i) == '*') && (line.charAt(i + 1) == '/')) {
-                        delete = false;
-                        return line.substring(i + 3);
-                    }
-                }
-            return " ";
-        }
 
-
-        for (int i = 0; i < line.length(); i++) {
-            if (line.charAt(i) == '/') {
-                if (line.charAt(i + 1) == '/') {
-                    return line.substring(0,i);
-                }
-               if (line.charAt(i + 1) == '*' && line.charAt(i + 2) != '*') {
-                    delete = true;
-                    return line.substring(0,i);
-                }
-               if (line.charAt(i + 1) == '*' && line.charAt(i + 2) == '*') {
-                    delete = true;
-                    return line.substring(0,i);
-                }
-            }
-        }
-        return line;
-    }
 }
