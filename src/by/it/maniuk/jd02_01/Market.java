@@ -1,7 +1,6 @@
 package by.it.maniuk.jd02_01;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Market {
@@ -10,7 +9,7 @@ public class Market {
 
     public static void main(String[] args) {
         System.out.println("Market opened");
-        int countBuyerInSecond = 0;
+        int countBuyerInSecond;
         for (int time = 0; time < 120; time++) {
             int second = time % 60;
             if ((second <= 30)) {
