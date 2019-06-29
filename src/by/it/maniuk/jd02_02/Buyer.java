@@ -34,7 +34,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         }
         StringBuilder sb = new StringBuilder();
         for (String good : goods) {
-            sb.append(good).append(" ").append(Goods.getCost().get(good)).append("  : ");
+            sb.append(good).append(" ").append(Goods.getCost().get(good)).append(" ");
         }
         if (pensioneer) sb.append(" pensionner");
         System.out.println(this + " stop choose goods: "+ sb.toString());

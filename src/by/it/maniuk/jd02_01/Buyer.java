@@ -19,7 +19,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void run() {
-       isPensionerHere();
+        isPensionerHere();
         enterToMarket();
         takeBacket();
         shopping();
@@ -33,9 +33,15 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         }
         StringBuilder sb = new StringBuilder();
         for (String good : goods) {
-            sb.append(good).append(" ").append(Goods.getCost().get(good)).append("  : ");
+            sb.append(good).append(" ").append(Goods.getCost().get(good)).append("  ");
         }
-        if (pensioneer) sb.append(" pensionner ID's");
+        Double cost=0d;
+        for (String good : goods) {
+           cost += Goods.getCost().get(good);
+        }
+        cost = Math.floor(cost*100)/100;
+        sb.append("summa = ").append(cost);
+        if (pensioneer) sb.append(" pensionner ");
         System.out.println(this + " stop choose goods: "+ sb.toString());
     }
 

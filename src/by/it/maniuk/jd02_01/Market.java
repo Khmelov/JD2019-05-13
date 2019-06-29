@@ -5,20 +5,25 @@ import java.util.Date;
 import java.util.List;
 
 public class Market {
+  private static List<Buyer> buyers = new ArrayList<>();
+   private static int countAllBuyers = 0;
 
     public static void main(String[] args) {
-        List<Buyer> buyers=new ArrayList<>();
-        List<String> taims=new ArrayList<>();
         System.out.println("Market opened");
-        int countBuyer=0;
+        int countBuyerInSecond = 0;
         for (int time = 0; time < 120; time++) {
-            int count=Util.rnd(2);
-            for (int i = 0; i < count; i++) {
-                Buyer buyer=new Buyer(++countBuyer);
-                buyer.start();
-                buyers.add(buyer);
-                taims.add(new Date().toString());
+            int second = time % 60;
+            if ((second <= 30)) {
+                countBuyerInSecond = Util.rnd(2) + (second + 10);
+
+            } else {
+                countBuyerInSecond = (40 + (30 - second));
+
             }
+            for (int i = countBuyerInSecond; i >0 ; i--) {
+                enerBuyers();
+            }
+
             Util.sleep(1000);
         }
         for (Buyer buyer : buyers) {
@@ -30,8 +35,13 @@ public class Market {
         }
         System.out.println("Market closed");
 
-        for (String taim : taims) {
-            System.out.println(taim);
+    }
+
+    private static void enerBuyers() {
+            Buyer buyer=new Buyer(++countAllBuyers);
+            buyer.start();
+            buyers.add(buyer);
         }
     }
-}
+
+
