@@ -3,12 +3,13 @@ package by.it.guchek.jd01_15;
 import java.io.*;
 
 public class TaskB {
-//этот комментарий надо удалить
+    //этот комментарий надо удалить
 
     /*бла бла бла
     бла бла
      */
     private static StringBuilder sb= new StringBuilder();
+    private static StringBuilder sb1= new StringBuilder();
     /*бла бла бла
     бла бла
      */
@@ -31,36 +32,34 @@ public class TaskB {
     //этот комментарий надо удалить
     public static void main(String[] args) {
 
-        try(BufferedReader bRead = new BufferedReader(new FileReader(fileName))){
+        try (BufferedReader bRead = new BufferedReader(new FileReader(fileName))) {
             String lineFrJava;
             boolean ignoreLine = false;
 
-            while (bRead.ready()){
-                lineFrJava=bRead.readLine();
+            while (bRead.ready()) {
+                lineFrJava = bRead.readLine();
 
-                if (lineFrJava.contains("/"+"/")||lineFrJava.contains("/"+"*")||lineFrJava.contains("/"+"**")){
-                    sb.append("", 0, 0).append("\n");
-                    if (lineFrJava.contains("/"+"/")){
-                        ignoreLine=false;
+                if (lineFrJava.contains("/" + "/") || lineFrJava.contains("/" + "*") || lineFrJava.contains("/" + "**")) {
+                    sb1.append("", 0, 0).append("\n");
+                    if (lineFrJava.contains("/" + "/")) {
+                        ignoreLine = false;
                     } else ignoreLine = true;
-                } else if (lineFrJava.contains("*"+"/")){
-                    sb.append("", 0, 0).append("\n");
+                } else if (lineFrJava.contains("*" + "/")) {
+                    sb1.append("", 0, 0).append("\n");
                     ignoreLine = false;
-                } else if (!ignoreLine){
-                    sb.append(lineFrJava).append("\n");
-                }
-                else sb.append("", 0, 0).append("\n");
+                } else if (!ignoreLine) {
+                    sb1.append(lineFrJava).append("\n");
+                } else sb1.append("", 0, 0).append("\n");
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println(sb.toString());
-
         try (PrintWriter prWrite = new PrintWriter(new FileWriter(fileName1))){
 
-           //prWrite.print(sb.toString());
+           prWrite.write(sb1.toString());
+           System.out.println(sb1);
 
         } catch (IOException e) {
             e.printStackTrace();

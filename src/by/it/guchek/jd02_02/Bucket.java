@@ -2,7 +2,7 @@ package by.it.guchek.jd02_02;
 
 public class Bucket {
 
-    public static void goodsInBacket() {
+    public static synchronized void goodsInBacket() {
 
         for (int i = 0; i < RandCount.randFrTo(1, 4); i++) {
 

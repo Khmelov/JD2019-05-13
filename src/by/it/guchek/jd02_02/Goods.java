@@ -20,7 +20,7 @@ public class Goods {
     }
 
         //Map.Entry <String, Double> entry = (Map.Entry<String, Double>) goods.entrySet().iterator();
-    static String getRandGood (){
+    static synchronized String getRandGood (){
         Iterator itGoods = goods.entrySet().iterator();
         for (int i = 0; i<(RandCount.randFrTo(1,goods.size())); i++){
         if (itGoods.hasNext()){

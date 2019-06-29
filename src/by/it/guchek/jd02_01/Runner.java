@@ -11,7 +11,7 @@ public class Runner {
         List<Buyer> buyers=new ArrayList<>();
         System.out.println("Магазин открыт");
 
-        for (int time = 0; time < 120/4; time++) {           //запускаем в течении 2 минут
+        for (int time = 0; time < 120; time++) {           //запускаем в течении 2 минут
             int countEntered=RandCount.randFrTo(2);  //от 0 до 2 покупателей в сек
             for (int i = 0; i < countEntered; i++) {
                 Buyer buyer=new Buyer(++countBuyers);

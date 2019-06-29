@@ -3,7 +3,7 @@ package by.it.guchek.jd02_02;
 public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket {
 
     private int num;  //номер покупателя
-    private static volatile boolean pensioneer=false;
+    private volatile boolean pensioneer=false;
 
     //конструктор покупателя с его номером
     public Buyer(int num){
