@@ -1,11 +1,11 @@
-package by.it.akhmelev.jd02_02;
+package by.it.akhmelev.jd02_03;
 
 import java.util.HashMap;
 import java.util.Map;
 
 class Goods {
 
-    private static Map<Integer,Good> goods=new HashMap<>();
+    private static Map<Integer, Good> goods=new HashMap<>();
 
     static {
         goods.put(1,new Good("Bread",2.2));
