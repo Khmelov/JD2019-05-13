@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Good {
+ class Good {
 
-    HashMap<String, Double> goods = new HashMap<>();
+    private static HashMap<String, Double> goods = new HashMap<>();
 
-    Good(){
+    static{
         goods.put("Хлеб",1.5);
         goods.put("Молоко",2.0);
         goods.put("Колбаса",23.75);
@@ -23,10 +23,13 @@ public class Good {
         goods.put("Сыр",15.9);
     }
 
-    String getRandomGood(){
-        List<String> keys = new ArrayList<>(goods.keySet());
-        String randomKey = keys.get(Rnd.fromTo(0,keys.size()-1));
-        Double value = goods.get(randomKey);
-        return randomKey + " по цене " + Double.toString(value);
+    private static List<String> keys = new ArrayList<>(goods.keySet());
+
+    static String getRandomGood(){
+        return keys.get(Utility.fromTo(0,keys.size()-1));
+    }
+
+    static Double getRandomGoodKey(String key){
+        return goods.get(key);
     }
 }

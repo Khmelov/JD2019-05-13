@@ -2,7 +2,7 @@ package by.it.dnevar.jd02_01;
 
 import java.util.Random;
 
-class Rnd {
+class Utility {
 
     static final long init = System.currentTimeMillis();
     static final Random random = new Random(init);
@@ -12,5 +12,4 @@ class Rnd {
         int rand = from+random.nextInt(delta);
         return rand;
     }
-
 }

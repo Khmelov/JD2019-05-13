@@ -1,32 +1,30 @@
 package by.it.dnevar.jd02_01;
 
+import java.util.HashMap;
+
+import static by.it.dnevar.jd02_01.Buyer.time;
+
 public class Basket implements IUseBasket {
 
-    String name;
-
-    Basket(String name){
-        this.name = name;
-    }
+    static HashMap<String,Double> goodsInBasket = new HashMap<>();
 
     @Override
     public void takeBasket() {
         try {
-            int timeout = Rnd.fromTo(100, 200);
+            int timeout = Utility.fromTo(time, 2*time);
             Thread.sleep(timeout);
         } catch (InterruptedException e) {
-            System.out.println(name + " //некоректное завершение ожидания");;
+            System.out.println(" //некоректное завершение ожидания");
         }
-        System.out.println(name + " взял корзину");
     }
 
     @Override
-    public void putGoodstobasket() {
+    public void putGoodsToBasket() {
         try {
-            int timeout = Rnd.fromTo(100, 200);
+            int timeout = Utility.fromTo(time, 2*time);
             Thread.sleep(timeout);
         } catch (InterruptedException e) {
-            System.out.println(name + " //некоректное завершение ожидания");;
+            System.out.println(" //некоректное завершение ожидания");;
         }
-        System.out.println(name + " положил товары в корзину");
     }
 }

@@ -3,20 +3,30 @@ package by.it.dnevar.jd02_01;
 public class Buyer extends Thread implements IBuyer, Runnable {
 
     int number;
-    Basket basket = new Basket(this.getName());
+    Basket basket = new Basket();
+    Good goodsInMarket = new Good();
+    static int time;
+
+    private boolean pensioneer = Utility.fromTo(1,4)==4;
 
     Buyer(int number){
-        this.number = number;
-        this.setName("Покупатель № " + number);
+        if(pensioneer){
+            setName("Покупатель(пенсионер) № " + number);
+            time = Dispetcher.TIMEPENSIONEER;
+        }else{
+            setName("Покупатель № " + number);
+            time = Dispetcher.TIMEBUYER;
+        }
     }
 
     @Override
     public void run(){
-        Basket basket = new Basket(this.getName());
         enterToMarket();
         basket.takeBasket();
+        System.out.println(getName()+ " взял корзину");
         chooseGoods();
-        basket.putGoodstobasket();
+        basket.putGoodsToBasket();
+        System.out.println(getName()+" положил товары в корзину");
         goOut();
     }
 
@@ -28,16 +38,18 @@ public class Buyer extends Thread implements IBuyer, Runnable {
 
     @Override
     public void chooseGoods() {
-        Good goodsInMarket = new Good();
         try {
-            int timeout = Rnd.fromTo(500, 2000);
+            int timeout = Utility.fromTo(5*time, 20*time);
             Thread.sleep(timeout);
         } catch (InterruptedException e) {
             System.out.println(this + " //некоректное завершение ожидания");;
         }
-        int numOfGoods = Rnd.fromTo(0,4);
+        int numOfGoods = Utility.fromTo(0,4);
         for (int i = 0; i < numOfGoods; i++) {
-            System.out.println(this + " выбрал " + goodsInMarket.getRandomGood());
+            String chosedGoodKey = Good.getRandomGood();
+            Double goodPrice = Good.getRandomGoodKey(chosedGoodKey);
+            System.out.println(this + " выбрал " + chosedGoodKey);
+            Basket.goodsInBasket.put(chosedGoodKey, goodPrice);
         }
     }
 
