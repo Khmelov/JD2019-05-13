@@ -5,11 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 public class Market {
+    private static List<Buyer> buyers = new ArrayList<>();
+    private static int countAllBuyers = 0;
 
     public static void main(String[] args) {
         List<Thread> threads=new ArrayList<>();
-        List<Buyer> buyers=new ArrayList<>();
-        List<String> times=new ArrayList<>();
+
         System.out.println("Market opened");
 
         for (int i = 0; i <2 ; i++) {
@@ -17,17 +18,21 @@ public class Market {
             threads.add(thread);
             thread.start();
         }
+        int countBuyerInSecond;
+        for (int time = 0; time < 120; time++) {
+            int second = time % 60;
+            if ((second <= 30)) {
+                countBuyerInSecond = Util.rnd(2) + (second + 10);
 
-        int numberBuyer=0;
-        while (Dispatcher.marketIsOpened()){
-            int count = Util.rnd(2);
-            for (int i = 0; i < count&& Dispatcher.marketIsOpened(); i++) {
-                Buyer buyer = new Buyer(++ numberBuyer);
-                buyer.start();
-                buyers.add(buyer);
-                //times.add(new Date().toString());
+            } else {
+                countBuyerInSecond = (40 + (30 - second));
+
+            }
+            for (int i = countBuyerInSecond; i >0 ; i--) {
+                enterBuyers();
             }
 
+            Util.sleep(1000);
             Util.sleep(1000);
         }
         for (Buyer buyer : buyers) {
@@ -39,8 +44,11 @@ public class Market {
         }
         System.out.println("Market closed");
 
-        for (String taim : times) {
-            System.out.println(taim);
-        }
+
+    }
+    private static void enterBuyers() {
+        Buyer buyer=new Buyer(++countAllBuyers);
+        buyer.start();
+        buyers.add(buyer);
     }
 }
