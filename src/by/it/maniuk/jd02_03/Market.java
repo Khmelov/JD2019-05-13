@@ -10,7 +10,6 @@ public class Market {
     private static int countAllBuyers = 0;
 
     public static void main(String[] args) {
-        Semaphore semaphore = new Semaphore(20);
         List<Thread> threads=new ArrayList<>();
         System.out.println("Market opened");
 
