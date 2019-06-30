@@ -105,7 +105,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         System.out.println(this + " stop choose goods: " + sb.toString());
     }
 
-    public List<String> getGoods() {
-        return goods;
+    public List getGoods() {
+        return  goods;
     }
 }
