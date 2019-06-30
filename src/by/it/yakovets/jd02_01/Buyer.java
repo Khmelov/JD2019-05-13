@@ -35,6 +35,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void enterToMarket() {
         System.out.println(this + " enter the market");
+        Market.buyerIn++;
     }
 
     @Override
@@ -53,6 +54,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void goOut() {
         System.out.println(this + " out from the market");
+        Market.buyerIn--;
     }
 
     @Override
