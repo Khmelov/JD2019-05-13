@@ -60,5 +60,3 @@ public class TaskC {
 
 
 
-    //SimpleDateFormat date = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-    //date.format(files[i].lastModified())
