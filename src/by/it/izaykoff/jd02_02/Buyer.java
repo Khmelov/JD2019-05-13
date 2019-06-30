@@ -55,25 +55,36 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     }
 
     @Override
-    public String toString() {
-        return getName();
-    }
-
-    @Override
     public void takeBasket() {
         System.out.println(this + " took the basket");
+    }
+
+    private Double total;
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     @Override
     public void putGoodsToBasket() {
         int count;
+        double price = 0;
         for (count = 1; count < 5; count++) {
-            String good = Goods.getRandomGood();
+            Good good = Goods.getRandomGood();
+            price += good.getPrice();
             System.out.println(this + " choose " + count + " " + good + " put in the basket");
         }
+        setTotal(price);
         System.out.println(this + " stop choose goods ");
     }
 
-
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
 

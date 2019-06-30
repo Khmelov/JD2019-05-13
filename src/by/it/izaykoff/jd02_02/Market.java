@@ -7,7 +7,8 @@ public class Market {
     public static void main(String[] args) {
         List<Thread> threads = new ArrayList<>();
         System.out.println("Market opened");
-        for (int i = 0; i < 2; i++){
+
+        for (int i = 1; i < 6; i++) {
             Thread thread = new Thread(new Cashier(i));
             threads.add(thread);
             thread.start();

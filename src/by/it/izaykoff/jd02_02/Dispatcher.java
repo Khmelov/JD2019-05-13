@@ -8,20 +8,20 @@ class Dispatcher {
     private static int bueyrInMarket = 0;
     private static int bueyrCounter = 0;
 
-    static boolean planComplect(){
+    static boolean planComplete() {
         return (bueyrCounter == PLAN && (bueyrInMarket == 0));
     }
 
-    synchronized static void addBuyer(){
+    synchronized static void addBuyer() {
         bueyrInMarket++;
     }
 
-    synchronized static void completeBuyer(){
+    synchronized static void completeBuyer() {
         bueyrInMarket--;
         bueyrCounter++;
     }
 
-    synchronized static boolean marketIsOpened(){
+    synchronized static boolean marketIsOpened() {
         return bueyrInMarket + bueyrCounter < PLAN;
     }
 }

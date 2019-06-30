@@ -12,14 +12,8 @@ import java.util.stream.Stream;
 
 public class TaskB {
 
-    /**
-     * Это JavaDoc комментарий, пример написания.
-     */
-    // Однострочный комментарий.
-    /* Тоже однострочный комментарий. */
-
-
     public static void main(String[] args) throws IOException {
+
 
         String fileTxt = getPath(TaskB.class,"TaskB.txt");
         String fileJava = getPath(TaskB.class,"TaskB.java");
@@ -34,6 +28,26 @@ public class TaskB {
         writeFileTxt(fileTxt, strBuilder);
     }
 
+    private static void readFileJava(String fileJava, StringBuilder strBuilder) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileJava))) {
+
+            while (reader.ready()) {
+                String line = reader.readLine();
+                if (line.contains("/"+"/") || line.contains("/"+"*" ) && !line.contains("if")){
+                    strBuilder.append(line, 0, line.indexOf("/")).append("\n");
+                }
+                else if (line.contains("*"+"/")  && !line.contains("if") ){
+                    strBuilder.append(line, 0, line.indexOf("*")).append("\n");
+                }
+                else {
+                    strBuilder.append(line).append("\n");
+
+                }
+            }
+        }
+    }
+
+
     private static void writeFileTxt(String fileTxt, StringBuilder strBuilder) {
         try (PrintWriter out = new PrintWriter(new FileWriter(fileTxt))) {
             out.write(String.valueOf(strBuilder));
@@ -43,25 +57,6 @@ public class TaskB {
         }
     }
 
-    private static void readFileJava(String fileJava, StringBuilder strBuilder) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileJava))) {
-
-            while (reader.ready()){
-                String line = reader.readLine();
-                int i = line.indexOf("/");
-                strBuilder.append(line);
-                if (i>=0){
-                    strBuilder.deleteCharAt(i);
-                }
-                strBuilder.append("\n");
-
-            }
-//                char line = (char) reader.read();
-//                if (line == '/') {
-//                    strBuilder.
-//                }
-            }
-    }
 
 
     private static String getPath(Class<?> aClass, String filename) {
@@ -77,5 +72,7 @@ public class TaskB {
         path = root + separator + "src" + separator + path;
         return path;
     }
+
+
 
 }
