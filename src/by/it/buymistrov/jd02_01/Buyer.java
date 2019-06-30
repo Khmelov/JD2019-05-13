@@ -1,5 +1,7 @@
 package by.it.buymistrov.jd02_01;
 
+import by.it.buymistrov.jd02_02.IUseBacket;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,18 +10,15 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private static Map<String, Integer> backet;
     private static String good;
-    private static boolean pensioner = false;
 
-    static boolean isPensioner() {
-        return pensioner;
-    }
+    private boolean pensioner = false;
 
-    static void setPensioner(boolean pensioner) {
-        Buyer.pensioner = pensioner;
-    }
 
     Buyer(int number) {
         super("Buyer №" + number);
+        if (number%4==0){
+            pensioner=true;
+        }
     }
 
     @Override

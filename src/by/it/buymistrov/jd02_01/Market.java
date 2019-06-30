@@ -11,26 +11,18 @@ public class Market {
         Set<Buyer> activeBuyers = new HashSet<>();
         System.out.println("Market opened");
         int countBuyer = 0;
-        int countPensioner = 0;
+
         for (int time = 0; time < 120; time++) {
+            int firstHalf = Util.rnd(2) + (time % 60) + 10- activeBuyers.size();
+            int secondHalf = Util.rnd(2) + 40 + (30 - time % 60) - activeBuyers.size();
             if (time % 60 <= 30) {
-                int count = Util.rnd(2) + (time % 60) + 10 - activeBuyers.size();
-                for (int i = 0; i < count; i++) {
-                    if (countBuyer % 4 == 0) {
-                        Buyer.setPensioner(!Buyer.isPensioner());
-                        countPensioner++;
-                    }
+                for (int i = 0; i < firstHalf; i++) {
                     Buyer buyer = new Buyer(++countBuyer);
                     buyer.start();
                     buyers.add(buyer);
                 }
             } else {
-                int count = Util.rnd(2) + 40 + (30 - time % 60) - activeBuyers.size();
-                for (int i = 0; i < count; i++) {
-                    if (countBuyer % 4 == 0) {
-                        Buyer.setPensioner(!Buyer.isPensioner());
-                        countPensioner++;
-                    }
+                for (int i = 0; i < secondHalf; i++) {
                     Buyer buyer = new Buyer(++countBuyer);
                     buyer.start();
                     buyers.add(buyer);
@@ -61,6 +53,5 @@ public class Market {
 
         System.out.println("Market closed");
         System.out.println("Всего покупателей " + countBuyer);
-        System.out.println("Из них пенсионеров " + countPensioner);
     }
 }
