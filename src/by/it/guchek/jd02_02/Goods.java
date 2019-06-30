@@ -4,24 +4,30 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Goods {
-    static String nameGood="";
+class Goods {
+    //static String nameGood="";
 
-    static Map<String, Double> goods = new HashMap<String, Double>();
+    private static Map<Integer, Good> goods = new HashMap<>();
 
     static {
-        goods.put("Батон", 1.12);
-        goods.put("Хлеб", 1.55);
-        goods.put("Колбаса", 6.00);
-        goods.put("Макароны", 2.50);
-        goods.put("Картошка", 2.00);
-        goods.put("Молоко", 1.15);
-        goods.put("Сыр", 4.25);
+        goods.put(1, new Good("Батон", 1.12));
+        goods.put(2,new Good("Хлеб", 1.55));
+        goods.put(3, new Good("Колбаса", 6.00));
+        goods.put(4, new Good("Макароны", 2.50));
+        goods.put(5,new Good("Картошка", 2.00));
+        goods.put(6, new Good("Молоко", 1.15));
+        goods.put(7, new Good("Сыр", 4.25));
     }
 
         //Map.Entry <String, Double> entry = (Map.Entry<String, Double>) goods.entrySet().iterator();
-    static synchronized String getRandGood (){
-        Iterator itGoods = goods.entrySet().iterator();
+    static synchronized Good getRandGood (){
+        int id=0;
+        for (int i = 0; i<(RandCount.randFrTo(1,4)); i++){
+            id=1+(int)(Math.random()*(goods.size()));
+        }
+        return goods.get(id);
+        //if (itGoods.hasNext()){
+        /*Iterator itGoods = goods.entrySet().iterator();
         for (int i = 0; i<(RandCount.randFrTo(1,goods.size())); i++){
         if (itGoods.hasNext()){
 
@@ -29,9 +35,7 @@ public class Goods {
             nameGood = entry.getKey()+" цена "+entry.getValue()+"р.";
 
          }else break;
-        }
-
-        return nameGood;
+        }*/
     }
 
 }

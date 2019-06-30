@@ -1,12 +1,15 @@
 package by.it.guchek.jd02_02;
 
-public class Bucket {
+import java.util.HashMap;
+import java.util.Map;
 
-    public static synchronized void goodsInBacket() {
+class Bucket {
+
+    static synchronized void goodsInBacket() {
 
         for (int i = 0; i < RandCount.randFrTo(1, 4); i++) {
 
-            String newGood = Goods.getRandGood();
+            Object newGood = Goods.getRandGood();
             System.out.printf("                 %s%n",  newGood);
 
 
