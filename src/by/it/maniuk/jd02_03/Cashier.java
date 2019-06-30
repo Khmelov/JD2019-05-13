@@ -1,13 +1,12 @@
-package by.it.maniuk.jd02_02;
+package by.it.maniuk.jd02_03;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Cashier implements Runnable {
 
     final static Object monitor = new Object();
 
-    int number;
+    private int number;
     private String name;
 
     Cashier(int number) {
@@ -26,14 +25,11 @@ public class Cashier implements Runnable {
                 }
 
             if (buyer != null) {
-                System.out.println(this + "started service of " + buyer);
-                int timeout = Util.rnd(2000, 5000);
-                Util.sleep(timeout);
-
-               // print(buyer);
-
-                System.out.println(this + "stopped service of " + buyer);
                 synchronized (buyer){
+                    System.out.println(this + "started service of " + buyer);
+                    int timeout = Util.rnd(2000, 5000);
+                    Util.sleep(timeout);
+                    System.out.println(this + "stopped service of " + buyer);
                     buyer.notify();
                 }
 

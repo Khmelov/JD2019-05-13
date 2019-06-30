@@ -1,4 +1,4 @@
-package by.it.maniuk.jd02_02;
+package by.it.maniuk.jd02_03;
 
 class Util {
     private static int count = 0;

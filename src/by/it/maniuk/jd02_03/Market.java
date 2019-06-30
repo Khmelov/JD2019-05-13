@@ -1,15 +1,20 @@
-package by.it.maniuk.jd02_02;
+package by.it.maniuk.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 public class Market {
     private static int countAllBuyers = 0;
+
     public static void main(String[] args) {
+        Semaphore semaphore = new Semaphore(20);
         List<Thread> threads=new ArrayList<>();
         System.out.println("Market opened");
 
-        cashierInWork(threads);
+        cashierInWork();
         marketStartedWork(threads);
 
 
@@ -35,21 +40,22 @@ public class Market {
                     countBuyerInSecond = (40 + (30 - second));
 
                 }
+
                 for (int i = 0; i < countBuyerInSecond && Dispatcher.marketIsOpened(); i++) {
-                    Buyer buyer = new Buyer(++ countAllBuyers);
-                    threads.add(buyer);
-                    buyer.start();
+                        Buyer buyer = new Buyer( ++ countAllBuyers);
+                        threads.add(buyer);
+                        buyer.start();
                 }
                 Util.sleep(1000);
             }
         }}
 
 
-    private static void cashierInWork(List<Thread> threads) {
-        for (int i = 0; i <= 5; i++) {
-            Thread thread = new Thread(new Cashier(i));
-            threads.add(thread);
-            thread.start();
+    private static void cashierInWork() {
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        for (int i = 0; i < 2; i++) {
+            executorService.execute(new Cashier(i));
+        }
+        executorService.shutdown();
         }
     }
-}

@@ -1,29 +1,39 @@
-package by.it.maniuk.jd02_02;
+package by.it.maniuk.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
     private boolean pensioneer;
-
+    private Semaphore semaphore = new Semaphore(20);
     private List<String> goods = new ArrayList<>();
 
     private void isPensioner() {
         pensioneer = Util.rnd(4) == 1;
     }
 
-    Buyer(int number) {
+    Buyer( int number)  {
         super("Buyer №" + number);
         Dispatcher.addBuyer();
+
     }
 
     @Override
     public void run() {
-        isPensioner();
-        enterToMarket();
-        shopping();
-        goToQueue();
-        goOut();
+        try {
+            semaphore.acquire();
+            isPensioner();
+            enterToMarket();
+           shopping();
+           goToQueue();
+           goOut();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphore.release();
+        }
+
     }
 
     @Override
@@ -62,7 +72,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         System.out.println(this + " out from the market");
         Dispatcher.completeBuyer();
         synchronized (Cashier.monitor) {
-            Cashier.monitor.notifyAll(); // Do not touch
+            Cashier.monitor.notifyAll();
         }
     }
 
