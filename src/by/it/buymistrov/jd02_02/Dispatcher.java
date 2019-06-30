@@ -2,7 +2,7 @@ package by.it.buymistrov.jd02_02;
 
 
 class Dispatcher {
-    static final int K_SPEED = 100;
+    static final int K_SPEED = 10;
 
     private static final int PLAN = 100;
 
