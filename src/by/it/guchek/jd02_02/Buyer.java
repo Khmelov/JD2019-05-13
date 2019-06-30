@@ -93,6 +93,7 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket {
 
         System.out.printf("%s Положил в корзину товар: %n", this);
         Bucket.goodsInBacket(this.getName());
+        //Bucket.billGoodsInBacket(this.getName());
         if (!pensioneer){
             int pauseForBacket = RandCount.randFrTo(100, 200); //кладет в корзину от 0,1 до 0,2 сек
             RandCount.sleep(pauseForBacket);

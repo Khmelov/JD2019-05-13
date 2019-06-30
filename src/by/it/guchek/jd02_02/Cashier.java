@@ -17,6 +17,7 @@ public class Cashier implements Runnable {
             if (buyer != null) {
                 System.out.println(this + "started service of " + buyer);
                 int timeout = RandCount.randFrTo(2000, 5000);
+                //Bucket.billGoodsInBacket(buyer.getName());
                 RandCount.sleep(timeout);
                 System.out.println(this + "stopped service of " + buyer);
                 synchronized (buyer){
