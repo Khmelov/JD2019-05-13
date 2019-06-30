@@ -1,4 +1,4 @@
-package by.it.trudnitski.jd02_01;
+package by.it.trudnitski.jd02_03;
 
 public interface IBuyer {
 
@@ -7,5 +7,7 @@ public interface IBuyer {
     void chooseGoods();
 
     void goOut();
+
+    void goToQeue();
 
 }

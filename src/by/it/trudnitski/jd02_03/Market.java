@@ -1,19 +1,20 @@
-package by.it.trudnitski.jd02_02;
+package by.it.trudnitski.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Market {
     public static void main(String[] args) {
         List<Thread> threads = new ArrayList<>();
         System.out.println("Market opened");
 
-
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
         for (int i = 0; i < 5; i++) {
-            Thread thread = new Thread(new Cashier(i));
-            threads.add(thread);
-            thread.start();
+            executorService.execute(new Cashier(i));
         }
+        executorService.shutdown();
 
         int numberBuyer = 0;
         while (Dispatcher.marketIsOpen()) {
@@ -36,4 +37,3 @@ public class Market {
         System.out.println("Market closed");
     }
 }
-

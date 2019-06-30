@@ -1,4 +1,4 @@
-package by.it.trudnitski.jd02_02;
+package by.it.trudnitski.jd02_03;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -25,9 +25,4 @@ public class Dispatcher {
         return buyerInMarket.get() + buyerCounter.get() < PLAN;
     }
 
-    static int getBuyerInMarket() {
-        return buyerInMarket.get();
-    }
 }
-
-

@@ -1,11 +1,11 @@
-package by.it.trudnitski.jd02_02;
+package by.it.trudnitski.jd02_03;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 class Queue {
 
-    private static Deque<Buyer> instance = new LinkedList<Buyer>();
+    private static BlockingDeque<Buyer> instance = new LinkedBlockingDeque<>();
 
 
     synchronized static void add(Buyer buyer) {
@@ -19,8 +19,6 @@ class Queue {
     synchronized static int getSize() {
         return instance.size();
     }
-
-    private static int cashierNow = 0;
 
     synchronized static int lenght() {
         return instance.size();

@@ -1,4 +1,4 @@
-package by.it.trudnitski.jd02_02;
+package by.it.trudnitski.jd02_03;
 
 import java.util.HashMap;
 import java.util.Map;

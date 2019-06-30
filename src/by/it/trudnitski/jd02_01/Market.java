@@ -9,7 +9,7 @@ public class Market {
         System.out.println("Market opened");
 
         int countBuyer=0;
-        for (int time = 0; time <120 ; time++) {
+        for (int time = 0; time < 120; time++) {
 
             int count=Helper.randomeGet(0,2);
             for (int i = 0; i < count; i++) {

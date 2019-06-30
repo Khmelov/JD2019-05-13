@@ -1,4 +1,4 @@
-package by.it.trudnitski.jd02_02;
+package by.it.trudnitski.jd02_03;
 
 public class Helper {
 

@@ -1,12 +1,12 @@
-package by.it.trudnitski.jd02_02;
+package by.it.trudnitski.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Cashier extends Thread {
     static final Object monitor = new Object();
     private String name;
-    private final List<Cashier> cashiers = new ArrayList<>();
+    private final BlockingDeque<Cashier> cashiers = new LinkedBlockingDeque<>();
 
 
     public Cashier(int number) {

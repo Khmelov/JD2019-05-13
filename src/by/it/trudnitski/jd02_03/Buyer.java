@@ -1,7 +1,8 @@
-package by.it.trudnitski.jd02_02;
+package by.it.trudnitski.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
@@ -11,16 +12,25 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         Dispatcher.addBuyer();
     }
 
+    private Semaphore semaphore = new Semaphore(20);
+
     private static List<Good> goods = new ArrayList<>();
 
 
     @Override
     public void run() {
-        enterToMarket();
-        takeBacket();
-        chooseGoods();
-        goToQeue();
-        goOut();
+        try {
+            semaphore.acquire();
+            enterToMarket();
+            takeBacket();
+            chooseGoods();
+            goToQeue();
+            goOut();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphore.release();
+        }
     }
 
     @Override
@@ -34,6 +44,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
         int randome = Helper.randomeGet(1, 4);
         double sum = 0;
+
         for (int i = 0; i < randome; i++) {
             int timeOut = Helper.randomeGet(500, 2000);
             Helper.sleep(timeOut);
@@ -42,9 +53,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
             sum += goods.getPrice();
         }
         putGoodsToBacket();
-        System.out.println(this + " All goods cost" + sum);
-
-
+        System.out.println(this + " All goods cost " + sum + "byn");
     }
 
     @Override
@@ -95,3 +104,4 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         return (goods.size() > 0) ? goods.stream().mapToDouble(Good::getPrice).sum() : 0;
     }
 }
+
