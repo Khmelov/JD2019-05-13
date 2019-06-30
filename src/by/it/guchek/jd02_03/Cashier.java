@@ -1,6 +1,4 @@
-package by.it.guchek.jd02_02;
-
-import java.util.HashMap;
+package by.it.guchek.jd02_03;
 
 public class Cashier implements Runnable {
     final static Object monitor = new Object();
@@ -19,12 +17,10 @@ public class Cashier implements Runnable {
             if (buyer != null) {
                 System.out.println(this + "started service of " + buyer);
                 int timeout = RandCount.randFrTo(2000, 5000);
-                //final HashMap<Integer, Object> integerObjectHashMap = Bucket.goodsInBacket(buyer.getName());
-                //System.out.println(Bucket.goodsInBacket(buyer.getName()).values());
-                //Bucket.billGoodsInBacket(buyer.getName());
                 RandCount.sleep(timeout);
                 System.out.println(this + "stopped service of " + buyer);
                 synchronized (buyer){
+                    buyer.setFlagWait(false);
                     buyer.notifyAll();
                 }
             } else {

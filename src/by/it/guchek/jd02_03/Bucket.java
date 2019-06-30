@@ -1,16 +1,17 @@
-package by.it.guchek.jd02_02;
+package by.it.guchek.jd02_03;
 
 import java.util.HashMap;
 import java.util.Map;
 
 class Bucket {
 
-    private static final Map<Integer, Object> goodsThisBuyer = new HashMap<>();
+    private final static Map<Integer, Object> goodsThisBuyer = new HashMap<>();
     private static Map<String, Object> goodsThisBuyerForCount = new HashMap<>();
 
 
     static synchronized void goodsInBacket(String nameBuyer) {
         int g = 0;
+
         for (int i = 0; i < RandCount.randFrTo(1, 4); i++) {
             g = i;
             Object newGood = Goods.getRandGood();
@@ -25,8 +26,9 @@ class Bucket {
 
         }
 
-        //goodsThisBuyerForCount.put(nameBuyer, goodsThisBuyer);//закрепим корзину за покупателем
-
+        goodsThisBuyerForCount.put(nameBuyer, goodsThisBuyer);//закрепим корзину за покупателем
+        //System.out.println(goodsThisBuyerForCount.size());
+        //return (HashMap<Integer, Object>) goodsThisBuyer;
     }
 
 
