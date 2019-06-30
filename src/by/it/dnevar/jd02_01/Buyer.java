@@ -1,65 +1,77 @@
 package by.it.dnevar.jd02_01;
 
-public class Buyer extends Thread implements IBuyer, Runnable {
+import java.util.HashMap;
 
-    int number;
-    Basket basket = new Basket();
-    Good goodsInMarket = new Good();
-    static int time;
+public class Buyer extends Thread implements IBuyer,IUseBacket{
 
-    private boolean pensioneer = Utility.fromTo(1,4)==4;
+    private HashMap<String,Double> backet= new HashMap<>();
+
+    private boolean pensioneer = Util.rnd(1,4)==1;
+    private int speed;
+
+
 
     Buyer(int number){
-        if(pensioneer){
-            setName("Покупатель(пенсионер) № " + number);
-            time = Dispetcher.TIMEPENSIONEER;
+        if(!pensioneer) {
+            setName("Buyer " + number);
+            speed = Dispatcher.BUYER_STANDART_SPEED;
         }else{
-            setName("Покупатель № " + number);
-            time = Dispetcher.TIMEBUYER;
+            setName("Buyer(pensioneer) " + number);
+            speed = Dispatcher.BUYER_PENSIONEER_SPEED;
         }
     }
 
     @Override
     public void run(){
         enterToMarket();
-        basket.takeBasket();
-        System.out.println(getName()+ " взял корзину");
-        chooseGoods();
-        basket.putGoodsToBasket();
-        System.out.println(getName()+" положил товары в корзину");
+        takeBacket();
+        chooseGood();
+        putGoodsToBacket();
         goOut();
     }
 
     @Override
     public void enterToMarket() {
-        System.out.println(this + " вошел в магазин");
-
+        System.out.println(this + " enter to marker");
     }
 
     @Override
-    public void chooseGoods() {
-        try {
-            int timeout = Utility.fromTo(5*time, 20*time);
-            Thread.sleep(timeout);
-        } catch (InterruptedException e) {
-            System.out.println(this + " //некоректное завершение ожидания");;
+    public void takeBacket() {
+        int timeout = Util.rnd(100,200);
+        Util.sleep(timeout);
+        System.out.println(this +" take backet");
+    }
+
+    @Override
+    public void chooseGood() {
+        System.out.println(this+" start choose goods");
+        int timeout = Util.rnd(5*speed,20*speed);
+        Util.sleep(timeout);
+        int countGoods = Util.rnd(1,4);
+        for (int i = 0; i < countGoods; i++) {
+            String good = Goods.getRandomGood();
+            Double price = Goods.getGoodPrice(good);
+            System.out.println(this+" get "+good);
+            backet.put(good,price);
         }
-        int numOfGoods = Utility.fromTo(0,4);
-        for (int i = 0; i < numOfGoods; i++) {
-            String chosedGoodKey = Good.getRandomGood();
-            Double goodPrice = Good.getRandomGoodKey(chosedGoodKey);
-            System.out.println(this + " выбрал " + chosedGoodKey);
-            Basket.goodsInBasket.put(chosedGoodKey, goodPrice);
-        }
+        System.out.println(this+" stop choose goods");
     }
 
     @Override
-    synchronized public void goOut() {
-        System.out.println(this + " вышел из магазина");
+    public void putGoodsToBacket() {
+        int timeout = Util.rnd(1*speed,2*speed);
+        Util.sleep(timeout);
+        System.out.println(this +" put goods to backet");
     }
 
     @Override
-    public String toString() {
-        return this.getName();
+    public void goOut() {
+        System.out.println(this+" go out");
     }
+
+    @Override
+    public String toString(){
+        return getName();
+    }
+
 }

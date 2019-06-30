@@ -4,7 +4,9 @@ public interface IBuyer {
 
     void enterToMarket();
 
-    void chooseGoods();
+    void chooseGood();
+
+    void goToQueue();
 
     void goOut();
 }
