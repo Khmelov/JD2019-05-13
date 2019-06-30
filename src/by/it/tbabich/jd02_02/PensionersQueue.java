@@ -3,9 +3,9 @@ package by.it.tbabich.jd02_02;
 import java.util.Deque;
 import java.util.LinkedList;
 
-class Queue {
+class PensionersQueue {
 
-    private Queue() {
+    private PensionersQueue() {
     }
 
     private static Deque<Buyer> instance = new LinkedList<>();

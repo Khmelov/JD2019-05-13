@@ -40,11 +40,10 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         for (int i = 0; i < quantityGood; i++) {
             int timeout = Util.rnd(500, 2000);
             Util.sleep((int) (timeout * coefSpeed));
-            int idGood = Goods.getRandomGood();
-            String good = Goods.getNameGood(idGood);
-            int cost = Goods.getCostGood(idGood);
-            System.out.println(this + " choose " + good);
-            putGoodsToBacket(idGood, cost);
+            int id = Goods.getRandomGood();
+            Product product = Goods.getProduct(id);
+            System.out.println(this + " choose " + product);
+            putGoodsToBacket(product);
         }
         System.out.println(this + " stop choose goods");
     }
@@ -69,9 +68,9 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     }
 
     @Override
-    public void putGoodsToBacket(int good, int cost) {
-        System.out.printf("%s push %s to backed\n", this, Goods.getNameGood(good));
-        backet.putToBacket(good, cost);
+    public void putGoodsToBacket(Product product) {
+        System.out.printf("%s push %s to backet\n", this, product);
+        backet.putToBacket(product);
         int timeout = Util.rnd(100, 200);
         Util.sleep((int) (timeout * coefSpeed));
     }

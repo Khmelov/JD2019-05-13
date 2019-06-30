@@ -12,7 +12,7 @@ public class Market {
         System.out.println("Market opened");
         numberBuyer = 0;
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 1; i < 6; i++) {
             Thread thread = new Thread(new Cashier(i));
             thread.start();
         }
@@ -36,8 +36,10 @@ public class Market {
                 }
             }
         }
-        System.out.println(threads.size());
         System.out.println("Market closed");
+        synchronized (Cashier.monitor) {
+            Cashier.monitor.notifyAll();
+        }
     }
 
     private static void visitorLaunch() {

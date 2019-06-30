@@ -27,7 +27,6 @@ public class Market {
                 e.printStackTrace();
             }
         }
-        System.out.println(buyers.size());
         System.out.println("Market closed");
     }
 

@@ -5,21 +5,14 @@ import java.util.Map;
 
 public class Goods {
 
-    private static Map<Integer, String> goods = new HashMap<>();
-    private static Map<Integer, Integer> prices = new HashMap<>();
+    private static Map<Integer, Product> goods = new HashMap<>();
 
     static {
-        goods.put(1, "Хлеб");
-        prices.put(1, 100);
-        goods.put(2, "Молоко");
-        prices.put(2, 200);
-        goods.put(3, "Сахар");
-        prices.put(3, 300);
-        goods.put(4, "Соль");
-        prices.put(4, 400);
-        goods.put(5, "Водка");
-        prices.put(5, 500);
-
+        goods.put(1, new Product("Хлеб", 1));
+        goods.put(2, new Product("Молоко", 1.4));
+        goods.put(3, new Product("Соль", 0.8));
+        goods.put(4, new Product("Сахар", 0.9));
+        goods.put(5, new Product("Сыр", 2.5));
     }
 
     static int getRandomGood() {
@@ -27,12 +20,8 @@ public class Goods {
         return id;
     }
 
-    static String getNameGood(int idGood){
-        return goods.get(idGood);
-    }
-
-    static int getCostGood(int idGood){
-        return prices.get(idGood);
+    static Product getProduct(int id) {
+        return goods.get(id);
     }
 
 }

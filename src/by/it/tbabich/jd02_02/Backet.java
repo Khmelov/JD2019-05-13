@@ -1,14 +1,17 @@
 package by.it.tbabich.jd02_02;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Backet {
+class Backet {
 
-    private static Map<Integer, Integer> backet = new HashMap<>();
+    private List<Product> backet = new ArrayList<>();
 
-    public void putToBacket(Integer good, int cost){
-        backet.put(good, cost);
+    public void putToBacket(Product product){
+        backet.add(product);
     }
 
+    public List<Product> getProductList() {
+        return backet;
+    }
 }
