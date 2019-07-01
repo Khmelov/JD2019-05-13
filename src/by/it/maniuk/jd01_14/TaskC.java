@@ -53,19 +53,35 @@ public class TaskC {
     }
 
     private static String getFilePath(Class<TaskC> aClass, String filename) {
-        return getPath(aClass) + filename;
+        return getPath2(aClass) + filename;
     }
 
     private static String getPath(Class<TaskC> aClass) {
+        String separator = File.separator;
+
+
+        String root = System.getProperty("user.dir")+ separator+ "src" + separator;
+        String simpleName = aClass.getSimpleName();
+        String name = TaskC.class.getName().replace(simpleName, "") .replace(".", separator);
+
+        String path = name.replace(simpleName, "").replace(".", separator).replace("jd01_14",separator);
+
+
+
+        path = root + separator + "src" + separator + path;
+
+        return path;
+    }
+    private static String getPath2(Class<?> aClass) {
         String root = System.getProperty("user.dir");
-        String name = TaskC.class.getName();
-        String simpleName = TaskC.class.getSimpleName();
+        String name = aClass.getName();
+        String simpleName = aClass.getSimpleName();
         String separator = File.separator;
         String path = name.replace(simpleName, "").replace(".", separator);
-
         path = root + separator + "src" + separator + path;
         return path;
     }
+
 }
 
 
