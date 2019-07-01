@@ -1,6 +1,5 @@
 package by.it.livanovich.jd02_01;
 
-import static by.it.livanovich.jd02_01.Basket.Basket;
 
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
@@ -28,9 +27,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         for (int i = 1; i <= countGoods; i++) {
             chooseGoods();
             putGoodsToBacket();
-            Basket.putInBasket(good);
         }
-        Basket(getName());
         goOut();
     }
 
@@ -69,7 +66,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
             Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
         else Rnd.sleep(timeout / Dispatcher.K_SPEED);
         System.out.println(this + " положил в корзину " + good);
-        Basket.putInBasket(good);
+
     }
 
     @Override

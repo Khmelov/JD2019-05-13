@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Runner {
-    private static List<Buyer> buyerList = new ArrayList<>();
 
     public static void main(String[] args) throws InterruptedException {
+        List<Buyer> buyerList = new ArrayList<>();
         System.out.println("Магазин открыт");
         int countBuyer = 0;
         for (int t = 1; t < 120; t++) {
@@ -17,9 +17,14 @@ public class Runner {
                 if (t > 30 && t < 60) {
                     while (Thread.activeCount() >= 40 + (30 - t)) {
                         Thread.sleep(1000);
+                        Thread.yield();
                     }
-                    buyer.start();
-                    buyerList.add(buyer);
+                }
+                if (t > 90 && t < 120) {
+                    while (Thread.activeCount() >= 40 + (30 - (t - 60))) {
+                        Thread.sleep(1000);
+                        Thread.yield();
+                    }
                 } else
                     buyer.start();
                 buyerList.add(buyer);

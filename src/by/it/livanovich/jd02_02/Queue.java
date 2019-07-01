@@ -5,13 +5,23 @@ import java.util.LinkedList;
 
 
 public class Queue {
-    private static Deque <Buyer> queueOfBuyers=new LinkedList<>();
 
-    synchronized static void addBuyer (Buyer buyer){
-        queueOfBuyers.add(buyer);
+    private Queue() {
+
     }
 
-    synchronized static void deductBuyer (Buyer buyer) {
-        queueOfBuyers.pollFirst();
+    public static int getQueueOfBuyersSize() {
+        return queueOfBuyers.size();
+    }
+
+    private static Deque<Buyer> queueOfBuyers = new LinkedList<>();
+
+    synchronized static void addBuyer(Buyer buyer) {
+        queueOfBuyers.add(buyer);
+        System.out.println(buyer+" встал в очередь");
+    }
+
+    synchronized static Buyer deductBuyer() {
+        return queueOfBuyers.pollFirst();
     }
 }

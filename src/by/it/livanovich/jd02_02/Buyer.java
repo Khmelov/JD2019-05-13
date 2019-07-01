@@ -1,36 +1,32 @@
 package by.it.livanovich.jd02_02;
 
-import static by.it.livanovich.jd02_01.Basket.Basket;
 
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
-    private String good;
-    private boolean pensionner = false;
-    static int count = 0;
+    private Good good;
+
+
 
     public Buyer(int number) {
         super("Покупатель № " + number);
-        counter();
+
+        Dispatcher.addBuyer();
     }
 
-    public static void counter() {
-        count++;
-    }
 
     public void run() {
-        if (count % 4 == 0) {
-            pensionner = true;
-        }
         enterToMarket();
         takeBacket();
-        int countGoods = Rnd.Rnd(1, 4);
-        for (int i = 1; i <= countGoods; i++) {
-            chooseGoods();
-            putGoodsToBacket();
-            Basket.putInBasket(good);
+
+        Integer countGoods = Rnd.Rnd(1, 4);
+        synchronized (countGoods) {
+            for (int i = 1; i <= countGoods; i++) {
+                chooseGoods();
+                putGoodsToBacket();
+            }
         }
-        Basket(getName());
+        goToQueue();
         goOut();
     }
 
@@ -42,22 +38,14 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void takeBacket() {
         int timeout = Rnd.Rnd(100, 200);
-        if (pensionner) {
-            Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
-        } else {
-            Rnd.sleep(timeout / Dispatcher.K_SPEED);
-        }
+        Rnd.sleep(timeout / Dispatcher.K_SPEED);
         System.out.println(this + " взял корзину");
     }
 
     @Override
     public void chooseGoods() {
         int timeout = Rnd.Rnd(500, 2000);
-        if (pensionner) {
-            Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
-        } else {
-            Rnd.sleep(timeout / Dispatcher.K_SPEED);
-        }
+        Rnd.sleep(timeout / Dispatcher.K_SPEED);
         good = Goods.getRandomGood();
         System.out.println(this + " выбрал товар " + good);
     }
@@ -65,16 +53,39 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void putGoodsToBacket() {
         int timeout = Rnd.Rnd(100, 200);
-        if (pensionner)
-            Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
-        else Rnd.sleep(timeout / Dispatcher.K_SPEED);
+        Rnd.sleep(timeout / Dispatcher.K_SPEED);
         System.out.println(this + " положил в корзину " + good);
-        Basket.putInBasket(good);
+
+    }
+
+    @Override
+    public void goToQueue() {
+        Queue.addBuyer(this);
+        if (Queue.getQueueOfBuyersSize()<=5) {
+            synchronized (Cashier.monitor) {
+                Cashier.monitor.notify();
+            }
+        }
+        else synchronized (Cashier.monitor) {
+            Cashier.monitor.notifyAll();
+        }
+        synchronized (this) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @Override
     public void goOut() {
         System.out.println(this + " вышел из магазина");
+        Dispatcher.deductBuyer();
+        synchronized (Cashier.monitor) {
+            Cashier.monitor.notifyAll();
+        }
     }
 
     @Override

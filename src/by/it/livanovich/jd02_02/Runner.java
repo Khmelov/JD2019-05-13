@@ -4,29 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Runner {
-    private static List<Buyer> buyerList = new ArrayList<>();
 
     public static void main(String[] args) throws InterruptedException {
+        List<Thread> threads = new ArrayList<>();
         System.out.println("Магазин открыт");
-        int countBuyer = 0;
-        for (int t = 1; t < 120; t++) {
+        for (int i = 1; i <6 ; i++) {
+            Thread cashier=new Thread(new Cashier(i));
+            cashier.start();
+            threads.add(cashier);
+        }
+        int numberBuyer = 0;
+        while (Dispatcher.marketIsOpen()) {
             int count = Rnd.Rnd(2);
-            for (int i = 0; i <= count; i++) {
-                countBuyer++;
-                Buyer buyer = new Buyer(countBuyer);
-                if (t > 30 && t < 60) {
-                    while (Thread.activeCount() >= 40 + (30 - t)) {
-                        Thread.sleep(1000);
-                    }
-                    buyer.start();
-                    buyerList.add(buyer);
-                } else
-                    buyer.start();
-                buyerList.add(buyer);
+            for (int i = 0; i <= count && Dispatcher.marketIsOpen(); i++) {
+                Buyer buyer = new Buyer(++numberBuyer);
+                buyer.start();
+                threads.add(buyer);
             }
         }
-        for (Buyer buyer : buyerList) {
-            buyer.join();
+        for (Thread thread : threads) {
+            thread.join();
         }
         System.out.println("Магазин закрыт");
     }
