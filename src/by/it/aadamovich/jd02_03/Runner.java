@@ -29,7 +29,7 @@ public class Runner {
                 new Buyer(++numberBuyer);
                 count--;
             }
-//            System.out.println("Time: " + time + " IN: " + Dispatcher.getBuyersInMarket() + " QueueSize: " + Queue.getQueueSize() + " Cash: " + Queue.cashierInWork()); // for testing
+//            System.out.println(" IN: " + Dispatcher.getBuyersInMarket() + " QueueSize: " + Queue.getQueueSize() + " Cash: " + Queue.cashierInWork()); // for testing
             Util.sleep(1000);
         }
 

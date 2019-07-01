@@ -8,28 +8,29 @@ import java.util.concurrent.LinkedBlockingDeque;
 class Basket {
 
     static final int BASKETS_LIMIT = 50;
-    private static final BlockingDeque<Basket> baskets = new LinkedBlockingDeque<>(BASKETS_LIMIT);
+    private static final BlockingDeque<Basket> basketsStore = new LinkedBlockingDeque<>(BASKETS_LIMIT);
 
     static {
         for (int i = 1; i < BASKETS_LIMIT + 1; i++) {
 
-            baskets.add(new Basket("Basket №" + i));
+            basketsStore.add(new Basket("Basket №" + i));
         }
     }
 
-    static Basket takeBasket() {
-        return baskets.pollLast();
+    static Basket takeBasket() throws InterruptedException {
+        return basketsStore.takeLast();
     }
 
     static void returnBasket(Basket basket) {
-        baskets.addLast(basket);
+        basketsStore.addLast(basket);
     }
+
 
     private String name;
 
-    private Deque<Good> basketContent = new LinkedList<>();
+    private Deque<Good> basket = new LinkedList<>();
 
-    Basket() {
+    private Basket() {
     }
 
     private Basket(String name) {
@@ -37,19 +38,19 @@ class Basket {
     }
 
     Good getGoodFromBasket() {
-        return basketContent.pollLast();
+        return basket.pollLast();
     }
 
     void putGoodToBasket(Good good) {
-        basketContent.addLast(good);
+        basket.addLast(good);
     }
 
     void emptyBasket() {
-        basketContent.clear();
+        basket.clear();
     }
 
     int basketContentSize() {
-        return basketContent.size();
+        return basket.size();
     }
 
     @Override

@@ -4,8 +4,8 @@ import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
-    static final int BUYERS_SHOPPING_LIMIT = 20;
-    static final int BUYERS_QUEUE_LIMIT = 30;
+    private static final int BUYERS_SHOPPING_LIMIT = 20;
+    private static final int BUYERS_QUEUE_LIMIT = 30;
 
     //every fourth buyer will be pensioner
     private boolean pensioner = Util.getRandom(1, 4) == 1;
@@ -25,7 +25,6 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private static Semaphore semaphoreShopping = new Semaphore(BUYERS_SHOPPING_LIMIT);
     private static Semaphore semaphoreJoinQueue = new Semaphore(BUYERS_QUEUE_LIMIT);
-    private static Semaphore semaphoreBaskets = new Semaphore(Basket.BASKETS_LIMIT);
 
     private Good good;
 
@@ -54,16 +53,11 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void run() {
         enterToMarket();
-        try {
-            semaphoreBaskets.acquire();
+
             takeBacket();
             chooseGoods();
             goToQueue();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            semaphoreBaskets.release();
-        }
+
         goOut();
     }
 
@@ -75,7 +69,11 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void takeBacket() {
         Util.sleep(Util.getRandom(100, 200), speed);
-        basket = Basket.takeBasket();
+        try {
+            basket = Basket.takeBasket();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(this + " took the basket " + basket);
 
     }
