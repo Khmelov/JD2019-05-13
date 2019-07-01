@@ -17,14 +17,14 @@ class Queue {
     }
 
     static void addBuyerToQueue(Buyer buyer) {
-        synchronized (pensionerQueue) {
+        synchronized (buyerQueue) {
             if (buyer.isPensioner()) pensionerQueue.add(buyer);
             else buyerQueue.add(buyer);
         }
     }
 
     static int getQueueSize() {
-        synchronized (pensionerQueue) {
+        synchronized (buyerQueue) {
             return buyerQueue.size() + pensionerQueue.size();
         }
     }
