@@ -23,6 +23,7 @@ public class Cashier implements Runnable{
                 int timeout=Rnd.Rnd(2000,5000);
                 Rnd.sleep(timeout);
                 System.out.println("В корзине "+ buyer+": ");
+                sum=0;
                 for (Good good : buyer.getList()) {
                     System.out.println(good);
                     sum+=good.getPrice();
@@ -31,13 +32,6 @@ public class Cashier implements Runnable{
                 System.out.println(this+"закончил обслуживать "+buyer);
                 synchronized (buyer){
                     buyer.notifyAll();
-                }
-                synchronized (monitor){
-                    try {
-                        monitor.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
             else synchronized (monitor){

@@ -7,19 +7,27 @@ import java.util.List;
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private Good good;
+    private boolean pensionner = false;
+    static int count = 0;
+    private List<Good> list = new ArrayList<>();
+    static int q=0;
 
     public List<Good> getList() {
         return list;
     }
 
-    private List<Good> list = new ArrayList<>();
-
     public Buyer(int number) {
         super("Покупатель № " + number);
         Dispatcher.addBuyer();
+        counter();
     }
-
+    public static void counter() {
+        count++;
+    }
     public void run() {
+        if (count % 4 == 0) {
+            pensionner = true;
+        }
         enterToMarket();
         takeBacket();
         Integer countGoods = Rnd.Rnd(1, 4);
@@ -41,14 +49,22 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void takeBacket() {
         int timeout = Rnd.Rnd(100, 200);
-        Rnd.sleep(timeout / Dispatcher.K_SPEED);
+        if (pensionner) {
+            Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
+        } else {
+            Rnd.sleep(timeout / Dispatcher.K_SPEED);
+        }
         System.out.println(this + " взял корзину");
     }
 
     @Override
     public void chooseGoods() {
         int timeout = Rnd.Rnd(500, 2000);
-        Rnd.sleep(timeout / Dispatcher.K_SPEED);
+        if (pensionner) {
+            Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
+        } else {
+            Rnd.sleep(timeout / Dispatcher.K_SPEED);
+        }
         good = Goods.getRandomGood();
         System.out.println(this + " выбрал товар " + good);
     }
@@ -56,7 +72,9 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void putGoodsToBacket() {
         int timeout = Rnd.Rnd(100, 200);
-        Rnd.sleep(timeout / Dispatcher.K_SPEED);
+        if (pensionner)
+            Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
+        else Rnd.sleep(timeout / Dispatcher.K_SPEED);
         System.out.println(this + " положил в корзину " + good);
         Backet.putBacket(list, good);
     }
@@ -64,12 +82,34 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void goToQueue() {
         Queue.addBuyer(this);
-        if (Queue.getQueueOfBuyersSize() <= 5) {
+        if (q==0) {
             synchronized (Cashier.monitor) {
                 Cashier.monitor.notify();
             }
-        } else synchronized (Cashier.monitor) {
-            Cashier.monitor.notifyAll();
+            q++;
+        }
+        if (Queue.getQueueOfBuyersSize()>5 && q==1) {
+            synchronized (Cashier.monitor) {
+                Cashier.monitor.notify();
+            }
+            q++;
+        }
+        if (Queue.getQueueOfBuyersSize()>10 && q==2) {
+            synchronized (Cashier.monitor) {
+                Cashier.monitor.notify();
+            }
+            q++;
+        }
+        if (Queue.getQueueOfBuyersSize()>15 && q==3) {
+            synchronized (Cashier.monitor) {
+                Cashier.monitor.notify();
+            }
+            q++;
+        }
+        if (Queue.getQueueOfBuyersSize()>20) {
+            synchronized (Cashier.monitor) {
+                Cashier.monitor.notifyAll();
+            }
         }
         synchronized (this) {
             try {
@@ -78,6 +118,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
                 e.printStackTrace();
             }
         }
+
     }
 
     @Override
