@@ -1,4 +1,4 @@
-package by.it.akhmelev.jd02_02;
+package by.it.maniuk.jd02_02;
 
 class Dispatcher {
 
@@ -7,7 +7,7 @@ class Dispatcher {
     private static final int PLAN = 100;
     private static int buyerInMarket = 0;
     private static int buyerCounter = 0;
-
+    private static final int cashierNumber = 5;
 
     static boolean planComplete() {
         return (buyerCounter == PLAN)
@@ -27,4 +27,7 @@ class Dispatcher {
         return buyerInMarket+buyerCounter<PLAN;
     }
 
+    public static int getCashierNumber() {
+        return cashierNumber;
+    }
 }
