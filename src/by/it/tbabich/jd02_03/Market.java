@@ -3,7 +3,7 @@ package by.it.tbabich.jd02_03;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Market {
+class Market {
 
     private static List<Thread> threads = new CopyOnWriteArrayList<>();
     private static int numberBuyer;

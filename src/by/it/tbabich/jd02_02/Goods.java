@@ -3,7 +3,7 @@ package by.it.tbabich.jd02_02;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Goods {
+class Goods {
 
     private static Map<Integer, Product> goods = new HashMap<>();
 

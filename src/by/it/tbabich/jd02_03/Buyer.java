@@ -1,6 +1,6 @@
 package by.it.tbabich.jd02_03;
 
-public class Buyer extends Thread implements IBuyer, IUseBacket {
+class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private Backet backet;
     private boolean pensioneer;
@@ -12,25 +12,6 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     public Backet getBacket() {
         return backet;
-    }
-
-    @Override
-    public void goToQueue() {
-        synchronized (Dispatcher.console) {
-            System.out.println(this + " go to Queue");
-        }
-        if (isPensioneer()) {
-            PensionersQueue.add(this);
-        } else
-            Queue.add(this);
-        Dispatcher.checkCashiers();
-        synchronized (this) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public void setPensioneer(boolean pensioneer) {
@@ -54,6 +35,25 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     }
 
     @Override
+    public void goToQueue() {
+        synchronized (Dispatcher.console) {
+            System.out.println(this + " go to Queue");
+        }
+        if (isPensioneer()) {
+            PensionersQueue.add(this);
+        } else
+            Queue.add(this);
+        Dispatcher.checkCashiers();
+        synchronized (this) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public void enterToMarket() {
         synchronized (Dispatcher.console) {
             System.out.println(this + " enter to the market");
@@ -62,6 +62,11 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void chooseGoods() {
+        try {
+            Dispatcher.buyerInMarketSemaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         synchronized (Dispatcher.console) {
             System.out.println(this + " start choose goods");
         }
@@ -79,10 +84,12 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         synchronized (Dispatcher.console) {
             System.out.println(this + " stop choose goods");
         }
+        Dispatcher.buyerInMarketSemaphore.release();
     }
 
     @Override
     public void goOut() {
+        Dispatcher.backetSemaphore.release();
         synchronized (Dispatcher.console) {
             System.out.println(this + " out from the market");
         }
@@ -91,16 +98,16 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     }
 
     @Override
-    public String toString() {
-        return getName();
-    }
-
-    @Override
     public void takeBacket() {
+        try {
+            Dispatcher.backetSemaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        backet = new Backet();
         synchronized (Dispatcher.console) {
             System.out.println(this + " taked backet");
         }
-        backet = new Backet();
         int timeout = Util.rnd(100, 200);
         Util.sleep((int) (timeout * coefSpeed));
     }
@@ -113,5 +120,10 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         backet.putToBacket(product);
         int timeout = Util.rnd(100, 200);
         Util.sleep((int) (timeout * coefSpeed));
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

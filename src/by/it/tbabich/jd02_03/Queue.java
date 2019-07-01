@@ -1,24 +1,28 @@
 package by.it.tbabich.jd02_03;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 class Queue {
 
     private Queue() {
     }
 
-    private static Deque<Buyer> instance = new LinkedList<>();
+    private static BlockingDeque<Buyer> instance = new LinkedBlockingDeque<>(30);
 
-    synchronized static void add(Buyer buyer) {
-        instance.addLast(buyer);
+    static void add(Buyer buyer) {
+        try {
+            instance.putLast(buyer);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    synchronized static Buyer extract(){
+    static Buyer extract(){
         return instance.pollFirst();
     }
 
-    synchronized static int getQueueSize(){
+    static int getQueueSize(){
         return instance.size();
     }
 

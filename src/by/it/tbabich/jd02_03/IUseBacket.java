@@ -1,6 +1,6 @@
 package by.it.tbabich.jd02_03;
 
-public interface IUseBacket {
+interface IUseBacket {
 
     void takeBacket(); //взял корзину
 

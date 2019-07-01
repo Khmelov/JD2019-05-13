@@ -1,14 +1,19 @@
 package by.it.tbabich.jd02_03;
 
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
+
 class Dispatcher {
 
-    static final int K_SPEED = 100;
+    static final int K_SPEED = 1;
     final static Object console = new Object();
+    final static Semaphore buyerInMarketSemaphore = new Semaphore(20);
+    final static Semaphore backetSemaphore = new Semaphore(50);
 
     private static final int PLAN = 100;
-    private static int buyerInMarket = 0;
-    private static int buyerCounter = 0;
-    private static int activeCashiers = 0;
+    private static AtomicInteger buyerInMarket = new AtomicInteger(0);
+    private static AtomicInteger buyerCounter = new AtomicInteger(0);
+    private static AtomicInteger activeCashiers = new AtomicInteger(0);
     private static double total = 0;
 
     synchronized static double getTotal() {
@@ -20,36 +25,35 @@ class Dispatcher {
     }
 
     static boolean planComplete() {
-        return (buyerCounter == PLAN)
-                && (buyerInMarket == 0);
+        return (buyerCounter.get() == PLAN)
+                && (buyerInMarket.get() == 0);
     }
 
-    synchronized static void addBuyer() {
-        buyerInMarket++;
+    static void addBuyer() {
+        buyerInMarket.incrementAndGet();
     }
 
-    synchronized static void completeBuyer() {
-        buyerInMarket--;
-        buyerCounter++;
+    static void completeBuyer() {
+        buyerInMarket.decrementAndGet();
+        buyerCounter.incrementAndGet();
     }
 
-    synchronized static void cashierOpen() {
-        activeCashiers++;
+    static void cashierOpen() {
+        activeCashiers.incrementAndGet();
     }
 
-    synchronized static void cashierClose() {
-        activeCashiers--;
+    static void cashierClose() {
+        activeCashiers.decrementAndGet();
     }
 
-    synchronized static boolean marketIsOpened() {
-        return buyerInMarket + buyerCounter < PLAN;
+    static boolean marketIsOpened() {
+        return buyerInMarket.get() + buyerCounter.get() < PLAN;
     }
 
-    synchronized static void checkCashiers() {
+    static void checkCashiers() {
         int queueSize = Queue.getQueueSize() + PensionersQueue.getQueueSize();
-        int checkLenght = queueSize % 5 == 0 ? queueSize / 5 : queueSize / 5 + 1;
-        if (checkLenght > activeCashiers) {
-            for (int i = 0; i < checkLenght - activeCashiers; i++) {
+        if ((queueSize / 5 + 1) > activeCashiers.get()) {
+            for (int i = 0; i < (queueSize / 5 + 1) - activeCashiers.get(); i++) {
                 synchronized (Cashier.monitor) {
                     Cashier.monitor.notify();
                 }

@@ -2,7 +2,7 @@ package by.it.tbabich.jd02_02;
 
 class Dispatcher {
 
-    static final int K_SPEED = 100;
+    static final int K_SPEED = 1;
     final static Object console = new Object();
 
     private static final int PLAN = 100;

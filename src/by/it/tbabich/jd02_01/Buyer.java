@@ -1,6 +1,6 @@
 package by.it.tbabich.jd02_01;
 
-public class Buyer extends Thread implements IBuyer, IUseBacket {
+class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private Backet backet;
     private boolean pensioneer;
