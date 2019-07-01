@@ -15,6 +15,7 @@ public class Parser {
         }
         Var one = Var.createVar(operand[0]);
         if(one == null||two == null){
+            Log.setLog("Пустой ввод");
             throw new CalcException("Пустой ввод");
         }
         Pattern p = Pattern.compile(Operation.OPERATION);
@@ -28,6 +29,7 @@ public class Parser {
                 case "/": return one.div(two);
             }
         }
+        Log.setLog("Неправильный операнд");
         throw new CalcException("Неправильный операнд");
     }
 

@@ -3,6 +3,7 @@ package by.it.dnevar.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+
     public static void main(String[] args){
 
         Scanner sc=new Scanner(System.in);
@@ -10,6 +11,12 @@ public class ConsoleRunner {
 
         Parser parser = new Parser();
         Printer printer = new Printer();
+
+        try{
+            Var.varInTxt();
+        } catch (CalcException e) {
+            e.printStackTrace();
+        }
 
         while(!(line = sc.nextLine()).equals("end")){
             if(line.equals("printvar")){
@@ -26,7 +33,6 @@ public class ConsoleRunner {
 
             }
         }
-
-
+        Log.logsToTxt();
     }
 }
