@@ -11,7 +11,7 @@ public class TaskC {
 
     public static void main(String[] args) throws IOException {
 
-        File dir = new File("D:/JD2019-05-13/src/by/it/maniuk/jd01_15/");
+        File dir = new File(getPath(TaskC.class));
         dir = dir.getCanonicalFile();
         Scanner scanner = new Scanner(System.in);
         String s;
@@ -58,7 +58,14 @@ public class TaskC {
         list =item.list();
         return list.length;
     }
-
-
+    private static String getPath(Class<?> aClass) {
+        String root = System.getProperty("user.dir");
+        String name = aClass.getName();
+        String simpleName = aClass.getSimpleName();
+        String separator = File.separator;
+        String path = name.replace(simpleName, "").replace(".", separator);
+        path = root + separator + "src" + separator + path;
+        return path;
+    }
 
 }
