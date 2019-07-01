@@ -4,6 +4,7 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket {
 
     private int num;  //номер покупателя
     private volatile boolean pensioneer=false;
+    Bucket1 bucket;
 
     //конструктор покупателя с его номером
     public Buyer(int num){
@@ -40,6 +41,7 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket {
     @Override
     public void enterToMarket() {
 
+        this.bucket = new Bucket1();
         System.out.printf("%s ВОШЁЛ в магазин%n", this);
 
     }
@@ -68,7 +70,11 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket {
         else {
             int pause = (int)(RandCount.randFrTo(500, 2000)*1.5);
             RandCount.sleep(pause);}
-        System.out.printf("%s Закончил выбор товара%n", this);
+        for (int i = 0; i < RandCount.randFrTo(1, 4); i++) {
+        Good good = Goods.getRandGood();
+        bucket.add(good);
+        System.out.println(this + " выбрал " + good);}
+        System.out.printf("%s --Закончил выбор товара--%n", this);
 
 
     }
@@ -92,7 +98,8 @@ public class Buyer extends Thread implements Runnable, IBuyer, IUseBacket {
     public void putGoodsToBacket() {
 
         System.out.printf("%s Положил в корзину товар: %n", this);
-        Bucket.goodsInBacket(this.getName());
+        bucket.readGood(this.getName());
+        //Bucket.goodsInBacket(this.getName());
         //Bucket.billGoodsInBacket(this.getName());
         if (!pensioneer){
             int pauseForBacket = RandCount.randFrTo(100, 200); //кладет в корзину от 0,1 до 0,2 сек

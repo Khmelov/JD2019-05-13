@@ -21,10 +21,10 @@ class Goods {
 
         //Map.Entry <String, Double> entry = (Map.Entry<String, Double>) goods.entrySet().iterator();
     static synchronized Good getRandGood (){
-        int id=0;
-        for (int i = 0; i<(RandCount.randFrTo(1,4)); i++){
-            id=1+(int)(Math.random()*(goods.size()));
-        }
+       // int id=0;
+       // for (int i = 0; i<(RandCount.randFrTo(1,4)); i++){
+            int id=1+(int)(Math.random()*(goods.size()));
+        //}
         return goods.get(id);
         //if (itGoods.hasNext()){
         /*Iterator itGoods = goods.entrySet().iterator();
