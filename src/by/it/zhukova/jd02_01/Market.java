@@ -9,12 +9,12 @@ public class Market {
         System.out.println("Market opened");
         MarketOpen(buyers);
         for (Buyer buyer : buyers) {
-                try {
-                    buyer.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            try {
+                buyer.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+        }
 
         System.out.println("Market closed");
     }
@@ -22,7 +22,7 @@ public class Market {
     private static void MarketOpen(List<Buyer> buyers) {
         int countBuyer=0;
         boolean pensioneer;
-        int count =0;
+        int count =Util.rnd(2);
         for (int min = 0; min < 2; min++) {
             for (int time = 0; time < 60; time++) {
                 int N = 0;
@@ -32,14 +32,9 @@ public class Market {
                         ++N;
                     }
                 }
-                if (time < 30) {
-                    if( N>=time+10 ) count=0;
-                   else count = Util.rnd(2);
+                if ((time > 30)&&(N > 40 + (30 - time))) {
+                    count = 0;
                 }
-                else {
-                        if (N <= 40 + (30 - time)) count = 1;
-                        else count = 0;
-                    }
                 for (int i = 0; i < count; i++) {
                     ++countBuyer;
                     if (countBuyer % 4 == 0) {

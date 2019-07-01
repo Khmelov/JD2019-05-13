@@ -1,14 +1,15 @@
-package by.it.zhukova.jd02_01;
+package by.it.zhukova.jd02_02;
 
-import java.util.*;
+
+import java.util.HashMap;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
-    public Buyer(int number, boolean pensioneer) {
-        super("Buyer №" + number);
-
+     Buyer(int number, boolean pensioneer) {
+           super("Buyer №" + number);
         this.pensioneer = pensioneer;
-    }
+         Dispatcher.addBuyer();
+     }
     private String good;
     private boolean pensioneer;
 
@@ -16,7 +17,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public void run() {
         enterToMarket();
         takeBacket();
-        HashMap<String, Double> basket= new HashMap<>();
+        HashMap<String, Double> basket = new HashMap<>();
         int count = Util.rnd(1,4);
         System.out.println(this + " start choose goods");
         for (int i = 0; i < count; i++) {
@@ -26,7 +27,9 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
             basket.put(good, price);
         }
         System.out.println(this + " stop choose goods");
-        System.out.println(this +" buy "+basket);
+        System.out.print(this + " buy ");
+        System.out.println(basket);
+        goToQueue();
         goOut();
     }
 
@@ -49,8 +52,27 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     }
 
     @Override
+    public void goToQueue() {
+        Queue.add(this);
+        synchronized (Cashier.monitor){
+            Cashier.monitor.notifyAll();
+        }
+        synchronized (this){
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public void goOut() {
         System.out.println( this + " go out from the market" );
+        Dispatcher.completeBuyer();
+        synchronized (Cashier.monitor){
+            Cashier.monitor.notifyAll();
+        }
     }
 
     @Override
@@ -65,7 +87,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
             Util.sleep((int)(timeout*1.5));
         }
         else {
-            Util.sleep(timeout);
+        Util.sleep(timeout);
         }
         System.out.println( this + " take a basket" );
     }
@@ -79,7 +101,6 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         else {
             Util.sleep(timeout);
         }
-
         System.out.println( this + " put " +good+" to the basket" );
     }
 }
