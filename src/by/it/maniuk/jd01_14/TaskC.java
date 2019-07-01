@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 public class TaskC {
     public static void main(String[] args) {
-        File dir = new File("D:/JD2019-05-13/src/by/it/maniuk");
+        File dir = new File(getPath2(TaskC.class));
         if (dir.isDirectory()) {
             for (File item : dir.listFiles()) {
                 if (item.isDirectory()) {
@@ -53,31 +53,26 @@ public class TaskC {
     }
 
     private static String getFilePath(Class<TaskC> aClass, String filename) {
-        return getPath2(aClass) + filename;
+        return  getPath(aClass) + filename;
     }
 
-    private static String getPath(Class<TaskC> aClass) {
+    private static  String getPath(Class<TaskC> aClass){
+        String root = System.getProperty("user.dir");
+        String name = TaskC.class.getName();
+        String simpleName = TaskC.class.getSimpleName();
         String separator = File.separator;
+        String path = name.replace(simpleName,"").replace(".",separator);
 
-
-        String root = System.getProperty("user.dir")+ separator+ "src" + separator;
-        String simpleName = aClass.getSimpleName();
-        String name = TaskC.class.getName().replace(simpleName, "") .replace(".", separator);
-
-        String path = name.replace(simpleName, "").replace(".", separator).replace("jd01_14",separator);
-
-
-
-        path = root + separator + "src" + separator + path;
-
+        path = root+separator+"src"+separator+path;
         return path;
     }
+
     private static String getPath2(Class<?> aClass) {
         String root = System.getProperty("user.dir");
         String name = aClass.getName();
         String simpleName = aClass.getSimpleName();
         String separator = File.separator;
-        String path = name.replace(simpleName, "").replace(".", separator);
+        String path = name.replace(simpleName, "").replace(".", separator).replace("jd01_14", "");
         path = root + separator + "src" + separator + path;
         return path;
     }

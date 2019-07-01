@@ -22,9 +22,10 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void run() {
         try {
-            semaphore.acquire();
+
             isPensioner();
             enterToMarket();
+            semaphore.acquire();
            shopping();
            goToQueue();
            goOut();
