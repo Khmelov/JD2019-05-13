@@ -15,10 +15,15 @@ public class Bucket1 {
     }
 
     void readGood(String nameBuyer) {
+
         Iterator it = goodList.iterator();
         while (it.hasNext()){
             System.out.println(nameBuyer+" ------ "+it.next().toString());
         }
+    }
+
+    int goodListsize(){
+        return goodList.size();
     }
 
     Good getOutOfBucket() {
