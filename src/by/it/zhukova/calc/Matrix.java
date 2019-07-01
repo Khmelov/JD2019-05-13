@@ -5,9 +5,6 @@ import java.util.regex.Pattern;
 
 class Matrix extends Var {
    private double [] [] value;
-    public double[][] getValue() {
-        return value;
-    }
 
     Matrix(double[ ][ ]  value) {
       double  [][] row= new double[value.length][value[0].length];

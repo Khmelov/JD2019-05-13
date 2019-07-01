@@ -25,7 +25,7 @@ public class TaskC {
             if (file.isDirectory()) {
                 System.out.printf("dir:%s%n", file.getName());
                 arrayFiles.add("dir:" + file.getName());
-                if (file.length() > 0) filePrint(file);
+                if (file.list() != null) filePrint(file);
             } else {
                 System.out.printf("file:%s%n", file.getName());
                 arrayFiles.add("file:" + file.getName());
