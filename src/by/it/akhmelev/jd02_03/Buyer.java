@@ -1,10 +1,16 @@
-package by.it.akhmelev.jd02_02;
+package by.it.akhmelev.jd02_03;
 
 public class Buyer extends Thread implements IBuyer {
 
     Buyer(int number) {
         super("Buyer №" + number);
         Dispatcher.addBuyer();
+    }
+
+    private boolean flagWait = false;
+
+    public void setFlagWait(boolean flagWait) {
+        this.flagWait = flagWait;
     }
 
     @Override
@@ -34,14 +40,18 @@ public class Buyer extends Thread implements IBuyer {
     @Override
     public void goToQueue() {
         Queue.add(this);
-        synchronized (Cashier.monitor){
+        synchronized (Cashier.monitor) {
             Cashier.monitor.notifyAll();
         }
-        synchronized (this){
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+        flagWait = true;
+        synchronized (this) {
+            while (flagWait) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -50,7 +60,7 @@ public class Buyer extends Thread implements IBuyer {
     public void goOut() {
         System.out.println(this + " out from the market");
         Dispatcher.completeBuyer();
-        synchronized (Cashier.monitor){
+        synchronized (Cashier.monitor) {
             Cashier.monitor.notifyAll();
         }
     }
