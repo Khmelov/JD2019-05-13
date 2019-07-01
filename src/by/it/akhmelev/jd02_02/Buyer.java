@@ -26,7 +26,7 @@ public class Buyer extends Thread implements IBuyer {
         System.out.println(this + " start choose goods");
         int timeout = Util.rnd(500, 2000);
         Util.sleep(timeout);
-        String good = Goods.getRandomGood();
+        Good good = Goods.getRandomGood();
         System.out.println(this + " choose " + good);
         System.out.println(this + " stop choose goods");
     }
