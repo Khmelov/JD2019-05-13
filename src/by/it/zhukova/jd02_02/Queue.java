@@ -15,4 +15,6 @@ import java.util.LinkedList;
     synchronized static Buyer extract() {
         return instance.pollFirst();
     }
+
+    static int size () { return instance.size();}
 }

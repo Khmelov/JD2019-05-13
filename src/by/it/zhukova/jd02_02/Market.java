@@ -21,8 +21,8 @@ public class Market {
 
     private static void MarketOpen(List<Thread> threads) {
         // запуск кассиров
-        for (int i = 0; i < 2; i++) {
-            Thread thread = new Thread(new Cashier(i));
+        for (int i = 0; i < 5; i++) {
+            Thread thread = new Thread(new Cashier(i+1));
             threads.add(thread);
             thread.start();
         }
