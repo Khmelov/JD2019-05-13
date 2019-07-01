@@ -11,10 +11,10 @@ public class Parser {
     String MATRIX = "\\{(\\{(-?[0-9]+\\.?([0-9]+)?,?)+\\},?)+\\}";
 
     Var calc(String expression) throws CalcException {
+
         String expressions [] = expression.split(OPERATION);
         Pattern pattern = Pattern.compile(OPERATION);
         Matcher matcher = pattern.matcher(expression);
-
 
         Var var1;
         Var var2;
@@ -25,13 +25,17 @@ public class Parser {
         }
 
         var2 = Var.createVar(expressions[1]);
+
         if(expression.contains("=")){
             return Var.saveVar(expressions[0], var2);
         }
+
             var1 = Var.createVar(expressions[0]);
 
             if(matcher.find()){
+
                 switch (matcher.group()){
+
                     case "+": return var1.add(var2);
                     case "-": return var1.sub(var2);
                     case "*": return var1.mul(var2);
