@@ -5,7 +5,11 @@ import java.util.Map;
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private boolean pensioneer;
+    private Basket basketOfBuyer;
 
+    public Basket getBasketOfBuyer() {
+        return basketOfBuyer;
+    }
 
     Buyer(int number) {
         super("Buyer №" + number);
@@ -22,11 +26,11 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void run() {
         enterToMarket();
-        Basket basket = takeBasket();
+        basketOfBuyer = takeBasket();
         int countGoods = Helper.rnd(1, 4);
         for (int i = 0; i < countGoods; i++) {
-            chooseGoods();
-            putGoodsToBasket();
+            Good choosedGood = chooseGoods();
+            putGoodsToBasket(basketOfBuyer, choosedGood);
         }
         goToQueue();
         goOut();
@@ -40,16 +44,16 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     }
 
     @Override
-    public void chooseGoods() {
+    public Good chooseGoods() {
         if (!pensioneer) {
             Helper.sleep(Helper.rnd(500, 2000));
         } else {
             int sleeping = (int) (Helper.rnd(500, 2000) * Dispatcher.P_SPEED);
             Helper.sleep(sleeping);
         }
-        String good = Goods.getRandom();
-        System.out.println(this + " choose " + good);
-
+        Good choosedGood = Goods.getRandom();
+        System.out.println(this + " choosed " + choosedGood.getName() + " by price " + choosedGood.getPrice());
+        return choosedGood;
     }
 
     @Override
@@ -85,20 +89,19 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         } else {
             Helper.sleep((int) (Helper.rnd(100, 200) * Dispatcher.P_SPEED));
         }
-        Basket basket = new Basket();
+
         System.out.println(this + " take backet");
-        return basket;
+        return new Basket();
     }
 
     @Override
-    public void putGoodsToBasket() {
+    public void putGoodsToBasket(Basket basketOfBuyer, Good choosedGood) {
         if (!pensioneer) {
             Helper.sleep(Helper.rnd(100, 200));
         } else {
             Helper.sleep((int) (Helper.rnd(100, 200) * Dispatcher.P_SPEED));
         }
-//        basket.addToBasket(good);
-        System.out.println(this + " put the good in the backet");
-
+        System.out.println(this + " put " + choosedGood.getName() + " in the backet");
+        basketOfBuyer.addToBasket(choosedGood);
     }
 }

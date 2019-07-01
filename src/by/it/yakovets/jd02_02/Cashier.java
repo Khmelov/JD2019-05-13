@@ -14,12 +14,14 @@ public class Cashier implements Runnable {
     public void run() {
         Buyer buyer;
         while (!Dispatcher.planComplete()) {
+
             buyer = Queue.extract();
             if (buyer != null) {
                 System.out.println(this + " started service of " + buyer);
                 int timeout = Helper.rnd(2000, 5000);
                 Helper.sleep(timeout);
-                
+                System.out.println("Basket of " + buyer+":");
+                buyer.getBasketOfBuyer().printContain();
                 System.out.println(this + " stopped service of " + buyer);
                 synchronized (buyer) {
                     buyer.notifyAll();
@@ -36,7 +38,7 @@ public class Cashier implements Runnable {
         }
 
 
-}
+    }
 
     @Override
     public String toString() {

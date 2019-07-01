@@ -1,25 +1,30 @@
 package by.it.yakovets.jd02_02;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class Basket {
-    private int value;
-    private HashMap<String, Integer> goods=new HashMap<>();
+    private int value = 0;
+    private Map<String, Integer> goods = new HashMap<>();
 
-//    public HashMap<String, Integer> getGoods() {
-//        return goods;
-//    }
-//
-//    public void addToBasket(String key, Integer value) {
-//        goods.put(key,value);
-//    }
-//
-//
-//
-//    public void addToBasket(String good) {
-//        goods.put(good);
-//
-//    }
+    public void addToBasket(Good good) {
+        goods.put(good.getName(), good.getPrice());
+        value += good.getPrice();
 
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void printContain() {
+        Set<Map.Entry<String, Integer>> goods = this.goods.entrySet();
+        System.out.println("Buyer take his goods from basket:");
+        for (Map.Entry<String, Integer> good : goods) {
+            System.out.println(good.getKey() + " by price " + good.getValue());
+        }
+        System.out.println("Value of basket=" + value);
+
+    }
 }
