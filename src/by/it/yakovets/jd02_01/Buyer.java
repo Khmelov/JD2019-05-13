@@ -7,11 +7,13 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     Buyer(int number) {
         super("Buyer №" + number);
+        Dispatcher.addBuyer();
     }
 
     Buyer(int number, boolean pensioneer) {
         super("Buyer №" + number + "(P)");
         this.pensioneer = pensioneer;
+        Dispatcher.addBuyer();
     }
 
     void setPensioneer(boolean pensioneer) {
@@ -35,7 +37,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void enterToMarket() {
         System.out.println(this + " enter the market");
-        Market.buyerIn++;
+
     }
 
     @Override
@@ -54,7 +56,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void goOut() {
         System.out.println(this + " out from the market");
-        Market.buyerIn--;
+        Dispatcher.completeBuyer();
     }
 
     @Override

@@ -6,19 +6,24 @@ public class Cashier implements Runnable {
     private String name;
 
     public Cashier(int number) {
-        name = "Cashien # " + number;
+        name = "Cashier №" + number;
 
     }
 
     @Override
     public void run() {
-        Buyer buyer = Queue.extract();
+        Buyer buyer;
         while (!Dispatcher.planComplete()) {
+            buyer = Queue.extract();
             if (buyer != null) {
                 System.out.println(this + " started service of " + buyer);
                 int timeout = Helper.rnd(2000, 5000);
                 Helper.sleep(timeout);
+                
                 System.out.println(this + " stopped service of " + buyer);
+                synchronized (buyer) {
+                    buyer.notifyAll();
+                }
             } else {
                 synchronized (monitor) {
                     try {
@@ -29,7 +34,9 @@ public class Cashier implements Runnable {
                 }
             }
         }
-    }
+
+
+}
 
     @Override
     public String toString() {
