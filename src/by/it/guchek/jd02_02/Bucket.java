@@ -8,7 +8,6 @@ class Bucket {
     private static final Map<Integer, Object> goodsThisBuyer = new HashMap<>();
     private static Map<String, Object> goodsThisBuyerForCount = new HashMap<>();
 
-
     static synchronized void goodsInBacket(String nameBuyer) {
         int g = 0;
         for (int i = 0; i < RandCount.randFrTo(1, 4); i++) {
