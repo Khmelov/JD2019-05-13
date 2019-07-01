@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class TaskB {
     public static void main(String[] args) {
-        String txt = getFilePath(TaskA.class,"TaskB.txt");
+        String txt = getFilePath(TaskA.class,"text.txt");
         String txt2 = getFilePath(TaskA.class,"ResultTaskB.txt");
 
         try (BufferedReader in = new BufferedReader(new FileReader((txt)));

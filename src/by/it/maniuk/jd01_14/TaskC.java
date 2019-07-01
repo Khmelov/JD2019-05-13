@@ -14,9 +14,9 @@ public class TaskC {
             for (File item : dir.listFiles()) {
                 if (item.isDirectory()) {
                     getFiles(item);
-                    System.out.println("\t dir:" + item.getName());
+                    System.out.println("dir:" + item.getName());
                 } else {
-                    System.out.println("\t file:" + item.getName());
+                    System.out.println("ile:" + item.getName());
                 }
             }
         }
@@ -31,19 +31,20 @@ public class TaskC {
 
                 if (item.isDirectory()) {
                     try(PrintWriter writer = new PrintWriter(new FileWriter(txt))) {
-                        writer.println("\t file:" + item.getName());
+                        writer.println(" file:" + item.getName());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    System.out.println("\t dir:" + item.getName());
+                    System.out.println(" dir:" + item.getName());
 
                 } else {
                     try(PrintWriter writer = new PrintWriter(new FileWriter(txt))) {
-                        writer.println("\t file:" + item.getName());
+                        writer.println("file:" + item.getName());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    System.out.println("\t file:" + item.getName());
+                    System.out.println();
+                    System.out.print("file:" + item.getName());
                 }
             }
         }
