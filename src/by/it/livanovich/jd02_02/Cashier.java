@@ -3,7 +3,7 @@ package by.it.livanovich.jd02_02;
 public class Cashier implements Runnable{
     static final Object monitor=new Object();
     private String name;
-
+    private double sum;
 
     Cashier(int number) {
         name = "Кассир №" + number + " ";
@@ -22,6 +22,12 @@ public class Cashier implements Runnable{
                 System.out.println(this+"начал обслуживать "+buyer);
                 int timeout=Rnd.Rnd(2000,5000);
                 Rnd.sleep(timeout);
+                System.out.println("В корзине "+ buyer+": ");
+                for (Good good : buyer.getList()) {
+                    System.out.println(good);
+                    sum+=good.getPrice();
+                }
+                System.out.printf("Итого: %4.2f\n",sum);
                 System.out.println(this+"закончил обслуживать "+buyer);
                 synchronized (buyer){
                     buyer.notifyAll();

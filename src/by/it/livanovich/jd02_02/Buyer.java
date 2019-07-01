@@ -1,24 +1,27 @@
 package by.it.livanovich.jd02_02;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private Good good;
 
+    public List<Good> getList() {
+        return list;
+    }
 
+    private List<Good> list = new ArrayList<>();
 
     public Buyer(int number) {
         super("Покупатель № " + number);
-
         Dispatcher.addBuyer();
     }
-
 
     public void run() {
         enterToMarket();
         takeBacket();
-
         Integer countGoods = Rnd.Rnd(1, 4);
         synchronized (countGoods) {
             for (int i = 1; i <= countGoods; i++) {
@@ -55,18 +58,17 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         int timeout = Rnd.Rnd(100, 200);
         Rnd.sleep(timeout / Dispatcher.K_SPEED);
         System.out.println(this + " положил в корзину " + good);
-
+        Backet.putBacket(list, good);
     }
 
     @Override
     public void goToQueue() {
         Queue.addBuyer(this);
-        if (Queue.getQueueOfBuyersSize()<=5) {
+        if (Queue.getQueueOfBuyersSize() <= 5) {
             synchronized (Cashier.monitor) {
                 Cashier.monitor.notify();
             }
-        }
-        else synchronized (Cashier.monitor) {
+        } else synchronized (Cashier.monitor) {
             Cashier.monitor.notifyAll();
         }
         synchronized (this) {
@@ -76,7 +78,6 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override
@@ -92,5 +93,4 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public String toString() {
         return getName();
     }
-
 }
