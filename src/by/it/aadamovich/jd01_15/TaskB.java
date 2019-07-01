@@ -17,6 +17,7 @@ public class TaskB {
     И это тоже удалить
     */
     private static StringBuilder sb = new StringBuilder();
+
     /**
      * Здесь должен быть нормальный код
      */
@@ -33,13 +34,13 @@ public class TaskB {
                       Комментарии излишни
                       Комментарии излишни
                      */
-                } else if (line.contains("/" + "*") || line.contains("*" + "/")) {
-                    sb.append("\n");
+                } else if (line.contains("/" + "*")) {
+                    sb.append(line, 0, line.indexOf("/" + "*")).append("\n");
+                    copyLine = !copyLine;
+                } else if (line.contains("*" + "/")) {
                     copyLine = !copyLine;
                 } else if (copyLine) {
                     sb.append(line).append("\n");
-                } else {
-                    sb.append("\n");
                 }
             }
         } catch (IOException e) {
@@ -62,7 +63,7 @@ public class TaskB {
         }
     }
 
-    private static Class<TaskA> cls = TaskA.class;
+    private static Class<TaskB> cls = TaskB.class;
 
     private static String getFilePath(String name) {
         String sep = File.separator;
