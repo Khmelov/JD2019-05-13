@@ -3,6 +3,7 @@ package by.it.akhmelev.jd02_01;
 class Util {
 
     static int rnd(int max){
+
         return rnd(0,max);
     }
 
