@@ -24,6 +24,7 @@ class Scalar extends Var {
     public Var add(Var other) throws CalcException{
         if(other instanceof Scalar){
             double res = this.value + ((Scalar)other).value;
+            Log.setLog(this.value+"+"+((Scalar)other).value+"="+res);
             return new Scalar(res);
         }else{
             return other.add(this);
@@ -34,6 +35,7 @@ class Scalar extends Var {
     public Var sub(Var other) throws CalcException{
         if(other instanceof Scalar){
             double res = this.value - ((Scalar)other).value;
+            Log.setLog(this.value+"-"+((Scalar)other).value+"="+res);
             return new Scalar(res);
         }else{
             return new Scalar(-1).mul(other).add(this);
@@ -44,6 +46,7 @@ class Scalar extends Var {
     public Var mul(Var other) throws CalcException{
         if(other instanceof Scalar){
             double res = this.value * ((Scalar)other).value;
+            Log.setLog(this.value+"*"+((Scalar)other).value+"="+res);
             return new Scalar(res);
         }else{
             return other.mul(this);
@@ -55,8 +58,10 @@ class Scalar extends Var {
         if(other instanceof Scalar){
             if(((Scalar)other).value!=0){
                 double res = this.value / ((Scalar)other).value;
+                Log.setLog(this.value+"/"+((Scalar)other).value+"="+res);
                 return new Scalar(res);
             }else{
+                Log.setLog("Деление на ноль");
             throw new CalcException("Деление на ноль");
             }
         }

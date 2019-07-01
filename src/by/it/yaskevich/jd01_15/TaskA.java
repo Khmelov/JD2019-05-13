@@ -33,8 +33,6 @@ public class TaskA {
         String fileName = getFilePath(TaskA.class, "matrix.txt");
         printArray(array, fileName);
 
-        //Files.lines(Path.get(fileName)).forEach(System.out::println);
-
         showFile(fileName);
     }
 

@@ -54,7 +54,7 @@ public class TaskB {
                  }
                  else str.append(simbol).append(c);
               }
-              else if (del) ;
+              else if (del) continue;
              else str.append(simbol);
           }
             System.out.println(str);
