@@ -1,0 +1,47 @@
+package by.it.zhukova.jd02_03;
+
+public class Cashier implements Runnable {
+    final static Object monitor = new Object();
+    private String name;
+    private double sum;
+
+    Cashier(int number) {
+        name = "Cashier №" + number + " ";
+    }
+
+    @Override
+    public void run() {
+        while (!Dispatcher.planComplete()) {
+            Buyer buyer = Queue.extract();
+            if (buyer != null) {
+                System.out.println(this + "started service of " + buyer);
+                int timeout = Util.rnd(2000, 5000);
+                Util.sleep(timeout);
+                sum=0;
+                System.out.println("Check "+buyer.getName());
+                for (Good good : buyer.getList()) {
+                    System.out.println(good);
+                   sum+=good.getPrice();
+                }
+                System.out.printf("Sum: %.2f\n",sum);
+                System.out.println(this + "stopped service of " + buyer);
+                synchronized (buyer) {
+                    buyer.notifyAll();
+                }
+            } else {
+                synchronized (monitor) {
+                    try {
+                        monitor.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+}

@@ -1,4 +1,4 @@
-package by.it.zhukova.jd02_02;
+package by.it.zhukova.jd02_03;
 
 public class Dispatcher {
     static final int K_SPEED=100;
