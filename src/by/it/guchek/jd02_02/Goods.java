@@ -1,5 +1,7 @@
 package by.it.guchek.jd02_02;
 
+import by.it.guchek.jd02_03.Good;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
