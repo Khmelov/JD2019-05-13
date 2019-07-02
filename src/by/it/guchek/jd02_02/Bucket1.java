@@ -22,6 +22,15 @@ public class Bucket1 {
         }
     }
 
+    void readGoodForBill(String nameBuyer) {
+
+        Iterator itTwo = goodList.iterator();
+        while (itTwo.hasNext()){
+            System.out.println(itTwo.next().toString());
+            System.out.println("-----------------------");
+        }
+    }
+
     int goodListsize(){
         return goodList.size();
     }
