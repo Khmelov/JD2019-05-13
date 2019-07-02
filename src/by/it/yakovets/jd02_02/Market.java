@@ -29,8 +29,8 @@ public class Market {
                 maxBuyers = 40 + (30 - (time % 60));
             }
             int countAddBuyers = maxBuyers - Dispatcher.buyerInMarket;
-            while (Dispatcher.marketIsOpened()) {
-                for (int i = 0; i < countAddBuyers; i++) {
+            if (Dispatcher.marketIsOpened()) {
+                for (int i = 0; i < countAddBuyers&&Dispatcher.marketIsOpened(); i++) {
                     Buyer buyer;
                     if (Helper.rnd(1, 4) == 1) {
                         buyer = new Buyer(++countBuyer, true);
@@ -54,6 +54,7 @@ public class Market {
                 e.printStackTrace();
             }
         }
+
         System.out.println("Market closed");
     }
 }

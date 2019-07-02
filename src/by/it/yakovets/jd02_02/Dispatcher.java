@@ -22,6 +22,7 @@ class Dispatcher {
     synchronized static void completeBuyer() {
         buyerInMarket--;
         buyerCounter++;
+
     }
 
     synchronized static boolean marketIsOpened() {

@@ -14,7 +14,6 @@ public class Cashier implements Runnable {
     public void run() {
         Buyer buyer;
         while (!Dispatcher.planComplete()) {
-
             buyer = Queue.extract();
             if (buyer != null) {
                 System.out.println(this + " started service of " + buyer);
