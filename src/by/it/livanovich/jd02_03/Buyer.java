@@ -3,21 +3,23 @@ package by.it.livanovich.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private Good good;
     private boolean pensionner = false;
     static int count = 0;
-    private List<Good> list = new ArrayList<>();
+    private Backet backet=new Backet();
     private boolean wait = false;
+    private static Semaphore semaphore=new Semaphore(20);
 
     public void setWait(boolean wait) {
         this.wait = wait;
     }
 
-    public List<Good> getList() {
-        return list;
+    public Backet getBacket() {
+        return backet;
     }
 
     public Buyer(int number) {
@@ -65,6 +67,8 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void chooseGoods() {
+        try {
+            semaphore.acquire();
         int timeout = Rnd.Rnd(500, 2000);
         if (pensionner) {
             Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
@@ -73,6 +77,13 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         }
         good = Goods.getRandomGood();
         System.out.println(this + " выбрал товар " + good);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            semaphore.release();
+        }
     }
 
     @Override
@@ -82,7 +93,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
             Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
         else Rnd.sleep(timeout / Dispatcher.K_SPEED);
         System.out.println(this + " положил в корзину " + good);
-        Backet.putBacket(list, good);
+        backet.putBacket(good);
     }
 
     @Override

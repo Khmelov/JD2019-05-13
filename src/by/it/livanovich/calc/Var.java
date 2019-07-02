@@ -15,7 +15,7 @@ abstract class Var implements Operation {
 
     static void print (){
         for (Map.Entry<String, Var> entry : varMap.entrySet()) {
-            String key = entry.getKey().toString();
+            String key = entry.getKey();
             String value = entry.getValue().toString();
             System.out.printf("%s = %s\n", key, value);
         }

@@ -18,7 +18,7 @@ public class ConsoleRunner {
             if (line.equals("printvar")) {
                 Var.print();}
             if (line.equals("sortvar")) {
-                Var.print();}
+                Var.sortvar();}
 
         }
     }
