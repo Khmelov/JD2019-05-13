@@ -22,7 +22,10 @@ class Vector extends Var {
     }
 
     Vector (String strVector){
-     String [] str=strVector.replaceAll("\\D+"," ").trim().split(" ");
+     String [] str=strVector
+             .replace("{","")
+             .replace("}","")
+             .split(",");
      double [] tempvalue=new double[str.length];
         for (int i = 0; i < str.length; i++) {
             tempvalue[i]=Double.parseDouble(str[i]);

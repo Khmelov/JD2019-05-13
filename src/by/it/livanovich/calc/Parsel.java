@@ -57,6 +57,22 @@ public class Parsel {
         if (expression.equals("sortvar")) {
             return null;
         }
+        expression = expression.replaceAll("\\s+", "");
+        Pattern first=Pattern.compile("\\([^\\(].*?\\)");
+        Matcher matcher=first.matcher(expression);
+        while (matcher.find()){
+        //    int start=matcher.start();
+          //  int end=expression.indexOf(")");
+            //String ex=expression.substring(start+1,end);
+           // String op=calc(ex).toString();
+         //   expression=expression.replace(ex,op).replace("(","").replace(")","");
+            String ex=matcher.group();
+            String expr=ex.replace("(","").replace(")","");
+            String oper=calc(expr).toString();
+            expression=expression.replace(ex,oper);
+            matcher.reset(expression);
+        }
+
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
 
@@ -71,6 +87,7 @@ public class Parsel {
             String operation=operations.remove(index);
             String sTwo=operands.remove(index);
             String result=oneOperation(sOne,operation,sTwo);
+
             operands.add(index,result);
         }
         return Var.createVar(operands.get(0));
