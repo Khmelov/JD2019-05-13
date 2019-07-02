@@ -20,7 +20,6 @@ public class Cashier extends Thread {
             Buyer buyer = null;
             synchronized (monitor) {
                 if (needCashier()) {
-                    System.out.println("Cashier" + cashiers + "working for buyer from Queue" + Queue.lenght());
                     buyer = Queue.extract();
                 }
             }
@@ -29,12 +28,14 @@ public class Cashier extends Thread {
                 Helper.sleep(Helper.randomeGet(2000, 5000));
                 System.out.println(this + " completes " + buyer + " service");
                 synchronized (buyer) {
-                    buyer.notifyAll();
+                    buyer.notify();
                 }
             } else {
                 synchronized (monitor) {
                     try {
-                        monitor.wait();
+                        if (!needCashier()) {
+                            monitor.wait();
+                        }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
