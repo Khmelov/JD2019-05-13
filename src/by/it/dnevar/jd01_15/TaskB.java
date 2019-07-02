@@ -8,6 +8,7 @@ public class TaskB {
     private static String fileResultTxt = getFilePath(TaskA.class, "TaskB.txt");
     private static StringBuilder text = new StringBuilder();
 
+
     public static void main(String[] args){
 
         deleteComentsPrintToConsole();
@@ -33,15 +34,19 @@ public class TaskB {
             boolean add = true;
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
-                if (line.contains("//") || line.contains("/*") || line.contains("/**")) {
+                if (line.contains("/"+"/") || line.contains("/"+"*")) {
                     if(!line.contains("if")){
                         add = false;
                     }
                 }
                 if (add) {
                     text.append(line).append("\n");
+                }else{
+                    if (line.contains("/"+"/") || line.contains("/"+"*")){
+                        text.append(line,0,line.indexOf("/")).append("\n");
+                    }
                 }
-                if (line.contains("//") || line.contains("*/")) {
+                if (line.contains("/"+"/") || line.contains("*"+"/")) {
                     if(!line.contains("if")){
                         add = true;
                     }

@@ -7,22 +7,19 @@ import java.util.Set;
 public class TaskC2 {
     @SafeVarargs
     private static <E> Set<E> getUnion(Set<E>... n) {
-        Set<E> resultSet = null;
-        for (int i = 0; i < n.length - 1; i++) {
-            resultSet = new HashSet<>(n[i]);
-            resultSet.addAll(n[i + 1]);
+        HashSet<E> resultSet = new HashSet<>();
+        for (Set<E> uN : n) {
+            resultSet.addAll(uN);
         }
-
         return resultSet;
     }
 
     @SafeVarargs
     private static <E> Set<E> getCross(Set<E>... n) {
-        Set<E> resultSet = null;
-        for (int i = 0; i < n.length - 1; i++) {
-            resultSet = new HashSet<>(n[i]);
-            resultSet.retainAll(n[i + 1]);
-        }
+        HashSet<E> resultSet = new HashSet<>(n[0]);
+            for (int i = 1; i < n.length; i++) {
+                resultSet.retainAll(n[i]);
+            }
 
         return resultSet;
     }
@@ -39,9 +36,8 @@ public class TaskC2 {
         HashSet g = new HashSet<>(Arrays.asList('a', 'g', 'y'));
 
 
-
         System.out.println("union:" + getUnion(e, d, a));
-        System.out.println("cross:" + getCross(a, b, c));
+        System.out.println("cross:" + getCross( b, c));
         System.out.println("UnionChar" + getUnion(f, g));
 
 

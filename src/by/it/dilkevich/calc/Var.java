@@ -50,6 +50,7 @@ public abstract class Var implements Operation {
 
         statement = statement.replaceAll(" ", "");
         Parser parser = new Parser();
+
         if (statement.matches(parser.SCALAR)){
             Var var = new Scalar(statement);
             return var;
