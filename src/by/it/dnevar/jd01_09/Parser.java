@@ -10,7 +10,7 @@ public class Parser {
         Var one = Var.createVar(operand[0]);
         Var two = Var.createVar(operand[1]);
         if(one == null||two == null){
-            return null;//TODO create error
+            return null;
         }
         Pattern p = Pattern.compile(Operation.OPERATION);
         Matcher m = p.matcher(expression);

@@ -45,6 +45,7 @@ class Matrix extends Var {
                     res[i][j] = res[i][j]+((Scalar)other).getValue();
                 }
             }
+            Log.setLog(Arrays.deepToString(this.value) +"+"+((Scalar)other).getValue()+"="+ Arrays.deepToString(res));
             return new Matrix(res);
         }else if(other instanceof Matrix){
             double[][] res = new double[this.value.length][];
@@ -56,11 +57,13 @@ class Matrix extends Var {
                     if(res.length==((Matrix)other).value.length && res[i].length==((Matrix)other).value[i].length){
                         res[i][j] = res[i][j]+((Matrix)other).value[i][j];
                     }else{
+                        Log.setLog("Матрицы разной длинны");
                         throw new CalcException("Матрицы разной длинны");
                     }
 
                 }
             }
+            Log.setLog(Arrays.deepToString(value) +"+"+ Arrays.deepToString(((Matrix) other).value) +"="+ Arrays.deepToString(res));
             return new Matrix(res);
         }else{
             return super.add(other);
@@ -79,6 +82,7 @@ class Matrix extends Var {
                     res[i][j] = res[i][j]-((Scalar)other).getValue();
                 }
             }
+            Log.setLog(Arrays.deepToString(value) +"-"+((Scalar)other).getValue()+"="+ Arrays.deepToString(res));
             return new Matrix(res);
         }else if(other instanceof Matrix){
             double[][] res = new double[this.value.length][];
@@ -90,10 +94,12 @@ class Matrix extends Var {
                     if(res.length==((Matrix)other).value.length && res[i].length==((Matrix)other).value[i].length){
                         res[i][j] = res[i][j]-((Matrix)other).value[i][j];
                     }else{
+                        Log.setLog("Матрицы разной длинны");
                         throw new CalcException("Матрицы разной длинны");
                     }
                 }
             }
+            Log.setLog(Arrays.deepToString(value) +"-"+ Arrays.deepToString(((Matrix) other).value) +"="+ Arrays.deepToString(res));
             return new Matrix(res);
         }else{
             return super.sub(other);
@@ -112,6 +118,7 @@ class Matrix extends Var {
                     res[i][j] = res[i][j] * ((Scalar) other).getValue();
                 }
             }
+            Log.setLog(Arrays.deepToString(value) +"*"+((Scalar)other).getValue()+"="+ Arrays.deepToString(res));
             return new Matrix(res);
         }else if(other instanceof Vector){
             double[][] res = new double[this.value.length][];
@@ -125,11 +132,13 @@ class Matrix extends Var {
                     if(vector.length==res.length) {
                         sum[i] = sum[i] + res[i][j] * vector[j];
                     }else{
+                        Log.setLog("Разная длинна матрицы и вектора");
                         throw new CalcException("Разная длинна матрицы и вектора");
                     }
                 }
 
             }
+            Log.setLog(Arrays.deepToString(value) +"*"+((Vector)other).toString()+"="+ Arrays.deepToString(res));
             return new Vector(sum);
         }else if(other instanceof Matrix){
             double[][] res = new double[this.value.length][];
@@ -143,11 +152,13 @@ class Matrix extends Var {
                         if(res.length==((Matrix)other).value.length && res[j].length==((Matrix)other).value[j].length) {
                             result[i][j] = result[i][j] + res[i][k] * ((Matrix) other).value[k][j];
                         }else{
+                            Log.setLog("Матрицы разной длинны");
                             throw new CalcException("Матрицы разной длинны");
                         }
                     }
                 }
             }
+            Log.setLog(Arrays.deepToString(value) +"*"+ Arrays.deepToString(((Matrix) other).value) +"="+ Arrays.deepToString(res));
             return new Matrix(result);
         } else{
             return super.mul(other);
@@ -166,10 +177,12 @@ class Matrix extends Var {
                     if(((Scalar) other).getValue()!=0) {
                         res[i][j] = res[i][j] / ((Scalar) other).getValue();
                     }else{
+                        Log.setLog("Деление на ноль");
                         throw new CalcException("Деление на ноль");
                     }
                 }
             }
+            Log.setLog(Arrays.deepToString(value) +"/"+((Scalar)other).getValue()+"="+ Arrays.deepToString(res));
             return new Matrix(res);
         }else{
             return super.div(other);
