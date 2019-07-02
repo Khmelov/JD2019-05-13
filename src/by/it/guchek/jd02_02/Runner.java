@@ -10,7 +10,7 @@ public class Runner {
         List<Thread> threads=new ArrayList<>();
         System.out.println("Магазин открыт");
 
-        for (int i = 0; i <5 ; i++) {                //запускаем поток кассиров
+        for (int i = 0; i <2 ; i++) {                //запускаем поток кассиров
 
             Thread thread = new Thread(new Cashier(i));
             threads.add(thread);
@@ -36,7 +36,6 @@ public class Runner {
 
                     count = RandCount.randFrTo(1);
                 }
-
             }
 
             for (int i = 0; i < count && Dispatcher.marketIsOpened(); i++) { //добавили в условие проверку открыты ли
@@ -44,6 +43,7 @@ public class Runner {
                 buyer.start();
                 threads.add(buyer);
             }
+
             RandCount.sleep(1000);
         }
 
