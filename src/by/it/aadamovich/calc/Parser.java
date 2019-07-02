@@ -59,16 +59,27 @@ class Parser {
     Var calc(String expression) throws CalcException {
 
         expression = expression.replaceAll("\\s+", "");
-
+        while (expression.contains("(")) {
+            Pattern patBracket = Pattern.compile(Patterns.BRACKET);
+            Matcher matcherBracket = patBracket.matcher(expression);
+            if (matcherBracket.find()) {
+                String insideBrackets = matcherBracket.group().replaceAll("[()]", "");
+                expression = expression
+                        .replaceFirst(Patterns.BRACKET, calc(insideBrackets).toString())
+                        .replaceAll("\\s+", "");
+            } else {
+                throw new CalcException("Скобки расставлены неверно");
+            }
+        }
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
 
         if (operands.size() == 1) throw new CalcException("Получена только одна переменная: " + operands.get(0));
 
         List<String> operations = new ArrayList<>();
-        Pattern pattern = Pattern.compile(Patterns.OPERATION);
-        Matcher matcher = pattern.matcher(expression);
-        while (matcher.find()) {
-            operations.add(matcher.group());
+        Pattern patOperation = Pattern.compile(Patterns.OPERATION);
+        Matcher matcherOperation = patOperation.matcher(expression);
+        while (matcherOperation.find()) {
+            operations.add(matcherOperation.group());
         }
 
         while (operations.size() > 0) {

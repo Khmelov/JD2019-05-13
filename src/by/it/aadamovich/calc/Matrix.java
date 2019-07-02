@@ -19,13 +19,13 @@ class Matrix extends Var {
 
     Matrix(String strMatrix) throws CalcException{
 
-        String[] linesOfMatrix = strMatrix.replaceAll("[({|})].{0,2}[({|})]", "  ")
+        String[] linesOfMatrix = strMatrix.replaceAll("[{}].*?[{}]", "  ")
                 .trim().split("[ ]{2,}");
 
         double[][] buffer = new double[linesOfMatrix.length][];
-
+      
         for (int i = 0; i < buffer.length; i++) {
-            String[] elementsInLine = linesOfMatrix[i].split("[^-?\\d+(.\\d+)?]");
+            String[] elementsInLine = linesOfMatrix[i].split("[^\\d.-]+");
             buffer[i] = new double[elementsInLine.length];
             if (i > 0 && buffer[i].length != buffer[i-1].length) {
                 throw new CalcException (String.format("Переменная %s не является матрицей", strMatrix));

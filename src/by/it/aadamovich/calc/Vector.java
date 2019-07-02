@@ -16,7 +16,7 @@ class Vector extends Var {
 
     Vector(String strVector) {
         String[] elements = strVector
-                .replaceAll("[^\\d.]+", " ")
+                .replaceAll("[^\\d.-]+", " ")
                 .trim().split(" ");
 
         double[] buffer = new double[elements.length];
