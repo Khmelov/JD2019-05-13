@@ -29,6 +29,37 @@ public class ParselTest {
         assertEquals("{6.0, 15.0}",actual.toString());
         actual=parsel.calc("H=D+{{1,2},{8,3}}*{{1,2},{8,3}}-(-6+9)");
         assertEquals("{{24.0, 15.0}, {39.0, 32.0}}",actual.toString());
- 
+     }
+
+     @Test
+    public void Scalar () throws Exception{
+        Scalar scalar=new Scalar("2");
+        assertEquals(2.0,scalar.getValue(),0);
+        String actual=scalar.toString();
+        assertEquals("2.0",actual);
+     }
+
+    @Test
+    public void Vector () throws Exception{
+        Vector vector=new Vector("{1,2,-3,4}");
+        double [] expected={1.0, 2.0, -3.0, 4.0};
+        double [] actul=vector.getValue();
+        assertArrayEquals(expected,actul,0);
+        String actual=vector.toString();
+        assertEquals("{1.0, 2.0, -3.0, 4.0}",actual);
+    }
+
+    @Test
+    public void Matrix () throws Exception{
+        Matrix matrix=new Matrix("{{1,2},{-3,4}}");
+        double [][] expected={{1.0, 2.0}, {-3.0, 4.0}};
+        double [][] actul=matrix.getValue();
+        for (int i = 0; i < expected.length; i++) {
+            for (int j = 0; j <expected[0].length ; j++) {
+                assertEquals(expected[i][j],actul[i][j],0);
+            }
+        }
+        String actual=matrix.toString();
+        assertEquals("{{1.0, 2.0}, {-3.0, 4.0}}",actual);
     }
 }

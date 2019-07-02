@@ -4,6 +4,10 @@ class Matrix extends Var {
     private double[][] value;
 
 
+    public double[][] getValue() {
+        return value;
+    }
+
     Matrix(double[][] value) {
         this.value = value;
     }
