@@ -7,7 +7,7 @@ import java.util.concurrent.Semaphore;
 
 public class Th3_02_Semaphore {
 
-    private static Semaphore semaphore=new Semaphore(3);
+    private static Semaphore semaphore=new Semaphore(5);
 
     private static class Run implements Runnable{
         private String name;

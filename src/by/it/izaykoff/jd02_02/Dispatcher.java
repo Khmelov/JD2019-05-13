@@ -5,23 +5,23 @@ class Dispatcher {
     static final int K_SPEED = 100;
 
     private static final int PLAN = 100;
-    private static int bueyrInMarket = 0;
-    private static int bueyrCounter = 0;
+    private static int buyerInMarket = 0;
+    private static int buyerCounter = 0;
 
     static boolean planComplete() {
-        return (bueyrCounter == PLAN && (bueyrInMarket == 0));
+        return (buyerCounter == PLAN && (buyerInMarket == 0));
     }
 
     synchronized static void addBuyer() {
-        bueyrInMarket++;
+        buyerInMarket++;
     }
 
     synchronized static void completeBuyer() {
-        bueyrInMarket--;
-        bueyrCounter++;
+        buyerInMarket--;
+        buyerCounter++;
     }
 
     synchronized static boolean marketIsOpened() {
-        return bueyrInMarket + bueyrCounter < PLAN;
+        return buyerInMarket + buyerCounter < PLAN;
     }
 }
