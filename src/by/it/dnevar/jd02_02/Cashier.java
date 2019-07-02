@@ -1,12 +1,11 @@
 package by.it.dnevar.jd02_02;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class Cashier implements Runnable {
 
     final static Object monitor = new Object();
+    private static List<Cashier> cashiers = new ArrayList<>();
 
     private String name;
 
@@ -50,6 +49,10 @@ public class Cashier implements Runnable {
             }
         }
     }
+
+//    private boolean getMoreChashier (){
+//
+//    }
 
     @Override
     public String toString() {
