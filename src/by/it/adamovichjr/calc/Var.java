@@ -16,7 +16,7 @@ public class Var implements Operation {
         return vars;
     }
 
-    static Var createVar(String operand){
+    static Var createVar(String operand) throws CalcException {
         operand = operand.trim().replaceAll("\\s+","");
         if (operand.matches(Patterns.SCALAR))
             return new Scalar(operand);
@@ -26,7 +26,7 @@ public class Var implements Operation {
             return new Matrix(operand);
         else if (vars.containsKey(operand))
             return vars.get(operand);
-        return null; // NEED create error
+        throw new CalcException("Невозможно создать "+ operand);
     }
     @Override
     public String toString() {
@@ -34,26 +34,23 @@ public class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) {
-        System.out.println("Оперция + невозможна");
-        return null;
+    public Var add(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s + %s невозможна%n", this, other));
+
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Оперция - невозможна");
-        return null;
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s - %s невозможна%n", this, other));
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Оперция * невозможна");
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s * %s невозможна%n", this, other));
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Оперция / невозможна");
-        return null;
+    public Var div(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
     }
 }
