@@ -34,6 +34,7 @@ class Vector extends Var {
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i]+((Scalar)other).getValue();
             }
+            Log.setLog(Arrays.toString(value)+"+"+((Scalar)other).getValue()+"="+Arrays.toString(res));
             return new Vector(res);
         }else if(other instanceof Vector){
             double[] res = Arrays.copyOf(value,value.length);
@@ -41,9 +42,11 @@ class Vector extends Var {
                 if(res.length==((Vector)other).value.length){
                     res[i] = res[i] + ((Vector) other).value[i];
                 }else{
+                    Log.setLog("Векторы разной длинны");
                     throw new CalcException("Векторы разной длинны");
                 }
             }
+            Log.setLog(Arrays.toString(value)+"+"+Arrays.toString(((Vector)other).value)+"="+Arrays.toString(res));
             return new Vector(res);
         }else{
             return super.add(other);
@@ -57,6 +60,7 @@ class Vector extends Var {
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i]-((Scalar)other).getValue();
             }
+            Log.setLog(Arrays.toString(value)+"-"+((Scalar)other).getValue()+"="+Arrays.toString(res));
             return new Vector(res);
         }else if(other instanceof Vector){
             double[] res = Arrays.copyOf(value,value.length);
@@ -64,9 +68,11 @@ class Vector extends Var {
                 if(res.length==((Vector)other).value.length){
                     res[i] = res[i] - ((Vector) other).value[i];
                 }else{
+                    Log.setLog("Векторы разной длинны");
                     throw new CalcException("Векторы разной длинны");
                 }
             }
+            Log.setLog(Arrays.toString(value)+"-"+Arrays.toString(((Vector)other).value)+"="+Arrays.toString(res));
             return new Vector(res);
         }else{
             return super.sub(other);
@@ -80,6 +86,7 @@ class Vector extends Var {
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i]*((Scalar)other).getValue();
             }
+            Log.setLog(Arrays.toString(value)+"*"+((Scalar)other).getValue()+"="+Arrays.toString(res));
             return new Vector(res);
         }else if(other instanceof Vector){
             double[] res = Arrays.copyOf(value,value.length);
@@ -89,9 +96,11 @@ class Vector extends Var {
                     res[i] = res[i] * ((Vector)other).value[i];
                     result+=res[i];
                 }else{
+                    Log.setLog("Векторы разной длинны");
                     throw new CalcException("Векторы разной длинны");
                 }
             }
+            Log.setLog(Arrays.toString(value)+"*"+Arrays.toString(((Vector)other).value)+"="+result);
             return new Scalar(result);
         }else{
             return super.mul(other);
@@ -106,9 +115,11 @@ class Vector extends Var {
                 if(((Scalar) other).getValue()!=0) {
                     res[i] = res[i] / ((Scalar) other).getValue();
                 }else{
+                    Log.setLog("Деление на ноль");
                     throw new CalcException("Деление на ноль");
                 }
             }
+            Log.setLog(Arrays.toString(value)+"/"+((Scalar)other).getValue()+"="+Arrays.toString(res));
             return new Vector(res);
         } else{
             return super.div(other);
