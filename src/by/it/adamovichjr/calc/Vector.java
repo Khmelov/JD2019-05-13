@@ -20,7 +20,7 @@ public class Vector extends Var {
     }
 
     Vector(String str){
-        str = str.replaceAll("[^\\d.]+"," ").trim();
+        str = str.replaceAll("[^-\\d.]+"," ").trim();
         String[] split = str.split("[ ]+");
         double[]mas = new double[split.length];
         for (int i = 0; i < mas.length; i++) {
@@ -104,7 +104,7 @@ public class Vector extends Var {
        StringBuilder sb = new StringBuilder("{");
        String delimiter = "";
         for (double el : value) {
-            sb.append(delimiter).append(el);
+            sb.append(delimiter).append(Math.round(el*100)/100.0);
             delimiter = ", ";
         }
         sb.append("}");

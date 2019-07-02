@@ -7,9 +7,8 @@ public class Var implements Operation {
 
     private static Map<String, Var> vars = new HashMap<>();
 
-    static Var saveVar (String name, Var var){
+    static void save(String name, Var var) {
         vars.put(name, var);
-        return var;
     }
 
     public static Map<String, Var> getVars() {
