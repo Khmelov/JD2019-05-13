@@ -9,6 +9,7 @@ public class ParserTest {
     @Test
     public void calc() throws Exception {
         Parser parser = new Parser();
+        //ест для скаляра
         Var actual = parser.calc("A=2+5.3");
         assertEquals("7.3",actual.toString());
         actual = parser.calc("B=A*3.5");
@@ -34,4 +35,16 @@ public class ParserTest {
         actual = parser.calc("D=A/(2+3)");
         assertEquals("{{-0.4, -0.4}, {-0.4, -0.4}}",actual.toString());
     }
-}
+
+    @Test
+    public void createVar() throws Exception {
+        //Тест для матрицы
+        String exemple = "{  {  1   ,  -   1    }   {1  ,   -   1   }   }";
+        Var actual = Var.createVar(exemple);
+        assertEquals("{{1.0, -1.0}, {1.0, -1.0}}",actual.toString());
+        exemple = "{{1,g}{3,4}}";
+        actual = Var.createVar(exemple);
+        assertEquals("ERROR: Невозможно создать {{1,g}{3,4}}",actual.toString());
+    }
+    }
+

@@ -52,7 +52,7 @@ public class Parser {
 
 
 
-    Var calcExpressionWithoutBrecket(String expression) throws CalcException {
+    private Var calcExpressionWithoutBrecket(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         List<String> operation = new ArrayList<>();
@@ -67,7 +67,7 @@ public class Parser {
             String sOne = operands.remove(index);
             String sTwo = operands.remove(index);
             String op = operation.remove(index);
-            String result = oneOperation(sOne, op, sTwo);
+            String result = oneOperation(sOne,op,sTwo);
             operands.add(index, result);
         }
         return Var.createVar(operands.get(0));
