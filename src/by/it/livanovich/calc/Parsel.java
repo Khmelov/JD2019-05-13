@@ -61,11 +61,6 @@ public class Parsel {
         Pattern first=Pattern.compile("\\([^\\(].*?\\)");
         Matcher matcher=first.matcher(expression);
         while (matcher.find()){
-        //    int start=matcher.start();
-          //  int end=expression.indexOf(")");
-            //String ex=expression.substring(start+1,end);
-           // String op=calc(ex).toString();
-         //   expression=expression.replace(ex,op).replace("(","").replace(")","");
             String ex=matcher.group();
             String expr=ex.replace("(","").replace(")","");
             String oper=calc(expr).toString();
