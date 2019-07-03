@@ -28,15 +28,17 @@ public class Runner {
 
                     count = RandCount.randFrTo(2);
 
-                } else if ((sec >= 30) && (sec % 2 == 0)) {
+                } else if ((sec > 30) && (sec % 2 == 0)) {
 
                     count = RandCount.randFrTo(2);
 
-                } else if ((sec >= 30) && (sec % 3 == 0)) {
+                } else if ((sec > 30) && (sec % 3 == 0)) {
 
                     count = RandCount.randFrTo(1);
                 }
             }
+
+
 
             for (int i = 0; i < count && Dispatcher.marketIsOpened(); i++) { //добавили в условие проверку открыты ли
                 Buyer buyer = new Buyer(++numberBuyer);
