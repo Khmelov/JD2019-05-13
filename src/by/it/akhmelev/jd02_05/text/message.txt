@@ -1,0 +1,3 @@
+message.welcom=Welcom!
+message.guestion=How do you do?
+user.name=Guchak Volga

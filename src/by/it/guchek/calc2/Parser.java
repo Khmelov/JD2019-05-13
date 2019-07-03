@@ -38,6 +38,7 @@ class Parser {
       }
 
       Var one = Var.createVar(sOne);
+
       switch (operation) {
          case "+":
             return one.add(two).toString();
@@ -51,7 +52,7 @@ class Parser {
       throw new CalcException("Error !!!!!");
    }
 
-   Var calc(String expression) throws CalcException {
+   Var calc2(String expression) throws CalcException {
       expression = expression.replaceAll("\\s+", "");
       List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
       List<String> operation = new ArrayList<>();
@@ -71,6 +72,22 @@ class Parser {
       }
       return Var.createVar(operands.get(0));
 
+   }
+
+   Var calc (String expression) throws CalcException {  //clearExprFromBrace
+
+      StringBuilder incomingExpression = new StringBuilder(expression);
+      StringBuilder sbForExprFromBrace= new StringBuilder();
+      Pattern patternExprInBrace = Pattern.compile(Patterns.BRACE);
+      Matcher matcher = patternExprInBrace.matcher(incomingExpression);
+
+      while (matcher.find()){
+         sbForExprFromBrace.append(matcher.group());
+         incomingExpression.replace(matcher.start()-1,matcher.end()+1,calc(sbForExprFromBrace.toString()).toString());
+         sbForExprFromBrace.delete(0,sbForExprFromBrace.length());
+         matcher.reset();}
+
+      return calc2(incomingExpression.toString());
    }
 
 

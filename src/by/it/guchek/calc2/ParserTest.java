@@ -24,5 +24,19 @@ public class ParserTest {
         expression = "B2=A/2-1";
         res = parcer.calc(expression).toString();
         assertEquals("2.65",res.toString());
+
+
+        expression = "C=B+(A*2)";
+        res = parcer.calc(expression).toString();
+        assertEquals("40.15",res.toString());
+
+        expression = "D=((C-0.15)-20)/(7-5)";
+        res = parcer.calc(expression).toString();
+        assertEquals("10.0",res.toString());
+
+        expression = "E={2,3}*(D/2)";
+        res = parcer.calc(expression).toString();
+        assertEquals("{10.0, 15.0}",res.toString());
+
     }
 }

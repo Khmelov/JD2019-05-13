@@ -1,0 +1,3 @@
+message.welcom=Привет!
+message.guestion=Как дела?
+user.name=Гучек Ольга

@@ -18,7 +18,7 @@ abstract class Var implements Operation {                 //реализовыв
     }
 
     static Var createVar(String operand) throws CalcException{
-        operand = operand.trim().replace("\\s", "");
+        operand = operand.trim().replace(" ", "").replace("(","").replace(")","");
         if (operand.matches(Patterns.SCALAR))          //если операнд соответствует рег. выр. СКАЛАР
         return new Scalar(operand);                   //должны вернуть новый скалар в конструктор
                                                                             // которого этот операнд передан
@@ -30,6 +30,9 @@ abstract class Var implements Operation {                 //реализовыв
 
         else if (vars.containsKey(operand))
             return vars.get(operand);
+
+        else if (operand.matches(Patterns.BRACE))
+            return new Parser().calc(operand);
 
         else throw new CalcException("Невозможно создать переменную: " +operand);
 
