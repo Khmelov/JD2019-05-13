@@ -21,19 +21,13 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void run() {
-        try {
 
             isPensioner();
             enterToMarket();
-            semaphore.acquire();
+
            shopping();
            goToQueue();
            goOut();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            semaphore.release();
-        }
 
     }
 
@@ -44,12 +38,19 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void chooseGoods() {
+        try {
+            semaphore.acquire();
         System.out.println(this + " start choose goods");
         int timeout = Util.rnd(500, 2000, pensioneer);
         Util.sleep(timeout);
         String good = Goods.getRandomGood();
         System.out.println(this + " choose " + good);
         goods.add(good);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphore.release();
+        }
     }
 
     @Override
