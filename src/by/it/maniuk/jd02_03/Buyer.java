@@ -21,14 +21,11 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void run() {
-
             isPensioner();
             enterToMarket();
-
            shopping();
            goToQueue();
            goOut();
-
     }
 
     @Override
@@ -119,5 +116,9 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     public List<String> getGoods() {
         return goods;
+    }
+
+    public boolean isPensioneer() {
+        return pensioneer;
     }
 }
