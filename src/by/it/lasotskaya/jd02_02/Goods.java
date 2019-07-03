@@ -6,7 +6,7 @@ import java.util.Map;
 
  class Goods {
 
-    private static HashMap<String, Double> products = new HashMap<>() {
+    private static HashMap<String, Double> products = new HashMap<String, Double>() {
         {
             this.put("Bread", 1.1);
             this.put("Milk", 2.2);
