@@ -19,10 +19,10 @@ public class Runner {
         }
 
         int numberBuyer=0;
+        int sec=0;
         while (Dispatcher.marketIsOpened()) {
-
             int count = 0;
-            for (int sec = 0; sec < 60; sec++) {
+            sec=sec++;
 
                 if ((sec <= 30) && (sec % 3 == 0)) {
 
@@ -36,8 +36,6 @@ public class Runner {
 
                     count = RandCount.randFrTo(1);
                 }
-            }
-
 
 
             for (int i = 0; i < count && Dispatcher.marketIsOpened(); i++) { //добавили в условие проверку открыты ли
