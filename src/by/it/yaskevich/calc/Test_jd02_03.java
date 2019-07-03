@@ -1,13 +1,27 @@
 package by.it.yaskevich.calc;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class Test_jd02_03 {
+    private Parser parser;
+
+    @Before
+    public void initParser() {
+        parser = new Parser();
+    }
+
+    @After
+    public void clearParser() {
+        parser = null;
+    }
+
     @Test
     public void calcA() throws Exception {
-        Parser parser = new Parser();
         Var actualVar = parser.calc("A=2+5.3");
         assertEquals("7.3", actualVar.toString());
         actualVar = parser.calc("B=A*3.5");
@@ -20,7 +34,6 @@ public class Test_jd02_03 {
 
     @Test
     public void calcB() throws Exception {
-        Parser parser = new Parser();
         Var actualVar = parser.calc("A=2+5.3");
         assertEquals("7.3", actualVar.toString());
         actualVar = parser.calc("B=A*3.5");
@@ -35,7 +48,6 @@ public class Test_jd02_03 {
 
     @Test
     public void calcC() throws Exception {
-        Parser parser = new Parser();
         Var actualVar = parser.calc("A={{1,2},{3,4}}*{1,1}");
         assertEquals("{3.0, 7.0}", actualVar.toString());
         actualVar = parser.calc("B=(A+{2,3})*2");
@@ -51,4 +63,13 @@ public class Test_jd02_03 {
         }
     }
 
+    @Test(expected = CalcException.class)
+    public void calcC_D() throws Exception {
+        parser.calc("A={{1,2},{3,4}}/10");
+    }
+
+    @Ignore("Это задание еще не придумали")
+    @Test
+    public void calcD() throws Exception {
+    }
 }
