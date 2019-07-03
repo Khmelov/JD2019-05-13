@@ -2,12 +2,15 @@ package by.it.maniuk.calc;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
 
+
     @Test
-    public void calcScalar() throws Exception {
+    public void calcScalar() throws CalcException, IOException {
         by.it.maniuk.calc.Parser parser = new by.it.maniuk.calc.Parser();
         by.it.maniuk.calc.Var actual = parser.calc("A=2+5.3");
         assertEquals("7.3",actual.toString());
@@ -23,7 +26,7 @@ public class ParserTest {
 
     }
     @Test
-    public void calcVector() throws Exception {
+    public void calcVector() throws CalcException, IOException  {
         by.it.maniuk.calc.Parser parser = new by.it.maniuk.calc.Parser();
         by.it.maniuk.calc.Var actual = parser.calc("{2,3,4}*2");
         assertEquals("{4.0, 6.0, 8.0}",actual.toString());
@@ -40,7 +43,7 @@ public class ParserTest {
 
     }
     @Test
-    public void calcMatrix() throws Exception {
+    public void calcMatrix() throws CalcException, IOException {
         by.it.maniuk.calc.Parser parser = new by.it.maniuk.calc.Parser();
         by.it.maniuk.calc.Var actual = parser.calc("{{1,2},{8,3}}-2" );
         assertEquals("{{-1.0, 0.0}, {6.0, 1.0}}",actual.toString());
@@ -51,6 +54,16 @@ public class ParserTest {
         actual = parser.calc("{{1,2},{8,3}}+{{1,2},{8,3}}");
         assertEquals("{{2.0, 4.0}, {16.0, 6.0}}",actual.toString());
 
+    }
+    @Test
+    public void createVar() throws CalcException {
+        Var var = null;
+        by.it.maniuk.calc.Var actual = var.createVar("5");
+        assertEquals("5.0",actual.toString());
+        actual=Var.createVar("{1,2}");
+        assertEquals("{1.0, 2.0}",actual.toString());
+        actual=Var.createVar("{{1,2},{3,4}}");
+        assertEquals("{{1.0, 2.0}, {3.0, 4.0}}",actual.toString());
     }
 }
 //A=2+5.3
