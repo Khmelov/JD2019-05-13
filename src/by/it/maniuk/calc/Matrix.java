@@ -14,7 +14,7 @@ public class Matrix extends Var {
         this.value = Arrays.copyOf(matrix.value,matrix.value.length);
     }
     public Matrix(String matrix) {
-            matrix = matrix.replaceAll("[^\\d.] ?", " ").trim();
+            matrix = matrix.replaceAll("[^-\\d.] ?", " ").trim();
             String[] line = matrix.split("[ ]{2,}");
             double[][] mas = new double[line.length][];
             for (int i = 0; i < mas.length; i++) {
@@ -136,7 +136,7 @@ public class Matrix extends Var {
             double[][] z = new double[res.length][matrixLeight];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < matrixLeight; j++)
-                    for (int k = 0; k < matrixLeight; k++) {
+                    for (int k = 0; k < res[0].length; k++) {
                         z[i][j] = z[i][j] + res[i][k] * ((Matrix) other).getValue()[k][j];
 
                     }

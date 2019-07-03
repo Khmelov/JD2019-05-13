@@ -13,9 +13,10 @@ abstract class Var implements Operation {
     static Var saveVar(String name, Var var) throws IOException {
         vars.put(name, var);
         String path = getFilePath(Var.class, "vars.txt"); // TODO Надо не забыть вынести все про IO в отельный класс
-        try(PrintWriter out = new PrintWriter( new FileWriter(path))) {
-                out.println(name+"="+var);
-                out.println();
+        try(PrintWriter out = new PrintWriter( new FileWriter(path, true))) {
+            out.print(name+"="+var);
+            out.println();
+
 
         } catch (IOException e) {
             throw e;
@@ -27,17 +28,19 @@ abstract class Var implements Operation {
        try(BufferedReader in = new BufferedReader(new FileReader(path))) {
            int count =0;
            for (; ; ) {
-               String line = in.readLine();
-               count++;
-               if (line == null)
-                   break;
-               else if (count==1) System.out.println("В памяти хранятся следующие переменные:");
-               String[] lines = line.split("=");
-               String name = lines[0];
-               Var var = Var.createVar(lines[1]);
-               vars.put(name,var);
+                   String line = in.readLine();
+                   count++;
+                   if (line == null || line.equals(""))
+                       break;
+                   else if (count == 1) System.out.println("В памяти хранятся следующие переменные:");
+                   String[] lines = line.split("=");
+                   String name = lines[1];
 
-               System.out.println(line);
+                   Var var = Var.createVar(name);
+                   vars.put(name, var);
+
+                   System.out.println(line);
+
            }
 
        } catch (IOException e) {
@@ -51,17 +54,16 @@ abstract class Var implements Operation {
     }
 
     static Var createVar(String strVar) throws CalcException {
-          strVar = strVar.replaceAll("\\s+", "");
-
+        strVar = strVar.replaceAll("\\s+", "");
         if (strVar.matches(Patterns.SCALAR))
             return new Scalar(strVar);
-        if (strVar.matches(Patterns.VECTOR))
+        else if (strVar.matches(Patterns.VECTOR))
             return new Vector(strVar);
-        if (strVar.matches(Patterns.MATRIX))
+        else if (strVar.matches(Patterns.MATRIX))
             return new Matrix(strVar);
-        if (vars.containsKey(strVar))
+        else if (vars.containsKey(strVar))
             return vars.get(strVar);
-      throw  new CalcException("ERROR: Не возможно создать " + strVar);
+        throw new CalcException(" не понимаю что такое "+strVar);
     }
 
     @Override

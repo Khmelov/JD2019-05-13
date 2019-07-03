@@ -14,8 +14,7 @@ class LogException {
         String path = getFilePath(LogException.class, "log.txt");
         try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
             System.out.println(e.getMessage());
-            out.println();
-            out.println(e + " - " +  new Date().toString());
+            out.print(e + " - " +  new Date().toString());
 
 
         } catch (IOException ex) {

@@ -10,23 +10,16 @@ import java.util.Set;
 class Printer {
 
     void print(Var result) {
-        String path = getFilePath(Printer.class, "vars.txt");
 
-        if (result != null)
+        if (result != null) {
             System.out.println(result);
-        try(PrintWriter out = new PrintWriter( new FileWriter(path))) {
-            out.println(result);
-            out.println();
-            } catch (IOException e) {
-            e.printStackTrace();
+
         }
-
     }
-
     static void printVar(){
         Set<Map.Entry<String, Var>> entrySet = Var.getVars().entrySet();
         for (Map.Entry<String, Var> varEntry : entrySet) {
-            System.out.println(varEntry.getKey() + "=" + varEntry.getValue());
+            System.out.println(varEntry.getKey() + "=" +varEntry.getValue());
         }
 
     }

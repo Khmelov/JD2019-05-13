@@ -11,7 +11,13 @@ public class Scalar extends Var {
     Scalar(Scalar scalar){
         this.value = scalar.value;
     }
-    Scalar(String strValue){
+
+    Scalar(String strValue) {
+//        String[] splitter = String.valueOf(strValue).split("\\.");
+//        int z = Integer.parseInt(splitter[1]);
+//        if (z == 0) {
+//                this.value = Integer.parseInt(splitter[0]);
+//        } else{}
         this.value = Double.parseDouble(strValue);
     }
 
