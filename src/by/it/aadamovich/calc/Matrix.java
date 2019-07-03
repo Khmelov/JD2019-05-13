@@ -23,7 +23,7 @@ class Matrix extends Var {
                 .trim().split("[ ]{2,}");
 
         double[][] buffer = new double[linesOfMatrix.length][];
-      
+
         for (int i = 0; i < buffer.length; i++) {
             String[] elementsInLine = linesOfMatrix[i].split("[^\\d.-]+");
             buffer[i] = new double[elementsInLine.length];
