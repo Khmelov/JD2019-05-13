@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Goods {
 
-    static HashMap<String, Double> products = new HashMap<>() {
+    static HashMap<String, Double> products = new HashMap<String, Double>() {
         {
             this.put("хлеб", 1.1);
             this.put("молоко", 2.2);
