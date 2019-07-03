@@ -20,7 +20,9 @@ public class Market {
     }
 
     private static void marketWorking() {
-        for (int time = 0; time < 120; time++) {
+        int time = 0;
+        while (Dispatcher.marketIsOpened()) {
+//        for (int time = 0; time < 120; time++) {
             int maxBuyers;
 
             if (time % 60 <= 30) {
@@ -29,24 +31,25 @@ public class Market {
                 maxBuyers = 40 + (30 - (time % 60));
             }
             int countAddBuyers = maxBuyers - Dispatcher.buyerInMarket;
-            if (Dispatcher.marketIsOpened()) {
-                for (int i = 0; i < countAddBuyers&&Dispatcher.marketIsOpened(); i++) {
-                    Buyer buyer;
-                    if (Helper.rnd(1, 4) == 1) {
-                        buyer = new Buyer(++countBuyer, true);
-                    } else {
-                        buyer = new Buyer(++countBuyer);
-                    }
-                    buyer.start();
-                    buyers.add(buyer);
 
+            for (int i = 0; i < countAddBuyers && Dispatcher.marketIsOpened(); i++) {
+                Buyer buyer;
+                if (Helper.rnd(1, 4) == 1) {
+                    buyer = new Buyer(++countBuyer, true);
+                } else {
+                    buyer = new Buyer(++countBuyer);
                 }
+                buyer.start();
+                buyers.add(buyer);
+
             }
             System.out.println("Time " + time + " Buyers in market " + Dispatcher.buyerInMarket);
             Helper.sleep(1000);
+            time++;
         }
 
-        for (Buyer buyer : buyers) {
+        for (
+                Buyer buyer : buyers) {
 
             try {
                 buyer.join();
