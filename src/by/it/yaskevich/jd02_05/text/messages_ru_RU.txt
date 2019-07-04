@@ -1,0 +1,4 @@
+message.welcome=Привет!
+message.question=Как дела?
+message.today=Сегодня
+user.name=Михаил Яскевич

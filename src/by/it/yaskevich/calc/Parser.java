@@ -98,7 +98,8 @@ class Parser {
             case "/":
                 return one.div(two).toString();
             default:
-                throw new CalcException("ERROR");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.ERROR));
         }
     }
 }

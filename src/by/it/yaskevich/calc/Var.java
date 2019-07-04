@@ -15,22 +15,26 @@ public abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException("Операция сложения " + this + " + " + other + " невозможна");
+        throw new CalcException(String.format(
+                ResourcesManager.INSTANCE.getString(Resources.THEADDITIONOPERATIONISNOTPOSSIBLE), this, other));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException("Операция вычитания" + this + " - " + other + " невозможна");
+        throw new CalcException(String.format(
+                ResourcesManager.INSTANCE.getString(Resources.THESUBTRACTIONOPERATIONISNOTPOSSIBLE), this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException("Операция умножения " + this + " * " + other + " невозможна");
+        throw new CalcException(String.format(
+                ResourcesManager.INSTANCE.getString(Resources.THEMULTIPLYOPERATIONISNOTPOSSIBLE), this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException("Операция деления " + this + " / " + other + " невозможна");
+        throw new CalcException(String.format(
+                ResourcesManager.INSTANCE.getString(Resources.THEDIVISIONOPERATIONISNOTPOSSIBLE), this, other));
     }
 
     static Var createVar(String strVar) throws CalcException {
@@ -45,7 +49,8 @@ public abstract class Var implements Operation {
         else if (vars.containsKey(strVar))
             return vars.get(strVar);
         else
-            throw new CalcException("Невозможно создать " + strVar);
+            throw new CalcException(
+                    ResourcesManager.INSTANCE.getString(Resources.UNABLETOCREATE) + " " + strVar);
     }
 
     static void printVar() {
