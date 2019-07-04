@@ -20,9 +20,6 @@ public class Market {
             executorCashiers.execute(new Cashier(i));
         }
         executorCashiers.shutdown();
-//        for (int i = 0; i < 5; i++) {
-//            threads.add(new Cashier(i));
-//        }
 
         while (Dispatcher.marketIsOpened()) {
 
