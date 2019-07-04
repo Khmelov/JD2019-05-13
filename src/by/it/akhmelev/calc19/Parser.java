@@ -30,17 +30,16 @@ class Parser {
                 currentPr = priorMap.get(op);
                 index = i;
             }
-            ;
+
         }
         return index;
     }
 
 
-    private String oneOperaion(String sOne, String operation, String sTwo) throws CalcException {
+    private String oneOperation(String sOne, String operation, String sTwo) throws CalcException {
         Var two = Var.createVar(sTwo);
         if (operation.equals("=")) {
-            String name = sOne;
-            Var.save(name, two);
+            Var.save(sOne, two);
             return two.toString();
         }
 
@@ -74,7 +73,7 @@ class Parser {
             String sOne = operands.remove(index);
             String sTwo = operands.remove(index);
             String op = operation.remove(index);
-            String result = oneOperaion(sOne, op, sTwo);
+            String result = oneOperation(sOne, op, sTwo);
             operands.add(index, result);
         }
         return Var.createVar(operands.get(0));
