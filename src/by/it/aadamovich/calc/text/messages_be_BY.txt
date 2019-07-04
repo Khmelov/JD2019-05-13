@@ -20,3 +20,4 @@ messages.noSavedVariables = Адсутнiчаюць захаваныя пера�
 messages.russianSwitch = Выбрана руская мова
 messages.englishSwitch = Выбрана англiйская мова
 messages.belarusianSwitch = Выбрана беларуская мова
+messages.errorMessage = ПАМЫЛКА: %s

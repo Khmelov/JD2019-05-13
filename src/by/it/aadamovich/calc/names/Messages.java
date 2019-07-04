@@ -8,4 +8,5 @@ public interface Messages {
     String RUSSIAN_SWITCH = "messages.russianSwitch";
     String ENGLISH_SWITCH = "messages.englishSwitch";
     String BELARUSIAN_SWITCH = "messages.belarusianSwitch";
+    String ERROR_MESSAGE = "messages.errorMessage";
 }

@@ -20,3 +20,4 @@ messages.noSavedVariables = No saved variables
 messages.russianSwitch = Russian language selected
 messages.englishSwitch = English language selected
 messages.belarusianSwitch = Belarusian language selected
+messages.errorMessage = ERROR: %s

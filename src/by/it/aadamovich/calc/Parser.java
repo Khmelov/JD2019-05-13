@@ -1,8 +1,6 @@
 package by.it.aadamovich.calc;
 
-import by.it.aadamovich.calc.names.Errors;
 import by.it.aadamovich.calc.names.ResData;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

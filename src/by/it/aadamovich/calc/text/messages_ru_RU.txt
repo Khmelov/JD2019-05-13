@@ -20,3 +20,4 @@ messages.noSavedVariables = Отсутствуют сохраненные пер
 messages.russianSwitch = Выбран русский язык
 messages.englishSwitch = Выбран английский язык
 messages.belarusianSwitch = Выбран белорусский язык
+messages.errorMessage = ОШИБКА: %s
