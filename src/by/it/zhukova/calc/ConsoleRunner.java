@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static by.it.zhukova.calc.Var.sortvar;
 
 public class ConsoleRunner {
-    public static void main(String[] args) throws CalcException {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         String expression;
         Parser parser = new Parser();

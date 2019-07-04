@@ -9,12 +9,12 @@ abstract class Var implements Operation {
 
 
     static Var createVar(String strVar) throws CalcException {
-        String strVar2=strVar.replaceAll("\\s+","");
-if (strVar2.matches(Patterns.SCALAR)) return new Scalar(strVar2);
-    else    if (strVar2.matches(Patterns.VECTOR)) return new Vector(strVar2);
-    else    if (strVar2.matches(Patterns.MATRIX)) return new Matrix(strVar2);
-    else    if (vars.containsKey(strVar)) return vars.get(strVar);
-          throw new CalcException(" не понимаю что такое "+strVar);
+        String strVarClear = strVar.replaceAll("\\s+", "");
+if (strVarClear.matches(Patterns.SCALAR)) return new Scalar(strVarClear);
+    else    if (strVarClear.matches(Patterns.VECTOR)) return new Vector(strVarClear);
+    else    if (strVarClear.matches(Patterns.MATRIX)) return new Matrix(strVarClear);
+    else    if (vars.containsKey(strVarClear)) return vars.get(strVarClear);
+          throw new CalcException(" не понимаю что такое "+strVarClear);
     }
 
     static void save(String name, Var var) {

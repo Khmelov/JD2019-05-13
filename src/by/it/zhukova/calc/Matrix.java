@@ -113,6 +113,18 @@ class Matrix extends Var {
 
     @Override
     public Var div(Var other) throws CalcException {
+        if (other instanceof Scalar){
+            if (((Scalar) other).getValue()==0)
+                throw new CalcException(" деление на ноль");
+            double  [][] div= new double[value.length][value[0].length];
+            double s = ((Scalar) other).getValue();
+            for (int i = 0; i < div.length; i++) {
+                for (int j = 0; j < div[0].length; j++) {
+                    div[i][j]=value[i][j]/s;
+                }
+            }
+            return new Matrix(div);
+        }
         return super.div(other);
     }
 
