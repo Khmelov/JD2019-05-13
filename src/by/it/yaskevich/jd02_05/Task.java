@@ -1,7 +1,5 @@
 package by.it.yaskevich.jd02_05;
 
-import javafx.scene.input.DataFormat;
-
 import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
