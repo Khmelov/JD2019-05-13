@@ -42,9 +42,14 @@ public class ParserTest {
         String exemple = "{  {  1   ,  -   1    }   {1  ,   -   1   }   }";
         Var actual = Var.createVar(exemple);
         assertEquals("{{1.0, -1.0}, {1.0, -1.0}}",actual.toString());
-        exemple = "{{1,g}{3,4}}";
+        //Тест для вектора
+        exemple = "{  1  ,  2  ,3,4  }";
         actual = Var.createVar(exemple);
-        assertEquals("ERROR: Невозможно создать {{1,g}{3,4}}",actual.toString());
+        assertEquals("{1.0, 2.0, 3.0, 4.0}",actual.toString());
+        //Тест для скаляра
+        exemple = "-6";
+        actual = Var.createVar(exemple);
+        assertEquals("-6.0",actual.toString());
     }
     }
 
