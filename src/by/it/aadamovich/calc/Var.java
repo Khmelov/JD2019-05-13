@@ -1,5 +1,7 @@
 package by.it.aadamovich.calc;
 
+import by.it.aadamovich.calc.names.ResData;
+
 abstract class Var implements Operation {
 
     static Var createVar(String operand) throws CalcException{
@@ -12,26 +14,31 @@ abstract class Var implements Operation {
         } else if (VarList.containVariable(operand)) {
             return VarList.getVariable(operand);
         }
-        throw new CalcException ("Невозможно создать переменную " + operand);
+        throw new CalcException (String.format
+                (ResourceManager.INSTANCE.getString(ResData.UNABLE_TO_CREATE_VAR), operand));
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s + %s невозможна%n", this, other));
+        throw new CalcException(String.format
+                (ResourceManager.INSTANCE.getString(ResData.SUM_NOT_POSSIBLE), this, other));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s - %s невозможна%n", this, other));
+        throw new CalcException(String.format
+                (ResourceManager.INSTANCE.getString(ResData.SUB_NOT_POSSIBLE), this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s * %s невозможна%n", this, other));
+        throw new CalcException(String.format
+                (ResourceManager.INSTANCE.getString(ResData.MUL_NOT_POSSIBLE), this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
+        throw new CalcException(String.format
+                (ResourceManager.INSTANCE.getString(ResData.DIV_NOT_POSSIBLE), this, other));
     }
 }

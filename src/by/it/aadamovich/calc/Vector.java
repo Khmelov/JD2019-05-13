@@ -1,5 +1,7 @@
 package by.it.aadamovich.calc;
 
+import by.it.aadamovich.calc.names.ResData;
+
 import java.util.Arrays;
 
 class Vector extends Var {
@@ -43,7 +45,8 @@ class Vector extends Var {
 
             if (this.value.length != ((Vector) other).value.length)
                 throw new CalcException(String.format(
-                        "Сложение невозможно: векторы %s и %s имеют разную длину", this, other));
+                        ResourceManager.INSTANCE.getString
+                                (ResData.SUM_VECTOR_VECTOR_SIZE), this, other));
 
             double[] sum = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < sum.length; i++) {
@@ -67,7 +70,8 @@ class Vector extends Var {
 
             if (this.value.length != ((Vector) other).value.length)
                 throw new CalcException(String.format(
-                        "Вычитание невозможно: векторы %s и %s имеют разную длину", this, other));
+                        ResourceManager.INSTANCE.getString
+                                (ResData.SUB_VECTOR_VECTOR_SIZE), this, other));
 
             double[] sub = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < sub.length; i++) {
@@ -91,7 +95,8 @@ class Vector extends Var {
 
             if (this.value.length != ((Vector) other).value.length)
                 throw new CalcException(String.format(
-                        "Умножение невозможно: векторы %s и %s имеют разную длину", this, other));
+                        ResourceManager.INSTANCE.getString
+                                (ResData.MUL_VECTOR_VECTOR_SIZE), this, other));
 
             double mul = 0;
             for (int i = 0; i < this.value.length; i++) {
@@ -106,7 +111,8 @@ class Vector extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
 
-            if (((Scalar) other).getValue() == 0) throw new CalcException("Деление на ноль невозможно");
+            if (((Scalar) other).getValue() == 0) throw new CalcException
+                    (ResourceManager.INSTANCE.getString(ResData.DIVISION_TO_ZERO));
 
             double[] div = Arrays.copyOf(this.value, this.value.length);
             for (int i = 0; i < div.length; i++) {

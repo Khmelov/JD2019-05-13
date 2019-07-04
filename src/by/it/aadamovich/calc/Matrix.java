@@ -1,5 +1,7 @@
 package by.it.aadamovich.calc;
 
+import by.it.aadamovich.calc.names.ResData;
+
 import java.util.Arrays;
 
 class Matrix extends Var {
@@ -28,7 +30,9 @@ class Matrix extends Var {
             String[] elementsInLine = linesOfMatrix[i].split("[^\\d.-]+");
             buffer[i] = new double[elementsInLine.length];
             if (i > 0 && buffer[i].length != buffer[i-1].length) {
-                throw new CalcException (String.format("Переменная %s не является матрицей", strMatrix));
+                throw new CalcException (String.format
+                        (ResourceManager.INSTANCE.getString
+                                (ResData.VARIABLE_NOT_MATRIX), strMatrix));
             }
 
             for (int j = 0; j < buffer[i].length; j++) {
@@ -54,7 +58,8 @@ class Matrix extends Var {
             if (this.value.length != ((Matrix) other).value.length
                     || this.value[0].length != ((Matrix) other).value[0].length)
                 throw new CalcException(String.format(
-                        "Сложение невозможно: матрицы %s и %s имеют разные размеры", this, other));
+                        ResourceManager.INSTANCE.getString
+                                (ResData.SUM_MATRIX_MATRIX_SIZE), this, other));
 
             double[][] sum = new double[this.value.length][this.value[0].length];
 
@@ -84,7 +89,8 @@ class Matrix extends Var {
             if (this.value.length != ((Matrix) other).value.length
                     || this.value[0].length != ((Matrix) other).value[0].length)
                 throw new CalcException(String.format(
-                        "Вычитание невозможно: матрицы %s и %s имеют разные размеры", this, other));
+                        ResourceManager.INSTANCE.getString
+                                (ResData.SUB_MATRIX_MATRIX_SIZE), this, other));
 
             double[][] sub = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < sub.length; i++) {
@@ -112,7 +118,8 @@ class Matrix extends Var {
 
             if (this.value[0].length != ((Vector) other).getValue().length)
                 throw new CalcException(String.format(
-                        "Умножение невозможно: разное количество столбцов матрицы %s и длина вектора %s", this, other));
+                        ResourceManager.INSTANCE.getString
+                                (ResData.MUL_MATRIX_VECTOR_SIZE), this, other));
 
             double[] mul = new double[this.value.length];
             for (int i = 0; i < this.value.length; i++) {
@@ -126,7 +133,8 @@ class Matrix extends Var {
 
             if (this.value[0].length != ((Matrix) other).value.length)
                 throw new CalcException(String.format(
-                        "Умножение невозможно: разное количество столбцов матрицы %s и строк матрицы %s", this, other));
+                        ResourceManager.INSTANCE.getString
+                                (ResData.MUL_MATRIX_MATRIX_SIZE), this, other));
 
             double[][] mul = new double[this.value.length][((Matrix) other).value[0].length];
             for (int i = 0; i < mul.length; i++) {
@@ -147,7 +155,8 @@ class Matrix extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
 
-            if (((Scalar) other).getValue() == 0) throw new CalcException("Деление на ноль невозможно");
+            if (((Scalar) other).getValue() == 0) throw new CalcException
+                    (ResourceManager.INSTANCE.getString(ResData.DIVISION_TO_ZERO));
             double[][] div = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < div.length; i++) {
                 for (int j = 0; j < div[0].length; j++) {

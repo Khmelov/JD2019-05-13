@@ -1,5 +1,8 @@
 package by.it.aadamovich.calc;
 
+import by.it.aadamovich.calc.names.Errors;
+import by.it.aadamovich.calc.names.ResData;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -53,7 +56,7 @@ class Parser {
             case "/":
                 return varOne.div(varTwo).toString();
         }
-        throw new CalcException("Операция невозможна");
+        throw new CalcException(ResourceManager.INSTANCE.getString(ResData.UNAVAILABLE_OPERATION));
     }
 
     Var calc(String expression) throws CalcException {
@@ -68,12 +71,16 @@ class Parser {
                         .replaceFirst(Patterns.BRACKET, calc(insideBrackets).toString())
                         .replaceAll("\\s+", "");
             } else {
-                throw new CalcException("Скобки расставлены неверно");
+                throw new CalcException
+                        (ResourceManager.INSTANCE.getString(ResData.BRACKETS_MISSPLACE)); // надо доработать
             }
         }
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
 
-        if (operands.size() == 1) throw new CalcException("Получена только одна переменная: " + operands.get(0));
+        if (operands.size() == 1)
+            System.out.println((String.format
+                    (ResourceManager.INSTANCE.getString
+                            (ResData.ONE_VARIABLE_RECEIVED), operands.get(0))));
 
         List<String> operations = new ArrayList<>();
         Pattern patOperation = Pattern.compile(Patterns.OPERATION);
