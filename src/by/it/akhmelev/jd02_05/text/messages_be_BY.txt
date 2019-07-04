@@ -1,0 +1,3 @@
+message.welcome=Прывiтaнне!
+message.question=Як справы?
+user.name=Аляксандр Хмялеу
