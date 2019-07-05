@@ -6,9 +6,10 @@ import by.it.guchek.jd02_05.names.User;
 import java.util.Locale;
 
 public class TaskA {
-    
 
-    public static void main(String ... args) {
+
+    public static void main(String [] args) {
+
         ResManager manager = ResManager.INSTANCE;
         if (args.length == 2) {
             String lang=args[0];

@@ -11,7 +11,9 @@ public enum ResManager {
     private ResourceBundle bundle;
 
     ResManager() {
-        setLocale(Locale.ENGLISH);
+        Locale.setDefault(Locale.ENGLISH);
+        bundle = ResourceBundle.getBundle(basename, Locale.getDefault());
+
     }
 
     public void setLocale(Locale locale) {
@@ -23,4 +25,8 @@ public enum ResManager {
         return bundle.getString(key);
     }
 
+    public Locale getLocale() {
+
+        return this.locale;
+    }
 }
