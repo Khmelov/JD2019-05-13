@@ -6,13 +6,7 @@ import by.it.guchek.jd02_05.names.User;
 import java.util.Locale;
 
 public class TaskA {
-
-    /*public static void main(String[ ] args) {
-        ResManager manager = ResManager.INSTANCE;
-        System.out.println(manager.get("message.welcom"));
-        manager.setLocale(new Locale("be","BY"));
-        System.out.println(manager.get("message.welcom"));
-    }*/
+    
 
     public static void main(String ... args) {
         ResManager manager = ResManager.INSTANCE;
@@ -23,14 +17,19 @@ public class TaskA {
             manager.setLocale(locale);
         }
 
+
+        printWellcoming(manager);
+
+
+    }
+
+    public static void printWellcoming(ResManager manager) {
         String question = manager.get(Message.QUESTION);
         String welcome = manager.get(Message.WELCOME);
         String userName = manager.get(User.NAME);
         System.out.println(welcome);
         System.out.println(question);
         System.out.println(userName);
-
-
     }
 
 }
