@@ -11,8 +11,7 @@ public enum Helper {
     private ResourceBundle bundle;
 
     Helper (){
-
-        setLocale(Locale.ENGLISH);
+        setLocale(Locale.getDefault());
     }
 
     public void setLocale (Locale locale){
