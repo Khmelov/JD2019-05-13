@@ -1,12 +1,12 @@
-error.text="ERROR: "
-impossible.text=" is not possible"
-operation.add="addition operation "
-operation.sub="subtraction operation "
-operation.mul="multiplication operation "
-operation.div="division operation "
-operation.unknown=" unknown operation"
-operation.zero="division by zero"
-create.variable="unable to create variable"
-size.vector="different vector sizes"
-size.matrix="different matrix sizes"
+error.text=ERROR: 
+impossible.text= is not possible
+operation.add=addition operation 
+operation.sub=subtraction operation 
+operation.mul=multiplication operation 
+operation.div=division operation 
+operation.unknown= unknown operation
+operation.zero=division by zero
+create.variable=unable to create variable
+size.vector=different vector sizes
+size.matrix=different matrix sizes
 
