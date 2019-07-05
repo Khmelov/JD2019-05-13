@@ -1,0 +1,5 @@
+message.welcome=Welcome!
+message.question=How do you do?
+message.username=Timur Babich
+message.date=The current date:
+messages.set.language=English is installed

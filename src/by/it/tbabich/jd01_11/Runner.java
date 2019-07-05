@@ -1,12 +1,16 @@
 package by.it.tbabich.jd01_11;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Runner {
     public static void main(String[] args) {
         List<String> myList = new ListB<>();
         List<String> arrList = new ArrayList<>();
+        List<Long> longList = new ListB<>();
+        Set<String> strings = new HashSet<>();
 
         myList.add("1");
         myList.add("2");
@@ -30,8 +34,11 @@ public class Runner {
         System.out.println(myList);
         System.out.println(arrList);
 
-        myList.addAll(arrList);
+        myList.addAll(1, arrList);
         System.out.println(myList);
-
+        System.out.println(myList.indexOf(444));
+        longList.add(1L);
+        longList.add(2L);
+        System.out.println(longList.indexOf(2L));
     }
 }

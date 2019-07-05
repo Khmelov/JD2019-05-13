@@ -74,7 +74,7 @@ class ListB<T> implements List<T> {
         T[] buffer = (T[]) new Object[size - index];
         System.arraycopy(elements, index, buffer, 0, size - index);
         System.arraycopy(input, 0, elements, index, sizeInput);
-        int temporarySize = size - index + sizeInput;
+        int temporarySize = index + sizeInput;
         System.arraycopy(buffer, 0, elements, temporarySize, buffer.length);
         size += sizeInput;
         return sizeInput != 0;
@@ -138,7 +138,7 @@ class ListB<T> implements List<T> {
                     return i;
         } else {
             for (int i = 0; i < size; i++) {
-                if (elements[i].equals(o))
+                if (o.equals(elements[i]))
                     return i;
             }
         }
