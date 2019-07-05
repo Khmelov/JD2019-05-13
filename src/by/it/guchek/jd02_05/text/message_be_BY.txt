@@ -1,0 +1,3 @@
+message.welcom=Вiтаю!
+message.guestion=Як справы?
+user.name=Гучак Вольга
