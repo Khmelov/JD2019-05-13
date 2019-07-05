@@ -1,0 +1,12 @@
+error.text="Памылка: "
+impossible.text=" немагчыма"
+operation.add="аперацыя складання "
+operation.sub="аперацыя аднімання "
+operation.mul="аперацыя множання "
+operation.div="аперацыя дзялення "
+operation.unknown=" невядомая аперацыя"
+operation.zero="дзяленне на нуль"
+create.variable="немагчыма стварыць переменную"
+size.vector="розны памер вектараў"
+size.matrix="розны памер матрыц"
+

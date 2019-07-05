@@ -1,5 +1,8 @@
 package by.it.livanovich.calc;
 
+import by.it.livanovich.calc.Text.Helper;
+import by.it.livanovich.calc.Text.Messages;
+
 import java.util.Arrays;
 
 class Vector extends Var {
@@ -57,7 +60,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector) {
             if (value.length!=((Vector) other).getLength()){
-                throw new CalcException("Разный размер векторов");
+                throw new CalcException(Helper.INSTANCE.getKey(Messages.VECTORSIZE));
             }
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -80,7 +83,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector) {
             if (value.length!=((Vector) other).getLength()){
-                throw new CalcException("Разный размер векторов");
+                throw new CalcException(Helper.INSTANCE.getKey(Messages.VECTORSIZE));
             }
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {

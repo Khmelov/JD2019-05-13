@@ -1,5 +1,8 @@
 package by.it.livanovich.calc;
 
+import by.it.livanovich.calc.Text.Helper;
+import by.it.livanovich.calc.Text.Messages;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,7 +49,7 @@ public class Parsel {
             case ("/"):
                 return one.div(two).toString();
         }
-        throw new CalcException("Ошибка: неизвестная операция");
+        throw new CalcException(Helper.INSTANCE.getKey(Messages.UNKNOWN));
     }
 
 

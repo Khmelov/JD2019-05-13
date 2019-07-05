@@ -1,5 +1,8 @@
 package by.it.livanovich.calc;
 
+import by.it.livanovich.calc.Text.Helper;
+import by.it.livanovich.calc.Text.Messages;
+
 class Matrix extends Var {
     private double[][] value;
 
@@ -67,7 +70,7 @@ class Matrix extends Var {
         }
         else if (other instanceof Matrix) {
             if (value.length!=((Matrix) other).getLength()){
-                throw new CalcException("Разный размер матриц");
+                throw new CalcException(Helper.INSTANCE.getKey(Messages.MATRIXSIZE));
             }
             double[][] res =new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
@@ -97,7 +100,7 @@ class Matrix extends Var {
         }
         else if (other instanceof Matrix) {
             if (value[0].length!=((Matrix) other).getLength()){
-                throw new CalcException("Разный размер матриц");
+                throw new CalcException(Helper.INSTANCE.getKey(Messages.MATRIXSIZE));
             }
             double[][] res =new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
