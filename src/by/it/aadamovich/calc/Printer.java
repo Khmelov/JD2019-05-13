@@ -13,6 +13,12 @@ class Printer {
         logger.writeLog(message);
     }
 
+    void print(Var variable) {
+        String result = String.format
+                (ResourceManager.INSTANCE.getString(ResData.RESULT), variable);
+        print(result);
+    }
+
     void print(Throwable e) {
         System.out.println(e.getMessage());
         logger.writeLog(e);

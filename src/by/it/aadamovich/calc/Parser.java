@@ -59,7 +59,7 @@ class Parser {
                 (ResourceManager.INSTANCE.getString(ResData.UNAVAILABLE_OPERATION));
     }
 
-    String calc(String expression) throws CalcException {
+    Var calc(String expression) throws CalcException {
 
         expression = expression.replaceAll("\\s+", "");
         while (expression.contains("(")) {
@@ -68,7 +68,7 @@ class Parser {
             if (matcherBracket.find()) {
                 String insideBrackets = matcherBracket.group().replaceAll("[()]", "");
                 expression = expression
-                        .replaceFirst(Patterns.BRACKET, calc(insideBrackets))
+                        .replaceFirst(Patterns.BRACKET, calc(insideBrackets).toString())
                         .replaceAll("\\s+", "");
             } else {
                 throw new CalcException  // надо доработать
@@ -77,11 +77,6 @@ class Parser {
         }
         List<String> operands = new ArrayList<>
                 (Arrays.asList(expression.split(Patterns.OPERATION)));
-
-        if (operands.size() == 1)
-            return String.format
-                    (ResourceManager.INSTANCE.getString
-                            (ResData.ONE_VARIABLE_RECEIVED), operands.get(0));
 
         List<String> operations = new ArrayList<>();
         Pattern patOperation = Pattern.compile(Patterns.OPERATION);
@@ -98,7 +93,6 @@ class Parser {
             String resultOperand = singleCalculation(one, operation, two);
             operands.add(index, resultOperand);
         }
-        return String.format
-                (ResourceManager.INSTANCE.getString(ResData.RESULT), Var.createVar(operands.get(0)));
+        return Var.createVar(operands.get(0));
     }
 }
