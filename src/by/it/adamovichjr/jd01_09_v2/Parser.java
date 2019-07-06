@@ -8,6 +8,7 @@ public class Parser {
     Var calc(String expression) {
         String[] operand = expression.split(Patterns.OPERATION);
 
+
         Pattern oper = Pattern.compile(Patterns.OPERATION);
         Matcher m = oper.matcher(expression);
         if (m.find()) {

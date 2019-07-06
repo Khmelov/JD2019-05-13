@@ -61,9 +61,7 @@ public class Matrix extends Var {
         }
         else if(other instanceof Matrix){
             if (this.value.length != ((Matrix) other).value.length|| this.value[0].length != ((Matrix) other).value[0].length) {
-                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.WRONG_ADD) +" %s "
-                        + ResourceManager.INSTANCE.get(All_messages.AND) + " %s "
-                        + ResourceManager.INSTANCE.get(All_messages.DIFFERENT_SIZES), this, other));
+                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.ADD_MATRIX), this, other));
             }
             double[][] res = new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
@@ -89,9 +87,7 @@ public class Matrix extends Var {
         }
         else if(other instanceof Matrix ){
             if (this.value.length != ((Matrix) other).value.length|| this.value[0].length != ((Matrix) other).value[0].length) {
-                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.WRONG_SUB)
-                        +" %s " + ResourceManager.INSTANCE.get(All_messages.AND)
-                        + " %s " + ResourceManager.INSTANCE.get(All_messages.DIFFERENT_SIZES), this, other));
+                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.SUB_MATRIX), this, other));
             }
             double[][] res = new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
@@ -117,8 +113,7 @@ public class Matrix extends Var {
         }
         else if (other instanceof Vector){
             if (this.value[0].length != ((Vector) other).getValue().length) {
-                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.WRONG_MUL)
-                        +" %s " + ResourceManager.INSTANCE.get(All_messages.AND) + " %s ", this, other));
+                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.MUL_MAT_AND_VECTOR), this, other));
             }
             double[] res = new double[value[0].length];
             for (int i = 0; i < value.length; i++) {
@@ -131,8 +126,7 @@ public class Matrix extends Var {
         }
         else if(other instanceof Matrix){
             if (this.value[0].length != ((Matrix) other).value.length) {
-                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.WRONG_MUL)
-                        +" %s " + ResourceManager.INSTANCE.get(All_messages.AND) + " %s ", this, other));
+                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.MUL_MATRIX), this, other));
             }
             double[][] res = new double[value.length][((Matrix)other).value[0].length];
             for (int i = 0; i < value.length; i++) {

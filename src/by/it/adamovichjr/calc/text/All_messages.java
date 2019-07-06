@@ -10,8 +10,8 @@ public interface All_messages {
     String MUL_MAT_AND_VECTOR = "all_messages.mul_mat_and_vector";
     String MUL_MATRIX = "all_messages.mul_mat";
     String OPERATION_ADD = "all_messages.operation_add";
-    String OPERATION_SUB = "all_messages.operation_SUB";
-    String OPERATION_MUL = "all_messages.operation_MUL";
-    String OPERATION_DIV = "all_messages.operation_DIV";
+    String OPERATION_SUB = "all_messages.operation_sub";
+    String OPERATION_MUL = "all_messages.operation_mul";
+    String OPERATION_DIV = "all_messages.operation_div";
 
 }
