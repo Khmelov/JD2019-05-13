@@ -1,16 +1,15 @@
+5+5
+Результат: 10.0
+be
+Выбрана беларуская мова
+4-2
+Вынiк: 2.0
 printvar
-Отсутствуют сохраненные переменные
+Адсутнiчаюць захаваныя пераменныя
 a=5
-Результат: 5.0
-9=6
-Результат: 6.0
-sortvar
-9 = 6.0
-a = 5.0
-5/0
-ОШИБКА: Деление на ноль невозможно
-by.it.aadamovich.calc.Scalar.div(Scalar.java:56)
-by.it.aadamovich.calc.Parser.singleCalculation(Parser.java:56)
-by.it.aadamovich.calc.Parser.calc(Parser.java:98)
+Вынiк: 5.0
+(5+3
+ПАМЫЛКА: Дужки расстаулены няверна
+by.it.aadamovich.calc.Parser.calc(Parser.java:75)
 by.it.aadamovich.calc.ConsoleRunner.main(ConsoleRunner.java:43)
-6 июля 2019 г. 16:49:43
+субота, 6, ліпеня 2019 17:16:02
