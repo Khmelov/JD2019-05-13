@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 import static org.junit.Assert.assertEquals;
 
-public class VarTest {
+public class VarCreatorTest {
 
     private static Map<String, String> test = new TreeMap<>();
 

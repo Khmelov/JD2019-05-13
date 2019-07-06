@@ -1,16 +1,18 @@
 package by.it.aadamovich.calc;
 
 import by.it.aadamovich.calc.names.ResData;
+import by.it.aadamovich.calc.reportBuilder.Director;
 
 import java.util.*;
 
 class Printer {
 
-    private Logger logger = Logger.LOGGER;
+    private LoggerSingletone logger = LoggerSingletone.LOGGER;
 
     void print(String message) {
         System.out.println(message);
         logger.writeLog(message);
+        Director.DIRECTOR.addEvent(message);
     }
 
     void print(Var variable) {
@@ -26,6 +28,7 @@ class Printer {
 
     void logData(String message) {
         logger.writeLog(message);
+        Director.DIRECTOR.addEvent(message);
     }
 
     void printVar() {
@@ -33,7 +36,7 @@ class Printer {
         if (list.isEmpty()) {
             print(ResourceManager.INSTANCE.getString(ResData.NO_SAVED_VARIABLE));
         } else {
-            varlistConsoleAndLogOut(list);
+            varlistToConsoleAndLogOut(list);
         }
     }
 
@@ -42,11 +45,11 @@ class Printer {
         if (listSorted.isEmpty()) {
             print(ResourceManager.INSTANCE.getString(ResData.NO_SAVED_VARIABLE));
         } else {
-            varlistConsoleAndLogOut(listSorted);
+            varlistToConsoleAndLogOut(listSorted);
         }
     }
 
-    private void varlistConsoleAndLogOut(Map<String, Var> list) {
+    private void varlistToConsoleAndLogOut(Map<String, Var> list) {
         String entry;
         Set<Map.Entry<String, Var>> entries = list.entrySet();
         for (Map.Entry<String, Var> next : entries) {

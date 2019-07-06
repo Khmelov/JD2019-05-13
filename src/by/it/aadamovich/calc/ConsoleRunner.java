@@ -2,8 +2,10 @@ package by.it.aadamovich.calc;
 
 import by.it.aadamovich.calc.names.Commands;
 import by.it.aadamovich.calc.names.LangCountry;
-import by.it.aadamovich.calc.names.Patterns;
 import by.it.aadamovich.calc.names.ResData;
+import by.it.aadamovich.calc.reportBuilder.Director;
+import by.it.aadamovich.calc.reportBuilder.FullReportBuilder;
+import by.it.aadamovich.calc.reportBuilder.ShortReportBuilder;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -12,6 +14,9 @@ public class ConsoleRunner {
 
     public static void main(String[] args) {
 
+        Director director = Director.DIRECTOR;
+        director.setBuilder(args.length == 0 ? new ShortReportBuilder() : new FullReportBuilder());
+        director.startReport();
         ResourceManager manager = ResourceManager.INSTANCE;
         Scanner sc = new Scanner(System.in);
         String line;
@@ -47,8 +52,11 @@ public class ConsoleRunner {
                         printer.print(calc);
                     } catch (CalcException e) {
                         printer.print(e);
+                        director.addError(e);
                     }
             }
         }
+        director.endReport();
+        System.out.println(director.getReport());
     }
 }
