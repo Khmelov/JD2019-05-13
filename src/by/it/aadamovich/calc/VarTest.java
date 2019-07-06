@@ -26,7 +26,7 @@ public class VarTest {
 
         String result;
         for (Map.Entry<String, String> entry : test.entrySet()) {
-            result = Var.createVar(entry.getKey()).toString();
+            result = VarFactory.CREATOR.createVar(entry.getKey()).toString();
             assertEquals(entry.getValue(), result);
         }
     }

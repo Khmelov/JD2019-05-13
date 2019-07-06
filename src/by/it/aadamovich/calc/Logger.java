@@ -1,5 +1,8 @@
 package by.it.aadamovich.calc;
 
+import by.it.aadamovich.calc.names.Path;
+import by.it.aadamovich.calc.names.Patterns;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +20,6 @@ public enum Logger {
     private boolean appendLoggerData = false;
 
     Logger() {
-
     }
 
     void writeLog(String message) {
@@ -58,6 +60,6 @@ public enum Logger {
         String sep = File.separator;
         String srcPath = System.getProperty("user.dir") + sep + "src" + sep;
         String classPath = cls.getName().replace(cls.getSimpleName(), "").replace(".", sep);
-        return srcPath + classPath + Patterns.DIR_FOR_LOGS + sep + Patterns.FILE_FOR_LOGS;
+        return srcPath + classPath + Path.DIR_FOR_LOGS + sep + Path.FILE_FOR_LOGS;
     }
 }

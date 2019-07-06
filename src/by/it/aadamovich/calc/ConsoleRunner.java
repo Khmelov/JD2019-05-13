@@ -1,5 +1,8 @@
 package by.it.aadamovich.calc;
 
+import by.it.aadamovich.calc.names.Commands;
+import by.it.aadamovich.calc.names.LangCountry;
+import by.it.aadamovich.calc.names.Patterns;
 import by.it.aadamovich.calc.names.ResData;
 
 import java.util.Locale;
@@ -15,24 +18,24 @@ public class ConsoleRunner {
         Parser parser = new Parser();
         Printer printer = new Printer();
 
-        while (!(line = sc.nextLine()).equals(Patterns.END_COMMAND)) {
-            printer.logData(line);
+        while (!(line = sc.nextLine()).equals(Commands.END_COMMAND)) {
+            printer.logData(String.format(manager.getString(ResData.CONSOLE_INPUT),line));
             switch (line) {
-                case Patterns.PRINTVAR_COMMAND:
+                case Commands.PRINTVAR_COMMAND:
                     printer.printVar();
                     break;
-                case Patterns.SORTVAR_COMMAND:
+                case Commands.SORTVAR_COMMAND:
                     printer.printSortedVar();
                     break;
-                case Patterns.RUSSIAN_COMMAND:
-                    manager.setLocale(Patterns.RUS_LANG, Patterns.RUS_COUN);
+                case Commands.RUS_LANG_COMMAND:
+                    manager.setLocale(LangCountry.RUS_LANG, LangCountry.RUS_COUN);
                     printer.print(manager.getString(ResData.RUSSIAN_SWITCH));
                     break;
-                case Patterns.BELARUSIAN_COMMAND:
-                    manager.setLocale(Patterns.BY_LANG, Patterns.BY_COUN);
+                case Commands.BY_LANG_COMMAND:
+                    manager.setLocale(LangCountry.BY_LANG, LangCountry.BY_COUN);
                     printer.print(manager.getString(ResData.BELARUSIAN_SWITCH));
                     break;
-                case Patterns.ENGLISH_COMMAND:
+                case Commands.ENG_LANG_COMMAND:
                     Locale.setDefault(Locale.ENGLISH);
                     manager.setLocale(Locale.getDefault());
                     printer.print(manager.getString(ResData.ENGLISH_SWITCH));

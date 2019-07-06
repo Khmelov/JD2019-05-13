@@ -1,5 +1,6 @@
 package by.it.aadamovich.calc;
 
+import by.it.aadamovich.calc.names.Patterns;
 import by.it.aadamovich.calc.names.ResData;
 
 import java.util.ArrayList;
@@ -37,13 +38,13 @@ class Parser {
 
     private static String singleCalculation(String one, String operation, String two) throws CalcException {
 
-        Var varTwo = Var.createVar(two);
+        Var varTwo = VarFactory.CREATOR.createVar(two);
 
         if (operation.matches("=")) {
             VarList.setVariable(one, varTwo);
             return varTwo.toString();
         }
-        Var varOne = Var.createVar(one);
+        Var varOne = VarFactory.CREATOR.createVar(one);
 
         switch (operation) {
             case "+":
@@ -93,6 +94,6 @@ class Parser {
             String resultOperand = singleCalculation(one, operation, two);
             operands.add(index, resultOperand);
         }
-        return Var.createVar(operands.get(0));
+        return VarFactory.CREATOR.createVar(operands.get(0));
     }
 }

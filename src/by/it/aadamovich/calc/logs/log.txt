@@ -1,42 +1,87 @@
-A=2+5.3
-Результат: 7.3
-B1=A*3.5
-Результат: 25.55
-B2=B1+0.11*-5
-Результат: 25.0
-B3=A/2-1
-Результат: 2.65
-C=B1+(A*2)
-Результат: 40.15
-D=((C-0.15)-20)/(7-5)
-Результат: 10.0
-E={2,3}*(D/2)
-Результат: {10.0, 15.0}
-F=((E+5)-{{1,2,3},{3,2,1}}*{1,2,3})/2
-Результат: {0.5, 5.0}
-G=({{1,2,3},{3,2,1}}-{{11,12,13},{13,12,11}})/2.5
-Результат: {{-4.0, -4.0, -4.0}, {-4.0, -4.0, -4.0}}
-G*{{-1,8},{-8,1},{-1,8}}+{{-20,48},{-20,48}}
-Результат: {{20.0, -20.0}, {20.0, -20.0}}
-((7+5)-11)*2-3.5*((2.4+3.6)-{12,10})
-Результат: {23.0, 16.0}
-printvar
-B2 = 25.0
-A = 7.3
-B3 = 2.65
-C = 40.15
-D = 10.0
-E = {10.0, 15.0}
-F = {0.5, 5.0}
-G = {{-4.0, -4.0, -4.0}, {-4.0, -4.0, -4.0}}
-B1 = 25.55
-sortvar
-A = 7.3
-B1 = 25.55
-B2 = 25.0
-B3 = 2.65
-C = 40.15
-D = 10.0
-E = {10.0, 15.0}
-F = {0.5, 5.0}
-G = {{-4.0, -4.0, -4.0}, {-4.0, -4.0, -4.0}}
+Ввод на консоль: {{1,2},{8,3}}-{{2,3,3},{2,3,3}}
+ОШИБКА: Вычитание невозможно: матрицы {{1.0, 2.0}, {8.0, 3.0}} и {{2.0, 3.0, 3.0}, {2.0, 3.0, 3.0}} имеют разные размеры
+by.it.aadamovich.calc.Matrix.sub(Matrix.java:91)
+by.it.aadamovich.calc.Parser.singleCalculation(Parser.java:53)
+by.it.aadamovich.calc.Parser.calc(Parser.java:94)
+by.it.aadamovich.calc.ConsoleRunner.main(ConsoleRunner.java:46)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.<init>(Test_jd01_13_for_calc.java:183)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.run(Test_jd01_13_for_calc.java:149)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.run(Test_jd01_13_for_calc.java:127)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.testTaskC__ConsoleRunner(Test_jd01_13_for_calc.java:52)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+java.util.concurrent.FutureTask.run(FutureTask.java:266)
+java.lang.Thread.run(Thread.java:748)
+6 июля 2019 г. 18:58:16
+Ввод на консоль: {{1,2},{8,3}}*{{1,2},{8,3}}
+Результат: {{17.0, 8.0}, {32.0, 25.0}}
+Ввод на консоль: {2,3,4}*2
+Результат: {4.0, 6.0, 8.0}
+Ввод на консоль: {2,3}+{1,2,3}
+ОШИБКА: Сложение невозможно: векторы {2.0, 3.0} и {1.0, 2.0, 3.0} имеют разную длину
+by.it.aadamovich.calc.Vector.add(Vector.java:47)
+by.it.aadamovich.calc.Parser.singleCalculation(Parser.java:51)
+by.it.aadamovich.calc.Parser.calc(Parser.java:94)
+by.it.aadamovich.calc.ConsoleRunner.main(ConsoleRunner.java:46)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.<init>(Test_jd01_13_for_calc.java:183)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.run(Test_jd01_13_for_calc.java:149)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.run(Test_jd01_13_for_calc.java:127)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.testTaskB__ConsoleRunner(Test_jd01_13_for_calc.java:39)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+java.util.concurrent.FutureTask.run(FutureTask.java:266)
+java.lang.Thread.run(Thread.java:748)
+6 июля 2019 г. 18:58:16
+Ввод на консоль: 3.8+26.2
+Результат: 30.0
+Ввод на консоль: 3.8/0
+ОШИБКА: Деление на ноль невозможно
+by.it.aadamovich.calc.Scalar.div(Scalar.java:56)
+by.it.aadamovich.calc.Parser.singleCalculation(Parser.java:57)
+by.it.aadamovich.calc.Parser.calc(Parser.java:94)
+by.it.aadamovich.calc.ConsoleRunner.main(ConsoleRunner.java:46)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.<init>(Test_jd01_13_for_calc.java:183)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.run(Test_jd01_13_for_calc.java:149)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.run(Test_jd01_13_for_calc.java:127)
+by.it.aadamovich.calc.Test_jd01_13_for_calc.testTaskA__ConsoleRunner(Test_jd01_13_for_calc.java:24)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+java.util.concurrent.FutureTask.run(FutureTask.java:266)
+java.lang.Thread.run(Thread.java:748)
+6 июля 2019 г. 18:58:16
