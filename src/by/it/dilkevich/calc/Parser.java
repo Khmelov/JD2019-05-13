@@ -91,6 +91,6 @@ public class Parser {
             case "/":
                 return one.div(two).toString();
         }
-        throw new CalcException("Операция невозможна");
+        throw new CalcException(ResManager.getName("error.operation"));
     }
 }

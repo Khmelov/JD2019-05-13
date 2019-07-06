@@ -53,9 +53,9 @@ public class Scalar extends Var {
     @Override
     public Var div(Var other) throws CalcException {
         if(other instanceof Vector)
-            throw new CalcException("ERROR: операция деления невозможна");
+            throw new CalcException(ResManager.getName("error.divide"));
         if(((Scalar) other).value == 0)
-            throw new CalcException("ERROR: Деление на ноль");
+            throw new CalcException(ResManager.getName("error.divide.zero"));
         if (other instanceof Scalar){
             double result = this.value / ((Scalar) other).value;
             return new Scalar(result);

@@ -1,5 +1,6 @@
 package by.it.dilkevich.calc;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -10,30 +11,42 @@ public class ConsoleRunner {
 
         Parser parser = new Parser();
         Printer printer = new Printer();
+        ResManager resManager = new ResManager(Locale.getDefault());
 
-            while (!((inputLine = scanner.nextLine()).equals("end"))) {
+        while (!((inputLine = scanner.nextLine()).equals("end"))) {
 
-                try {
+            try {
 
-                if (inputLine.equals("printvar")) {
+                if (inputLine.equals("ru")) {
+                    resManager = new ResManager(new Locale("ru", "RU"));
+                }
+                else if (inputLine.equals("be")) {
+                    System.out.println("be s");
+                    resManager = new ResManager(new Locale("be", "BY"));
+                }
+                else if (inputLine.equals("en")) {
+                    resManager = new ResManager(new Locale("",""));
+                }
+
+                else if (inputLine.equals("printvar")) {
 
                     printer.printVar();
                 }
-                if (inputLine.equals("sortvar")) {
+                else if (inputLine.equals("sortvar")) {
 
                     printer.printSortVar();
                 }
-                if (!inputLine.equals("printvar") && !inputLine.equals("sortvar")) {
-
+                else {
                     Var result = parser.calc(inputLine);
                     printer.print(result);
                 }
 
-                } catch (CalcException e) {
 
-                    System.out.println(e.getMessage());
-                }
+            } catch (CalcException e) {
+
+                System.out.println(e.getMessage());
             }
+        }
 
     }
 

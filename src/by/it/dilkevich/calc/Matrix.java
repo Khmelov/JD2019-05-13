@@ -118,7 +118,7 @@ public class Matrix extends Var {
             double [][] result = new double[value.length][value[1].length];
 
             if(((Matrix) other).value.length != result.length || ((Matrix) other).value[0].length != result[0].length)
-                throw new CalcException("ERROR: вычитание матриц невозможно");
+                throw new CalcException(ResManager.getName("error.matrix.sub"));
 
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[1].length; j++) {

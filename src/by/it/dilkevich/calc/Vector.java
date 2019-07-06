@@ -80,7 +80,7 @@ public class Vector extends Var {
         else if (other instanceof Vector){
             double [] result = Arrays.copyOf(value,value.length);
             if(((Vector) other).value.length != result.length)
-                throw new CalcException("ERROR: вычитание векторов невозможно");
+                throw new CalcException(ResManager.getName("error.vector.sub"));
             for (int i = 0; i < result.length; i++) {
                 result[i] = result[i] - ((Vector) other).value[i];
             }
@@ -117,7 +117,7 @@ public class Vector extends Var {
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
                 if(((Scalar) other).getValue() == 0)
-                    throw new CalcException("ERROR: деление на ноль");
+                    throw new CalcException(ResManager.getName("error.divide.zero"));
                 result[i] = result[i] / ((Scalar) other).getValue();
             }
             return new Vector(result);

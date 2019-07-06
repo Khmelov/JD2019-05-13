@@ -13,25 +13,25 @@ public abstract class Var implements Operation {
     @Override
     public Var add(Var other) throws CalcException {
 
-        throw new CalcException("Операция сложения " + this + " + " + other + " невозможна");
+        throw new CalcException(ResManager.getName("operaton.add") + this + " + " + other + ResManager.getName("operation.notpossible"));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
 
-        throw new CalcException("Операция сложения " + this + " - " + other + " невозможна");
+        throw new CalcException(ResManager.getName("operaton.sub") + this + " - " + other + ResManager.getName("operation.notpossible"));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
 
-        throw new CalcException("Операция сложения " + this + " * " + other + " невозможна");
+        throw new CalcException(ResManager.getName("operaton.mul") + this + " * " + other + ResManager.getName("operation.notpossible"));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
 
-        throw new CalcException("Операция сложения " + this + " + " + other + " невозможна");
+        throw new CalcException(ResManager.getName("operaton.div") + this + " / " + other + ResManager.getName("operation.notpossible"));
     }
 
     private static Map<String, Var> vars = new HashMap<>();
@@ -67,7 +67,7 @@ public abstract class Var implements Operation {
             return vars.get(statement);
         }
 
-        throw new CalcException("ERROR: Невозможно создать" + statement);
+        throw new CalcException(ResManager.getName("error.create") + statement);
     }
 
 }
