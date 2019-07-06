@@ -40,7 +40,7 @@ public class ConsoleRunner {
 
                 default:
                     try {
-                        Var calc = parser.calc(line);
+                        String calc = parser.calc(line);
                         printer.print(calc);
                     } catch (CalcException e) {
                         printer.print(e);

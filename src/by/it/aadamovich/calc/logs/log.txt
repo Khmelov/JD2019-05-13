@@ -1,0 +1,16 @@
+printvar
+Отсутствуют сохраненные переменные
+a=5
+Результат: 5.0
+9=6
+Результат: 6.0
+sortvar
+9 = 6.0
+a = 5.0
+5/0
+ОШИБКА: Деление на ноль невозможно
+by.it.aadamovich.calc.Scalar.div(Scalar.java:56)
+by.it.aadamovich.calc.Parser.singleCalculation(Parser.java:56)
+by.it.aadamovich.calc.Parser.calc(Parser.java:98)
+by.it.aadamovich.calc.ConsoleRunner.main(ConsoleRunner.java:43)
+6 июля 2019 г. 16:49:43

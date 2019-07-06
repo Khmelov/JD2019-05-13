@@ -55,10 +55,11 @@ class Parser {
             case "/":
                 return varOne.div(varTwo).toString();
         }
-        throw new CalcException(ResourceManager.INSTANCE.getString(ResData.UNAVAILABLE_OPERATION));
+        throw new CalcException
+                (ResourceManager.INSTANCE.getString(ResData.UNAVAILABLE_OPERATION));
     }
 
-    Var calc(String expression) throws CalcException {
+    String calc(String expression) throws CalcException {
 
         expression = expression.replaceAll("\\s+", "");
         while (expression.contains("(")) {
@@ -67,19 +68,20 @@ class Parser {
             if (matcherBracket.find()) {
                 String insideBrackets = matcherBracket.group().replaceAll("[()]", "");
                 expression = expression
-                        .replaceFirst(Patterns.BRACKET, calc(insideBrackets).toString())
+                        .replaceFirst(Patterns.BRACKET, calc(insideBrackets))
                         .replaceAll("\\s+", "");
             } else {
-                throw new CalcException
-                        (ResourceManager.INSTANCE.getString(ResData.BRACKETS_MISSPLACE)); // надо доработать
+                throw new CalcException  // надо доработать
+                        (ResourceManager.INSTANCE.getString(ResData.BRACKETS_MISSPLACE));
             }
         }
-        List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
+        List<String> operands = new ArrayList<>
+                (Arrays.asList(expression.split(Patterns.OPERATION)));
 
         if (operands.size() == 1)
-            System.out.println((String.format
+            return String.format
                     (ResourceManager.INSTANCE.getString
-                            (ResData.ONE_VARIABLE_RECEIVED), operands.get(0))));
+                            (ResData.ONE_VARIABLE_RECEIVED), operands.get(0));
 
         List<String> operations = new ArrayList<>();
         Pattern patOperation = Pattern.compile(Patterns.OPERATION);
@@ -96,6 +98,7 @@ class Parser {
             String resultOperand = singleCalculation(one, operation, two);
             operands.add(index, resultOperand);
         }
-        return Var.createVar(operands.get(0));
+        return String.format
+                (ResourceManager.INSTANCE.getString(ResData.RESULT), Var.createVar(operands.get(0)));
     }
 }
