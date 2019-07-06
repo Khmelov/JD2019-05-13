@@ -1,5 +1,7 @@
 package by.it.zhukova.calc;
 
+import by.it.zhukova.calc.exceptions.Exceptions;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +34,7 @@ class Matrix extends Var {
                 double  [][] add= new double[value.length][value[0].length];
                 Matrix m = (Matrix) other;
                 if (this.value.length != m.value.length | this.value[0].length != m.value[0].length )
-                    throw new CalcException(" матрицы разных размеров");
+                    throw new CalcException(ConsoleRunner.manager.get(Exceptions.MATRIXADD));
                 for (int i = 0; i < add.length; i++) {
                 for (int j = 0; j < add[0].length; j++) {
                     add[i][j]= this.value[i][j]+ m.value[i][j];
@@ -59,7 +61,7 @@ class Matrix extends Var {
             double  [][] sub= new double[value.length][value[0].length];
             Matrix m = (Matrix) other;
             if (this.value.length != m.value.length | this.value[0].length != m.value[0].length )
-                throw new CalcException(" матрицы разных размеров");
+                throw new CalcException(ConsoleRunner.manager.get(Exceptions.MATRIXADD));
             for (int i = 0; i < sub.length; i++) {
                 for (int j = 0; j < sub[0].length; j++) {
                     sub[i][j]= this.value[i][j]- m.value[i][j];
@@ -83,7 +85,7 @@ class Matrix extends Var {
         }
         else if (other instanceof Vector){
             if (!(((Vector) other).getValue().length ==value[0].length))
-                throw new CalcException(" число столбцов в матрице должно быть равно длине вектора");
+                throw new CalcException(ConsoleRunner.manager.get(Exceptions.MATRIXVEC));
             double[] mul = new double[value.length];
             double[] v = ((Vector) other).getValue();
             for (int i = 0; i < mul.length; i++) {
@@ -97,8 +99,7 @@ class Matrix extends Var {
             double[][] m = ((Matrix) other).value;
             double  [][] mul= new double[value.length][m[0].length];
             if (this.value[0].length != m.length)
-                throw new CalcException(" число столбцов в первой матрице должно" +
-                        " быть равно числу строк во второй матрице");
+                throw new CalcException(ConsoleRunner.manager.get(Exceptions.MATRIXMAT));
             for (int i = 0; i < this.value.length; i++) {
                 for (int k = 0; k < m[0].length; k++) {
                     for (int j = 0; j < m.length; j++) {
@@ -115,7 +116,7 @@ class Matrix extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar){
             if (((Scalar) other).getValue()==0)
-                throw new CalcException(" деление на ноль");
+                throw new CalcException(ConsoleRunner.manager.get(Exceptions.ZERODIV));
             double  [][] div= new double[value.length][value[0].length];
             double s = ((Scalar) other).getValue();
             for (int i = 0; i < div.length; i++) {

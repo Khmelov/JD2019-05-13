@@ -1,5 +1,7 @@
 package by.it.zhukova.calc;
 
+import by.it.zhukova.calc.exceptions.Exceptions;
+
 class Scalar extends Var {
    private double value;
 
@@ -46,7 +48,7 @@ class Scalar extends Var {
         if (other instanceof Scalar){
             Scalar s = (Scalar) other;
             if (s.value==0)
-                throw new CalcException(" деление на ноль");
+                throw new CalcException(ConsoleRunner.manager.get(Exceptions.ZERODIV));
             double div=this.value/s.value;
             return new Scalar(div);
         }

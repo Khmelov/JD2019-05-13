@@ -14,9 +14,14 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     private boolean pensioneer;
     private List<Good> list = new ArrayList<>();
     static int ColCasier=0;
+    private boolean flagWait = false;
 
     public List<Good> getList() {
         return list;
+    }
+
+    public void setFlagWait(boolean flagWait) {
+        this.flagWait = flagWait;
     }
 
     @Override
@@ -30,7 +35,11 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
             putGoodsToBacket();
         }
         System.out.println(this + " stop choose goods");
-        goToQueue();
+        try {
+            goToQueue();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         goOut();
     }
 
@@ -78,7 +87,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     }
 
     @Override
-    public void goToQueue() {
+    public void goToQueue() throws InterruptedException {
         Queue.add(this);
         System.out.println(this+" go to Queue");
         if ((Queue.size() <5 )&&(ColCasier==0)){
@@ -111,11 +120,14 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
             }
             ColCasier=0;
         }
-        synchronized (this){
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        flagWait = true;
+        synchronized (this) {
+            while (flagWait) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

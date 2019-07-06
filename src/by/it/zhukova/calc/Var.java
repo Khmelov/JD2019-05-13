@@ -1,7 +1,8 @@
 package by.it.zhukova.calc;
 
+import by.it.zhukova.calc.exceptions.Exceptions;
+
 import java.util.*;
-import java.util.stream.Stream;
 
 abstract class Var implements Operation {
 
@@ -14,7 +15,7 @@ if (strVarClear.matches(Patterns.SCALAR)) return new Scalar(strVarClear);
     else    if (strVarClear.matches(Patterns.VECTOR)) return new Vector(strVarClear);
     else    if (strVarClear.matches(Patterns.MATRIX)) return new Matrix(strVarClear);
     else    if (vars.containsKey(strVarClear)) return vars.get(strVarClear);
-          throw new CalcException(" не понимаю что такое "+strVarClear);
+          throw new CalcException(ConsoleRunner.manager.get(Exceptions.VAR)+strVarClear);
     }
 
     static void save(String name, Var var) {
@@ -36,21 +37,25 @@ if (strVarClear.matches(Patterns.SCALAR)) return new Scalar(strVarClear);
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
+        throw new CalcException(String.format(ConsoleRunner.manager.get(Exceptions.OPERATION)
+                +this+"+"+other+ConsoleRunner.manager.get(Exceptions.IMPOSSIBLE)));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
+        throw new CalcException(String.format(ConsoleRunner.manager.get(Exceptions.OPERATION)
+                +this+"-"+other+ConsoleRunner.manager.get(Exceptions.IMPOSSIBLE)));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
+        throw new CalcException(String.format(ConsoleRunner.manager.get(Exceptions.OPERATION)
+                +this+"*"+other+ConsoleRunner.manager.get(Exceptions.IMPOSSIBLE)));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
+        throw new CalcException(String.format(ConsoleRunner.manager.get(Exceptions.OPERATION)
+                +this+"/"+other+ConsoleRunner.manager.get(Exceptions.IMPOSSIBLE)));
     }
 }

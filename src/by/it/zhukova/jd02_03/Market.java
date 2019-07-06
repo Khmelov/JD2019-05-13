@@ -33,7 +33,7 @@ public class Market {
             int count = Util.rnd(2);
             for (int min = 0; min < 2; min++) {
                 for (int time = 0; time < 60; time++) {
-                    int N = Dispatcher.buyerInMarket;
+                    int N = Dispatcher.getBuyerInMarket().get();
                     if ((time > 30) && (N > 40 + (30 - time))) {
                         count = 0;
                     }

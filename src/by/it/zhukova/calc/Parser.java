@@ -1,5 +1,7 @@
 package by.it.zhukova.calc;
 
+import by.it.zhukova.calc.exceptions.Exceptions;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -82,6 +84,6 @@ public class Parser {
             case "*":
                 return one.mul(two).toString();
         }
-        throw new CalcException("Error !!!!!");
+        throw new CalcException(ConsoleRunner.manager.get(Exceptions.ERRORTOTAL));
     }
 }

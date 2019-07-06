@@ -1,0 +1,6 @@
+Win+R
+cmd
+D:
+Copypath D:\IdeaProjects\JD2019-05-13\src\by\it\zhukova\jd02_05
+cd D:\IdeaProjects\JD2019-05-13\src\by\it\zhukova\jd02_05
+native2ascii -encoding -utf8 text\str.txt resources\str.properties

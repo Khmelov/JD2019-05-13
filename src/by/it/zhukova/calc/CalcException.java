@@ -1,19 +1,20 @@
 package by.it.zhukova.calc;
+import by.it.zhukova.calc.exceptions.Exceptions;
 
 public class CalcException extends Exception{
     public CalcException() {
-        super("ERROR:");
+        super(ConsoleRunner.manager.get(Exceptions.ERROR));
     }
 
     public CalcException(String message) {
-        super("ERROR:"+message);
+        super(ConsoleRunner.manager.get(Exceptions.ERROR)+message);
     }
 
     public CalcException(String message, Throwable cause) {
-        super("ERROR:"+message, cause);
+        super(ConsoleRunner.manager.get(Exceptions.ERROR)+message, cause);
     }
 
     public CalcException(Throwable cause) {
-        super("ERROR:"+cause);
+        super(ConsoleRunner.manager.get(Exceptions.ERROR)+cause);
     }
 }
