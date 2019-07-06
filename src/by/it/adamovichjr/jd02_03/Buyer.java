@@ -45,7 +45,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
 
     @Override
     public void enterToMarket() {
-        System.out.println(this.getName() + "Enter to the market");
+        System.out.println(this.getName() + " Enter to the market");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
         Time.sleep(pause);
         String choisedGood = Goods.getGood();
 
-        System.out.println(this.getName() + "chose " + choisedGood);
+        System.out.println(this.getName() + " chose " + choisedGood);
         return choisedGood;
     }
 
@@ -101,7 +101,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
             e.printStackTrace();
         }
         Time.sleep(pause);
-        System.out.println(this.getName() + "take backet ");
+        System.out.println(this.getName() + " take backet ");
         return backet;
     }
 
@@ -110,7 +110,7 @@ public class Buyer extends Thread implements IBuer, IUseBacket {
         int pause = Time.fromTo(100, 200) * speedPensionerOrNormal / 100 * Dispetcher.BUYERS_SPEED;
         backet.addGoodInBacked(good);
         Time.sleep(pause);
-        System.out.println(this.getName() + "put " + good + " to backet");
+        System.out.println(this.getName() + " put " + good + " to backet");
     }
 
     @Override

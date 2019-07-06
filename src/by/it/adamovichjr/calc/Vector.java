@@ -1,5 +1,7 @@
 package by.it.adamovichjr.calc;
 
+import by.it.adamovichjr.calc.text.All_messages;
+
 import java.util.Arrays;
 
 public class Vector extends Var {
@@ -20,7 +22,7 @@ public class Vector extends Var {
     }
 
     Vector(String str){
-        str = str.replaceAll("[^\\d.]+"," ").trim();
+        str = str.replaceAll("[^-\\d.]+"," ").trim();
         String[] split = str.split("[ ]+");
         double[]mas = new double[split.length];
         for (int i = 0; i < mas.length; i++) {
@@ -89,7 +91,7 @@ public class Vector extends Var {
     @Override
     public Var div(Var other) throws CalcException {
         if(other instanceof Scalar) {
-            if (((Scalar) other).getValue() == 0) throw new CalcException("Деление на ноль");
+            if (((Scalar) other).getValue() == 0) throw new CalcException(ResourceManager.INSTANCE.get(All_messages.ZERO_DIV));
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i] /= ((Scalar) other).getValue();
@@ -104,7 +106,7 @@ public class Vector extends Var {
        StringBuilder sb = new StringBuilder("{");
        String delimiter = "";
         for (double el : value) {
-            sb.append(delimiter).append(el);
+            sb.append(delimiter).append(Math.round(el*100)/100.0);
             delimiter = ", ";
         }
         sb.append("}");

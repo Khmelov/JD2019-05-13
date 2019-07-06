@@ -1,5 +1,7 @@
 package by.it.adamovichjr.calc;
 
+import by.it.adamovichjr.calc.text.All_messages;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,9 +9,8 @@ public class Var implements Operation {
 
     private static Map<String, Var> vars = new HashMap<>();
 
-    static Var saveVar (String name, Var var){
+    static void save(String name, Var var) {
         vars.put(name, var);
-        return var;
     }
 
     public static Map<String, Var> getVars() {
@@ -26,7 +27,7 @@ public class Var implements Operation {
             return new Matrix(operand);
         else if (vars.containsKey(operand))
             return vars.get(operand);
-        throw new CalcException("Невозможно создать "+ operand);
+        throw new CalcException(ResourceManager.INSTANCE.get(All_messages.UNABLE_CREATE) + operand);
     }
     @Override
     public String toString() {
@@ -35,22 +36,26 @@ public class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s + %s невозможна%n", this, other));
+        throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.OPERATION)
+                +" %s + %s " + ResourceManager.INSTANCE.get(All_messages.IMPOSABLE)+"\n", this, other));
 
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s - %s невозможна%n", this, other));
+        throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.OPERATION)
+                +" %s + %s " + ResourceManager.INSTANCE.get(All_messages.IMPOSABLE)+"\n", this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s * %s невозможна%n", this, other));
+        throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.OPERATION)
+                +" %s + %s " + ResourceManager.INSTANCE.get(All_messages.IMPOSABLE)+"\n", this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
+        throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.OPERATION)
+                +" %s + %s " + ResourceManager.INSTANCE.get(All_messages.IMPOSABLE)+"\n", this, other));
     }
 }

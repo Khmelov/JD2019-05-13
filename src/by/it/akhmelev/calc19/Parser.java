@@ -1,10 +1,16 @@
-package by.it.adamovichjr.calc;
+package by.it.akhmelev.calc19;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+class Parser {
+
+
     private static final Map<String, Integer> priorMap = new HashMap<>();
 
     static {
@@ -29,6 +35,7 @@ public class Parser {
         return index;
     }
 
+
     private String oneOperation(String sOne, String operation, String sTwo) throws CalcException {
         Var two = Var.createVar(sTwo);
         if (operation.equals("=")) {
@@ -47,12 +54,11 @@ public class Parser {
             case "/":
                 return one.div(two).toString();
         }
-        throw new CalcException("ERROR: нет такой операции");
+        throw new CalcException("Error !!!!!");
     }
 
 
-
-    private Var calcExpressionWithoutBrecket(String expression) throws CalcException {
+    Var calc(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         List<String> operation = new ArrayList<>();
@@ -67,24 +73,11 @@ public class Parser {
             String sOne = operands.remove(index);
             String sTwo = operands.remove(index);
             String op = operation.remove(index);
-            String result = oneOperation(sOne,op,sTwo);
+            String result = oneOperation(sOne, op, sTwo);
             operands.add(index, result);
         }
         return Var.createVar(operands.get(0));
 
     }
 
-    Var calc(String expression) throws CalcException{
-        StringBuilder result = new StringBuilder(expression);
-        StringBuilder buffer = new StringBuilder();
-        Pattern patternExpressionWithBracket = Pattern.compile(Patterns.EXPRESSION_IN_BRACKETS);
-        Matcher matcher = patternExpressionWithBracket.matcher(result);
-        while (matcher.find()){
-            buffer.append(matcher.group().replaceAll("[()]",""));
-            result.replace(matcher.start(),matcher.end(), calcExpressionWithoutBrecket(buffer.toString()).toString());
-            buffer.delete(0,buffer.length());
-            matcher.reset();
-        }
-        return calcExpressionWithoutBrecket(result.toString());
-    }
 }
