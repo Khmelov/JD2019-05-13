@@ -10,6 +10,6 @@ public interface CalcErrors {
     String UNABLE_SUB="calc.suberror";
     String UNABLE_DIV="calc.diverror";
     String UNABLE_MUL="calc.mulerror";
-    String UNABLE="calc.unable";
-    
+    String UNABLE="calc.impossible";
+
 }

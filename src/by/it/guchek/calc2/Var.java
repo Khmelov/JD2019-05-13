@@ -46,26 +46,26 @@ abstract class Var implements Operation {                 //реализовыв
 
     @Override
     public Var add(Var other) throws CalcException{
-        throw new CalcException("Операция сложения "+this+"+"+other+" невозможна!");
+        throw new CalcException(managerC.get(CalcErrors.UNABLE_ADD)+" "+this+"+"+other+" "+managerC.get(CalcErrors.UNABLE));
     }
 
     @Override
     public Var sub(Var other) throws CalcException{
-        throw new CalcException("Операция вычитания "+this+"-"+other+" невозможна!");
+        throw new CalcException(managerC.get(CalcErrors.UNABLE_SUB)+" "+this+"-"+other+" "+managerC.get(CalcErrors.UNABLE));
     }
 
     @Override
     public Var mul(Var other) throws CalcException{
-        throw new CalcException("Операция умножения "+this+"*"+other+" невозможна!");
+        throw new CalcException(managerC.get(CalcErrors.UNABLE_MUL)+" "+this+"*"+other+" "+managerC.get(CalcErrors.UNABLE));
     }
 
     @Override
     public Var div(Var other) throws CalcException{
-        throw new CalcException("Операция деления "+this+"/"+other+" невозможна!");
+        throw new CalcException(managerC.get(CalcErrors.UNABLE_DIV)+" "+this+"/"+other+" "+managerC.get(CalcErrors.UNABLE));
     }
 
     @Override
     public String toString() {
-        return "Это абстрактный класс Var";
+        return "Abstract Var";
     }
 }
