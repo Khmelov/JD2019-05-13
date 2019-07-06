@@ -1,5 +1,7 @@
 package by.it.adamovichjr.calc;
 
+import by.it.adamovichjr.calc.text.All_messages;
+
 import java.util.Arrays;
 
 public class Vector extends Var {
@@ -89,7 +91,7 @@ public class Vector extends Var {
     @Override
     public Var div(Var other) throws CalcException {
         if(other instanceof Scalar) {
-            if (((Scalar) other).getValue() == 0) throw new CalcException("Деление на ноль");
+            if (((Scalar) other).getValue() == 0) throw new CalcException(ResourceManager.INSTANCE.get(All_messages.ZERO_DIV));
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i] /= ((Scalar) other).getValue();

@@ -47,7 +47,7 @@ public class Parser {
             case "/":
                 return one.div(two).toString();
         }
-        throw new CalcException("Error: нет такой операции");
+        throw new CalcException("ERROR: нет такой операции");
     }
 
 

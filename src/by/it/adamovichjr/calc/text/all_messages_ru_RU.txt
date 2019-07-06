@@ -1,0 +1,12 @@
+all_messages.Error = ОШИБКА:
+all_messages.zero_div = Деление на ноль
+all_messages.wrong_create_matrix = Создание матрицы невозможно, столбцы матрицы должны быть одинаковой длины
+all_messages.set_language = Установлен русский язык
+all_messages.add_mat = Сложение невозможно: матрицы %s и %s имеют разные размеры
+all_messages.sub_mat = Вычитание невозможно: матрицы %s и %s имеют разные размеры
+all_messages.mul_mat_and_vector = Умножение невозможно: разное количество столбцов матрицы %s и длина вектора %s
+all_messages.mul_mat = Умножение матрицы %s и матрицы %s невозможно
+all_messages.operation_add = Операция %s + %s невозможна%n
+all_messages.operation_sub = Операция %s - %s невозможна%n
+all_messages.operation_mul = Операция %s * %s невозможна%n
+all_messages.operation_div = Операция %s / %s невозможна%n

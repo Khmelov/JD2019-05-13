@@ -1,0 +1,12 @@
+all_messages.Error = ПАМЫЛКА:
+all_messages.zero_div = Дзяленне на нуль
+all_messages.wrong_create_matrix = Стварэнне матрыцы немагчыма, слупкі матрыцы павінны быць аднолькавай даўжыні
+all_messages.set_language = Усталявана беларусская мова
+all_messages.add_mat = Складанне немагчыма: матрыцы %s і %s маюць розныя памеры
+all_messages.sub_mat = Адніманне немагчыма: матрыцы %s і %s маюць розныя памеры
+all_messages.mul_mat_and_vector = Множанне немагчыма: розная колькасць слупкоў матрыцы %s і даўжыня вектара %s
+all_messages.mul_mat = Множанне матрыцы %s і матрыцы %s немагчыма
+all_messages.operation_add = Аперацыя %s + %s немагчымая%n
+all_messages.operation_sub = Аперацыя %s - %s немагчымая%n
+all_messages.operation_mul = Аперацыя %s * %s немагчымая%n
+all_messages.operation_div = Аперацыя %s / %s немагчымая%n

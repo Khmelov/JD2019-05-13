@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ParserTest {
+public class ParserAndCreateVarTest {
 
     @Test
     public void calc() throws Exception {
