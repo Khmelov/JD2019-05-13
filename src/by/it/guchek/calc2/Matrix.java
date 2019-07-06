@@ -1,6 +1,10 @@
 package by.it.guchek.calc2;
 
+import by.it.guchek.jd02_05.names.CalcErrors;
+
 import java.util.Arrays;
+
+import static by.it.guchek.calc2.ConsoleRunner.managerC;
 
 public class Matrix extends Var {
 
@@ -39,7 +43,7 @@ public class Matrix extends Var {
             double [] [] sumArr= new double[this.value.length][this.value[0].length];
 
             if ((!(sumArr.length==((Matrix) other).value.length))||(!(sumArr[0].length==((Matrix) other).value[0].length)))
-                throw new CalcException("Несоответствие размеров матриц");
+                throw new CalcException(managerC.get(CalcErrors.MATRIX_NOT_EQUAL));
 
             for (int i = 0; i <sumArr.length ; i++) {
                 for (int j = 0; j <sumArr[0].length ; j++) {
@@ -66,7 +70,7 @@ public class Matrix extends Var {
             double [] [] subArr= new double[this.value.length][this.value[0].length];
 
             if ((!(subArr.length==((Matrix) other).value.length))||(!(subArr[0].length==((Matrix) other).value[0].length)))
-                throw new CalcException("Несоответствие размеров матриц");
+                throw new CalcException(managerC.get(CalcErrors.MATRIX_NOT_EQUAL));
 
             for (int i = 0; i <subArr.length ; i++) {
                 for (int j = 0; j <subArr[0].length ; j++) {
@@ -121,7 +125,7 @@ public class Matrix extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar){
             if (((Scalar) other).getValue() == 0)
-                throw new CalcException("Деление на ноль");
+                throw new CalcException(managerC.get(CalcErrors.DIVNULL));
             double[][] divMatrScalarRez = new double[this.value.length][this.value[0].length];
 
         for (int i = 0; i < this.value.length; i++)

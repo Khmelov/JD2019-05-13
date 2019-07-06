@@ -1,17 +1,16 @@
-package by.it.guchek.jd02_05;
+package by.it.guchek.calc2;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public enum ResManager {
+public enum ResManagerForCalc {
     INSTANCE;
 
     private String basename = "by.it.guchek.jd02_05.resources.message";
     private Locale locale;
     private ResourceBundle bundle;
 
-    ResManager() {
-        Locale.setDefault(Locale.ENGLISH);
+    ResManagerForCalc() {
         bundle = ResourceBundle.getBundle(basename, Locale.getDefault());
     }
 
@@ -25,7 +24,6 @@ public enum ResManager {
     }
 
     public Locale getLocale() {
-        //locale=Locale.getDefault();
         return this.locale=locale;
     }
 }

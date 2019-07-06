@@ -1,6 +1,10 @@
 package by.it.guchek.calc2;
 
+import by.it.guchek.jd02_05.names.CalcErrors;
+
 import java.util.Arrays;
+
+import static by.it.guchek.calc2.ConsoleRunner.managerC;
 
 class Vector extends Var {
 
@@ -44,7 +48,7 @@ class Vector extends Var {
         else if (other instanceof Vector){
             double [] sumArr=Arrays.copyOf(value, value.length);
             if (sumArr.length!=((Vector) other).value.length)
-                throw new CalcException(" Несоответствие размеров векторов");
+                throw new CalcException(managerC.get(CalcErrors.VECTORS_NOT_EQUAL));
             for (int i = 0; i <value.length ; i++) {
                 sumArr[i]=sumArr[i]+((Vector) other).value[i];
             }
@@ -59,7 +63,7 @@ class Vector extends Var {
         if (other instanceof Vector) {
             double[] razArr = Arrays.copyOf(value, value.length);
             if (razArr.length!=((Vector) other).value.length)
-                throw new CalcException(" Несоответствие размеров векторов");
+                throw new CalcException(managerC.get(CalcErrors.VECTORS_NOT_EQUAL));
             for (int i = 0; i < value.length; i++) {
                 razArr[i] = razArr[i] - ((Vector) other).value[i];
             }
@@ -99,7 +103,7 @@ class Vector extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             if (((Scalar) other).getValue() == 0)
-                throw new CalcException("Деление на ноль");
+                throw new CalcException(managerC.get(CalcErrors.DIVNULL));
             double[] divArr = Arrays.copyOf(value, value.length);
                         for (int i = 0; i < value.length; i++) divArr[i] = divArr[i] / ((Scalar) other).getValue();
             return new Vector(divArr);

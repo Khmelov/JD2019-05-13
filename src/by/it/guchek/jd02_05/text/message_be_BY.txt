@@ -1,3 +1,8 @@
 message.welcom=Вiтаю!
 message.guestion=Як справы?
 user.name=Гучак Вольга
+resdata.data=Сягоняшняя дата:
+calc.divnull=Нельга дзялиць на 0!
+calc.vectorsize= Неадпаведнасць памерау вектарау
+calc.matrixsize= Неадпаведнасць памерау мытрыц
+calc.variableerror= Нельга зрабiць пераменную:

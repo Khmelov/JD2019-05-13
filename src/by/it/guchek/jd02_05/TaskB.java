@@ -1,5 +1,8 @@
 package by.it.guchek.jd02_05;
 
+import by.it.guchek.jd02_05.names.Message;
+import by.it.guchek.jd02_05.names.ResData;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.Instant;
@@ -8,9 +11,13 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class TaskB {
+
+    public static ResManager manager = ResManager.INSTANCE;
+
     public static void main(String[] args) {
 
-        ResManager manager = ResManager.INSTANCE;
+        manager.setLocale(Locale.getDefault());
+
         if (args.length == 2) {
             String lang=args[0];
             String country=args[1];
@@ -21,30 +28,41 @@ public class TaskB {
         TaskA.printWellcoming(manager);
 
         DateFormat dateInstance = DateFormat.getDateInstance(DateFormat.LONG, manager.getLocale());
-        System.out.println(dateInstance.format(Date.from(Instant.now())));
+        System.out.println(manager.get(ResData.DATA)+" "+dateInstance.format(Date.from(Instant.now())));
+
         Scanner sc = new Scanner(System.in);
         String line;
+
         while (!(line=sc.nextLine()).equals("end")){
             switch (line){
                 case "ru":{
                     Locale locale = new Locale("ru", "RU");
                     manager.setLocale(locale);
+                    reWelcomByLocale();
                     break;
                 }
                 case "be":{
                     Locale locale = new Locale("be", "BY");
                     manager.setLocale(locale);
+                    reWelcomByLocale();
                     break;
                 }
-                case "us":{
-                    Locale locale = new Locale("us", "EN");
+                case "en":{
+                    Locale locale = new Locale("en", "EN");
                     manager.setLocale(locale);
+                    reWelcomByLocale();
                     break;
                 }
-            } break;
+            }
+
         }
-        DateFormat dateInstance2 = DateFormat.getDateInstance(DateFormat.LONG, manager.getLocale());
-        System.out.println(dateInstance2.format(Date.from(Instant.now())));
+    }
+
+    private static void reWelcomByLocale() {
+        DateFormat dateInstance;
+        TaskA.printWellcoming(manager);
+        dateInstance = DateFormat.getDateInstance(DateFormat.LONG, manager.getLocale());
+        System.out.println(manager.get(ResData.DATA)+" "+dateInstance.format(Date.from(Instant.now())));
     }
 }
 

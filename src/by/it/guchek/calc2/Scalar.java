@@ -1,5 +1,10 @@
 package by.it.guchek.calc2;
 
+import by.it.guchek.jd02_05.names.CalcErrors;
+import java.lang.reflect.Member;
+
+import static by.it.guchek.calc2.ConsoleRunner.managerC;
+
 class Scalar extends Var {                                    //убрала публичный т.к. больше нигде не будет виден
     private double value;
 
@@ -58,7 +63,7 @@ class Scalar extends Var {                                    //убрала п�
 
         if (other instanceof Scalar){
             if (((Scalar) other).value == 0)
-                throw new CalcException("Деление на ноль");
+                throw new CalcException(managerC.get(CalcErrors.DIVNULL));
             double div = this.value/((Scalar) other).value;
             return new Scalar(div);
 

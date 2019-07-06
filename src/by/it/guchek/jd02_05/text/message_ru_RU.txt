@@ -1,3 +1,8 @@
 message.welcom=Привет!
 message.guestion=Как дела?
 user.name=Гучек Ольга
+resdata.data=Сегодняшняя дата:
+calc.divnull=Деление на 0 невозможно!
+calc.vectorsize= Несоответствие размеров векторов
+calc.matrixsize= Несоответствие размеров матриц
+calc.variableerror= Невозможно создать переменную:

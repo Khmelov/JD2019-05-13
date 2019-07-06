@@ -1,7 +1,11 @@
 package by.it.guchek.calc2;
 
+import by.it.guchek.jd02_05.names.CalcErrors;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import static by.it.guchek.calc2.ConsoleRunner.managerC;
 
 abstract class Var implements Operation {                 //реализовывает интерфейс Operation
 
@@ -34,7 +38,8 @@ abstract class Var implements Operation {                 //реализовыв
         else if (operand.matches(Patterns.BRACE))
             return new Parser().calc(operand);
 
-        else throw new CalcException("Невозможно создать переменную: " +operand);
+        else throw new CalcException(managerC.get(CalcErrors.UNABLE_VARIABLE)+
+                    " "+operand);
 
     }
 
