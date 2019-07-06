@@ -1,6 +1,5 @@
 package by.it._examples_.jd01_14;
 
-
 /**
  * Created by Alex on 05.06.2016.
  */
