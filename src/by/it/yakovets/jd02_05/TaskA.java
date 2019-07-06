@@ -26,7 +26,7 @@ public class TaskA {
             System.out.println(question);
             System.out.println(userName);
             Date date = new Date();
-            System.out.println(date.toString());
+            System.out.println(manager.getDate(date));
             line =sc.nextLine();
             switch (line) {
                 case "ru":
