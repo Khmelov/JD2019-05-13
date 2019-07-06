@@ -29,7 +29,7 @@ public class Market {
         while (Dispetcher.marketIsOpen()) {
 
             int limitBuyers = getLimitBuyers(time);
-            int additionalBuyers = (limitBuyers - Dispetcher.countBuyerInMarket);
+            int additionalBuyers = (limitBuyers - Dispetcher.countBuyerInMarket-1);
             int newBuyers = Time.fromTo(0, 2) + additionalBuyers;
             lettingInNewBuyers(newBuyers);
             System.out.println("Time = " + (time) + " count buyers in market = " + Dispetcher.countBuyerInMarket + " Cashiers wait = " + Queue.dequeCashiersWait.size() + " Buyers in queue = " +Queue.dequeBuyers.size() + " PENSIONERS in Q = " + Queue.dequePensionerBuyer.size());
