@@ -1,0 +1,6 @@
+message.welcome=Прывiтaнне!
+message.question=Як справы?
+message.language=Размауляй па Беларускi!
+message.input_error=Памылка. Не зразумею уведзенную велiчiню
+message.mull_error=Немагчыма слiчышь уведзенные лiчбы
+user.name=Дзмiтрый Манюк

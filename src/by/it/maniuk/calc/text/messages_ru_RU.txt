@@ -1,0 +1,6 @@
+message.welcome=Привет!
+message.question=Как дела?
+message.language=Русский язык!
+message.input_error=Ошибка ввода
+message.mull_error=Сложение введенных величин не возможно. Повторите ввод.
+user.name=Дмитрий Манюк

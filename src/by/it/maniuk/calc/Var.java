@@ -1,5 +1,7 @@
 package by.it.maniuk.calc;
 
+import by.it.maniuk.calc.names.Messages;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +56,7 @@ abstract class Var implements Operation {
     }
 
     static Var createVar(String strVar) throws CalcException {
+
         strVar = strVar.replaceAll("\\s+", "");
         if (strVar.matches(Patterns.SCALAR))
             return new Scalar(strVar);
@@ -63,12 +66,13 @@ abstract class Var implements Operation {
             return new Matrix(strVar);
         else if (vars.containsKey(strVar))
             return vars.get(strVar);
-        throw new CalcException(" не понимаю что такое "+strVar);
+
+        throw new CalcException(Messages.INPUTERROR);
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw  new CalcException(("ERROR: Операция сложения "+this+ "+" + other + " невозможна"));
+        throw  new CalcException((Messages.MULL_ERROR));
 
     }
 

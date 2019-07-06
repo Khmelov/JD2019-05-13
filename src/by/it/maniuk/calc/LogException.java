@@ -1,11 +1,14 @@
 package by.it.maniuk.calc;
 
+import by.it.maniuk.calc.names.Messages;
+
 import java.io.File;
 import java.io.FileWriter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Locale;
 
 class LogException {
 
@@ -13,8 +16,8 @@ class LogException {
 
         String path = getFilePath(LogException.class, "log.txt");
         try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
-            System.out.println(e.getMessage());
             out.print(e + " - " +  new Date().toString());
+            printerror(e.getMessage());
 
 
         } catch (IOException ex) {
@@ -35,5 +38,10 @@ class LogException {
 
         path = root + separator + "src" + separator + path;
         return path;
+    }
+    private void printerror(String mes){
+        ResManager manager = ResManager.INSTANCE;
+        System.out.println(manager.get(mes));
+
     }
 }

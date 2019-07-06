@@ -103,7 +103,6 @@ class Parser {
             operands.add(index, result);
         }
 
-
        return Var.createVar(operands.get(0));
 
     }

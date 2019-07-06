@@ -1,0 +1,6 @@
+message.welcome=Welcome!
+message.question=How do you do?
+message.language=English language in use!
+message.input_error=Input Error
+message.mull_error=this multiply is not possible
+user.name=Dzmitriy Maniuk

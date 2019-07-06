@@ -1,1 +1,1 @@
-by.it.maniuk.calc.CalcException:  не понимаю что такое {1,2}\n" - Wed Jul 03 13:20:14 MSK 2019
+by.it.maniuk.calc.CalcException: message.input_error - Sat Jul 06 23:58:33 MSK 2019
