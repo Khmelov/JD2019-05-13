@@ -6,29 +6,52 @@ import java.util.*;
 
 class Printer {
 
-    void print(Var variable) {
-        System.out.printf(ResourceManager.INSTANCE.getString(ResData.RESULT), variable);
+    private Logger logger = Logger.LOGGER;
+
+    void print(String message) {
+        System.out.println(message);
+        logger.writeLog(message);
     }
 
-    void printVar () {
+    void print(Var variable) {
+        String result = String.format
+                (ResourceManager.INSTANCE.getString(ResData.RESULT), variable);
+        print(result);
+    }
+
+    void print(Throwable e) {
+        System.out.println(e.getMessage());
+        logger.writeLog(e);
+    }
+
+    void logData(String message) {
+        logger.writeLog(message);
+    }
+
+    void printVar() {
         Map<String, Var> list = VarList.getList();
-
-        if (list.isEmpty()) System.out.println(ResourceManager.INSTANCE.getString(ResData.NO_SAVED_VARIABLE));
-
-        Set<Map.Entry<String, Var>> entries = list.entrySet();
-        for (Map.Entry<String, Var> next : entries) {
-            System.out.printf("%s = %s\n", next.getKey(), next.getValue());
+        if (list.isEmpty()) {
+            print(ResourceManager.INSTANCE.getString(ResData.NO_SAVED_VARIABLE));
+        } else {
+            varlistConsoleAndLogOut(list);
         }
     }
 
-    void printSortedVar () {
+    void printSortedVar() {
         Map<String, Var> listSorted = new TreeMap<>(VarList.getList());
+        if (listSorted.isEmpty()) {
+            print(ResourceManager.INSTANCE.getString(ResData.NO_SAVED_VARIABLE));
+        } else {
+            varlistConsoleAndLogOut(listSorted);
+        }
+    }
 
-        if (listSorted.isEmpty()) System.out.println(ResourceManager.INSTANCE.getString(ResData.NO_SAVED_VARIABLE));
-
-        Set<Map.Entry<String, Var>> entries = listSorted.entrySet();
+    private void varlistConsoleAndLogOut(Map<String, Var> list) {
+        String entry;
+        Set<Map.Entry<String, Var>> entries = list.entrySet();
         for (Map.Entry<String, Var> next : entries) {
-            System.out.printf("%s = %s\n", next.getKey(), next.getValue());
+            entry = String.format("%s = %s", next.getKey(), next.getValue());
+            print(entry);
         }
     }
 }

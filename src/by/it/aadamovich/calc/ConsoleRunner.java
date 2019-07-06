@@ -16,6 +16,7 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
         while (!(line = sc.nextLine()).equals(Patterns.END_COMMAND)) {
+            printer.logData(line);
             switch (line) {
                 case Patterns.PRINTVAR_COMMAND:
                     printer.printVar();
@@ -24,17 +25,17 @@ public class ConsoleRunner {
                     printer.printSortedVar();
                     break;
                 case Patterns.RUSSIAN_COMMAND:
-                    manager.setLocale(ConsoleRunner.getLocale(Patterns.RUS_LANG, Patterns.RUS_COUN));
-                    System.out.println(manager.getString(ResData.RUSSIAN_SWITCH));
+                    manager.setLocale(Patterns.RUS_LANG, Patterns.RUS_COUN);
+                    printer.print(manager.getString(ResData.RUSSIAN_SWITCH));
                     break;
                 case Patterns.BELARUSIAN_COMMAND:
-                    manager.setLocale(ConsoleRunner.getLocale(Patterns.BY_LANG, Patterns.BY_COUN));
-                    System.out.println(manager.getString(ResData.BELARUSIAN_SWITCH));
+                    manager.setLocale(Patterns.BY_LANG, Patterns.BY_COUN);
+                    printer.print(manager.getString(ResData.BELARUSIAN_SWITCH));
                     break;
                 case Patterns.ENGLISH_COMMAND:
                     Locale.setDefault(Locale.ENGLISH);
                     manager.setLocale(Locale.getDefault());
-                    System.out.println(manager.getString(ResData.ENGLISH_SWITCH));
+                    printer.print(manager.getString(ResData.ENGLISH_SWITCH));
                     break;
 
                 default:
@@ -42,13 +43,9 @@ public class ConsoleRunner {
                         Var calc = parser.calc(line);
                         printer.print(calc);
                     } catch (CalcException e) {
-                        System.out.println(e.getMessage());
+                        printer.print(e);
                     }
             }
         }
-    }
-
-    private static Locale getLocale(String language, String country) {
-                return new Locale(language, country);
     }
 }

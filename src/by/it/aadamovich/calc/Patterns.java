@@ -9,6 +9,9 @@ interface Patterns {
     String BRACKET = "\\([^)(]+\\)";
 
     String BASENAME = "by.it.aadamovich.calc.resources.messages";
+    String DIR_FOR_LOGS = "logs";
+    String FILE_FOR_LOGS = "log.txt";
+
     String END_COMMAND = "end";
     String SORTVAR_COMMAND = "sortvar";
     String PRINTVAR_COMMAND = "printvar";
