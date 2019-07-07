@@ -26,5 +26,8 @@ public interface All_messages {
     String START_PROGRAM = "all_messages.start_program";
     String FINISH_PROGRAM = "all_messages.finish_program";
     String RESULT = "all_messages.result";
+    String UNABLE_CREATE_OPERAND = "all_messages.unable_create_operand";
+    String WRONG_BRACKETS = "all_messages.wrong_brackets";
+    String CHOSE_WITHOUT_REPORT = "all_messages.chose_without_report_complite";
 
 }

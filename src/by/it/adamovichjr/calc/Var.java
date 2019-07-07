@@ -13,22 +13,11 @@ public class Var implements Operation {
         vars.put(name, var);
     }
 
-    public static Map<String, Var> getVars() {
+    static Map<String, Var> getVars() {
         return vars;
     }
 
-    static Var createVar(String operand) throws CalcException {
-        operand = operand.trim().replaceAll("\\s+","");
-        if (operand.matches(Patterns.SCALAR))
-            return new Scalar(operand);
-        if(operand.matches(Patterns.VECTOR))
-            return new Vector(operand);
-        if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
-        else if (vars.containsKey(operand))
-            return vars.get(operand);
-        throw new CalcException(ResourceManager.INSTANCE.get(All_messages.ERROR) + operand);
-    }
+
     @Override
     public String toString() {
         return "Var";

@@ -4,21 +4,21 @@ import by.it.adamovichjr.calc.ResourceManager;
 import by.it.adamovichjr.calc.text.All_messages;
 
 public class Report {
-    StringBuilder reportName = new StringBuilder();
-    StringBuilder time = new StringBuilder();
-    StringBuilder events = new StringBuilder();
-    StringBuilder exceptions = new StringBuilder();
+    private StringBuilder reportName = new StringBuilder();
+    private StringBuilder time = new StringBuilder();
+    private StringBuilder events = new StringBuilder();
+    private StringBuilder exceptions = new StringBuilder();
 
-    public void setReportName(String name){
+    void setReportName(String name){
         this.reportName.append(name).append("\n");
     }
-    public void addTime(String time){
+    void addTime(String time){
         this.time.append(time).append("\n");
     }
-    public void addEvents(String event){
+    void addEvents(String event){
         this.events.append(event).append("\n");
     }
-    public void addExceptions(String exception){
+    void addExceptions(String exception){
         this.exceptions.append(exception).append("\n");
     }
 

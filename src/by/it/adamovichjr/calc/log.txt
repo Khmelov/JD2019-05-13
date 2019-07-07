@@ -1,32 +1,31 @@
+A=({{1, 1, 1}{1,1,1}} +{{-2, 0, -2}{-2, 0, -2}})* {{2,2}{2,2}{2,2}}
+Результат:{{-2.0, -2.0}, {-2.0, -2.0}}
+B={{1,-1}{1,-1}}*{1,2}+5
+Результат:{4.0, 4.0}
+C=A*B-B
+Результат:{-20.0, -20.0}
+D=A/(2+3)
+Результат:{{-0.4, -0.4}, {-0.4, -0.4}}
+(D+A
+ОШИБКА:Неправильно расставлены скобки
+by.it.adamovichjr.calc.FactoryVar.createVar(FactoryVar.java:9)
+by.it.adamovichjr.calc.Parser.oneOperation(Parser.java:41)
+by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:72)
+by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:44)
+7 июля 2019 г. 22:11:02
+dg
+ОШИБКА:Невозможно создать:dg
+by.it.adamovichjr.calc.FactoryVar.createVar(FactoryVar.java:19)
+by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
+by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:44)
+7 июля 2019 г. 22:11:07
 be
-
-ПАМЫЛКА:ПАМЫЛКА:
-by.it.adamovichjr.calc.Var.createVar(Var.java:30)
+A%B
+ПАМЫЛКА:Немагчыма сбудавать:A%B
+by.it.adamovichjr.calc.FactoryVar.createVar(FactoryVar.java:19)
 by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
 by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
-by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:47)
-нядзеля, 7, ліпеня 2019 20:31:04
-ru
-be
-
-ПАМЫЛКА:ПАМЫЛКА:
-by.it.adamovichjr.calc.Var.createVar(Var.java:30)
-by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
-by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
-by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:47)
-нядзеля, 7, ліпеня 2019 20:31:17
-dfh
-ПАМЫЛКА:ПАМЫЛКА:dfh
-by.it.adamovichjr.calc.Var.createVar(Var.java:30)
-by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
-by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
-by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:47)
-нядзеля, 7, ліпеня 2019 20:31:31
-{{1,2,3}{1,2}}
-ПАМЫЛКА:Стварэнне матрыцы немагчыма, слупкі матрыцы павінны быць аднолькавай даўжыні
-by.it.adamovichjr.calc.Matrix.<init>(Matrix.java:42)
-by.it.adamovichjr.calc.Var.createVar(Var.java:27)
-by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
-by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
-by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:47)
-нядзеля, 7, ліпеня 2019 20:31:57
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:44)
+нядзеля, 7, ліпеня 2019 22:11:24

@@ -40,15 +40,15 @@ public class ParserAndCreateVarTest {
     public void createVar() throws Exception {
         //Тест для матрицы
         String exemple = "{  {  1   ,  -   1    }   {1  ,   -   1   }   }";
-        Var actual = Var.createVar(exemple);
+        Var actual = FactoryVar.createVar(exemple);
         assertEquals("{{1.0, -1.0}, {1.0, -1.0}}",actual.toString());
         //Тест для вектора
         exemple = "{  1  ,  2  ,3,4  }";
-        actual = Var.createVar(exemple);
+        actual = FactoryVar.createVar(exemple);
         assertEquals("{1.0, 2.0, 3.0, 4.0}",actual.toString());
         //Тест для скаляра
         exemple = "-6";
-        actual = Var.createVar(exemple);
+        actual = FactoryVar.createVar(exemple);
         assertEquals("-6.0",actual.toString());
     }
     }

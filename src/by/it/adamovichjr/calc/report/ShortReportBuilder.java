@@ -5,7 +5,7 @@ import by.it.adamovichjr.calc.text.All_messages;
 
 import java.util.List;
 
-public class ShortReportBuilder extends ReportBuilder {
+class ShortReportBuilder extends ReportBuilder {
     @Override
     void buildName() {
         report.setReportName(ResourceManager.INSTANCE.get(All_messages.SHORT_REPORT_NAME));

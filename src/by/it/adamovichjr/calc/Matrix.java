@@ -6,7 +6,7 @@ import by.it.adamovichjr.calc.text.All_messages;
 import java.util.Arrays;
 
 public class Matrix extends Var {
-    ;
+
     private double [][] value;
 
     public double[][] getValue() {

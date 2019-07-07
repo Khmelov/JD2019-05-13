@@ -5,7 +5,7 @@ import by.it.adamovichjr.calc.text.All_messages;
 
 import java.util.List;
 
-public class FullReportBuilder extends ReportBuilder {
+class FullReportBuilder extends ReportBuilder {
     @Override
     void buildName() {
         report.setReportName(ResourceManager.INSTANCE.get(All_messages.FULL_REPORT_NAME));
@@ -26,7 +26,7 @@ public class FullReportBuilder extends ReportBuilder {
     }
 
     @Override
-    void buildExceptions(List<Throwable> exceptions,List<String> events,List<String> time) {
+    void buildExceptions(List<Throwable> exceptions, List<String> events, List<String> time) {
         StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < exceptions.size(); i++) {
             buffer.append(ResourceManager.INSTANCE.get(All_messages.EVENT_WITH_EXCEPTION)).append(events.get(i)).append("\n")

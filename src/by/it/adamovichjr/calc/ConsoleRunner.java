@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class ConsoleRunner {
     public static void main(String[] args) {
 
-        ChoseReport.ChoseOrNotreport(); //Начало отсчета работы программы начинается после выбора типа отчета
+        ChoseReport.ChoseOrNotReport(); //Начало отсчета работы программы начинается после выбора типа отчета
         if (ChoseReport.needReport) {
             Director.DIRECTOR.putTime(ResourceManager.INSTANCE.get(All_messages.START_PROGRAM));
         }
@@ -20,7 +20,7 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
 
-        while (!(line=scanner.nextLine()).equals("end")){
+        while (!(line = scanner.nextLine()).equals("end")) {
             SingeltonLogger.LOGGER.writeLogInFile(line);
             Director.DIRECTOR.putEventToDirector(line);
             switch (line) {
@@ -31,16 +31,13 @@ public class ConsoleRunner {
                     printer.sortvar();
                     break;
                 case "ru":
-                    ResourceManager.INSTANCE.setLocale("ru","RU");
-                    System.out.println(ResourceManager.INSTANCE.get(All_messages.SET_LANGUAGE));
+                    resetLocale("ru", "RU");
                     break;
                 case "be":
-                    ResourceManager.INSTANCE.setLocale("be","BY");
-                    System.out.println(ResourceManager.INSTANCE.get(All_messages.SET_LANGUAGE));
+                    resetLocale("be", "BY");
                     break;
                 case "en":
-                    ResourceManager.INSTANCE.setLocale("en","EN");
-                    System.out.println(ResourceManager.INSTANCE.get(All_messages.SET_LANGUAGE));
+                    resetLocale("en", "EN");
                     break;
                 default:
                     try {
@@ -54,12 +51,17 @@ public class ConsoleRunner {
                         }
                         System.out.println(e.getMessage());
                     }
-                }
             }
+        }
         if (ChoseReport.needReport) {
             Director.DIRECTOR.putTime(ResourceManager.INSTANCE.get(All_messages.FINISH_PROGRAM));
             System.out.println(Director.DIRECTOR.BuildReport());
         }
     }
+
+    private static void resetLocale(String language, String country) {
+        ResourceManager.INSTANCE.setLocale(language, country);
+        System.out.println(ResourceManager.INSTANCE.get(All_messages.SET_LANGUAGE));
     }
+}
 

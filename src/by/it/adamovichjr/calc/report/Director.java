@@ -34,14 +34,13 @@ public enum Director {
         this.events.add(event);
     }
 
-    public Report BuildReport(){
-            builder.createReport();
-            builder.buildName();
-            builder.buildTime(time);
-            builder.buildEvents(events);
-            builder.buildExceptions(exceptions, eventsWithExceptions,timeOfExceptions);
-            Report report = builder.getReport();
-            return report;
-        }
+    public Report BuildReport() {
+        builder.createReport();
+        builder.buildName();
+        builder.buildTime(time);
+        builder.buildEvents(events);
+        builder.buildExceptions(exceptions, eventsWithExceptions, timeOfExceptions);
+        return builder.getReport();
+    }
 
 }
