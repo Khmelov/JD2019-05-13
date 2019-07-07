@@ -1,52 +1,53 @@
 package by.it.yakimovich.calc;
 
+import sun.rmi.runtime.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
-abstract class Var implements Operation {
+abstract class Var implements Operation,Vars {
+    private static Map<String, Var> vars = new HashMap<>();
 
-   private static Map<String,Var> vars=new HashMap<>();
-   static Var saveVar(String name,Var var){
-       vars.put(name, var);
-       return var;
-   }
-
-
-    static Var createVar(String operand) throws CalcException {
-        operand=operand.trim().replace("\\s+","");
-        if (operand.matches(Patterns.SCALAR))
-            return new Scalar(operand);
-        if (operand.matches(Patterns.VECTOR))
-            return new Vector(operand);
-        if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
-        else if (vars.containsKey(operand))
-            return vars.get(operand);
-        throw  new CalcException("Невозможно создать"+operand);
+    static Var createVar(String strVar) throws CalcException {
+        strVar = strVar.replaceAll("\\s+", "");
+        if (strVar.matches(Patterns.SCALAR))
+            return new Scalar(strVar);
+        else if (strVar.matches(Patterns.VECTOR))
+            return new Vector(strVar);
+        else if (strVar.matches(Patterns.MATRIX))
+            return new Matrix(strVar);
+        else if (vars.containsKey(strVar))
+            return vars.get(strVar);
+       throw new CalcException(" не понимаю что такое "+strVar);
 
     }
-    @Override
-    public Var add(Var other) throws CalcException{
-        throw new CalcException("Операция "+this+"+"+other+" невозможна");
-    }
 
-    @Override
-    public Var sub(Var other) throws CalcException {
-        throw new CalcException("Операция "+this+"-"+other+" невозможна");
-        }
-
-    @Override
-    public Var mul(Var other) throws CalcException{
-        throw new CalcException("Операция "+this+"*"+other+" невозможна");
-    }
-
-    @Override
-    public Var div(Var other) throws CalcException{
-        throw new CalcException("Операция "+this+"/"+other+" невозможна");
+    static void save(String name, Var var) {
+        vars.put(name, var);
     }
 
     @Override
     public String toString() {
-        return "abstract var";
+        return "abstract Var";
+    }
+
+    @Override
+    public Var add(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s + %s невозможна%n", this, other));
+    }
+
+    @Override
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s - %s невозможна%n", this, other));
+    }
+
+    @Override
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s * %s невозможна%n", this, other));
+    }
+
+    @Override
+    public Var div(Var other) throws CalcException {
+        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
     }
 }
