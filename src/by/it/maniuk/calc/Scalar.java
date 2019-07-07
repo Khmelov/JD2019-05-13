@@ -1,6 +1,8 @@
 package by.it.maniuk.calc;
 
 
+import by.it.maniuk.calc.names.Messages;
+
 public class Scalar extends Var {
 
     private double  value;
@@ -60,7 +62,7 @@ public class Scalar extends Var {
     public Var div(Var other) throws CalcException {
             if (other instanceof Scalar){
                 if (((Scalar) other).value==0) {
-                    throw new CalcException("ERROR: Деление на ноль");}
+                    throw new CalcException(Messages.DELL_TO_ZERO);}
                 Scalar s = (Scalar) other;
                 double div = this.value/s.value;
                 return new Scalar(div);

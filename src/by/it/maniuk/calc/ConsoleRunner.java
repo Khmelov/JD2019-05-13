@@ -12,11 +12,13 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-   static String country = "EN";
+
     public static void main(String[] args) {
-        String s;
         String lang = "en";
         String country = "EN";
+        if (args.length == 2) {
+            lang =  args[0];  country =  args[1];}
+        String s;
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser();
         Printer printer = new Printer();
@@ -32,20 +34,20 @@ public class ConsoleRunner {
                     lang = "ru";
                     country = "RU";
                     lacal(lang, country);
-                    continue;
+
                 }
                 if (s.equals("be")) {
                     lang = "be";
                     country = "BY";
                     lacal(lang, country);
-                    continue;
+
                 }
                 if (s.equals("en")) {
                     Locale.setDefault(Locale.ENGLISH);
                     lang = "en";
                     country = "EN";
                     lacal(lang, country);
-                    continue;
+
                 }
                 if (s.equals("sortvar")) {Printer.sortVar(); continue;}
                 if(s.equals("printvar")){Printer.printVar(); continue;}

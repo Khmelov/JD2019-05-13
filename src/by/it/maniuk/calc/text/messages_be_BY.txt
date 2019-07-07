@@ -1,6 +1,15 @@
 message.welcome=Прывiтaнне!
+message.memory=У памяці захоўваюцца наступныя зменныя:
 message.question=Як справы?
 message.language=Размауляй па Беларускi!
-message.input_error=Памылка. Не зразумею уведзенную велiчiню
-message.mull_error=Немагчыма слiчышь уведзенные лiчбы
+message.input_error=ERROR: Памылка. Не зразумею уведзенную велiчiню
+message.mull_error=ERROR: Немагчыма памножыць лiчбы
+message.add_error=ERROR: Немагчыма слiчышь уведзенные лiчбы
+message.del_error=ERROR: Дзяленне уведзеных велічыняў не магчыма
+message.sub_error=ERROR: Адніманне уведзеных велічыняў не магчыма.
+message.del_to_0=ERROR: Дзяленне на нуль
+message.vector_different=ERROR: Розная памернасць вектараў
+message.matrix_different=ERROR: Памеры матрыц павінны быць аднолькавымі
+message.matrix_different_light=ERROR: Такія матрыцы нельга перамнажаць, так як колькасць слупкоў матрыцы ня роўнае вектару
+message.matrix_different_other=ERROR: Колькасць слупкоў першай матрыцы павінна раўняцца колькасці радкоў другі.
 user.name=Дзмiтрый Манюк

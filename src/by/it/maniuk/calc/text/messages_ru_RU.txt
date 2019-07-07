@@ -1,6 +1,15 @@
 message.welcome=Привет!
+message.memory=В памяти находятся следующие значения:
 message.question=Как дела?
 message.language=Русский язык!
-message.input_error=Ошибка ввода
-message.mull_error=Сложение введенных величин не возможно. Повторите ввод.
+message.input_error=ERROR: Ошибка ввода
+message.mull_error=ERROR: Умножение введенных величин не возможно. Повторите ввод.
+message.add_error=ERROR: Сложение введенных величин не возможно. Повторите ввод.
+message.del_error=ERROR: Деление введенных величин не возможно. Повторите ввод.
+message.sub_error=ERROR: Вычитание введенных величин не возможно. Повторите ввод.
+message.del_to_0=ERROR: деление на ноль
+message.vector_different=ERROR: Несоответствие размеров векторов
+message.matrix_different=ERROR: Размеры матриц должны быть одинаковыми
+message.matrix_different_light=ERROR: Такие матрицы нельзя перемножить, так как количество столбцов матрицы не равно вектору
+message.matrix_different_other=ERROR: Количество столбцов первой матрицы должно равняться количеству строк второй.
 user.name=Дмитрий Манюк

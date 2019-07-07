@@ -26,6 +26,7 @@ abstract class Var implements Operation {
         return  var;
    }
    static void backToMap() throws CalcException {
+       ResManager manager = ResManager.INSTANCE;
        String path = getFilePath(Var.class, "vars.txt");
        try(BufferedReader in = new BufferedReader(new FileReader(path))) {
            int count =0;
@@ -34,7 +35,7 @@ abstract class Var implements Operation {
                    count++;
                    if (line == null || line.equals(""))
                        break;
-                   else if (count == 1) System.out.println("В памяти хранятся следующие переменные:");
+                   else if (count == 1) System.out.println(manager.get(Messages.MEMORY));
                    String[] lines = line.split("=");
                    String name = lines[1];
 
@@ -72,25 +73,25 @@ abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw  new CalcException((Messages.MULL_ERROR));
+        throw  new CalcException((Messages.ADD_ERROR)); // (this + "-" + other));
 
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-       throw new CalcException ("ERROR: Операция вычитания  "+this+ "-" + other + " невозможна");
+       throw new CalcException ((Messages.SUB_ERROR)); // (this + "-" + other));
 
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-       throw  new CalcException("ERROR: Операция умножения "+this+ "*" + other + " невозможна");
+       throw  new CalcException((Messages.MULL_ERROR)); // (this + "-" + other));
 
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw  new CalcException("ERROR: Операция деления "+this+ "/" + other + " невозможна");
+        throw  new CalcException((Messages.DEL_ERROR)); //(this + "/" + other));
 
     }
 

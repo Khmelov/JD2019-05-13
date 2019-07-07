@@ -16,6 +16,9 @@ public class CalcException extends Exception {
         super(cause);
     }
 
+    public CalcException(String message,String text) {
+        super(message + text);
+    }
 
 
 

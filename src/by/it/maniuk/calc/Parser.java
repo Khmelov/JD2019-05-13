@@ -1,5 +1,7 @@
 package by.it.maniuk.calc;
 
+import by.it.maniuk.calc.names.Messages;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -51,7 +53,7 @@ class Parser {
             case "/":
                 return one.div(two).toString();
         }
-        throw new CalcException("Error !!!!!");
+        throw new CalcException(Messages.INPUTERROR);
     }
 
     Var calc(String expression) throws CalcException, IOException {

@@ -20,6 +20,7 @@ public enum ResManager {
     }
 
     public String get(String key) {
+        key = key.replace("ERROR:", "");
         return bundle.getString(key);
     }
 
