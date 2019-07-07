@@ -1,13 +1,18 @@
 package by.it.dnevar.jd02_03;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
-    private HashMap<String,Double> backet= new HashMap<>();
+    private ConcurrentHashMap<String,Double> backet= new ConcurrentHashMap<>();
 
     private boolean pensioneer = Util.rnd(1,4)==1;
     private int speed;
+
+    private static Semaphore semaphoreBuyersChooseGoods = new Semaphore(20);
+    private static Semaphore semaphoreTakeBacket = new Semaphore(30);
 
 
 
@@ -25,11 +30,26 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void run(){
         enterToMarket();
-        takeBacket();
-        chooseGood();
-        putGoodsToBacket();
-        goToQueue();
-        goOut();
+        try {
+            semaphoreTakeBacket.acquire();
+            takeBacket();
+            try {
+                semaphoreBuyersChooseGoods.acquire();
+                chooseGood();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                semaphoreBuyersChooseGoods.release();
+            }
+            putGoodsToBacket();
+            goToQueue();
+            goOut();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphoreTakeBacket.release();
+        }
+
     }
 
     @Override
@@ -90,7 +110,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         }
     }
 
-    public HashMap<String,Double> getBacket(){
+    public ConcurrentHashMap<String,Double> getBacket(){
         return backet;
     }
 

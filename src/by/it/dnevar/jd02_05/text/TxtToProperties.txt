@@ -1,5 +1,0 @@
-Open in terminal folder with txt files
-write:
--encoding utf-8 messages.txt messages.properties
--encoding utf-8 messages_be_BY.txt messages_be_BY.properties
--encoding utf-8 messages_ru_RU.txt messages_ru_RU.properties
