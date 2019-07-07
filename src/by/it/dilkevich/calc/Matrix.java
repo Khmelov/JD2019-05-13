@@ -1,5 +1,6 @@
 package by.it.dilkevich.calc;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,7 +66,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) throws CalcException {
+    public Var add(Var other) throws CalcException, IOException {
         if(other instanceof Scalar){
             double [][] result = new double[value.length][value[1].length];
             for (int i = 0; i < result.length; i++) {
@@ -98,7 +99,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) throws CalcException {
+    public Var sub(Var other) throws CalcException, IOException {
         if(other instanceof Scalar){
             double [][] result = new double[value.length][value[1].length];
 
@@ -117,8 +118,11 @@ public class Matrix extends Var {
         else if(other instanceof Matrix){
             double [][] result = new double[value.length][value[1].length];
 
-            if(((Matrix) other).value.length != result.length || ((Matrix) other).value[0].length != result[0].length)
+            if(((Matrix) other).value.length != result.length || ((Matrix) other).value[0].length != result[0].length){
+                Logger.setLog(ResManager.getName("error.matrix.sub"));
                 throw new CalcException(ResManager.getName("error.matrix.sub"));
+            }
+
 
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[1].length; j++) {
@@ -136,7 +140,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) throws CalcException {
+    public Var mul(Var other) throws CalcException, IOException {
         if (other instanceof Scalar){
             double [][] result = new double[value.length][value[0].length];
             for (int i = 0; i < result.length; i++) {

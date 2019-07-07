@@ -2,12 +2,14 @@ package by.it.dilkevich.calc;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class ParserTest {
 
     @Test
-    public void bracketsTest() throws CalcException {
+    public void bracketsTest() throws CalcException, IOException {
         Parser parser = new Parser();
         Var actual = parser.calc("A=2+5.3");
         assertEquals("7.3",actual.toString());
@@ -25,7 +27,7 @@ public class ParserTest {
     }
 
     @Test
-    public void vectorTest() throws CalcException {
+    public void vectorTest() throws CalcException, IOException {
 
         Parser parser = new Parser();
         Var actual = parser.calc("B={2,4,5,6}+{3,4,5,10}");
@@ -39,7 +41,7 @@ public class ParserTest {
     }
 
     @Test
-    public void matrixTest() throws CalcException {
+    public void matrixTest() throws CalcException, IOException {
         Parser parser = new Parser();
 
         Var actual = parser.calc("B={{2,434,5,6}, {3,4,5,1540}}+{{2,432,5,6}, {31,4,5,10}}+{{2,4,555,6}, {3,4,5,1065}}");

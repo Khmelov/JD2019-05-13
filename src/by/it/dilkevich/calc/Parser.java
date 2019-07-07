@@ -1,5 +1,6 @@
 package by.it.dilkevich.calc;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +24,7 @@ public class Parser {
     }
 
 
-    Var calc(String expression) throws CalcException {
+    Var calc(String expression) throws CalcException, IOException {
 
         Pattern patternBrackets = Pattern.compile(BRACKETS);
         Matcher matcherBrackets = patternBrackets.matcher(expression);
@@ -44,7 +45,9 @@ public class Parser {
         List<String> operation = new ArrayList<>();
         Pattern patternOperation = Pattern.compile(OPERATION);
         Matcher matcherOperation = patternOperation.matcher(expression);
+
         while (matcherOperation.find()) {
+
             operation.add(matcherOperation.group());
         }
 
@@ -74,23 +77,33 @@ public class Parser {
     }
 
 
-    private String oneOperation(String sOne, String operation, String sTwo) throws CalcException {
+    private String oneOperation(String sOne, String operation, String sTwo) throws CalcException, IOException {
         Var two = Var.createVar(sTwo);
         if (operation.equals("=")) {
             Var.saveVar(sOne, two);
             return two.toString();
         }
         Var one = Var.createVar(sOne);
+        String result;
         switch (operation) {
             case "+":
-                return one.add(two).toString();
+                result = one.add(two).toString();
+                OperationsSaver.saveResultOperatonsFile(result);
+                return result;
             case "-":
-                return one.sub(two).toString();
+                result = one.sub(two).toString();
+                OperationsSaver.saveResultOperatonsFile(result);
+                return result;
             case "*":
-                return one.mul(two).toString();
+                result = one.mul(two).toString();
+                OperationsSaver.saveResultOperatonsFile(result);
+                return result;
             case "/":
-                return one.div(two).toString();
+                result = one.div(two).toString();
+                OperationsSaver.saveResultOperatonsFile(result);
+                return result;
         }
+        Logger.setLog(ResManager.getName(ResManager.getName("error.operation")));
         throw new CalcException(ResManager.getName("error.operation"));
     }
 }

@@ -1,5 +1,6 @@
 package by.it.dilkevich.calc;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,27 +12,31 @@ public abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) throws CalcException {
+    public Var add(Var other) throws CalcException, IOException {
 
-        throw new CalcException(ResManager.getName("operaton.add") + this + " + " + other + ResManager.getName("operation.notpossible"));
+        Logger.setLog(ResManager.getName("operation.add") + this + " + " + other + ResManager.getName("operation.notpossible"));
+        throw new CalcException(ResManager.getName("operation.add") + this + " + " + other + ResManager.getName("operation.notpossible"));
     }
 
     @Override
-    public Var sub(Var other) throws CalcException {
+    public Var sub(Var other) throws CalcException, IOException {
 
-        throw new CalcException(ResManager.getName("operaton.sub") + this + " - " + other + ResManager.getName("operation.notpossible"));
+        Logger.setLog(ResManager.getName("operation.sub") + this + " + " + other + ResManager.getName("operation.notpossible"));
+        throw new CalcException(ResManager.getName("operation.sub") + this + " - " + other + ResManager.getName("operation.notpossible"));
     }
 
     @Override
-    public Var mul(Var other) throws CalcException {
+    public Var mul(Var other) throws CalcException, IOException {
 
-        throw new CalcException(ResManager.getName("operaton.mul") + this + " * " + other + ResManager.getName("operation.notpossible"));
+        Logger.setLog(ResManager.getName("operation.mul") + this + " + " + other + ResManager.getName("operation.notpossible"));
+        throw new CalcException(ResManager.getName("operation.mul") + this + " * " + other + ResManager.getName("operation.notpossible"));
     }
 
     @Override
-    public Var div(Var other) throws CalcException {
+    public Var div(Var other) throws CalcException, IOException {
 
-        throw new CalcException(ResManager.getName("operaton.div") + this + " / " + other + ResManager.getName("operation.notpossible"));
+        Logger.setLog(ResManager.getName("operation.div") + this + " + " + other + ResManager.getName("operation.notpossible"));
+        throw new CalcException((ResManager.getName("operation.div") + this + " / " + other + ResManager.getName("operation.notpossible")));
     }
 
     private static Map<String, Var> vars = new HashMap<>();
@@ -46,7 +51,7 @@ public abstract class Var implements Operation {
         return  var;
     }
 
-    static Var createVar(String statement) throws CalcException {
+    static Var createVar(String statement) throws CalcException, IOException {
 
         statement = statement.replaceAll(" ", "");
         Parser parser = new Parser();
@@ -67,6 +72,7 @@ public abstract class Var implements Operation {
             return vars.get(statement);
         }
 
+        Logger.setLog(ResManager.getName("error.create"));
         throw new CalcException(ResManager.getName("error.create") + statement);
     }
 
