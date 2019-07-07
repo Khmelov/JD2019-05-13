@@ -7,6 +7,7 @@ class Dispatcher {
     private static final int PLAN = 100;
     static int buyerInMarket = 0;
     static int buyerCounter = 0;
+    static int cashierscount=5;
 
 
     static boolean planComplete() {

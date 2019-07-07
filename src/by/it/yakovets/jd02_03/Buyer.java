@@ -1,11 +1,15 @@
-package by.it.yakovets.jd02_02;
+package by.it.yakovets.jd02_03;
 
+
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private boolean pensioneer;
     private Basket basketOfBuyer;
-    final static Object monitor = new Object();
+
+
+    private static Semaphore limit = new Semaphore(20);
 
     public synchronized Basket getBasketOfBuyer() {
         return basketOfBuyer;
@@ -29,10 +33,18 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public void run() {
         enterToMarket();
         basketOfBuyer = takeBasket();
-        int countGoods = Helper.rnd(1, 4);
-        for (int i = 0; i < countGoods; i++) {
-            Good choosedGood = chooseGoods();
-            putGoodsToBasket(basketOfBuyer, choosedGood);
+        try {
+            limit.acquire();
+
+            int countGoods = Helper.rnd(1, 4);
+            for (int i = 0; i < countGoods; i++) {
+                Good choosedGood = chooseGoods();
+                putGoodsToBasket(basketOfBuyer, choosedGood);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            limit.release();
         }
         goToQueue();
         goOut();
@@ -78,14 +90,14 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void goOut() {
-        System.out.println(this + " out from the market");
+
         Dispatcher.completeBuyer();
         if (Dispatcher.planComplete()) {
             synchronized (Cashier.monitor) {
                 Cashier.monitor.notifyAll();
             }
         }
-
+        System.out.println(this + " out from the market");
     }
 
     @Override
