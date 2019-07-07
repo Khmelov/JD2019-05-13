@@ -8,8 +8,11 @@ class Queue {
     }
     private static BlockingDeque<Buyer> instance = new LinkedBlockingDeque<>(30);
 
-   static void add(Buyer buyer) throws InterruptedException {
-       instance.putLast(buyer);
+   static void add(Buyer buyer, boolean pensioneer) throws InterruptedException {
+       if (pensioneer){
+           instance.putFirst(buyer);
+       }
+        else  instance.putLast(buyer);
    }
 
    static Buyer extract() {

@@ -2,7 +2,6 @@ package by.it.zhukova.calc;
 
 import java.util.Locale;
 import java.util.Scanner;
-
 import static by.it.zhukova.calc.Var.sortvar;
 
 public class ConsoleRunner {
@@ -35,8 +34,8 @@ public class ConsoleRunner {
         String expression;
         Parser parser = new Parser();
         Printer printer = new Printer();
-
-            while (!(expression = scanner.nextLine()).equals("end")) {
+        Logger instance = Logger.getInstance();
+        while (!(expression = scanner.nextLine()).equals("end")) {
               if (expression.equals("printvar")) {Var.printvar(); continue;}
                 if (expression.equals("sortvar")) {
                     sortvar(); continue;}

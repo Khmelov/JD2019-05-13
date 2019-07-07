@@ -1,8 +1,8 @@
 package by.it.zhukova.calc;
 
 import by.it.zhukova.calc.exceptions.Exceptions;
-
 import java.util.Arrays;
+import static by.it.zhukova.calc.ConsoleRunner.*;
 
 class Vector extends Var {
      private double [] value;
@@ -26,7 +26,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             if (!(((Vector) other).getValue().length ==value.length))
-                throw new CalcException(ConsoleRunner.manager.get(Exceptions.VECTOR));
+                throw new CalcException(manager.get(Exceptions.VECTOR));
             double [] add= Arrays.copyOf(value,value.length);
             for (int i = 0; i < add.length; i++) {
                 add[i]+=((Vector) other).value[i];
@@ -47,7 +47,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             if (!(((Vector) other).getValue().length ==value.length))
-                throw new CalcException(ConsoleRunner.manager.get(Exceptions.VECTOR));
+                throw new CalcException(manager.get(Exceptions.VECTOR));
             double [] sub= Arrays.copyOf(value,value.length);
             for (int i = 0; i < sub.length; i++) {
                 sub[i]-=((Vector) other).value[i];
@@ -68,7 +68,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector){
             if (!(((Vector) other).getValue().length ==value.length))
-                throw new CalcException(ConsoleRunner.manager.get(Exceptions.VECTOR));
+                throw new CalcException(manager.get(Exceptions.VECTOR));
             double [] mul= Arrays.copyOf(value,value.length);
            double res = 0;
             for (int i = 0; i < mul.length; i++) {
@@ -83,7 +83,7 @@ class Vector extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar){
             if (((Scalar) other).getValue()==0)
-                throw new CalcException(ConsoleRunner.manager.get(Exceptions.ZERODIV));
+                throw new CalcException(manager.get(Exceptions.ZERODIV));
             double [] div= Arrays.copyOf(value,value.length);
             for (int i = 0; i < div.length; i++) {
                 div[i]/=((Scalar) other).getValue();

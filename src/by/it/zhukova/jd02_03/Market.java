@@ -1,32 +1,16 @@
 package by.it.zhukova.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Market {
     public static void main(String[] args) {
-        List<Thread> threads = new ArrayList<>();
         System.out.println("Market opened");
-        MarketOpen(threads);
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println("Market closed");
-    }
-
-    private static void MarketOpen(List<Thread> threads) {
-        // запуск кассиров
+         ExecutorService executorService = Executors.newFixedThreadPool(5);
         for (int i = 0; i < 5; i++) {
-            Thread thread = new Thread(new Cashier(i+1));
-            threads.add(thread);
-            thread.start();
+            executorService.execute(new Cashier(i));
         }
-
+        executorService.shutdown();
         int numberBuyer = 0;
         boolean pensioneer;
         while (Dispatcher.marketIsOpened()) {
@@ -42,15 +26,16 @@ public class Market {
                         if (numberBuyer % 4 == 0) {
                             pensioneer = true;
                         } else {
-                            pensioneer = true;
+                            pensioneer = false;
                         }
                         Buyer buyer = new Buyer(numberBuyer, pensioneer);
                         buyer.start();
-                        threads.add(buyer);
                     }
                     Util.sleep(1000);
                 }
             }
         }
-    }
+       while (!executorService.isTerminated()) {Util.sleep(200);}
+        System.out.println("Market closed");
+}
 }

@@ -1,7 +1,6 @@
 package by.it.zhukova.calc;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class ParserTest {

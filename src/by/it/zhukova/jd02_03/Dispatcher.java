@@ -13,8 +13,8 @@ public class Dispatcher {
     }
 
     static boolean planComplete() {
-        return (buyerCounter.equals(PLAN))
-                && (buyerInMarket.equals(0));
+        return (buyerCounter.get()==(PLAN))
+                && (buyerInMarket.get()==0);
     }
 
     public static int getBuyerCounter() {

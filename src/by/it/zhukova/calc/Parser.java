@@ -6,6 +6,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static by.it.zhukova.calc.ConsoleRunner.*;
+
 public class Parser {
     private static final Map<String,Integer> priorityOperation= new HashMap<>();
     static {
@@ -84,6 +86,6 @@ public class Parser {
             case "*":
                 return one.mul(two).toString();
         }
-        throw new CalcException(ConsoleRunner.manager.get(Exceptions.ERRORTOTAL));
+        throw new CalcException(manager.get(Exceptions.ERRORTOTAL));
     }
 }

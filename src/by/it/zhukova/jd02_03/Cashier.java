@@ -26,6 +26,7 @@ public class Cashier implements Runnable {
                 System.out.printf("Sum: %.2f\n",sum);
                 System.out.println(this + "stopped service of " + buyer);
                 synchronized (buyer) {
+                    buyer.setFlagWait(false);
                     buyer.notifyAll();
                 }
             } else {
