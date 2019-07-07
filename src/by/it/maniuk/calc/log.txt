@@ -1,1 +1,1 @@
-by.it.maniuk.calc.CalcException: message.del_to_0 - Sun Jul 07 11:29:16 MSK 2019
+

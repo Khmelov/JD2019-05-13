@@ -1,22 +1,20 @@
 package by.it.maniuk.calc;
 
-import by.it.maniuk.calc.names.Messages;
-
 import java.io.File;
 import java.io.FileWriter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.Locale;
 
 class LogException {
 
      LogException(Exception e)  {
 
         String path = getFilePath(LogException.class, "log.txt");
-        try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
+        try (PrintWriter out = new PrintWriter(new FileWriter(path,true))) {
             out.print(e + " - " +  new Date().toString());
+            out.println();
             printerror(e.getMessage());
 
 
