@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class Logger {
 
@@ -34,33 +37,30 @@ public class Logger {
         String path=System.getProperty("user.dir")+ File.separator+"src"+File.separator;
         String classDir =cl.getName().replace(cl.getSimpleName(), "").replace(".",File.separator);
         return path+classDir;
+
     }
 
 
-    //private static File logger = new File(dir(SomeExeptions.class)+"log.txt");
-
     public static void printExeptionsOutLogFile(Exception err) { //продублируем ошибки в файл
-        //File logger = new File(dir(SomeExeptions.class)+"log.txt");
-        //File logger;
-        //if (logger.exists()) logger = new File(dir(SomeExeptions.class) + "log.txt");
-        //else {
-            try (
-                    PrintWriter prWrOutLogFile = new PrintWriter(
-                            new FileWriter(logger))
-            ) {
 
-                System.out.println(dir(SomeExeptions.class));
+        ZonedDateTime zdt = ZonedDateTime.of(LocalDateTime.now(), ZoneId.of("Europe/Moscow"));
 
-                prWrOutLogFile.append(err.getClass().getName()).append("\n");
-                StackTraceElement[] stackTrace = err.getStackTrace();
-                for (StackTraceElement element : stackTrace) {
-                    prWrOutLogFile.append(element.toString()).append("\n");
-                }
+        try (
+                PrintWriter prWrOutLogFile = new PrintWriter(
+                        new FileWriter(logger, true))
+        ) {
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            prWrOutLogFile.append(zdt.toString()).append("\n");
+            prWrOutLogFile.append(err.getClass().getName()).append(" ");
+            prWrOutLogFile.append(err.getMessage()).append("\n");
+            StackTraceElement[] stackTrace = err.getStackTrace();
+            for (StackTraceElement element : stackTrace) {
+                prWrOutLogFile.append(element.toString()).append("\n");
             }
-        //}
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
