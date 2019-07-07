@@ -23,14 +23,18 @@ abstract class Var implements Operation {                 //реализовыв
 
     static Var createVar(String operand) throws CalcException{
         operand = operand.trim().replace(" ", "").replace("(","").replace(")","");
-        if (operand.matches(Patterns.SCALAR))          //если операнд соответствует рег. выр. СКАЛАР
-        return new Scalar(operand);                   //должны вернуть новый скалар в конструктор
-                                                                            // которого этот операнд передан
-        else if (operand.matches(Patterns.VECTOR))
-            return new Vector(operand);
 
-        else if (operand.matches(Patterns.MATRIX))
-            return new Matrix(operand);
+        if (operand.matches(Patterns.SCALAR)){          //если операнд соответствует рег. выр. СКАЛАР
+            Creator creator = new CreatorScalar();
+            return creator.factoryMethod(operand);}             //должны вернуть новый скалар в конструктор
+                                                                            // которого этот операнд передан
+        else if (operand.matches(Patterns.VECTOR)){
+            Creator creator = new CreatorVec();
+            return creator.factoryMethod(operand);}
+
+        else if (operand.matches(Patterns.MATRIX)){
+            Creator creator = new CreatorMatrix();
+            return creator.factoryMethod(operand);}
 
         else if (vars.containsKey(operand))
             return vars.get(operand);

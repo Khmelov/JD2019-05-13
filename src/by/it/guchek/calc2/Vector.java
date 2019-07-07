@@ -10,9 +10,6 @@ class Vector extends Var {
 
     private double [] value;
 
-    public Vector() {
-
-    }
 
     public double[] getValue() { return value; }
 

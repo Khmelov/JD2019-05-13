@@ -35,10 +35,6 @@ public class Matrix extends Var {
         this.value=matr1;
     }
 
-    public Matrix() {
-
-    }
-
 
     @Override
     public Var add(Var other) throws CalcException {
