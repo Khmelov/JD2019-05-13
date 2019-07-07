@@ -14,18 +14,17 @@ abstract class Var implements Operation {
 
     static Var saveVar(String name, Var var) throws IOException {
         vars.put(name, var);
-        String path = getFilePath(Var.class, "vars.txt"); // TODO Надо не забыть вынести все про IO в отельный класс
-        try(PrintWriter out = new PrintWriter( new FileWriter(path, true))) {
-            out.print(name+"="+var);
-            out.println();
+            String path = getFilePath(Var.class, "vars.txt"); // TODO Надо не забыть вынести все про IO в отельный класс
+            try (PrintWriter out = new PrintWriter(new FileWriter(path, true))) {
+                out.print(name + "=" + var);
+                out.println();
 
-
-        } catch (IOException e) {
-            throw e;
-        }
+            } catch (IOException e) {
+                throw e;
+            }
         return  var;
    }
-   static void backToMap() throws CalcException {
+   static void backToMap() throws CalcException, IOException {
        ResManager manager = ResManager.INSTANCE;
        String path = getFilePath(Var.class, "vars.txt");
        try(BufferedReader in = new BufferedReader(new FileReader(path))) {
@@ -35,7 +34,11 @@ abstract class Var implements Operation {
                    count++;
                    if (line == null || line.equals(""))
                        break;
-                   else if (count == 1) System.out.println(manager.get(Messages.MEMORY));
+                   else if (count == 1) {
+                       Singleton sing = Singleton.getInstance();
+                       sing.printMessageToLog(manager.get(Messages.MEMORY));
+                   }
+
                    String[] lines = line.split("=");
                    String name = lines[1];
 
@@ -46,8 +49,6 @@ abstract class Var implements Operation {
 
            }
 
-       } catch (IOException e) {
-           e.printStackTrace();
        }
    }
 
@@ -57,18 +58,18 @@ abstract class Var implements Operation {
     }
 
     static Var createVar(String strVar) throws CalcException {
-
-        strVar = strVar.replaceAll("\\s+", "");
-        if (strVar.matches(Patterns.SCALAR))
-            return new Scalar(strVar);
-        else if (strVar.matches(Patterns.VECTOR))
-            return new Vector(strVar);
-        else if (strVar.matches(Patterns.MATRIX))
-            return new Matrix(strVar);
-        else if (vars.containsKey(strVar))
-            return vars.get(strVar);
-
-        throw new CalcException(Messages.INPUTERROR);
+        return Factory.create(strVar);
+//        strVar = strVar.replaceAll("\\s+", "");
+//        if (strVar.matches(Patterns.SCALAR))
+//            return new Scalar(strVar);
+//        else if (strVar.matches(Patterns.VECTOR))
+//            return new Vector(strVar);
+//        else if (strVar.matches(Patterns.MATRIX))
+//            return new Matrix(strVar);
+//        else if (vars.containsKey(strVar))
+//            return vars.get(strVar);
+//       else if (strVar.equals("ru") || strVar.equals("be") || strVar.equals("en")) return null;
+//        throw new CalcException(Messages.INPUTERROR);
     }
 
     @Override

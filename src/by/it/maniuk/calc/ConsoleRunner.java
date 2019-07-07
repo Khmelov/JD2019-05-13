@@ -1,86 +1,87 @@
 package by.it.maniuk.calc;
 
-
-
 import by.it.maniuk.calc.names.Messages;
-
+import by.it.maniuk.calc.names.User;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
 
-    public static void main(String[] args) {
-        String lang = "en";
-        String country = "EN";
-        if (args.length == 2) {
-            lang =  args[0];  country =  args[1];}
-        String s;
+    public static void main(String[] args)  {
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser();
         Printer printer = new Printer();
-        lacal(lang, country);
+        Date data = new Date();
+        DocumentBuilder builderSimple =new SimpleBuilder();
+        DocumentBuilder builderComplicated =  new ComplicatedBuilder();
+        ResManager manager = ResManager.INSTANCE;
+        if (args.length == 2) {
+           String lang = args[0];
+          String  country = args[1];
+            builderSimple.createHeader();
+            builderComplicated.createHeader();
+            manager.setLocale(lang, country);
+            lacal(manager, data);
+        }
+
         try {
             Var.backToMap();
-        } catch (CalcException e) {
-            new LogException(e);
+        } catch (CalcException | IOException e) {
+            Singleton sing = Singleton.getInstance();
+            sing.printErrorToLog(e);
+            builderSimple.createParagraph(e.getMessage(), true);
+            builderComplicated.createParagraph(e.getMessage(), true);
         }
-        while (!(s = scanner.nextLine()).equals("end")){
-            try {
-                if (s.equals("ru")) {
-                    lang = "ru";
-                    country = "RU";
-                    lacal(lang, country);
-
-                }
-                if (s.equals("be")) {
-                    lang = "be";
-                    country = "BY";
-                    lacal(lang, country);
-
-                }
-                if (s.equals("en")) {
-                    Locale.setDefault(Locale.ENGLISH);
-                    lang = "en";
-                    country = "EN";
-                    lacal(lang, country);
-
-                }
-                if (s.equals("sortvar")) {Printer.sortVar(); continue;}
-                if(s.equals("printvar")){Printer.printVar(); continue;}
-                Var result = null;
-                try {
-                    result = parser.calc(s);
-                } catch (IOException e) {
-                    new LogException(e);
-                }
-                printer.print(result);
-            } catch (CalcException e) {
-                new LogException(e);
+        String s;
+        while (! (s = scanner.nextLine()).equals("end")) {
+            builderSimple.createParagraph(s,true);
+            builderComplicated.createParagraph(s,true);
+            if (s.equals("ru")){
+                    manager.setLocale("ru", "RU");
+                    lacal(manager,data);
+                   }
+            if (s.equals("be")) {
+                manager.setLocale("be", "BY");
+                lacal(manager,data);
+                    }
+            if (s.equals("en")) {
+                    manager.setLocale(Locale.getDefault());
+                lacal(manager,data);
             }
+            if (s.equals("sortvar")) {
+                Printer.sortVar();
+                continue;
+            }
+            if (s.equals("printvar")) {
+                Printer.printVar();
+                continue;
+            }
+            Var result = null;
+            try {
+                result = parser.calc(s);
+                if (result !=null){
+                builderSimple.createParagraph(result.toString(),true);
+                builderComplicated.createParagraph(result.toString(),true);
+                }
 
+            } catch (IOException | CalcException e) {
+                Singleton sing = Singleton.getInstance();
+                sing.printErrorToLog(e);
+                builderSimple.createParagraph(e.getMessage(),true);
+                builderComplicated.createParagraph(sing.returnError(e), true);
+            }
+            printer.print(result);
         }
-
+        builderSimple.createBody();
+        builderComplicated.createBody();
     }
-
-     static void lacal(String lang, String country) {
-        Locale locale;
-        ResManager manager = ResManager.INSTANCE;
-        locale = new Locale(lang, country);
-        String d = DateFormat.getDateInstance(DateFormat.LONG).format(new Date());
-        String t = (new SimpleDateFormat("HH:mm:ss")).format(new Date());
-        System.out.println(d+" "+t);
-        manager.setLocale(locale);
-        String welcome = manager.get(Messages.WELCOME);
-        System.out.println(welcome);
-        String language = manager.get(Messages.LANGUAGE);
-        System.out.println(language);
-
-
+     private static void lacal( ResManager manager, Date date) {
+         Singleton sing = Singleton.getInstance();
+         sing.printMessageToLog(manager.get(Messages.WELCOME));
+         sing.printMessageToLog(manager.get(Messages.QUESTION));
+         sing.printMessageToLog(manager.get(User.NAME));
+         sing.printMessageToLog(ResManager.INSTANCE.getTime(date));
     }
-
-
 }

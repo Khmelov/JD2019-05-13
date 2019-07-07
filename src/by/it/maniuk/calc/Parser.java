@@ -37,8 +37,7 @@ class Parser {
     private String oneOperaion(String sOne, String operation, String sTwo) throws CalcException, IOException {
         Var two = Var.createVar(sTwo);
         if (operation.equals("=")) {
-            String name = sOne;
-            Var.saveVar(name, two);
+            Var.saveVar(sOne, two);
             return two.toString();
         }
 

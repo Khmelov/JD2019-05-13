@@ -75,11 +75,11 @@ public class Matrix extends Var {
 
     @Override
     public Var sub(Var other) throws CalcException {
-        if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(value, value.length);
+        if (other instanceof Scalar){
+            double[][] res =Arrays.copyOf(value, value.length) ;
             for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res[0].length; j++) {
-                    res[i][j] = res[i][j] - ((Scalar) other).getValue();
+                for (int j = 0; j <res[0].length ; j++) {
+                    res[i][j] = res[i][j]-((Scalar) other).getValue();
                 }
             }
             return new Matrix(res);
@@ -87,12 +87,10 @@ public class Matrix extends Var {
         else if (other instanceof Matrix){
             double[][] res =Arrays.copyOf(value, value.length) ;
             int matrixLeight = ((Matrix) other).getValue().length;
+            if (res.length != matrixLeight){
+                throw new CalcException(Messages.MATRIX_DIF);
+            }
             double[][] z = new double[res.length][matrixLeight];
-
-            if(res.length == getMatrixVerticallValue() ||                              //! Подумать про это еще раз
-                   res[0].length == getMatrixHorizontalValue())
-                throw  new CalcException(Messages.MATRIX_DIF);
-
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j <res[0].length ; j++) {
                     z[i][j] = res[i][j]-((Matrix) other).getValue()[i][j];

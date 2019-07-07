@@ -1,5 +1,7 @@
 package by.it.maniuk.calc;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -9,20 +11,31 @@ public enum ResManager {
     private String basename = "by.it.maniuk.calc.resources.messages";
     private Locale locale;
     private ResourceBundle bundle;
-
+    private DateFormat dateFormat;
     ResManager() {
-        setLocale(Locale.ENGLISH);
+        dateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault());
+        Locale.setDefault(Locale.ENGLISH);
+
+    }
+
+    public void setLocale(String language, String country) {
+        locale = new Locale(language, country);
+        dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
+        bundle = ResourceBundle.getBundle(basename, locale);
+
+    }
+
+    public String get(String key) {
+        return bundle.getString(key);
+    }
+    public String getTime(Date key) {
+        return dateFormat.format(key);
     }
 
     public void setLocale(Locale locale) {
         this.locale = locale;
+        dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
         bundle = ResourceBundle.getBundle(basename, locale);
+
     }
-
-    public String get(String key) {
-       // key = key.replace("ERROR:", "");
-        return bundle.getString(key);
-    }
-
-
 }
