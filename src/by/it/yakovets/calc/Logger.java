@@ -6,18 +6,28 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
-public class Logger {
+class Logger {
+    private static Logger logger;
 
-    public Logger(CalcException e) {
-        String path = getPath(Logger.class, "log.txt");
-        try (PrintWriter out = new PrintWriter(new FileWriter(path,true))) {
+    private Logger() {
+    }
+
+    public static void log(Exception e) {
+        if (logger == null) {
+            logger = new Logger();
+        }
+           String path = getPath(Logger.class, "log.txt");
+        try (
+                PrintWriter out = new PrintWriter(new FileWriter(path, true))) {
             out.println();
             out.println(e + " " + new Date().toString());
 
 
-        } catch (IOException exception) {
+        } catch (
+                IOException exception) {
             exception.printStackTrace();
         }
+
     }
 
 

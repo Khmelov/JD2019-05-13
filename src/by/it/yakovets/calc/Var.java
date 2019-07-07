@@ -16,18 +16,12 @@ abstract class Var implements Operation {
     }
 
 
-    public static Var createVar(String strVar) throws CalcException{
-        strVar = strVar.replaceAll("\\s+", "");
-        if (strVar.matches(Patterns.SCALAR))
-            return new Scalar(strVar);
-        if (strVar.matches(Patterns.VECTOR))
-            return new Vector(strVar);
-        if (strVar.matches(Patterns.MATRIX))
-            return new Matrix(strVar);
-        if (vars.containsKey(strVar))
-            return vars.get(strVar);
+    public static Var createVar(String strVar) throws CalcException {
 
-        throw new CalcException("Невозможно создать "+strVar);
+        strVar = strVar.replaceAll("\\s+", "");
+        VarSelector varSelector = new VarSelector();
+        return varSelector.getVar(strVar);
+
     }
 
     @Override
@@ -37,23 +31,23 @@ abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException("Операция сложения "+this+"+"+other+" невозможна");
+        throw new CalcException("Операция сложения " + this + "+" + other + " невозможна");
 
     }
 
     @Override
-    public Var sub(Var other) throws CalcException{
-        throw new CalcException("Операция вычитания "+this+"-"+other+" невозможна");
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException("Операция вычитания " + this + "-" + other + " невозможна");
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException("Операция умножения "+this+"*"+other+" невозможна");
+        throw new CalcException("Операция умножения " + this + "*" + other + " невозможна");
     }
 
     @Override
-    public Var div(Var other) throws CalcException{
-        throw new CalcException("Операция деления "+this+"/"+other+" невозможна");
+    public Var div(Var other) throws CalcException {
+        throw new CalcException("Операция деления " + this + "/" + other + " невозможна");
     }
 }
 

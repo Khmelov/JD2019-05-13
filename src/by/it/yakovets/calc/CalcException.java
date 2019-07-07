@@ -4,28 +4,28 @@ public class CalcException extends Exception {
 
     public CalcException() {
         super("ERROR:");
-        new Logger(this);
+        Logger.log(this);
 
     }
 
     public CalcException(String message) {
         super("ERROR:"+message);
-        new Logger(this);
+        Logger.log(this);
     }
 
     public CalcException(String message, Throwable cause) {
         super("ERROR:"+message, cause);
-        new Logger(this);
+        Logger.log(this);
     }
 
     protected CalcException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super("ERROR:"+message, cause, enableSuppression, writableStackTrace);
-        new Logger(this);
+        Logger.log(this);
     }
 
     public CalcException(Throwable cause) {
         super("ERROR:"+cause);
-        new Logger(this);
+        Logger.log(this);
     }
 
 }
