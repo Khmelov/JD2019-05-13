@@ -10,10 +10,6 @@ class Queue {
     private Queue() {
     }
 
-//    public static BlockingDeque<Buyer> getInstance() {
-//        return instance;
-//    }
-
     static void add(Buyer buyer) {
         try {
             instance.putLast(buyer);
@@ -23,8 +19,8 @@ class Queue {
     }
 
     static Buyer extract() {
-        return instance.pollFirst();
-    }
+            return instance.pollFirst();
+        }
 
     static int length() {
         return instance.size();

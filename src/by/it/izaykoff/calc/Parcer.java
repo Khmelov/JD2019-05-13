@@ -1,6 +1,7 @@
 package by.it.izaykoff.calc;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +15,8 @@ class Parcer {
         priorMap.put("-", 1);
         priorMap.put("*", 2);
         priorMap.put("/", 2);
+        priorMap.put("(", 3);
+        priorMap.put(")", 3);
     }
 
     private int getIndex(List<String> operation) {
@@ -31,11 +34,9 @@ class Parcer {
     private String oneOperation(String sOne, String operation, String sTwo) throws CalcException {
         Var two = Var.createVar(sTwo);
         if (operation.equals("=")) {
-            String name = sOne;
-            Var.saveVar(name, two);
+            Var.saveVar(sOne, two);
             return two.toString();
         }
-
         Var one = Var.createVar(sOne);
         switch (operation) {
             case "+":
@@ -51,7 +52,50 @@ class Parcer {
     }
 
     Var calc(String expression) throws CalcException {
-        expression = expression.replaceAll("\\s+", "");
+        expression = expression.replaceAll("[,\\]\\[]","").replaceAll("\\s+","");
+        List<String> list = new CopyOnWriteArrayList<>();
+
+
+        if (expression.contains("(")){
+            list = new ArrayList<>(Arrays.asList(expression.split("(?<=\\G.)")));
+//            StringTokenizer strTok = new StringTokenizer(expression, "-+*/()=", true);
+//            while (strTok.hasMoreTokens()) {
+//                list.add(strTok.nextToken());
+//            }
+        }
+        while (expression.contains("(")){
+            List<String> temp = new CopyOnWriteArrayList<>();
+            int first = 0;
+            int last = 0;
+            int listSize = 0;
+
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).equals("(")) {
+                    first = i;
+                }
+                if (list.get(i).equals(")") && last < i) {
+                    last = i;
+                    listSize = last - first;
+                    temp.addAll(list.subList(first + 1, last));
+                    break;
+                }
+            }
+
+            String res = calc(temp.toString()).toString();
+            for (int i1 = 0; i1 <= listSize; i1++) {
+                list.remove(first);
+            }
+            list.add(first, res);
+            StringBuilder newExpression = new StringBuilder();
+            for (String s : list) {
+                newExpression.append(s);
+            }
+            expression = newExpression.toString();
+            temp.clear();
+
+        }
+
+
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         List<String> operation = new ArrayList<>();
         Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
@@ -71,5 +115,6 @@ class Parcer {
         }
         return Var.createVar(operands.get(0));
     }
+
 
 }

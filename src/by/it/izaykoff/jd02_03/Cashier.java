@@ -47,8 +47,7 @@ class Cashier implements Runnable {
         int timeout = Util.rnd(2000, 5000);
         Util.sleep(timeout);
         double total = buyer.getTotal();
-        System.out.println(this + "check goods " + buyer);
-        System.out.println("goods" + " total: " + total);
+        System.out.println(this + "check goods " + buyer + " goods" + " total: " + total);
         System.out.println(this + "stopped service of " + buyer);
     }
 

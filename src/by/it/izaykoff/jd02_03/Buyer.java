@@ -2,21 +2,11 @@ package by.it.izaykoff.jd02_03;
 
 
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
+
     private static Semaphore semaphore = new Semaphore(20);
-
-    private static AtomicInteger buyerInHall = new AtomicInteger(0);
-
-    static void addBuyerInHall() {
-        buyerInHall.getAndIncrement();
-    }
-
-    static void removeBuyerInHall() {
-        buyerInHall.getAndDecrement();
-    }
 
 
     public Buyer(int number) {
@@ -31,13 +21,6 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public void run() {
         enterToMarket();
         takeBasket();
-        try {
-            semaphore.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            semaphore.release();
-        }
         chooseGoods();
         putGoodsToBasket();
         goToQueue();
@@ -51,16 +34,19 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void chooseGoods() {
-        addBuyerInHall();
-        System.out.println(this + " start choose goods " + "bayer in the hall " + buyerInHall);
+        try {
+            semaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(this + " start choose goods ");
         int timeout = Util.rnd(1000, 2000);
         Util.sleep(timeout);
     }
 
     @Override
     public void goOut() {
-        removeBuyerInHall();
-        System.out.println(this + " out from the market " + "bayer in the hall " + buyerInHall);
+        System.out.println(this + " out from the market ");
         Dispatcher.completeBuyer();
         synchronized (Cashier.monitor) {
             Cashier.monitor.notifyAll();
@@ -70,6 +56,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void goToQueue() {
         Queue.add(this);
+        semaphore.release();
         synchronized (Cashier.monitor) {
             Cashier.monitor.notifyAll();
         }
