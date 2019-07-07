@@ -32,7 +32,7 @@ public class Singleton {
         }
 
     }
-    public void printMessageToLog(String e) {
+    void printMessageToLog(String e) {
         String path = getFilePath(Singleton.class, "log.txt");
         try (PrintWriter out = new PrintWriter(new FileWriter(path, true))) {
             System.out.println(e);
