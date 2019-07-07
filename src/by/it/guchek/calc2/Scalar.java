@@ -8,6 +8,10 @@ import static by.it.guchek.calc2.ConsoleRunner.managerC;
 class Scalar extends Var {                                    //убрала публичный т.к. больше нигде не будет виден
     private double value;
 
+    public Scalar() {
+
+    }
+
     public double getValue() {
         return value;
     }
