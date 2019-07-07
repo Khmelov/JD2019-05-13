@@ -1,6 +1,5 @@
 package by.it.guchek.jd02_06.TaskA;
 
-import by.it.guchek.jd01_13.TaskA;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -32,6 +31,7 @@ public class Logger {
         return localInstance; //возврат
     }
 
+
     private static String dir (Class<?> cl){  //прочитаем путь к файлам
 
         String path=System.getProperty("user.dir")+ File.separator+"src"+File.separator;
@@ -57,13 +57,11 @@ public class Logger {
             for (StackTraceElement element : stackTrace) {
                 prWrOutLogFile.append(element.toString()).append("\n");
             }
+            prWrOutLogFile.append("\n");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
 
 }

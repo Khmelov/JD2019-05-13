@@ -1,6 +1,7 @@
 package by.it.guchek.calc2;
 
 import by.it.guchek.jd02_05.ResManager;
+import by.it.guchek.jd02_06.TaskA.Logger;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ public class ConsoleRunner {
 
     public static void main(String[] args) {
 
+        Logger loggerC = Logger.getInstance();
         managerC.setLocale(Locale.getDefault());
         Scanner sc = new Scanner(System.in);
         String line;
@@ -41,7 +43,7 @@ public class ConsoleRunner {
                                 }
                 } catch (CalcException e) {
                     System.out.println(e.getMessage());
-                    //e.printStackTrace();
+                    loggerC.printExeptionsOutLogFile(e);
                 }
         }
 
