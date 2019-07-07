@@ -1,0 +1,7 @@
+7 июля 2019 г. 21:36:46
+F-0
+by.it.maniuk.calc.CalcException: message.input_error - ERROR: Ошибка ввода - 7 июля 2019 г. 21:36:46
+D=8
+8.0
+D/0
+by.it.maniuk.calc.CalcException: message.del_to_0 - "ERROR:Деление на ноль" - 7 июля 2019 г. 21:36:46
