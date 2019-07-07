@@ -1,4 +1,4 @@
-package by.it.dnevar.jd02_02;
+package by.it.dnevar.jd02_03;
 
 public class Dispatcher {
 

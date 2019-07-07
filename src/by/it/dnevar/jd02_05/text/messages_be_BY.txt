@@ -1,0 +1,3 @@
+message.welcom=Прывiтанне!
+message.question=Як справы?
+user.name=Невар Дiма

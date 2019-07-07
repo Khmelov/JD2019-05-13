@@ -1,6 +1,8 @@
-package by.it.dnevar.jd02_02;
+package by.it.dnevar.jd02_03;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Cashier implements Runnable {
 

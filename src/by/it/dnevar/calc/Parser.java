@@ -39,25 +39,25 @@ public class Parser {
         }
 
         while(expression.contains("(")) {
-            int indexLastOpenBacket = 0;
-            int indexFirstCloseBacket = 0;
+            int indexLastOpenBracket = 0;
+            int indexFirstCloseBracket = 0;
             for (int i = 0; i < str.size(); i++) {
                 if (str.get(i).equals("(")) {
-                    indexLastOpenBacket = i;
-                } else if (str.get(i).equals(")") && indexLastOpenBacket<i) {
-                    indexFirstCloseBacket = i;
+                    indexLastOpenBracket = i;
+                } else if (str.get(i).equals(")") && indexLastOpenBracket<i) {
+                    indexFirstCloseBracket = i;
                     break;
                 }
             }
             String subExpression="";
-            for (int i = 0; i <= indexFirstCloseBacket - indexLastOpenBacket; i++) {
-                if(i==0 || i == indexFirstCloseBacket - indexLastOpenBacket) {
-                    str.remove(indexLastOpenBacket);
+            for (int i = 0; i <= indexFirstCloseBracket - indexLastOpenBracket; i++) {
+                if(i==0 || i == indexFirstCloseBracket - indexLastOpenBracket) {
+                    str.remove(indexLastOpenBracket);
                 }else{
-                    subExpression += str.remove(indexLastOpenBacket);
+                    subExpression += str.remove(indexLastOpenBracket);
                 }
             }
-            str.add(indexLastOpenBacket,calc(subExpression).toString());
+            str.add(indexLastOpenBracket,calc(subExpression).toString());
             String newExpression="";
             for (int i = 0; i < str.size(); i++) {
                 newExpression+=str.get(i);

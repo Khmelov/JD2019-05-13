@@ -1,4 +1,4 @@
-package by.it.dnevar.jd02_02;
+package by.it.dnevar.jd02_03;
 
 import java.util.Deque;
 import java.util.LinkedList;
