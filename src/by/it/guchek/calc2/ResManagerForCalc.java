@@ -24,6 +24,6 @@ public enum ResManagerForCalc {
     }
 
     public Locale getLocale() {
-        return this.locale=locale;
+        return this.locale;
     }
 }

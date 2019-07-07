@@ -25,7 +25,6 @@ public enum ResManager {
     }
 
     public Locale getLocale() {
-        //locale=Locale.getDefault();
-        return this.locale=locale;
+        return this.locale;
     }
 }
