@@ -1,0 +1,15 @@
+fgh
+ОШИБКА:ОШИБКА:fgh
+by.it.adamovichjr.calc.Var.createVar(Var.java:30)
+by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:73)
+by.it.adamovichjr.calc.Parser.calc(Parser.java:88)
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:53)
+7 июля 2019 г. 17:03:16
+9/0
+ОШИБКА:Деление на ноль
+by.it.adamovichjr.calc.Scalar.div(Scalar.java:58)
+by.it.adamovichjr.calc.Parser.oneOperation(Parser.java:48)
+by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:70)
+by.it.adamovichjr.calc.Parser.calc(Parser.java:88)
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:53)
+7 июля 2019 г. 17:03:20
