@@ -1,15 +1,32 @@
-fgh
-ОШИБКА:ОШИБКА:fgh
+be
+
+ПАМЫЛКА:ПАМЫЛКА:
 by.it.adamovichjr.calc.Var.createVar(Var.java:30)
-by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:73)
-by.it.adamovichjr.calc.Parser.calc(Parser.java:88)
-by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:53)
-7 июля 2019 г. 17:03:16
-9/0
-ОШИБКА:Деление на ноль
-by.it.adamovichjr.calc.Scalar.div(Scalar.java:58)
-by.it.adamovichjr.calc.Parser.oneOperation(Parser.java:48)
-by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:70)
-by.it.adamovichjr.calc.Parser.calc(Parser.java:88)
-by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:53)
-7 июля 2019 г. 17:03:20
+by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
+by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:47)
+нядзеля, 7, ліпеня 2019 20:31:04
+ru
+be
+
+ПАМЫЛКА:ПАМЫЛКА:
+by.it.adamovichjr.calc.Var.createVar(Var.java:30)
+by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
+by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:47)
+нядзеля, 7, ліпеня 2019 20:31:17
+dfh
+ПАМЫЛКА:ПАМЫЛКА:dfh
+by.it.adamovichjr.calc.Var.createVar(Var.java:30)
+by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
+by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:47)
+нядзеля, 7, ліпеня 2019 20:31:31
+{{1,2,3}{1,2}}
+ПАМЫЛКА:Стварэнне матрыцы немагчыма, слупкі матрыцы павінны быць аднолькавай даўжыні
+by.it.adamovichjr.calc.Matrix.<init>(Matrix.java:42)
+by.it.adamovichjr.calc.Var.createVar(Var.java:27)
+by.it.adamovichjr.calc.Parser.calcExpressionWithoutBrecket(Parser.java:75)
+by.it.adamovichjr.calc.Parser.calc(Parser.java:90)
+by.it.adamovichjr.calc.ConsoleRunner.main(ConsoleRunner.java:47)
+нядзеля, 7, ліпеня 2019 20:31:57

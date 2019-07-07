@@ -1,6 +1,8 @@
 package by.it.adamovichjr.calc;
 
+import by.it.adamovichjr.calc.report.ChoseReport;
 import by.it.adamovichjr.calc.report.Director;
+import by.it.adamovichjr.calc.text.All_messages;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -8,9 +10,11 @@ import java.util.Set;
 
 public class Printer {
     public void print(Var result) {
-        String res = "Результат: " + result.toString();
+        String res = ResourceManager.INSTANCE.get(All_messages.RESULT) + result.toString();
         SingeltonLogger.LOGGER.writeLogInFile(res);
-        Director.DIRECTOR.putEventToDirector(res);
+        if (ChoseReport.needReport) {
+            Director.DIRECTOR.putEventToDirector(res);
+        }
         System.out.println(res);
     }
 
@@ -21,7 +25,9 @@ public class Printer {
         while (iter.hasNext()){
             Map.Entry<String, Var> elem = iter.next();
             SingeltonLogger.LOGGER.writeLogInFile(elem.getKey() + " = " + elem.getValue());
-            Director.DIRECTOR.putEventToDirector(elem.getKey() + " = " + elem.getValue());
+            if (ChoseReport.needReport) {
+                Director.DIRECTOR.putEventToDirector(elem.getKey() + " = " + elem.getValue());
+            }
             System.out.println(elem.getKey() + " = " + elem.getValue());
         }
     }

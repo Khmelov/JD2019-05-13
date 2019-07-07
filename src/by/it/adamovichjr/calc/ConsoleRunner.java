@@ -1,23 +1,17 @@
 package by.it.adamovichjr.calc;
 
+import by.it.adamovichjr.calc.report.ChoseReport;
 import by.it.adamovichjr.calc.report.Director;
-import by.it.adamovichjr.calc.report.FullReportBuilder;
-import by.it.adamovichjr.calc.report.ShortReportBuilder;
 import by.it.adamovichjr.calc.text.All_messages;
 
 import java.util.Scanner;
 
 public class ConsoleRunner {
     public static void main(String[] args) {
-        Director director = Director.DIRECTOR;
-        Director.DIRECTOR.putTime("Program start at: ");
-        ResourceManager manager = ResourceManager.INSTANCE;
-        switch (args[0]){
-            case "0":
-                director.SetBuilder(new ShortReportBuilder());
-                break;
-            case "1":
-                director.SetBuilder(new FullReportBuilder());
+
+        ChoseReport.ChoseOrNotreport(); //Начало отсчета работы программы начинается после выбора типа отчета
+        if (ChoseReport.needReport) {
+            Director.DIRECTOR.putTime(ResourceManager.INSTANCE.get(All_messages.START_PROGRAM));
         }
         Scanner scanner = new Scanner(System.in);
         String line;
@@ -37,16 +31,16 @@ public class ConsoleRunner {
                     printer.sortvar();
                     break;
                 case "ru":
-                    manager.setLocale("ru","RU");
-                    System.out.println(manager.get(All_messages.SET_LANGUAGE));
+                    ResourceManager.INSTANCE.setLocale("ru","RU");
+                    System.out.println(ResourceManager.INSTANCE.get(All_messages.SET_LANGUAGE));
                     break;
                 case "be":
-                    manager.setLocale("be","BY");
-                    System.out.println(manager.get(All_messages.SET_LANGUAGE));
+                    ResourceManager.INSTANCE.setLocale("be","BY");
+                    System.out.println(ResourceManager.INSTANCE.get(All_messages.SET_LANGUAGE));
                     break;
                 case "en":
-                    manager.setLocale("en","EN");
-                    System.out.println(manager.get(All_messages.SET_LANGUAGE));
+                    ResourceManager.INSTANCE.setLocale("en","EN");
+                    System.out.println(ResourceManager.INSTANCE.get(All_messages.SET_LANGUAGE));
                     break;
                 default:
                     try {
@@ -55,13 +49,17 @@ public class ConsoleRunner {
                         printer.print(result);
                     } catch (CalcException e) {
                         SingeltonLogger.LOGGER.writeLogInFile(e);
-                        Director.DIRECTOR.putExceptionToDirector(e,line,ResourceManager.INSTANCE.getTime());
+                        if (ChoseReport.needReport) {
+                            Director.DIRECTOR.putExceptionToDirector(e, line, ResourceManager.INSTANCE.getTime());
+                        }
                         System.out.println(e.getMessage());
                     }
                 }
             }
-        Director.DIRECTOR.putTime("Program finish at: ");
-        System.out.println(Director.DIRECTOR.BuildReport());
+        if (ChoseReport.needReport) {
+            Director.DIRECTOR.putTime(ResourceManager.INSTANCE.get(All_messages.FINISH_PROGRAM));
+            System.out.println(Director.DIRECTOR.BuildReport());
+        }
     }
     }
 

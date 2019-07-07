@@ -1,5 +1,8 @@
 package by.it.adamovichjr.calc.report;
 
+import by.it.adamovichjr.calc.ResourceManager;
+import by.it.adamovichjr.calc.text.All_messages;
+
 public class Report {
     StringBuilder reportName = new StringBuilder();
     StringBuilder time = new StringBuilder();
@@ -23,9 +26,9 @@ public class Report {
     public String toString() {
         return reportName.append("\n")
                 .append(time).append("\n")
-                .append("Events").append("\n\n")
+                .append(ResourceManager.INSTANCE.get(All_messages.TITLE_EVENTS)).append("\n\n")
                 .append(events).append("\n")
-                .append("Exceptions").append("\n\n")
+                .append(ResourceManager.INSTANCE.get(All_messages.TITLE_EXCEPTIONS)).append("\n\n")
                 .append(exceptions).toString();
     }
 }

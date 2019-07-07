@@ -1,11 +1,14 @@
 package by.it.adamovichjr.calc.report;
 
+import by.it.adamovichjr.calc.ResourceManager;
+import by.it.adamovichjr.calc.text.All_messages;
+
 import java.util.List;
 
 public class ShortReportBuilder extends ReportBuilder {
     @Override
     void buildName() {
-        report.setReportName("SHORT REPORT");
+        report.setReportName(ResourceManager.INSTANCE.get(All_messages.SHORT_REPORT_NAME));
     }
 
     @Override
@@ -26,9 +29,9 @@ public class ShortReportBuilder extends ReportBuilder {
     void buildExceptions(List<Throwable> exceptions,List<String> events,List<String> time) {
         StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < exceptions.size(); i++) {
-            buffer.append("Event with Exception: ").append(events.get(i)).append("\n")
+            buffer.append(ResourceManager.INSTANCE.get(All_messages.EVENT_WITH_EXCEPTION)).append(events.get(i)).append("\n")
                     .append(exceptions.get(i).getMessage()).append("\n")
-                    .append("Time of exception: ").append(time.get(i)).append("\n\n");
+                    .append(ResourceManager.INSTANCE.get(All_messages.TIME_OF_EXCEPTION)).append(time.get(i)).append("\n\n");
         }
         report.addExceptions(buffer.toString());
     }

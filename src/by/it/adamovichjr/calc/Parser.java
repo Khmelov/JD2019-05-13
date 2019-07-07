@@ -1,5 +1,7 @@
 package by.it.adamovichjr.calc;
 
+import by.it.adamovichjr.calc.text.All_messages;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,7 +49,7 @@ public class Parser {
             case "/":
                 return one.div(two).toString();
         }
-        throw new CalcException("ERROR: нет такой операции");
+        throw new CalcException(ResourceManager.INSTANCE.get(All_messages.WRONG_OPERATION));
     }
 
 

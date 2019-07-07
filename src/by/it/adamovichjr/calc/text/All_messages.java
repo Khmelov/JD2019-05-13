@@ -13,5 +13,18 @@ public interface All_messages {
     String OPERATION_SUB = "all_messages.operation_sub";
     String OPERATION_MUL = "all_messages.operation_mul";
     String OPERATION_DIV = "all_messages.operation_div";
+    String CHOSE_REPORT = "all_messages.chose_report";
+    String WRONG_OPERATION = "all_messages.wrong_operation";
+    String CHOSE_REPORT_COMPLIETE = "all_messages.chose_report_complite";
+    String WRONG_CHOSE_REPORT = "all_messages.wrong_cose_report";
+    String FULL_REPORT_NAME = "all_messages.full_report_name";
+    String SHORT_REPORT_NAME = "all_messages.short_report_name";
+    String EVENT_WITH_EXCEPTION = "all_messages.event_with_exception";
+    String TIME_OF_EXCEPTION = "all_messages.time_of_exception";
+    String TITLE_EVENTS = "all_messages.title_events";
+    String TITLE_EXCEPTIONS = "all_messages.title_exceptions";
+    String START_PROGRAM = "all_messages.start_program";
+    String FINISH_PROGRAM = "all_messages.finish_program";
+    String RESULT = "all_messages.result";
 
 }
