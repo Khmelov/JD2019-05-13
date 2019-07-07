@@ -1,4 +1,4 @@
-package by.it.orlov.jd02_02;
+package by.it.orlov.jd02_03;
 
 class Util {
 

@@ -1,4 +1,4 @@
-package by.it.orlov.jd02_02;
+package by.it.orlov.jd02_03;
 
 public class Cashier implements Runnable {
 
@@ -11,15 +11,18 @@ public class Cashier implements Runnable {
     }
 
     @Override
+    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
     public void run() {
         while (!Dispatcher.planComplete()) {
             Buyer buyer = Queue.extract();
             if (buyer != null) {
                 System.out.println(this + "started service of " + buyer);
+                Basket.readGood(buyer.getName());
                 int timeout = Util.rnd(2000, 5000);
                 Util.sleep(timeout);
                 System.out.println(this + "stopped service of " + buyer);
                 synchronized (buyer){
+                    buyer.setFlagWait(false);
                     buyer.notifyAll();
                 }
             } else {
