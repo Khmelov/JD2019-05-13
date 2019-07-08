@@ -15,8 +15,7 @@ public class Cashier implements Runnable {
     @Override
     public void run() {
         while (!Dispatcher.planIsDone()) {
-            if (countWorkCashier(needsOfCashiers())) {
-                Buyer buyer = Queue.deductBuyer();
+            Buyer buyer = Queue.deductBuyer();
                 if (buyer != null) {
                     System.out.println(this + "начал обслуживать " + buyer);
                     int timeout = Rnd.Rnd(2000, 5000);
@@ -33,7 +32,7 @@ public class Cashier implements Runnable {
                     synchronized (buyer) {
                         buyer.notifyAll();
                     }
-                }
+
             } else synchronized (monitor) {
                 try {
                     monitor.wait();
