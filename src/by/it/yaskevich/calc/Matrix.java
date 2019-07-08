@@ -19,11 +19,11 @@ public class Matrix extends Var {
         this(matrix.value);
     }
 
-    Matrix(String strMatrix) {
+    Matrix(String strMatrix) throws CalcException {
         strMatrix = strMatrix.replaceAll("\\s+", "");
         Matcher matcher = Pattern.compile(Patterns.MATRIX).matcher(strMatrix);
         if (!matcher.find())
-            throw new IllegalArgumentException(
+            throw new CalcException(
                     ResourcesManager.INSTANCE.getString(Resources.INCORRECTFRMAT) + " " + strMatrix);
 
         String rawData = matcher.group("arrays");

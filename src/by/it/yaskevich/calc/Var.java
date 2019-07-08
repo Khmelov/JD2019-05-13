@@ -37,22 +37,6 @@ public abstract class Var implements Operation {
                 ResourcesManager.INSTANCE.getString(Resources.THEDIVISIONOPERATIONISNOTPOSSIBLE), this, other));
     }
 
-    static Var createVar(String strVar) throws CalcException {
-        strVar = strVar.replaceAll("\\s+", "");
-
-        if (strVar.matches(Patterns.SCALAR))
-            return new Scalar(strVar);
-        else if (strVar.matches(Patterns.VECTOR))
-            return new Vector(strVar);
-        else if (strVar.matches(Patterns.MATRIX))
-            return new Matrix(strVar);
-        else if (vars.containsKey(strVar))
-            return vars.get(strVar);
-        else
-            throw new CalcException(
-                    ResourcesManager.INSTANCE.getString(Resources.UNABLETOCREATE) + " " + strVar);
-    }
-
     static void printVar() {
         if (!vars.isEmpty()) {
             for (Map.Entry<String, Var> varEntry : vars.entrySet()) {
@@ -99,7 +83,7 @@ public abstract class Var implements Operation {
                 }
                 String[] strings = rawData.split("=");
                 if (strings.length == 2) {
-                    vars.put(strings[0], createVar(strings[1]));
+                    vars.put(strings[0], VarFactory.getInstance(strings[1]));
                 }
             }
         } catch (IOException | CalcException e) {
@@ -119,4 +103,7 @@ public abstract class Var implements Operation {
         return getPath(aClass) + filename;
     }
 
+    public static Map<String, Var> getVars() {
+        return vars;
+    }
 }

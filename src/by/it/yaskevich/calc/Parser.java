@@ -49,7 +49,7 @@ class Parser {
             String result = oneOperation(oneOperand, operation, twoOperand);
             operands.add(index, result);
         }
-        return Var.createVar(operands.get(0));
+        return VarFactory.getInstance(operands.get(0));
     }
 
     private String calcSimpleExpression(String expression) throws CalcException {
@@ -81,13 +81,13 @@ class Parser {
     }
 
     private String oneOperation(String oneOperand, String operation, String twoOperand) throws CalcException {
-        Var two = Var.createVar(twoOperand);
+        Var two = VarFactory.getInstance(twoOperand);
         if (operation.equals("=")) {
             Var.save(oneOperand, two);
             return two.toString();
         }
 
-        Var one = Var.createVar(oneOperand);
+        Var one = VarFactory.getInstance(oneOperand);
         switch (operation) {
             case "+":
                 return one.add(two).toString();

@@ -20,11 +20,11 @@ public class Vector extends Var {
         this(vector.value);
     }
 
-    Vector(String strVector) {
+    Vector(String strVector) throws CalcException {
         strVector = strVector.replaceAll("\\s+", "");
         Matcher matcher = Pattern.compile(Patterns.VECTOR).matcher(strVector);
         if (!matcher.find())
-            throw new IllegalArgumentException(
+            throw new CalcException(
                     ResourcesManager.INSTANCE.getString(Resources.INCORRECTFRMAT) + " " + strVector);
 
         String rawData = matcher.group(1);
