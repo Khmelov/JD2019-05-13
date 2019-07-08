@@ -3,8 +3,9 @@ package by.it.izaykoff.calc;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
-abstract class Var implements Operation {
+abstract class Var implements Operation, Patterns {
 
     private static Map<String,Var> vars = new HashMap<>();
 
