@@ -1,0 +1,4 @@
+message.welcome=Прывiтaнне!
+message.question=Як справы?
+user.name=Дзмiтрый Манюк
+message.language=Беларускi

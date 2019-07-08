@@ -1,5 +1,7 @@
 package by.it.maniuk.calc;
 
+import by.it.maniuk.calc.names.Messages;
+
 import java.util.Arrays;
 
 public class Matrix extends Var {
@@ -14,7 +16,7 @@ public class Matrix extends Var {
         this.value = Arrays.copyOf(matrix.value,matrix.value.length);
     }
     public Matrix(String matrix) {
-            matrix = matrix.replaceAll("[^\\d.] ?", " ").trim();
+            matrix = matrix.replaceAll("[^-\\d.] ?", " ").trim();
             String[] line = matrix.split("[ ]{2,}");
             double[][] mas = new double[line.length][];
             for (int i = 0; i < mas.length; i++) {
@@ -56,7 +58,7 @@ public class Matrix extends Var {
             double[][] res =Arrays.copyOf(value, value.length) ;
             int matrixLeight = ((Matrix) other).getValue().length;
             if (res.length != matrixLeight){
-                throw new CalcException("ERROR: Размеры матриц должны быть одинаковыми");
+                throw new CalcException(Messages.MATRIX_DIF);
             }
             double[][] z = new double[res.length][matrixLeight];
             for (int i = 0; i < res.length; i++) {
@@ -73,11 +75,11 @@ public class Matrix extends Var {
 
     @Override
     public Var sub(Var other) throws CalcException {
-        if (other instanceof Scalar) {
-            double[][] res = Arrays.copyOf(value, value.length);
+        if (other instanceof Scalar){
+            double[][] res =Arrays.copyOf(value, value.length) ;
             for (int i = 0; i < res.length; i++) {
-                for (int j = 0; j < res[0].length; j++) {
-                    res[i][j] = res[i][j] - ((Scalar) other).getValue();
+                for (int j = 0; j <res[0].length ; j++) {
+                    res[i][j] = res[i][j]-((Scalar) other).getValue();
                 }
             }
             return new Matrix(res);
@@ -85,12 +87,10 @@ public class Matrix extends Var {
         else if (other instanceof Matrix){
             double[][] res =Arrays.copyOf(value, value.length) ;
             int matrixLeight = ((Matrix) other).getValue().length;
+            if (res.length != matrixLeight){
+                throw new CalcException(Messages.MATRIX_DIF);
+            }
             double[][] z = new double[res.length][matrixLeight];
-
-            if(res.length == getMatrixVerticallValue() ||                              //! Подумать про это еще раз
-                   res[0].length == getMatrixHorizontalValue())
-                throw  new CalcException("ERROR: Размеры матриц должны быть одинаковыми");
-
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j <res[0].length ; j++) {
                     z[i][j] = res[i][j]-((Matrix) other).getValue()[i][j];
@@ -118,7 +118,7 @@ public class Matrix extends Var {
             double[][] res = Arrays.copyOf(value, value.length);
             double[] z = new double[res.length];
             if (res[0].length != z.length){
-                throw new CalcException("ERROR: Такие матрицы нельзя перемножить, так как количество столбцов матрицы не равно вектору");
+                throw new CalcException(Messages.MATRIX_DIF_LIGHT);
             }
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
@@ -131,12 +131,12 @@ public class Matrix extends Var {
             double[][] res = Arrays.copyOf(value, value.length);
             int matrixLeight = ((Matrix) other).getValue().length;
             if (res.length != matrixLeight){
-                throw new CalcException("ERROR: Количество столбцов первой матрицы должно равняться количеству строк второй.");
+                throw new CalcException(Messages.MATRIX_DIF_OTHER);
             }
             double[][] z = new double[res.length][matrixLeight];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < matrixLeight; j++)
-                    for (int k = 0; k < matrixLeight; k++) {
+                    for (int k = 0; k < res[0].length; k++) {
                         z[i][j] = z[i][j] + res[i][k] * ((Matrix) other).getValue()[k][j];
 
                     }
@@ -152,7 +152,7 @@ public class Matrix extends Var {
         if (other instanceof Scalar) {
             double[][] res = Arrays.copyOf(value, value.length);
             if (((Scalar) other).getValue()==0) {
-                throw new CalcException("ERROR: Деление на ноль");}
+                throw new CalcException(Messages.DELL_TO_ZERO);}
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
                     res[i][j] = res[i][j] / ((Scalar) other).getValue();

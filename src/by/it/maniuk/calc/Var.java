@@ -1,5 +1,7 @@
 package by.it.maniuk.calc;
 
+import by.it.maniuk.calc.names.Messages;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,36 +14,41 @@ abstract class Var implements Operation {
 
     static Var saveVar(String name, Var var) throws IOException {
         vars.put(name, var);
-        String path = getFilePath(Var.class, "vars.txt"); // TODO Надо не забыть вынести все про IO в отельный класс
-        try(PrintWriter out = new PrintWriter( new FileWriter(path))) {
-                out.println(name+"="+var);
+            String path = getFilePath(Var.class, "vars.txt"); // TODO Надо не забыть вынести все про IO в отельный класс
+            try (PrintWriter out = new PrintWriter(new FileWriter(path, true))) {
+                out.print(name + "=" + var);
                 out.println();
 
-        } catch (IOException e) {
-            throw e;
-        }
+            } catch (IOException e) {
+                throw e;
+            }
         return  var;
    }
-   static void backToMap() throws CalcException {
+   static void backToMap() throws CalcException, IOException {
+       ResManager manager = ResManager.INSTANCE;
        String path = getFilePath(Var.class, "vars.txt");
        try(BufferedReader in = new BufferedReader(new FileReader(path))) {
            int count =0;
            for (; ; ) {
-               String line = in.readLine();
-               count++;
-               if (line == null)
-                   break;
-               else if (count==1) System.out.println("В памяти хранятся следующие переменные:");
-               String[] lines = line.split("=");
-               String name = lines[0];
-               Var var = Var.createVar(lines[1]);
-               vars.put(name,var);
+                   String line = in.readLine();
+                   count++;
+                   if (line == null || line.equals(""))
+                       break;
+                   else if (count == 1) {
+                       Singleton sing = Singleton.getInstance();
+                       sing.printMessageToLog(manager.get(Messages.MEMORY));
+                   }
 
-               System.out.println(line);
+                   String[] lines = line.split("=");
+                   String name = lines[1];
+
+                   Var var = Var.createVar(name);
+                   vars.put(name, var);
+
+                   System.out.println(line);
+
            }
 
-       } catch (IOException e) {
-           e.printStackTrace();
        }
    }
 
@@ -51,40 +58,41 @@ abstract class Var implements Operation {
     }
 
     static Var createVar(String strVar) throws CalcException {
-          strVar = strVar.replaceAll("\\s+", "");
-
-        if (strVar.matches(Patterns.SCALAR))
-            return new Scalar(strVar);
-        if (strVar.matches(Patterns.VECTOR))
-            return new Vector(strVar);
-        if (strVar.matches(Patterns.MATRIX))
-            return new Matrix(strVar);
-        if (vars.containsKey(strVar))
-            return vars.get(strVar);
-      throw  new CalcException("ERROR: Не возможно создать " + strVar);
+        return Factory.create(strVar);
+//        strVar = strVar.replaceAll("\\s+", "");
+//        if (strVar.matches(Patterns.SCALAR))
+//            return new Scalar(strVar);
+//        else if (strVar.matches(Patterns.VECTOR))
+//            return new Vector(strVar);
+//        else if (strVar.matches(Patterns.MATRIX))
+//            return new Matrix(strVar);
+//        else if (vars.containsKey(strVar))
+//            return vars.get(strVar);
+//       else if (strVar.equals("ru") || strVar.equals("be") || strVar.equals("en")) return null;
+//        throw new CalcException(Messages.INPUTERROR);
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw  new CalcException(("ERROR: Операция сложения "+this+ "+" + other + " невозможна"));
+        throw  new CalcException((Messages.ADD_ERROR)); // (this + "-" + other));
 
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-       throw new CalcException ("ERROR: Операция вычитания  "+this+ "-" + other + " невозможна");
+       throw new CalcException ((Messages.SUB_ERROR)); // (this + "-" + other));
 
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-       throw  new CalcException("ERROR: Операция умножения "+this+ "*" + other + " невозможна");
+       throw  new CalcException((Messages.MULL_ERROR)); // (this + "-" + other));
 
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw  new CalcException("ERROR: Операция деления "+this+ "/" + other + " невозможна");
+        throw  new CalcException((Messages.DEL_ERROR)); //(this + "/" + other));
 
     }
 
