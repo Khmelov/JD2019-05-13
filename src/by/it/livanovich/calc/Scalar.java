@@ -61,7 +61,9 @@ class Scalar extends Var {
     Scalar (String strScalar){
         this.value=Double.parseDouble(strScalar);
     }
-
+Scalar (){
+return;
+}
 
     @Override
     public String toString() {

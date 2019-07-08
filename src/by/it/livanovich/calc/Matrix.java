@@ -6,6 +6,10 @@ import by.it.livanovich.calc.Text.Messages;
 class Matrix extends Var {
     private double[][] value;
 
+    public Matrix() {
+
+    }
+
 
     public double[][] getValue() {
         return value;

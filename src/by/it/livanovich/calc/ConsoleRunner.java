@@ -1,17 +1,18 @@
 package by.it.livanovich.calc;
 
 import by.it.livanovich.calc.Text.Helper;
-import by.it.livanovich.jd02_05.names.Data;
-import by.it.livanovich.jd02_05.names.Message;
-import by.it.livanovich.jd02_05.names.User;
+import by.it.livanovich.calc.logger.Singleton;
+
 
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class ConsoleRunner {
-
+private final static Logger logger=Logger.getLogger(ConsoleRunner.class.getName());
 
     public static void main(String[] args) {
+        Singleton singleton=Singleton.INSTANCE;
 
         Scanner sc = new Scanner(System.in);
         String line;
@@ -25,12 +26,15 @@ public class ConsoleRunner {
                 if (line.equals("be")) {
                     language = "be";
                     country = "BY";
+                    singleton.createLog(logger);
                 } else if (line.equals("ru")) {
                     language = "ru";
                     country = "RU";
+                    singleton.createLog(logger);
                 } else {
                     language = "en";
                     country = "EN";
+                    singleton.createLog(logger);
                 }
                 Locale locale = new Locale(language, country);
                 helper.setLocale(locale);
@@ -39,15 +43,20 @@ public class ConsoleRunner {
             try {
                 Var result = parsel.calc(line);
                 printer.print(result);
+                singleton.createLog(logger);
             } catch (CalcException e) {
                 System.out.println(e.getMessage());
+                singleton.createLog(logger);
             }
             if (line.equals("printvar")) {
                 Var.print();
+                singleton.createLog(logger);
             }
             if (line.equals("sortvar")) {
                 Var.sortvar();
+                singleton.createLog(logger);
             }
         }
+
     }
 }
