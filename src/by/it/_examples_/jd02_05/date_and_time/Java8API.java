@@ -15,7 +15,7 @@ public class Java8API {
         Clock clock=Clock.systemDefaultZone(); //тут много способов
         System.out.println(clock.millis());
         System.out.println(clock.instant());
-        //но часы это не Date они идут
+        //но часы это не DateClass они идут
         Thread.sleep(1500);
         System.out.println(clock.millis());
         //метка времени

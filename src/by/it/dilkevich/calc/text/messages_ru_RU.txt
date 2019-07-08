@@ -1,0 +1,12 @@
+error.matrix.sub=ERROR: Вычитание матриц невозможно
+error.vector.sub=ERROR: Вычитание векторов невозможно
+error.create=ERROR: Невозможно создать
+error.divide=ERROR: Операция деления невозможна
+error.divide.zero=ERROR: Деление на ноль
+error.operation=ERROR: Операция невозможна
+operation.add=Операция сложения
+operaton.sub=Операция вычитания
+operation.mul=Операция умножения
+operation.div=Операция деления
+operation.notpossible= невозможна
+

@@ -1,5 +1,7 @@
 package by.it.dilkevich.calc;
 
+import java.io.IOException;
+
 public class Scalar extends Var {
 
     private double value;
@@ -24,7 +26,7 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var add(Var other) throws CalcException {
+    public Var add(Var other) throws CalcException, IOException {
         if(other instanceof Scalar){
             double result = this.value + ((Scalar) other).value;
             return new Scalar(result);
@@ -33,7 +35,7 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var sub(Var other) throws CalcException {
+    public Var sub(Var other) throws CalcException, IOException {
         if(other instanceof Scalar){
             double result = this.value - ((Scalar) other).value;
             return new Scalar(result);
@@ -42,7 +44,7 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var mul(Var other) throws CalcException {
+    public Var mul(Var other) throws CalcException, IOException {
         if(other instanceof Scalar){
             double result = this.value * ((Scalar) other).value;
             return new Scalar(result);
@@ -51,11 +53,15 @@ public class Scalar extends Var {
     }
 
     @Override
-    public Var div(Var other) throws CalcException {
-        if(other instanceof Vector)
-            throw new CalcException("ERROR: операция деления невозможна");
-        if(((Scalar) other).value == 0)
-            throw new CalcException("ERROR: Деление на ноль");
+    public Var div(Var other) throws CalcException, IOException {
+        if(other instanceof Vector) {
+            Logger.setLog(ResManager.getName("error.divide"));
+            throw new CalcException(ResManager.getName("error.divide"));
+        }
+        if(((Scalar) other).value == 0) {
+            Logger.setLog(ResManager.getName("error.divide.zero"));
+            throw new CalcException(ResManager.getName("error.divide.zero"));
+        }
         if (other instanceof Scalar){
             double result = this.value / ((Scalar) other).value;
             return new Scalar(result);

@@ -1,49 +1,109 @@
 package by.it.dilkevich.calc;
 
+import java.io.IOException;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
 
-    String OPERATION = "[-=+*/]";
+    String OPERATION = "(?<=[^+=*/{,-])[=*/+-]";
     String SCALAR = "-?[0-9]+\\.?([0-9]+)?";
     String VECTOR = "\\{(-?[0-9]+\\.?([0-9]+)?,?)+\\}";
     String MATRIX = "\\{(\\{(-?[0-9]+\\.?([0-9]+)?,?)+\\},?)+\\}";
+    String BRACKETS = "(\\([^(]+?\\))";
 
-    Var calc(String expression) throws CalcException {
+    private static final Map<String, Integer> priorMap = new HashMap<>();
 
-        String expressions [] = expression.split(OPERATION);
-        Pattern pattern = Pattern.compile(OPERATION);
-        Matcher matcher = pattern.matcher(expression);
+    static {
+        priorMap.put("=", 0);
+        priorMap.put("+", 1);
+        priorMap.put("-", 1);
+        priorMap.put("*", 2);
+        priorMap.put("/", 2);
+    }
 
-        Var var1;
-        Var var2;
 
-        for (String i: expressions) {
-            if(i == null)
-                return null;
+    Var calc(String expression) throws CalcException, IOException {
+
+        Pattern patternBrackets = Pattern.compile(BRACKETS);
+        Matcher matcherBrackets = patternBrackets.matcher(expression);
+        while (matcherBrackets.find()){
+            String matchWithBrackets = matcherBrackets.group();
+            int start = matcherBrackets.start();
+            int end = matcherBrackets.end();
+            String match = matchWithBrackets.replace("(","");
+            match = match.replace(")", "");
+            String s = calc(match).toString();
+            expression = expression.replace(matchWithBrackets,s);
+            matcherBrackets = patternBrackets.matcher(expression);
         }
 
-        var2 = Var.createVar(expressions[1]);
+        expression = expression.replaceAll("\\s+", "");
+        List<String> operands = new ArrayList<>(Arrays.asList(expression.split(OPERATION)));
 
-        if(expression.contains("=")){
-            return Var.saveVar(expressions[0], var2);
+        List<String> operation = new ArrayList<>();
+        Pattern patternOperation = Pattern.compile(OPERATION);
+        Matcher matcherOperation = patternOperation.matcher(expression);
+
+        while (matcherOperation.find()) {
+
+            operation.add(matcherOperation.group());
         }
 
-            var1 = Var.createVar(expressions[0]);
+        while (operation.size() > 0) {
+            int index = getIndex(operation);
+            String sOne = operands.remove(index);
+            String sTwo = operands.remove(index);
+            String op = operation.remove(index);
+            String result = oneOperation(sOne, op, sTwo);
+            operands.add(index, result);
+        }
+        return Var.createVar(operands.get(0));
+    }
 
-            if(matcher.find()){
-
-                switch (matcher.group()){
-
-                    case "+": return var1.add(var2);
-                    case "-": return var1.sub(var2);
-                    case "*": return var1.mul(var2);
-                    case "/": return var1.div(var2);
-                }
+    private int getIndex(List<String> operation) {
+        int index = -1;
+        int currentPr = -1;
+        for (int i = 0; i < operation.size(); i++) {
+            String op = operation.get(i);
+            if (priorMap.get(op) > currentPr) {
+                currentPr = priorMap.get(op);
+                index = i;
             }
 
-        return null;
-        //// Дописать если выражения более, чем 2
+        }
+        return index;
+    }
+
+
+    private String oneOperation(String sOne, String operation, String sTwo) throws CalcException, IOException {
+        Var two = Var.createVar(sTwo);
+        if (operation.equals("=")) {
+            Var.saveVar(sOne, two);
+            return two.toString();
+        }
+        Var one = Var.createVar(sOne);
+        String result;
+        switch (operation) {
+            case "+":
+                result = one.add(two).toString();
+                OperationsSaver.saveResultOperatonsFile(result);
+                return result;
+            case "-":
+                result = one.sub(two).toString();
+                OperationsSaver.saveResultOperatonsFile(result);
+                return result;
+            case "*":
+                result = one.mul(two).toString();
+                OperationsSaver.saveResultOperatonsFile(result);
+                return result;
+            case "/":
+                result = one.div(two).toString();
+                OperationsSaver.saveResultOperatonsFile(result);
+                return result;
+        }
+        Logger.setLog(ResManager.getName(ResManager.getName("error.operation")));
+        throw new CalcException(ResManager.getName("error.operation"));
     }
 }
