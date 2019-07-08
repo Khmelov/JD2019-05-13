@@ -1,36 +1,23 @@
 package by.it.orlov.jd02_02;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 class Goods {
 
-    private static HashMap<String, Integer> goodsWithPrice = new HashMap<>();
+    private static Map<Integer, Good> goods=new HashMap<>();
 
     static {
-        goodsWithPrice.put("Хлеб", 3);
-        goodsWithPrice.put("Мясо", 5);
-        goodsWithPrice.put("Водка", 30);
-        goodsWithPrice.put("Сок", 35);
-        goodsWithPrice.put("Банан", 13);
+        goods.put(1,new Good("Bread",2.2));
+        goods.put(2,new Good("Milk",3.3));
+        goods.put(3,new Good("Sugar",4.4));
+        goods.put(4,new Good("Salt",1.1));
+        goods.put(5,new Good("Vodka",9.9));
     }
 
-    private static List<String> goods = new ArrayList<>(goodsWithPrice.keySet());
-
-    static String getRandomGood() {
-        return goods.get(Util.getRandom(goods.size() - 1));
+    static Good getRandomGood(){
+        int id=1+(int)(Math.random()*5);
+        return goods.get(id);
     }
 
-    static int getPrice(String goods) {
-        return goodsWithPrice.get(goods);
-    }
-
-    private static int marketProfit = 0;
-
-    // adds current cheque to total market profit and than returns increased total profit
-    synchronized static int increaseProfit(int cheque) {
-        marketProfit += cheque;
-        return marketProfit;
-    }
 }

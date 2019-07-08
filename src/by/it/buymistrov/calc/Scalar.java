@@ -1,5 +1,7 @@
 package by.it.buymistrov.calc;
 
+import by.it.buymistrov.calc.names.Messages;
+
 public class Scalar extends Var {
 
     private double value;
@@ -66,7 +68,7 @@ public class Scalar extends Var {
         if (other instanceof Scalar) {
             Scalar s = (Scalar) other;
             if (s.value==0)
-                throw new CalcException(" деление на ноль");
+                throw new CalcException(ResManager.INSTANCE.get(Messages.DBZ));
             double res = this.value / s.value;
             return new Scalar(res);
         }

@@ -6,54 +6,56 @@ import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
+    private Semaphore semaphore = new Semaphore(20);
+    private static List<Double> sum = new ArrayList<>();
+
 
     public Buyer(int number) {
         super("Buyer №" + number);
         Dispatcher.addBuyer();
     }
 
-    private Semaphore semaphore = new Semaphore(20);
-
-    private static List<Good> goods = new ArrayList<>();
-
 
     @Override
     public void run() {
-        try {
-            semaphore.acquire();
-            enterToMarket();
-            takeBacket();
-            chooseGoods();
-            goToQeue();
-            goOut();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            semaphore.release();
-        }
+        enterToMarket();
+        chooseGoods();
+        goToQeue();
+        goOut();
+
     }
 
     @Override
     public void enterToMarket() {
-        System.out.println(this + "enter to the market");
+        System.out.println(this + " Enter to the market ");
 
     }
 
     @Override
     public void chooseGoods() {
-
+        try {
+            semaphore.acquire();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        double res = 0;
         int randome = Helper.randomeGet(1, 4);
-        double sum = 0;
+
+        takeBacket();
+
+        System.out.println(this + " Start choose goods ");
 
         for (int i = 0; i < randome; i++) {
             int timeOut = Helper.randomeGet(500, 2000);
             Helper.sleep(timeOut);
             Good goods = Goods.getRandomGood();
             System.out.println(this + " choose " + goods);
-            sum += goods.getPrice();
+            sum.add(goods.getPrice());
+            res += goods.getPrice();
+            putGoodsToBacket();
         }
-        putGoodsToBacket();
-        System.out.println(this + " All goods cost " + sum + "byn");
+
+        System.out.println(this + " All goods cost " + res + " byn ");
     }
 
     @Override
@@ -61,7 +63,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         System.out.println(this + "  out from the market");
         Dispatcher.completeBuyer();
         synchronized (Cashier.monitor) {
-            Cashier.monitor.notifyAll();
+            Cashier.monitor.notify();
         }
 
     }
@@ -69,6 +71,8 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void goToQeue() {
         Queue.add(this);
+        semaphore.release();
+
         synchronized (Cashier.monitor) {
             Cashier.monitor.notify();
         }
@@ -96,12 +100,9 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void putGoodsToBacket() {
         Helper.sleep(Helper.randomeGet(100, 200));
-        System.out.println(this + "  put goods to the basket");
+        System.out.println(this + "  put to the basket");
 
     }
 
-    double getSumTotal() {
-        return (goods.size() > 0) ? goods.stream().mapToDouble(Good::getPrice).sum() : 0;
-    }
 }
 

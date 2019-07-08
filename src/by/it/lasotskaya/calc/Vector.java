@@ -93,7 +93,7 @@ public class Vector extends Var {
                 sum=sum +res[i];
 
             }
-            return new Vector(res);
+            return new Scalar(sum);
         }
         else throw new CalcException(" Операция невозможна ");
     }

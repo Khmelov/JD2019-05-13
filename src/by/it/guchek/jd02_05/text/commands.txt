@@ -1,0 +1,3 @@
+set path=
+d:\JDK\java-se-8u40-ri\bin\native2ascii -encoding utf-8 message.txt d:\Drivers for Notebook\projects\JD2019-05-13\src\by\it\guchek\jd02_05\resources\message.properties
+d:\JDK\java-se-8u40-ri\bin\native2ascii -encoding utf-8 message_ru_RU.txt d:/Drivers for Notebook/projects/JD2019-05-13/src/by/it/guchek/jd02_05/resources/message_ru_RU.properties

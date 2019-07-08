@@ -15,15 +15,14 @@ public class Goods {
     }
 
 
-    static String getRandom() {
+    static Good getRandom() {
         Random random = new Random();
-        List<String> keys = new ArrayList<String>(goods.keySet());
+        List<String> keys = new ArrayList<>(goods.keySet());
         String key = keys.get(random.nextInt(keys.size()));
         Integer price = goods.get(key);
-        Map<String, Integer> choosedGood=new HashMap<>();
-        choosedGood.put(key,price);
-
-        return (key+ " by price: " + price);
+        Good choosedGood = new Good(key, price);
+        System.out.println(key + " by price: " + price);
+        return (choosedGood);
 
     }
 

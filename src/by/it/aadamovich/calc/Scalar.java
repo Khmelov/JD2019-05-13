@@ -1,5 +1,7 @@
 package by.it.aadamovich.calc;
 
+import by.it.aadamovich.calc.names.ResData;
+
 class Scalar extends Var {
 
     private double value;
@@ -50,7 +52,8 @@ class Scalar extends Var {
     @Override
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
-            if (((Scalar) other).value == 0) throw new CalcException("Деление на ноль невозможно");
+            if (((Scalar) other).value == 0) throw new CalcException
+                    (ResourceManager.INSTANCE.getString(ResData.DIVISION_TO_ZERO));
             double div = this.value / ((Scalar) other).value;
             return new Scalar(div);
         } else

@@ -12,10 +12,6 @@ public class Scalar extends Var {
         this.value = value;
     }
 
-    Scalar(Scalar scalar) {
-        this.value = scalar.value;
-    }
-
     Scalar(String strValue) {
         this.value = Double.parseDouble(strValue);
     }
@@ -53,7 +49,8 @@ public class Scalar extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             if (((Scalar)other).value == 0) {
-                throw new CalcException("Деление на ноль");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.DIVISIONBYZERO));
             }
             return new Scalar(this.value / ((Scalar)other).value);
         }

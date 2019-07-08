@@ -1,46 +1,34 @@
 package by.it.orlov.jd02_02;
 
-public class Cashier extends Thread {
+public class Cashier implements Runnable {
 
-    static final Object monitorCashier = new Object();
-    static final int cashiersMaxLimit = 5;
-    static final int buyersPerCashier = 5;
+    final static Object monitor = new Object();
 
-    private int number;
+    private String name;
 
-    public Cashier(int number) {
-        this.number = number;
-        setName("Cashier №" + number);
-        start();
+    Cashier(int number) {
+        name = "Cashier №" + number + " ";
     }
 
     @Override
     public void run() {
-        Buyer buyer;
-        System.out.println(this + " is opened");
         while (!Dispatcher.planComplete()) {
-
-            if ((Queue.cashierInWork() * buyersPerCashier) >=
-                    (Queue.getQueueSize() + buyersPerCashier)) {
-                System.out.println(this + " is closed");
-                Queue.cashierCloses();
-                synchronized (monitorCashier) {
+            Buyer buyer = Queue.extract();
+            if (buyer != null) {
+                System.out.println(this + "started service of " + buyer);
+                int timeout = Util.rnd(2000, 5000);
+                Util.sleep(timeout);
+                System.out.println(this + "stopped service of " + buyer);
+                synchronized (buyer){
+                    buyer.notifyAll();
+                }
+            } else {
+                synchronized (monitor){
                     try {
-                        monitorCashier.wait();
+                        monitor.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }
-                if (!Dispatcher.planComplete())
-                    System.out.println(this + " is opened");
-            } else {
-                buyer = Queue.getBuyerFromQueue();
-                System.out.println(this + " starts " + buyer + " service");
-                Util.sleep(Util.getRandom(2000, 5000), 100);
-                System.out.println(this + " completes " + buyer + " service\n"
-                        + new Cheque().printCheque(buyer.getBasket(), number));
-                synchronized (buyer) {
-                    buyer.notify();
                 }
             }
         }
@@ -48,6 +36,6 @@ public class Cashier extends Thread {
 
     @Override
     public String toString() {
-        return getName();
+        return name;
     }
 }

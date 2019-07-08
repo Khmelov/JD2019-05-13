@@ -1,7 +1,6 @@
 package by.it.lasotskaya.calc;
 
 class Scalar extends Var {
-
     private  double value;
 
     public double getValue() {

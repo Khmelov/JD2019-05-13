@@ -2,32 +2,29 @@ package by.it.orlov.jd02_02;
 
 class Dispatcher {
 
-    static final int SPEED_BUYER_STANDARD = 100;
-    static final int SPEED_PENSIONER_STANDARD = 150;
+    static final int K_SPEED = 100;
 
     private static final int PLAN = 100;
-    private static int buyersInMarket = 0;
-    private static int buyersLeftMarket = 0;
+    private static int buyerInMarket = 0;
+    private static int buyerCounter = 0;
 
-    synchronized static void addBuyer() {
-        buyersInMarket++;
-    }
-
-    synchronized static void leftBuyer() {
-        buyersInMarket--;
-        buyersLeftMarket++;
-    }
-
-    synchronized static boolean marketOpened() {
-        return PLAN > buyersInMarket + buyersLeftMarket;
-    }
 
     static boolean planComplete() {
-        return (buyersLeftMarket == PLAN)
-                && (buyersInMarket == 0);
+        return (buyerCounter == PLAN)
+                && (buyerInMarket == 0);
     }
 
-    static int getBuyersInMarket() {
-        return buyersInMarket;
+    synchronized static void addBuyer(){
+        buyerInMarket++;
     }
+
+    synchronized static void completeBuyer(){
+        buyerInMarket--;
+        buyerCounter++;
+    }
+
+    synchronized static boolean marketIsOpened(){
+        return buyerInMarket+buyerCounter<PLAN;
+    }
+
 }

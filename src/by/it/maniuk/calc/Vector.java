@@ -1,8 +1,6 @@
 package by.it.maniuk.calc;
 
-
-
-
+import by.it.maniuk.calc.names.Messages;
 
 import java.util.Arrays;
 
@@ -27,11 +25,10 @@ public class Vector extends Var{
                                 .split(",");
         value = new double[array.length];
         for (int i = 0; i < array.length; i++) {
-            value[i]=Double.parseDouble(array[i]); //Здесь ошибка!!!!!!!!!
+            value[i]=Double.parseDouble(array[i]);
         }
 
    }
-
 
     public double[] getValue() {
         return value;
@@ -51,7 +48,7 @@ public class Vector extends Var{
         else if (other instanceof Vector){
             double[] res = Arrays.copyOf(value, value.length);
             if (res.length !=((Vector) other).getValue().length){
-                throw new CalcException("ERROR: Разная размерность векторов");
+                throw new CalcException(Messages.VECTOR_DIF);
             }
             for (int i = 0; i <res.length ; i++) {
                 res[i] = res[i]+((Vector) other).value[i];
@@ -76,7 +73,7 @@ public class Vector extends Var{
         else if (other instanceof Vector) {
             double[] res = Arrays.copyOf(value, value.length);
             if (res.length !=((Vector) other).getValue().length){
-                throw new CalcException("ERROR: Разная размерность векторов");
+                throw new CalcException(Messages.VECTOR_DIF);
             }
             for (int i = 0; i < res.length; i++) {
                 res[i] = res[i] - ((Vector) other).value[i];

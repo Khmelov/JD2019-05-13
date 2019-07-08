@@ -1,32 +1,35 @@
 package by.it.yakovets.jd02_02;
 
-public class Cashier implements Runnable {
+public class Cashier extends Thread {
+
     static final Object monitor = new Object();
 
-    private String name;
-
     public Cashier(int number) {
-        name = "Cashier №" + number;
+        setName("Cashier №" + number);
+        start();
 
     }
 
     @Override
     public void run() {
-        Buyer buyer;
+
         while (!Dispatcher.planComplete()) {
-            buyer = Queue.extract();
-            if (buyer != null) {
+            if (Queue.cashiersNeed()){
+                Buyer buyer=Queue.extract();
                 System.out.println(this + " started service of " + buyer);
                 int timeout = Helper.rnd(2000, 5000);
                 Helper.sleep(timeout);
-                
+                System.out.println("Basket of " + buyer+":");
+                buyer.getBasketOfBuyer().printContain();
                 System.out.println(this + " stopped service of " + buyer);
                 synchronized (buyer) {
-                    buyer.notifyAll();
+                    buyer.notify();
                 }
             } else {
                 synchronized (monitor) {
                     try {
+                        Queue.addCashier(this);
+                        System.out.println(this + " stopped working");
                         monitor.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -36,10 +39,10 @@ public class Cashier implements Runnable {
         }
 
 
-}
+    }
 
     @Override
     public String toString() {
-        return name;
+        return this.getName();
     }
 }

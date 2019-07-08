@@ -14,6 +14,10 @@ class Queue {
         instance.addLast(buyer);
     }
 
+    synchronized static int getSizeQueqe (){
+        return instance.size();
+    }
+
     synchronized static Buyer extract(){
         return instance.pollFirst();
     }

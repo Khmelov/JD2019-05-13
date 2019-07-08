@@ -14,6 +14,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     private Good good;
     private boolean pensioneer;
     private List<Good> list = new ArrayList<>();
+    static int ColCasier=0;
 
     public List<Good> getList() {
         return list;
@@ -80,20 +81,36 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void goToQueue() {
         Queue.add(this);
-        synchronized (Cashier.monitor) {
-            Cashier.monitor.notify();
-            if (Queue.size() == 6) {
+        System.out.println(this+" go to Queue");
+        if ((Queue.size() <5 )&&(ColCasier==0)){
+            synchronized (Cashier.monitor) {
+                    Cashier.monitor.notify();
+                }
+            ColCasier++;
+        }
+              if ((Queue.size() >5 )&&(ColCasier==1)) {
+            synchronized (Cashier.monitor) {
                 Cashier.monitor.notify();
             }
-            if (Queue.size() == 11) {
+            ColCasier++;
+        }
+                if ((Queue.size() >10 )&&(ColCasier==2)) {
+            synchronized (Cashier.monitor) {
                 Cashier.monitor.notify();
             }
-            if (Queue.size() == 16) {
+            ColCasier++;
+        }
+                if ((Queue.size() >15)&&(ColCasier==3)) {
+            synchronized (Cashier.monitor) {
                 Cashier.monitor.notify();
             }
-            if (Queue.size() == 21) {
+            ColCasier++;
+        }
+                  if ((Queue.size() >20 )&&(ColCasier==4)) {
+            synchronized (Cashier.monitor) {
                 Cashier.monitor.notify();
             }
+            ColCasier=0;
         }
         synchronized (this){
             try {
@@ -108,8 +125,10 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     public void goOut() {
         System.out.println( this + " go out from the market" );
         Dispatcher.completeBuyer();
-        synchronized (Cashier.monitor){
+        if (Dispatcher.planComplete()){
+        synchronized (Cashier.monitor) {
             Cashier.monitor.notifyAll();
+        }
         }
     }
 

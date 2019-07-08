@@ -11,6 +11,10 @@ public class Dispatcher {
                 && (buyerInMarket == 0);
     }
 
+    public static int getBuyerCounter() {
+        return buyerCounter;
+    }
+
     synchronized static void addBuyer(){
         buyerInMarket++;
     }

@@ -26,6 +26,7 @@ public class Market {
             threads.add(thread);
             thread.start();
         }
+
         int numberBuyer = 0;
         boolean pensioneer;
         while (Dispatcher.marketIsOpened()) {

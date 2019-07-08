@@ -32,14 +32,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void run() {
         enterToMarket();
-        try {
-            queue.acquire();
-            chooseGoods();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            queue.release();
-        }
+        chooseGoods();
         goToQueue();
         goOut();
     }
@@ -51,6 +44,11 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void chooseGoods() {
+        try {
+            queue.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         takeBasket();
         printText(this + " начал выбирать товары");
         int countGoods = Utilities.rnd(MIN_COUNT_GOODS, MAX_COUNT_GOODS);
@@ -65,6 +63,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void goToQueue() {
         Queue.add(this);
+        queue.release();
         synchronized (Cashier.monitor) {
             restoreWorkCashiers();
         }

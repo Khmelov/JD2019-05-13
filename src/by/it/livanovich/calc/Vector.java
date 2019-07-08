@@ -1,9 +1,16 @@
 package by.it.livanovich.calc;
 
+import by.it.livanovich.calc.Text.Helper;
+import by.it.livanovich.calc.Text.Messages;
+
 import java.util.Arrays;
 
 class Vector extends Var {
         private double [] value;
+
+    public Vector() {
+
+    }
 
 
     public double[] getValue() {
@@ -22,7 +29,10 @@ class Vector extends Var {
     }
 
     Vector (String strVector){
-     String [] str=strVector.replaceAll("\\D+"," ").trim().split(" ");
+     String [] str=strVector
+             .replace("{","")
+             .replace("}","")
+             .split(",");
      double [] tempvalue=new double[str.length];
         for (int i = 0; i < str.length; i++) {
             tempvalue[i]=Double.parseDouble(str[i]);
@@ -54,7 +64,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector) {
             if (value.length!=((Vector) other).getLength()){
-                throw new CalcException("Разный размер векторов");
+                throw new CalcException(Helper.INSTANCE.getKey(Messages.VECTORSIZE));
             }
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -77,7 +87,7 @@ class Vector extends Var {
         }
         else if (other instanceof Vector) {
             if (value.length!=((Vector) other).getLength()){
-                throw new CalcException("Разный размер векторов");
+                throw new CalcException(Helper.INSTANCE.getKey(Messages.VECTORSIZE));
             }
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {

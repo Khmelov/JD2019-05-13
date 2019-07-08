@@ -18,23 +18,11 @@ class Goods {
         goods.put(7, new Good("Сыр", 4.25));
     }
 
-        //Map.Entry <String, Double> entry = (Map.Entry<String, Double>) goods.entrySet().iterator();
-    static synchronized Good getRandGood (){
-        int id=0;
-        for (int i = 0; i<(RandCount.randFrTo(1,4)); i++){
-            id=1+(int)(Math.random()*(goods.size()));
-        }
+    static synchronized Good getRandGood() {
+
+        int id = 1 + (int) (Math.random() * (goods.size()));
+
         return goods.get(id);
-        //if (itGoods.hasNext()){
-        /*Iterator itGoods = goods.entrySet().iterator();
-        for (int i = 0; i<(RandCount.randFrTo(1,goods.size())); i++){
-        if (itGoods.hasNext()){
 
-            Map.Entry <String, Double> entry = (Map.Entry<String, Double>) itGoods.next();
-            nameGood = entry.getKey()+" цена "+entry.getValue()+"р.";
-
-         }else break;
-        }*/
     }
-
 }

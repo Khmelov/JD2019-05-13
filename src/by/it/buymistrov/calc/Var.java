@@ -1,5 +1,7 @@
 package by.it.buymistrov.calc;
 
+import by.it.buymistrov.calc.names.Messages;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +10,7 @@ abstract class Var implements Operation {
 
     private static Map<String, Var> vars = new HashMap<>();
 
-    public static Map<String, Var> getVars() {
+    static Map<String, Var> getVars() {
         return vars;
     }
 
@@ -28,8 +30,9 @@ abstract class Var implements Operation {
             return new Matrix(strVar);
         else if (vars.containsKey(strVar))
             return vars.get(strVar);
-        throw new CalcException(" не понимаю что такое "+strVar);
-
+        else {
+            throw new CalcException(ResManager.INSTANCE.get(Messages.IDUWII) + strVar);
+        }
     }
 
     @Override
@@ -39,21 +42,21 @@ abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s + %s невозможна%n", this, other));
+        throw new CalcException(String.format(ResManager.INSTANCE.get(Messages.OPERATIONIMPOSSIBLE), this, other));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s - %s невозможна%n", this, other));
+        throw new CalcException(String.format(ResManager.INSTANCE.get(Messages.OPERATIONIMPOSSIBLE), this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s * %s невозможна%n", this, other));
+        throw new CalcException(String.format(ResManager.INSTANCE.get(Messages.OPERATIONIMPOSSIBLE), this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
+        throw new CalcException(String.format(ResManager.INSTANCE.get(Messages.OPERATIONIMPOSSIBLE), this, other));
     }
 }

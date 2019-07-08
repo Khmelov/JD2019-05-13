@@ -1,26 +1,25 @@
 package by.it.orlov.jd02_02;
 
-import java.util.Random;
-
 class Util {
 
-    private static Random random = new Random();
 
-    static int getRandom(int from, int to) {
-        return random.nextInt(to - from + 1) + from;
+    //max may be not only 2
+    @SuppressWarnings("SameParameterValue")
+    static int rnd(int max){
+        return rnd(0,max);
     }
 
-
-    static int getRandom(int to) {
-        return getRandom(0, to);
+    static int rnd(int start, int stop){
+        return start+(int)(Math.random()*(stop-start+1));
     }
 
-
-    static void sleep(int timeout, int speed) {
+    static void sleep(int timeout){
         try {
-            Thread.sleep(timeout * speed / 100);
+            Thread.sleep(timeout/ Dispatcher.K_SPEED);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
+
 }

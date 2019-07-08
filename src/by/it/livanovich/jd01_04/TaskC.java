@@ -1,7 +1,5 @@
 package by.it.livanovich.jd01_04;
 
-import com.sun.scenario.effect.Merge;
-
 import java.util.Arrays;
 import java.util.Scanner;
 

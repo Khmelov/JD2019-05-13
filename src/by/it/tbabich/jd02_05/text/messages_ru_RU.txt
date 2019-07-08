@@ -1,0 +1,5 @@
+message.welcome=Привет!
+message.question=Как дела?
+message.username=Тимур Бабич
+message.date=Текущая дата:
+messages.set.language=Установлен русский язык

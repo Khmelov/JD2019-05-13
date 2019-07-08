@@ -16,15 +16,12 @@ public class Vector extends Var {
         this.value = Arrays.copyOf(value, value.length);
     }
 
-    Vector(Vector vector) {
-        this(vector.value);
-    }
-
-    Vector(String strVector) {
+    Vector(String strVector) throws CalcException {
         strVector = strVector.replaceAll("\\s+", "");
         Matcher matcher = Pattern.compile(Patterns.VECTOR).matcher(strVector);
         if (!matcher.find())
-            throw new IllegalArgumentException("Incorrect format: " + strVector);
+            throw new CalcException(
+                    ResourcesManager.INSTANCE.getString(Resources.INCORRECTFRMAT) + " " + strVector);
 
         String rawData = matcher.group(1);
         String[] numbers = Pattern.compile(",").split(rawData);
@@ -61,7 +58,8 @@ public class Vector extends Var {
             return new Vector(result);
         } else if (other instanceof Vector) {
             if (((Vector)other).value.length != value.length) {
-                throw new CalcException("Неверная размерность векторов");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.INVALIDVECTORDIMENSION));
             }
             double[] v = ((Vector)other).value;
             double[] result = Arrays.copyOf(value, value.length);
@@ -84,7 +82,8 @@ public class Vector extends Var {
             return new Vector(result);
         } else if (other instanceof Vector) {
             if (((Vector)other).value.length != value.length) {
-                throw new CalcException("Неверная размерность векторов");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.INVALIDVECTORDIMENSION));
             }
             double[] v = ((Vector)other).value;
             double[] result = Arrays.copyOf(value, value.length);
@@ -107,7 +106,8 @@ public class Vector extends Var {
             return new Vector(result);
         } else if (other instanceof Vector) {
             if (((Vector)other).value.length != value.length) {
-                throw new CalcException("Неверная размерность векторов");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.INVALIDVECTORDIMENSION));
             }
             double[] v = ((Vector)other).value;
             double result = 0;

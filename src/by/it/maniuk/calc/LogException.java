@@ -12,10 +12,10 @@ class LogException {
      LogException(Exception e)  {
 
         String path = getFilePath(LogException.class, "log.txt");
-        try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
-            System.out.println(e.getMessage());
+        try (PrintWriter out = new PrintWriter(new FileWriter(path,true))) {
+            out.print(e + " - " +  new Date().toString());
             out.println();
-            out.println(e + " - " +  new Date().toString());
+            printerror(e.getMessage());
 
 
         } catch (IOException ex) {
@@ -36,5 +36,10 @@ class LogException {
 
         path = root + separator + "src" + separator + path;
         return path;
+    }
+    private void printerror(String mes){
+        ResManager manager = ResManager.INSTANCE;
+        System.out.println(manager.get(mes));
+
     }
 }

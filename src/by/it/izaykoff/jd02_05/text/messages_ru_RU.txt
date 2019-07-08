@@ -1,0 +1,4 @@
+message.welcome = Привет!
+message.date = Дата:
+message.question = Как дела?
+user.name = Иван Зайков.

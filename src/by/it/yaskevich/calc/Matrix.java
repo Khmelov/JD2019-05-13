@@ -8,22 +8,19 @@ public class Matrix extends Var {
 
     private double[][] value;
 
-    Matrix(double[][] value) {
+    private Matrix(double[][] value) {
         this.value = Arrays.copyOf(value, value.length);
         for (int i = 0; i < value.length; i++) {
             this.value[i] = Arrays.copyOf(value[i], value[i].length);
         }
     }
 
-    Matrix(Matrix matrix) {
-        this(matrix.value);
-    }
-
-    Matrix(String strMatrix) {
+    Matrix(String strMatrix) throws CalcException {
         strMatrix = strMatrix.replaceAll("\\s+", "");
         Matcher matcher = Pattern.compile(Patterns.MATRIX).matcher(strMatrix);
         if (!matcher.find())
-            throw new IllegalArgumentException("Incorrect format: " + strMatrix);
+            throw new CalcException(
+                    ResourcesManager.INSTANCE.getString(Resources.INCORRECTFRMAT) + " " + strMatrix);
 
         String rawData = matcher.group("arrays");
         matcher = Pattern.compile(Patterns.VECTOR).matcher(rawData);
@@ -91,7 +88,8 @@ public class Matrix extends Var {
             double[][] m = ((Matrix)other).value;
             double[][] result = copyOfValue();
             if ((result[0].length != m.length)) {
-                throw new CalcException("Неверная размерность массивов");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.INVALIDARRAYDIMENSION));
             }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
@@ -118,7 +116,8 @@ public class Matrix extends Var {
             double[][] m = ((Matrix)other).value;
             double[][] result = copyOfValue();
             if ((result.length != m.length) || (result[0].length != m[0].length)) {
-                throw new CalcException("Неверная размерность массивов");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.INVALIDARRAYDIMENSION));
             }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
@@ -145,7 +144,8 @@ public class Matrix extends Var {
             double[] v = ((Vector)other).getValue();
             double[] result = new double[v.length];
             if ((value[0].length != v.length)) {
-                throw new CalcException("Неверная размерность массивов");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.INVALIDARRAYDIMENSION));
             }
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < value[i].length; j++) {
@@ -157,7 +157,8 @@ public class Matrix extends Var {
             double[][] m = ((Matrix)other).value;
             double[][] result = new double[value.length][value[0].length];
             if ((result[0].length != m.length)) {
-                throw new CalcException("Неверная размерность массивов");
+                throw new CalcException(
+                        ResourcesManager.INSTANCE.getString(Resources.INVALIDARRAYDIMENSION));
             }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
