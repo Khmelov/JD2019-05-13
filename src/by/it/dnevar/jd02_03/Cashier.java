@@ -1,6 +1,9 @@
-package by.it.dnevar.jd02_02;
+package by.it.dnevar.jd02_03;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Cashier implements Runnable {
 
@@ -22,7 +25,7 @@ public class Cashier implements Runnable {
                 int timeout = Util.rnd(2000, 5000);
                 Util.sleep(timeout);
                 synchronized (buyer) {
-                    HashMap<String, Double> buyerBacket = buyer.getBacket();
+                    ConcurrentHashMap<String, Double> buyerBacket = buyer.getBacket();
                     Set<String> keys = buyerBacket.keySet();
                     Iterator<String> iterator = keys.iterator();
                     Double sum = 0.0;

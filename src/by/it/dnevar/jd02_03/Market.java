@@ -1,7 +1,9 @@
-package by.it.dnevar.jd02_02;
+package by.it.dnevar.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Market {
     public static void main(String[] args) {
@@ -10,12 +12,13 @@ public class Market {
 
         System.out.println("Market open");
 
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+
         for (int i = 0; i < 5; i++) {
-            Thread thread = new Thread(new Cashier(i+1));
-            threads.add(thread);
-            thread.start();
+            executorService.execute(new Cashier(i+1));
             Dispatcher.turnOnCashier();
         }
+        executorService.shutdown();
 
         int countBuyerForName = 0;
 

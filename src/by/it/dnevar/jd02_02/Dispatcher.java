@@ -10,6 +10,7 @@ public class Dispatcher {
     private static final int PLAN = 100;
     private static int buyerInMarket = 0;
     private static int buyerCounter = 0;
+    private static int cashierInWork = 0;
 
 
     static boolean planComplete() {
@@ -26,8 +27,24 @@ public class Dispatcher {
         buyerCounter++;
     }
 
+    synchronized static void turnOnCashier(){
+        cashierInWork++;
+    }
+
+    synchronized static void turnOffCashier(){
+        cashierInWork--;
+    }
+
+    synchronized static int getNumCashierInWork(){
+        return cashierInWork;
+    }
+
     synchronized static boolean marketIsOpened(){
         return buyerInMarket+buyerCounter<PLAN;
+    }
+
+    synchronized static int getBuyerInMarket(){
+        return buyerInMarket;
     }
 
 }

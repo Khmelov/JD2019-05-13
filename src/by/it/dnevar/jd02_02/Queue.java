@@ -24,7 +24,7 @@ class Queue {
         if(pensioneerQueue.size()!=0) {
             return pensioneerQueue.pollFirst();
         }else{
-            return buyersQueue.pollLast();
+            return buyersQueue.pollFirst();
         }
     }
 
