@@ -1,9 +1,12 @@
 package by.it.adamovichjr.calc;
 
 
+import by.it.adamovichjr.calc.text.All_messages;
+
 import java.util.Arrays;
 
 public class Matrix extends Var {
+
     private double [][] value;
 
     public double[][] getValue() {
@@ -26,13 +29,18 @@ public class Matrix extends Var {
         this.value = buffer;
     }
 
-    Matrix(String str){
-        str = str.replaceAll("[^\\d.] ?"," ").trim();
+    Matrix(String str) throws CalcException {
+        str = str.replaceAll("[^-\\d.] ?"," ").trim();
         String[]line = str.split("[ ]{2,}");
+
         double[][] mas = new double[line.length][];
+
         for (int i = 0; i < mas.length; i++) {
             String[] count = line[i].split(" ");
             mas[i] = new double[count.length];
+            if (i > 0 && mas[i].length != mas[i-1].length) {
+                throw new CalcException (ResourceManager.INSTANCE.get(All_messages.WRONG_CREATE_MATRIX));
+            }
             for (int j = 0; j < mas[i].length; j++) {
                 mas[i][j] = Double.parseDouble(count[j]);
             }
@@ -51,7 +59,10 @@ public class Matrix extends Var {
             }
             return new Matrix(res);
         }
-        else if(other instanceof Matrix && this.value.length == ((Matrix)other).value[0].length && this.value[0].length == ((Matrix)other).value[0].length){
+        else if(other instanceof Matrix){
+            if (this.value.length != ((Matrix) other).value.length|| this.value[0].length != ((Matrix) other).value[0].length) {
+                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.ADD_MATRIX), this, other));
+            }
             double[][] res = new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
@@ -74,7 +85,10 @@ public class Matrix extends Var {
             }
             return new Matrix(res);
         }
-        else if(other instanceof Matrix && this.value.length == ((Matrix)other).value.length && this.value[0].length == ((Matrix)other).value[0].length){
+        else if(other instanceof Matrix ){
+            if (this.value.length != ((Matrix) other).value.length|| this.value[0].length != ((Matrix) other).value[0].length) {
+                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.SUB_MATRIX), this, other));
+            }
             double[][] res = new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
@@ -97,7 +111,10 @@ public class Matrix extends Var {
             }
             return new Matrix(res);
         }
-        else if (other instanceof Vector && this.value[0].length == ((Vector)other).getValue().length) {
+        else if (other instanceof Vector){
+            if (this.value[0].length != ((Vector) other).getValue().length) {
+                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.MUL_MAT_AND_VECTOR), this, other));
+            }
             double[] res = new double[value[0].length];
             for (int i = 0; i < value.length; i++) {
                 res[i] = 0;
@@ -107,7 +124,10 @@ public class Matrix extends Var {
             }
             return new Vector(res);
         }
-        else if(other instanceof Matrix && this.value.length == ((Matrix)other).value[0].length && this.value[0].length == ((Matrix)other).value[0].length){
+        else if(other instanceof Matrix){
+            if (this.value[0].length != ((Matrix) other).value.length) {
+                throw new CalcException(String.format(ResourceManager.INSTANCE.get(All_messages.MUL_MATRIX), this, other));
+            }
             double[][] res = new double[value.length][((Matrix)other).value[0].length];
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < ((Matrix)other).value[0].length; j++) {
@@ -124,7 +144,7 @@ public class Matrix extends Var {
     @Override
     public Var div(Var other) throws CalcException {
         if(other instanceof Scalar) {
-            if (((Scalar) other).getValue() == 0) throw new CalcException("Деление на ноль");
+            if (((Scalar) other).getValue() == 0) throw new CalcException(ResourceManager.INSTANCE.get(All_messages.ZERO_DIV));
             double[][] res = new double[value.length][value[0].length];
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {

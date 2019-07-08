@@ -1,16 +1,20 @@
 package by.it.adamovichjr.calc;
 
+import by.it.adamovichjr.calc.text.All_messages;
+
 public class CalcException extends Exception {
+
+
     public CalcException() {
-        super("Error:");
+        super(ResourceManager.INSTANCE.get(All_messages.ERROR));
     }
 
     public CalcException(String message) {
-        super("ERROR: " + message);
+        super(ResourceManager.INSTANCE.get(All_messages.ERROR) + message);
     }
 
     public CalcException(String message, Throwable cause) {
-        super("ERROR: " + message, cause);
+        super(ResourceManager.INSTANCE.get(All_messages.ERROR) + message, cause);
     }
 
     public CalcException(Throwable cause) {
@@ -18,6 +22,6 @@ public class CalcException extends Exception {
     }
 
     protected CalcException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super("ERROR: " + message, cause, enableSuppression, writableStackTrace);
+        super(ResourceManager.INSTANCE.get(All_messages.ERROR) + message, cause, enableSuppression, writableStackTrace);
     }
 }

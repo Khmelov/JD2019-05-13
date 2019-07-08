@@ -13,7 +13,7 @@ public class Cashier implements Runnable {
 
     Cashier(int number) {
         name = "Cashier №" + number + " ";
-        numbersOfSpacesForPrint = (number-1)* COLUMNS_WIDTH;
+        numbersOfSpacesForPrint = (number - 1) * COLUMNS_WIDTH;
     }
 
     private static final int COLUMNS_WIDTH = 20;
@@ -55,26 +55,25 @@ public class Cashier implements Runnable {
         ArrayList<String> courentBuyerBacket = buyer.backet.getBacked();
         int sumOfCheck = countSumOfCheck(courentBuyerBacket);
 
-        sb.delete(0,sb.length());
+        sb.delete(0, sb.length());
         String spaces = createProbelsForColumn(numbersOfSpacesForPrint);
         sb.append("\n").append(spaces).append(this);
-        String spacesForQueueColumn = createProbelsForColumn(Dispetcher.NUMBER_OF_CAHIRS * COLUMNS_WIDTH - (sb.length()-1));
+        String spacesForQueueColumn = createProbelsForColumn(Dispetcher.NUMBER_OF_CAHIRS * COLUMNS_WIDTH - (sb.length() - 1));
         int queueSize = Queue.dequeBuyers.size() + Queue.dequePensionerBuyer.size();
         sb.append(spacesForQueueColumn).append("Queue: ").append(queueSize);
-        String spacesForTotalSum = createProbelsForColumn(Dispetcher.NUMBER_OF_CAHIRS * COLUMNS_WIDTH + LAST_COLUMNS_WIDTH - (sb.length()-1));
-
-            totalSumInChecks.getAndAdd(sumOfCheck);
-            sb.append(spacesForTotalSum).append("Total Sum: ").append(totalSumInChecks).append("\n");
-
+        String spacesForTotalSum = createProbelsForColumn(Dispetcher.NUMBER_OF_CAHIRS * COLUMNS_WIDTH + LAST_COLUMNS_WIDTH - (sb.length() - 1));
+        totalSumInChecks.getAndAdd(sumOfCheck);
+        sb.append(spacesForTotalSum).append("|Total Sum: ").append(totalSumInChecks).append("\n");
         for (int i = 1; i <= courentBuyerBacket.size(); i++) {
-            sb.append(spaces).append("№").append(i).append(" ").append(courentBuyerBacket.get(i - 1)).append(" Price: ").append(Goods.goods.get(courentBuyerBacket.get(i-1))).append("\n");
+            sb.append(spaces).append("№").append(i).append(" ").append(courentBuyerBacket.get(i - 1)).append(" Price: ").append(Goods.goods.get(courentBuyerBacket.get(i - 1))).append("\n");
         }
 
         sb.append(spaces).append("Sum of check: ").append(sumOfCheck).append("\n");
         System.out.println(sb);
-        sb.delete(0,sb.length());
+        sb.delete(0, sb.length());
     }
-    private int countSumOfCheck(ArrayList<String>backet){
+
+    private int countSumOfCheck(ArrayList<String> backet) {
         int result = 0;
         for (String s : backet) {
             result += Goods.goods.get(s);
@@ -87,7 +86,7 @@ public class Cashier implements Runnable {
             sb.append(" ");
         }
         final String probels = sb.toString();
-        sb.delete(0,sb.length());
+        sb.delete(0, sb.length());
         return probels;
     }
 

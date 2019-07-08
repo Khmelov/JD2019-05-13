@@ -31,7 +31,7 @@ public class Market {
             int additionalBuyers = (limitBuyers - Dispetcher.getCountBuyerInMarket());
             int newBuyers = Time.fromTo(0, 2) + additionalBuyers;
             lettingInNewBuyers(newBuyers);
-            //System.out.println("Time = " + (time) + " count buyers in market = " + Dispetcher.getCountBuyerInMarket() + " Cashiers wait = " + Queue.dequeCashiersWait.size() + " Buyers in queue = " +(Queue.dequeBuyers.size()+ Queue.dequePensionerBuyer.size()) + " PENSIONERS in Q = " + Queue.dequePensionerBuyer.size());
+        //    System.out.println("Time = " + (time) + " count buyers in market = " + Dispetcher.getCountBuyerInMarket() + " Cashiers wait = " + Queue.dequeCashiersWait.size() + " Buyers in queue = " +(Queue.dequeBuyers.size()+ Queue.dequePensionerBuyer.size()) + " PENSIONERS in Q = " + Queue.dequePensionerBuyer.size());
             time++;
             Time.sleep(1000);
         }

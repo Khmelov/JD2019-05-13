@@ -1,0 +1,4 @@
+message.hello = Прывiтанне!
+message.question = Як справы?
+message.user = Адамовiч Антон
+message.language = Беларусскiй
