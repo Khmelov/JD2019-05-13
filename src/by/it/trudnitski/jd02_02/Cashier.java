@@ -17,7 +17,7 @@ public class Cashier extends Thread {
     public void run() {
         System.out.println(this + " is opened");
         while (!Dispatcher.planComplete()) {
-            Buyer buyer = null;
+            Buyer buyer=null;
             synchronized (monitor) {
                 if (needCashier()) {
                     System.out.println("Cashier" + cashiers + "working for buyer from Queue" + Queue.lenght());
