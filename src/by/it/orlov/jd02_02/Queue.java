@@ -1,46 +1,22 @@
 package by.it.orlov.jd02_02;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.LinkedList;
 
 class Queue {
 
-    private static final Deque<Buyer> buyerQueue = new LinkedList<>();
-    private static final Deque<Buyer> pensionerQueue = new LinkedList<>();
-
-    static Buyer getBuyerFromQueue() {
-        synchronized (buyerQueue) {
-            if (pensionerQueue.size() != 0)
-                return pensionerQueue.poll();
-            else
-                return buyerQueue.poll();
-        }
+    private Queue() {
     }
 
-    static void addBuyerToQueue(Buyer buyer) {
-        synchronized (pensionerQueue) {
-            if (buyer.isPensioner()) pensionerQueue.add(buyer);
-            else buyerQueue.add(buyer);
-        }
+    private static Deque<Buyer> instance = new LinkedList<>();
+
+    synchronized static void add(Buyer buyer) {
+            instance.addLast(buyer);
     }
 
-    static int getQueueSize() {
-        synchronized (pensionerQueue) {
-            return buyerQueue.size() + pensionerQueue.size();
-        }
+    synchronized static Buyer extract(){
+        return instance.pollFirst();
     }
 
-    private static int cashiersClosed = 0;
-
-    static synchronized void cashierOpens() {
-        cashiersClosed--;
-    }
-
-    static synchronized void cashierCloses() {
-        cashiersClosed++;
-    }
-
-    static synchronized int cashierInWork() {
-        return Cashier.cashiersMaxLimit - cashiersClosed;
-    }
 
 }
