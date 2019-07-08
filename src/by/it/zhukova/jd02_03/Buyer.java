@@ -1,8 +1,8 @@
-package by.it.zhukova.jd02_02;
-
+package by.it.zhukova.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
@@ -15,29 +15,52 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     private boolean pensioneer;
     private List<Good> list = new ArrayList<>();
     static int ColCasier=0;
+    private boolean flagWait = false;
+    private static Semaphore semaphore=new Semaphore(20);
 
     public List<Good> getList() {
         return list;
+    }
+
+    public void setFlagWait(boolean flagWait) {
+        this.flagWait = flagWait;
     }
 
     @Override
     public void run() {
         enterToMarket();
         takeBacket();
-        int count = Util.rnd(1,4);
-        System.out.println(this + " start choose goods");
-        for (int i = 0; i < count; i++) {
-            chooseGoods();
-            putGoodsToBacket();
+        try {
+            semaphore.acquire(); //взяли разрешение у семафора
+            System.out.println(this + " start choose goods");
+            int count = Util.rnd(1,4);
+            for (int i = 0; i < count; i++) {
+                chooseGoods();
+                putGoodsToBacket();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        System.out.println(this + " stop choose goods");
-        goToQueue();
+        finally {
+            System.out.println(this + " stop choose goods");
+            semaphore.release(); //вернули разрешение
+        }
+
+        try {
+            goToQueue();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         goOut();
     }
 
     @Override
     public void enterToMarket() {
-        System.out.println( this + " enter to the market" );
+        if (pensioneer) {
+            System.out.println(this + " enter to the market(pensioneer)");
+        }
+        else
+            System.out.println(this + " enter to the market");
     }
 
     @Override
@@ -79,8 +102,8 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     }
 
     @Override
-    public void goToQueue() {
-        Queue.add(this);
+    public void goToQueue() throws InterruptedException {
+        Queue.add(this,pensioneer);
         System.out.println(this+" go to Queue");
         if ((Queue.size() <5 )&&(ColCasier==0)){
             synchronized (Cashier.monitor) {
@@ -110,13 +133,16 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
             synchronized (Cashier.monitor) {
                 Cashier.monitor.notify();
             }
-            ColCasier=0;
+            ColCasier=1;
         }
-        synchronized (this){
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        flagWait = true;
+        synchronized (this) {
+            while (flagWait) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -126,6 +152,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         System.out.println( this + " go out from the market" );
         Dispatcher.completeBuyer();
         if (Dispatcher.planComplete()){
+            System.out.println("plan completed");
         synchronized (Cashier.monitor) {
             Cashier.monitor.notifyAll();
         }
