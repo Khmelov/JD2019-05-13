@@ -4,5 +4,5 @@ public interface Errors {
 
     String ERROR = "error.calc.exception";
     String MESSAGE_ERROR = "message.error";
-    String MESSAGE_OPERATION_ERROR = "message.operation.error";
+    String MESSAGE_OPERATION_ERROR = "message.operation.add.error";
 }

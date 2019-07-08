@@ -1,6 +1,6 @@
 package by.it.tbabich.calc;
 
-import by.it.tbabich.jd02_05.calc.names.Errors;
+import by.it.tbabich.calc.names.Errors;
 
 import java.util.*;
 import java.util.regex.Matcher;

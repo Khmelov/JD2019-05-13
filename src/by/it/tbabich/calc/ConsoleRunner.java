@@ -1,6 +1,6 @@
 package by.it.tbabich.calc;
 
-import by.it.tbabich.jd02_05.names.ConsoleCommands;
+import by.it.tbabich.calc.names.ConsoleCommands;
 
 import java.util.Scanner;
 
@@ -22,15 +22,20 @@ public class ConsoleRunner {
                     break;
                 default:
                     if (!Settings.isSetLanguage(expression)) {
+                        Settings.shortReportBuilder.addExpressionToBody("Expression: " + expression);
+                        Settings.fullReportBuilder.addExpressionToBody("Expression: " + expression);
                         Var var = null;
                         try {
                             var = parser.calc(expression);
                         } catch (CalcException e) {
-                            e.printStackTrace();
+                            System.out.println(e.getMessage());
                         }
+                        Settings.fullReportBuilder.addExpressionToBody("Result: " + var);
+                        Settings.shortReportBuilder.addExpressionToBody("Result: " + var);
                         printer.print(var);
                     }
             }
         }
+        settings.stop();
     }
 }

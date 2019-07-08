@@ -1,6 +1,6 @@
 package by.it.tbabich.calc;
 
-class Scalar extends Var {
+public class Scalar extends Var {
 
     private double value;
 
@@ -8,15 +8,15 @@ class Scalar extends Var {
         return value;
     }
 
-    Scalar(double value) {
+    public Scalar(double value) {
         this.value = value;
     }
 
-    Scalar(Scalar scalar) {
+    public Scalar(Scalar scalar) {
         this(scalar.value);
     }
 
-    Scalar(String strScalar) {
+    public Scalar(String strScalar) {
         this(Double.parseDouble(strScalar));
     }
 
@@ -27,7 +27,7 @@ class Scalar extends Var {
 
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             Scalar s = (Scalar) other;
             return new Scalar(this.value + ((Scalar) other).value);
@@ -36,7 +36,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             Scalar s = (Scalar) other;
             return new Scalar(this.value - ((Scalar) other).value);
@@ -45,7 +45,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             Scalar s = (Scalar) other;
             return new Scalar(this.value * ((Scalar) other).value);
@@ -54,7 +54,7 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws  CalcException{
         if (other instanceof Scalar) {
             Scalar s = (Scalar) other;
             return new Scalar(this.value / ((Scalar) other).value);

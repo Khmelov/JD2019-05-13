@@ -2,7 +2,7 @@ package by.it.tbabich.calc;
 
 import java.util.Arrays;
 
-class Vector extends Var {
+public class Vector extends Var {
 
     private double[] value;
 
@@ -10,15 +10,15 @@ class Vector extends Var {
         return value;
     }
 
-    Vector(double[] value) {
+    public Vector(double[] value) {
         this.value = Arrays.copyOf(value, value.length);
     }
 
-    Vector(Vector vector) {
+    public Vector(Vector vector) {
         this(vector.value);
     }
 
-    Vector(String strVector) {
+    public Vector(String strVector) {
         String[] arrayString = strVector.replace("{", "").replace("}", "").split(",");
         double[] arrayDouble = new double[arrayString.length];
         for (int i = 0; i < arrayString.length; i++) {
@@ -28,7 +28,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double s = ((Scalar) other).getValue();
             double[] res = Arrays.copyOf(value, value.length);
@@ -37,6 +37,8 @@ class Vector extends Var {
             }
             return new Vector(res);
         } else if (other instanceof Vector) {
+            if (this.value.length != ((Vector) other).value.length)
+                throw new CalcException(String.format("Сложение невозможно: векторы %s и %s имеют разную длину", this, other));
             double[] v = ((Vector) other).value;
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -47,7 +49,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double s = ((Scalar) other).getValue();
             double[] res = Arrays.copyOf(value, value.length);
@@ -56,17 +58,19 @@ class Vector extends Var {
             }
             return new Vector(res);
         } else if (other instanceof Vector) {
+            if (this.value.length != ((Vector) other).value.length)
+                throw new CalcException(String.format("Вычитание невозможно: векторы %s и %s имеют разную длину", this, other));
             double[] v = ((Vector) other).value;
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
                 res[i] -= v[i];
             }
             return new Vector(res);
-        } else return super.add(other);
+        } else return super.sub(other);
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             Double s = ((Scalar) other).getValue();
             double[] res = Arrays.copyOf(value, value.length);
@@ -74,7 +78,9 @@ class Vector extends Var {
                 res[i] *= s;
             }
             return new Vector(res);
-        } else if (other instanceof Vector && this.value.length == ((Vector) other).value.length) {
+        } else if (other instanceof Vector) {
+            if (this.value.length != ((Vector) other).value.length)
+                throw new CalcException(String.format("Умножение невозможно: векторы %s и %s имеют разную длину", this, other));
             double[] vector1 = ((Vector) other).value;
             double[] vector2 = Arrays.copyOf(value, value.length);
             double result = 0;
@@ -86,11 +92,11 @@ class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException{
         if (other instanceof Scalar) {
+            if (((Scalar) other).getValue() == 0) throw new CalcException("Деление на ноль невозможно");
             Double s = ((Scalar) other).getValue();
             double[] res = Arrays.copyOf(value, value.length);
-//            double result = 0;
             for (int i = 0; i < res.length; i++) {
                 res[i] /= s;
             }

@@ -1,7 +1,7 @@
 package by.it.tbabich.calc;
 
-import by.it.tbabich.jd02_05.names.Countries;
-import by.it.tbabich.jd02_05.names.Languages;
+import by.it.tbabich.calc.names.Countries;
+import by.it.tbabich.calc.names.Languages;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -12,7 +12,7 @@ public enum ResManager {
 
     private Locale locale;
     private ResourceBundle resourceBundle;
-    private String basename = "by.it.tbabich.jd02_05.calc.resources.messages";
+    private String basename = "by.it.tbabich.calc.resources.messages";
 
     private ResManager() {
         setLocale(new Locale(Languages.EN, Countries.EN));

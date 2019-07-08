@@ -1,0 +1,22 @@
+07-07-2019 17:45:26 : ERROR:Operation {{5.0, 6.0}, {3.0, 2.0}} - {4.0, 5.0} is impossible
+07-07-2019 17:45:26 : ERROR:Don't understand what is 5&6
+07-07-2019 17:46:03 : ERROR:Don't understand what is 5^5
+07-07-2019 21:45:24 : ERROR:Don't understand what is 42^5
+08-07-2019 07:17:26 : ERROR:Don't understand what is 5^5
+08-07-2019 07:17:26 : ERROR:Operation {3.0, 4.0} + {{4.0, 5.0}, {6.0, 7.0}} is impossible
+08-07-2019 07:19:00 : ERROR:Operation {4.0, 5.0} - {{5.0, 4.0}, {6.0, 8.0}} is impossible
+08-07-2019 07:19:00 : ERROR:Don't understand what is 4%4
+08-07-2019 11:00:05 : ERROR:Don't understand what is 5^5
+08-07-2019 11:14:01 : ERROR:Don't understand what is 5^5
+08-07-2019 11:15:39 : ERROR:Don't understand what is 4^5
+08-07-2019 11:18:57 : ERROR:Don't understand what is 4%4
+08-07-2019 11:20:06 : ERROR:Don't understand what is 5^5
+08-07-2019 11:20:22 : ERROR:Don't understand what is 5^5
+08-07-2019 11:21:29 : ERROR:Don't understand what is A
+08-07-2019 11:22:30 : ERROR:Don't understand what is 5^5
+08-07-2019 12:20:35 : ERROR:Вычитание невозможно: матрицы {{1.0, 2.0}, {8.0, 3.0}} и {{2.0, 3.0, 3.0}, {2.0, 3.0, 3.0}} имеют разные размеры
+08-07-2019 12:20:46 : ERROR:Деление на ноль невозможно
+08-07-2019 12:23:53 : ERROR:Вычитание невозможно: матрицы {{1.0, 2.0}, {8.0, 3.0}} и {{2.0, 3.0, 3.0}, {2.0, 3.0, 3.0}} имеют разные размеры
+08-07-2019 12:24:02 : ERROR:Вычитание невозможно: матрицы {{1.0, 2.0}, {8.0, 3.0}} и {{2.0, 3.0, 3.0}, {2.0, 3.0, 3.0}} имеют разные размеры
+08-07-2019 12:24:09 : ERROR:Вычитание невозможно: матрицы {{1.0, 2.0}, {8.0, 3.0}} и {{2.0, 3.0, 3.0}, {2.0, 3.0, 3.0}} имеют разные размеры
+08-07-2019 12:24:14 : ERROR:Don't understand what is B\
