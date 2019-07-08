@@ -1,5 +1,7 @@
 package by.it.buymistrov.calc;
 
+import by.it.buymistrov.calc.names.Messages;
+
 import java.util.Arrays;
 
 
@@ -7,7 +9,7 @@ public class Matrix extends Var {
 
     private double[][] value;
 
-    Matrix(double[][] value) {
+    private Matrix(double[][] value) {
         this.value = value;
     }
 
@@ -20,7 +22,6 @@ public class Matrix extends Var {
 
 
         String[] stringMatrix = strMatrix.split("},");
-//        String[] stringMatrix1 = strMatrix.split("},\\{");
         String[] strLine = new String[stringMatrix.length];
         String[][] splittedStrLine = new String[strLine.length][strLine.length];
 
@@ -108,7 +109,7 @@ public class Matrix extends Var {
 
             if (this.value.length == ((Matrix) other).value.length
                     && this.value[0].length == ((Matrix) other).value[0].length){
-                throw new CalcException("Разный размер матриц");
+                throw new CalcException(ResManager.INSTANCE.get(Messages.DMS));
             }
             double[][] rez = new double[value.length][value.length];
 
