@@ -1,0 +1,8 @@
+message.welcome=Welcome!
+message.question=How do you do?
+message.username=Timur Babich
+message.date=The current date:
+message.set.language=English is installed
+error.calc.exception=ERROR:
+message.error=Don't understand what is
+message.operation.error=Operation %s + %s is impossible%n

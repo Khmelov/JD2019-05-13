@@ -1,4 +1,4 @@
-package by.it.tbabich.jd01_13;
+package by.it.tbabich.calc;
 
 
 import org.junit.Test;
