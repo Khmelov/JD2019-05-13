@@ -75,8 +75,8 @@ public class Vector extends Var {
 
         } else if (other instanceof Vector) {
             double[] res = Arrays.copyOf(value, value.length);
-            if (!(((Vector) other).getValue().length ==value.length))
-                throw new CalcException("Разная длина векторов");
+            if (!(((Vector) other).getValue().length ==value.length)){
+               throw new CalcException("Разная длина векторов");}
             for (int i = 0; i < res.length; i++)
                 res[i] = res[i] - ((Vector) other).value[i];
             return new Vector(res);
