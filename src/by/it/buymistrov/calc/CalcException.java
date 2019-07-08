@@ -9,17 +9,21 @@ public class CalcException extends Exception {
 
     public CalcException() {
         super(ResManager.INSTANCE.get(Messages.ERROR));
+        Logger.toLog(this.toString());
     }
 
     public CalcException(String message) {
         super(ResManager.INSTANCE.get(Messages.ERROR) + message);
+        Logger.toLog(this.toString());
     }
 
     public CalcException(String message, Throwable cause) {
         super(ResManager.INSTANCE.get(Messages.ERROR) + message, cause);
+        Logger.toLog(this.toString());
     }
 
     public CalcException(Throwable cause) {
         super(ResManager.INSTANCE.get(Messages.ERROR), cause);
+        Logger.toLog(this.toString());
     }
 }

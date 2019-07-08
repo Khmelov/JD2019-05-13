@@ -4,7 +4,7 @@ public class TaskA {
     public static void main(String[] args) {
 
         for (int i = 0; i < 5; i++) {
-            Logger.toLog("Error: " + i);
+            Logger.toLog("Error: " + i + ".");
         }
 
     }

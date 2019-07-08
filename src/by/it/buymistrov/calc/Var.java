@@ -30,9 +30,9 @@ abstract class Var implements Operation {
             return new Matrix(strVar);
         else if (vars.containsKey(strVar))
             return vars.get(strVar);
-        else
-        throw new CalcException(ResManager.INSTANCE.get(Messages.IDUWII) +strVar);
-
+        else {
+            throw new CalcException(ResManager.INSTANCE.get(Messages.IDUWII) + strVar);
+        }
     }
 
     @Override
