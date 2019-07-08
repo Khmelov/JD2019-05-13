@@ -1,6 +1,6 @@
 package by.it.yaskevich.calc;
 
-public class FullReportBuilder extends ReportBuilder {
+class FullReportBuilder extends ReportBuilder {
     @Override
     void buildName() {
         name = "Full report";

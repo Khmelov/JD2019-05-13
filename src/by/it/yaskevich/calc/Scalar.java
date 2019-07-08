@@ -12,10 +12,6 @@ public class Scalar extends Var {
         this.value = value;
     }
 
-    Scalar(Scalar scalar) {
-        this.value = scalar.value;
-    }
-
     Scalar(String strValue) {
         this.value = Double.parseDouble(strValue);
     }

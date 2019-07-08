@@ -8,15 +8,11 @@ public class Matrix extends Var {
 
     private double[][] value;
 
-    Matrix(double[][] value) {
+    private Matrix(double[][] value) {
         this.value = Arrays.copyOf(value, value.length);
         for (int i = 0; i < value.length; i++) {
             this.value[i] = Arrays.copyOf(value[i], value[i].length);
         }
-    }
-
-    Matrix(Matrix matrix) {
-        this(matrix.value);
     }
 
     Matrix(String strMatrix) throws CalcException {

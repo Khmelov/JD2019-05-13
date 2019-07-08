@@ -103,7 +103,7 @@ public abstract class Var implements Operation {
         return getPath(aClass) + filename;
     }
 
-    public static Map<String, Var> getVars() {
+    static Map<String, Var> getVars() {
         return vars;
     }
 }

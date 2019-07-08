@@ -16,10 +16,6 @@ public class Vector extends Var {
         this.value = Arrays.copyOf(value, value.length);
     }
 
-    Vector(Vector vector) {
-        this(vector.value);
-    }
-
     Vector(String strVector) throws CalcException {
         strVector = strVector.replaceAll("\\s+", "");
         Matcher matcher = Pattern.compile(Patterns.VECTOR).matcher(strVector);
