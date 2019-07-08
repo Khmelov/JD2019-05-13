@@ -1,0 +1,5 @@
+message.welcome=Добро пожаловать!
+message.question=Как дела?
+message.changeLanguage=Язык изменен на русский
+message.unknown=Неизвестная команда
+user.name=Алексей Адамович

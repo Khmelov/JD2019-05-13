@@ -1,37 +1,30 @@
 package by.it.aadamovich.calc;
 
-abstract class Var implements Operation {
+import by.it.aadamovich.calc.names.ResData;
 
-    static Var createVar(String operand) throws CalcException{
-        if (operand.matches(Patterns.SCALAR)) {
-            return new Scalar(operand);
-        } else if (operand.matches(Patterns.VECTOR)) {
-            return new Vector(operand);
-        } else if (operand.matches(Patterns.MATRIX)) {
-            return new Matrix(operand);
-        } else if (VarList.containVariable(operand)) {
-            return VarList.getVariable(operand);
-        }
-        throw new CalcException ("Невозможно создать переменную " + operand);
-    }
+abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s + %s невозможна%n", this, other));
+        throw new CalcException(String.format
+                (ResourceManager.INSTANCE.getString(ResData.SUM_NOT_POSSIBLE), this, other));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s - %s невозможна%n", this, other));
+        throw new CalcException(String.format
+                (ResourceManager.INSTANCE.getString(ResData.SUB_NOT_POSSIBLE), this, other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s * %s невозможна%n", this, other));
+        throw new CalcException(String.format
+                (ResourceManager.INSTANCE.getString(ResData.MUL_NOT_POSSIBLE), this, other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Операция %s / %s невозможна%n", this, other));
+        throw new CalcException(String.format
+                (ResourceManager.INSTANCE.getString(ResData.DIV_NOT_POSSIBLE), this, other));
     }
 }

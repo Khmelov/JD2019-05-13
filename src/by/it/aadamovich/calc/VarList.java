@@ -8,20 +8,20 @@ import java.util.Map;
 class VarList {
 
     private static Map<String, Var> list;
+
     static {
         list = new HashMap<>();
     }
 
-    static Var setVariable(String name, Var variable) {
+    static void setVariable(String name, Var variable) {
         list.put(name, variable);
-        return variable;
     }
 
-    static Var getVariable (String name){
+    static Var getVariable(String name) {
         return list.get(name);
     }
 
-    static boolean containVariable (String name) {
+    static boolean containVariable(String name) {
         return list.containsKey(name);
     }
 
