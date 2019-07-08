@@ -1,7 +1,5 @@
 package by.it.dilkevich.jd01_14;
 
-import com.sun.xml.internal.txw2.output.DataWriter;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

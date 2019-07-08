@@ -1,7 +1,5 @@
 package by.it.yakimovich.calc;
 
-import sun.rmi.runtime.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 

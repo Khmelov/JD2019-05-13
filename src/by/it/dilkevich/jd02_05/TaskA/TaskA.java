@@ -1,10 +1,5 @@
 package by.it.dilkevich.jd02_05.TaskA;
 
-import sun.rmi.server.LoaderHandler;
-
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

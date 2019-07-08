@@ -1,9 +1,6 @@
 package by.it.dilkevich.jd01_04;
 
 import by.it.dilkevich.jd01_03.Helper;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
-
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
