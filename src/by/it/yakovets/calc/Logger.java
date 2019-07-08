@@ -12,19 +12,21 @@ class Logger {
     private Logger() {
     }
 
-    public static void log(Exception e) {
+    public static Logger getInstance() {
         if (logger == null) {
             logger = new Logger();
         }
-           String path = getPath(Logger.class, "log.txt");
-        try (
-                PrintWriter out = new PrintWriter(new FileWriter(path, true))) {
+        return logger;
+    }
+
+    public void log(Exception e) {
+
+        String path = getPath(Logger.class, "log.txt");
+        try (PrintWriter out = new PrintWriter(new FileWriter(path, true))) {
             out.println();
             out.println(e + " " + new Date().toString());
 
-
-        } catch (
-                IOException exception) {
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
 
