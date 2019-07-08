@@ -1,14 +1,15 @@
-package by.it.akhmelev.jd02_03;
+package by.it.yakovets.jd02_03;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 class Dispatcher {
 
     static final int K_SPEED = 100;
-
+    static final double P_SPEED = 1.5;
     private static final int PLAN = 100;
-    private static final AtomicInteger buyerInMarket = new AtomicInteger(0);
-    private static final AtomicInteger buyerCounter = new AtomicInteger(0);
+    static AtomicInteger buyerInMarket = new AtomicInteger(0);
+    static AtomicInteger buyerCounter = new AtomicInteger(0);
+    static int cashierscount = 5;
 
 
     static boolean planComplete() {
@@ -17,13 +18,14 @@ class Dispatcher {
     }
 
     static void addBuyer() {
-        buyerInMarket.getAndIncrement(); //b++
-        //buyerInMarket.incrementAndGet(); //++b
+        buyerInMarket.getAndIncrement();
+
     }
 
     static void completeBuyer() {
         buyerInMarket.getAndDecrement();
         buyerCounter.getAndIncrement();
+
     }
 
     static boolean marketIsOpened() {
@@ -31,4 +33,3 @@ class Dispatcher {
     }
 
 }
-

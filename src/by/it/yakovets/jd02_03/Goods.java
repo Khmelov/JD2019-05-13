@@ -1,4 +1,4 @@
-package by.it.yakovets.jd02_02;
+package by.it.yakovets.jd02_03;
 
 import java.util.*;
 

@@ -1,6 +1,4 @@
-package by.it.yakovets.jd02_02;
-
-import java.util.Map;
+package by.it.yakovets.jd02_03;
 
 public interface IBuyer {
     void enterToMarket();

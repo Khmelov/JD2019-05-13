@@ -1,42 +1,87 @@
 package by.it.yakovets.calc;
 
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    Var calc(String expression) throws CalcException {
-        expression = expression.replaceAll("\\s+", "");
-        String[] part = expression.split(Patterns.OPERATION);
-        Var result = null;
-        if (part.length == 1) {
-            result = Var.createVar(part[0]);
-        } else if (part.length == 2) {
-            Var two = Var.createVar(part[1]);
-            Pattern pattern = Pattern.compile(Patterns.OPERATION);
-            Matcher matcher = pattern.matcher(expression);
 
-            matcher.find();
-            String operation = matcher.group();
-            if (operation.equals("=")) {
-                String name=part[0];
-                Var.saveVar(name, two);
-                return two;
+    private static final Map<String, Integer> priorMap = new HashMap<>();
+
+    static {
+        priorMap.put("=", 0);
+        priorMap.put("+", 1);
+        priorMap.put("-", 1);
+        priorMap.put("*", 2);
+        priorMap.put("/", 2);
+    }
+
+    private int getIndex(List<String> operation) {
+        int index = -1;
+        int currentPr = -1;
+        for (int i = 0; i < operation.size(); i++) {
+            String op = operation.get(i);
+            if (priorMap.get(op) > currentPr) {
+                currentPr = priorMap.get(op);
+                index = i;
             }
 
-            Var one = Var.createVar(part[0]);
-            switch (operation) {
-                case "+":
-                    return one.add(two);
-                case "-":
-                    return one.sub(two);
-                case "*":
-                    return one.mul(two);
-                case "/":
-                    return one.div(two);
-            }
+        }
+        return index;
+    }
+
+
+    private String oneOperation(String sOne, String operation, String sTwo) throws CalcException {
+        Var two = Var.createVar(sTwo);
+        if (operation.equals("=")) {
+            Var.saveVar(sOne, two);
+            return two.toString();
         }
 
-
-        return result;
+        Var one = Var.createVar(sOne);
+        switch (operation) {
+            case "+":
+                return one.add(two).toString();
+            case "-":
+                return one.sub(two).toString();
+            case "*":
+                return one.mul(two).toString();
+            case "/":
+                return one.div(two).toString();
+        }
+        throw new CalcException("Error !!!!!");
     }
+
+
+    Var calc(String expression) throws CalcException {
+        expression = expression.replaceAll("\\s+", "");
+        Pattern patBrackets = Pattern.compile(Patterns.BRACKET);
+        Matcher matcherBrackets = patBrackets.matcher(expression);
+        while (matcherBrackets.find()) {
+            String result = calc(matcherBrackets.group()
+                    .replaceAll("[()]", ""))
+                    .toString();
+           expression= calc(expression.replace(matcherBrackets.group(), result)).toString();
+
+        }
+        List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
+        List<String> operation = new ArrayList<>();
+        Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
+        Matcher matcherOperation = patternOperation.matcher(expression);
+        while (matcherOperation.find()) {
+            operation.add(matcherOperation.group());
+        }
+
+        while (operation.size() > 0) {
+            int index = getIndex(operation);
+            String sOne = operands.remove(index);
+            String sTwo = operands.remove(index);
+            String op = operation.remove(index);
+            String result = oneOperation(sOne, op, sTwo);
+            operands.add(index, result);
+        }
+        return Var.createVar(operands.get(0));
+
+    }
+
 }

@@ -9,7 +9,7 @@ public class ConsoleRunner {
         Parser parser = new Parser();
         Printer printer = new Printer();
 
-        while (!(expression = sc.nextLine()).equals("end")) {
+        while (!(expression = sc.nextLine()).equalsIgnoreCase("end")) {
             if (expression.equals("printvar")) {
                 printer.printvar();
                 continue;

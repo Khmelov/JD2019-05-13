@@ -16,10 +16,6 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         Dispatcher.addBuyer();
     }
 
-    void setPensioneer(boolean pensioneer) {
-        this.pensioneer = pensioneer;
-    }
-
 
     @Override
     public void run() {
