@@ -1,5 +1,8 @@
 package by.it.livanovich.calc;
 
+import by.it.livanovich.calc.Text.Helper;
+import by.it.livanovich.calc.Text.Messages;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,7 +18,7 @@ abstract class Var implements Operation {
 
     static void print (){
         for (Map.Entry<String, Var> entry : varMap.entrySet()) {
-            String key = entry.getKey().toString();
+            String key = entry.getKey();
             String value = entry.getValue().toString();
             System.out.printf("%s = %s\n", key, value);
         }
@@ -41,27 +44,27 @@ abstract class Var implements Operation {
             return varMap.get(operand);
         }
         else
-            throw new CalcException ("невозможно создать переменную");
+            throw new CalcException (Helper.INSTANCE.getKey(Messages.VARIABLE));
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException("Операция сложения " + this + "+" + other + " невозможна");
+        throw new CalcException(Helper.INSTANCE.getKey(Messages.ADD) + this + "+" + other + Helper.INSTANCE.getKey(Messages.IMPOS));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException ("Операция вычетания " + this + "-" + other + " невозможна");
+        throw new CalcException (Helper.INSTANCE.getKey(Messages.SUB) + this + "-" + other + Helper.INSTANCE.getKey(Messages.IMPOS));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException("Операция умножения " + this + "*" + other + " невозможна");
+        throw new CalcException(Helper.INSTANCE.getKey(Messages.MUL) + this + "*" + other + Helper.INSTANCE.getKey(Messages.IMPOS));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException("Операция деления " + this + "/" + other + " невозможна");
+        throw new CalcException(Helper.INSTANCE.getKey(Messages.DIV) + this + "/" + other + Helper.INSTANCE.getKey(Messages.IMPOS));
     }
 }
 

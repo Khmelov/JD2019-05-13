@@ -1,12 +1,22 @@
-package by.it.livanovich.jd02_02;
+package by.it.livanovich.jd02_03;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     private Good good;
     private boolean pensionner = false;
     static int count = 0;
+    private Backet backet=new Backet();
+    private boolean wait = false;
+    private static Semaphore semaphore=new Semaphore(20);
 
-    private Backet backet = new Backet();
+    public void setWait(boolean wait) {
+        this.wait = wait;
+    }
 
     public Backet getBacket() {
         return backet;
@@ -29,9 +39,11 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         enterToMarket();
         takeBacket();
         Integer countGoods = Rnd.Rnd(1, 4);
-        for (int i = 1; i <= countGoods; i++) {
-            chooseGoods();
-            putGoodsToBacket();
+        synchronized (countGoods) {
+            for (int i = 1; i <= countGoods; i++) {
+                chooseGoods();
+                putGoodsToBacket();
+            }
         }
         goToQueue();
         goOut();
@@ -55,6 +67,8 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
 
     @Override
     public void chooseGoods() {
+        try {
+            semaphore.acquire();
         int timeout = Rnd.Rnd(500, 2000);
         if (pensionner) {
             Rnd.sleep((int) (timeout / Dispatcher.K_SPEED * 1.5));
@@ -63,6 +77,13 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         }
         good = Goods.getRandomGood();
         System.out.println(this + " выбрал товар " + good);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            semaphore.release();
+        }
     }
 
     @Override
@@ -81,11 +102,14 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
         synchronized (Cashier.monitor) {
             Cashier.monitor.notifyAll();
         }
+        wait = true;
         synchronized (this) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while (wait) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
