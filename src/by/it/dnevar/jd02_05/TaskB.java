@@ -27,6 +27,7 @@ public class TaskB {
                 printMessages(manager);
             }
         }
+        float f = 1;
 
 
 
