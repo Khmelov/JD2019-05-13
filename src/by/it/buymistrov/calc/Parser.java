@@ -1,5 +1,7 @@
 package by.it.buymistrov.calc;
 
+import by.it.buymistrov.calc.names.Messages;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,7 +52,7 @@ class Parser {
             case "/":
                 return one.div(two).toString();
         }
-        throw new CalcException("Error !!!!!");
+        throw new CalcException(ResManager.INSTANCE.get(Messages.ERROR));
     }
 
 
