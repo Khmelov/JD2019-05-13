@@ -1,0 +1,10 @@
+message.incorrectformat=Incorrect format:
+message.invalidvectordimension=Invalid vector dimension
+message.invalidarraydimension=Invalid array dimension
+message.theadditionoperationisnotpossible=The addition operation %s + %s is not possible.
+message.thesubtractionoperationisnotpossible=The subtraction operation %s + %s is not possible.
+message.themultiplyoperationisnotpossible=The multiply subtraction %s + %s is not possible.
+message.thedivisionoperationisnotpossible=The division subtraction %s + %s is not possible.
+message.unabletocreate=Unable to create
+message.divisionbyzero=Division by zero
+message.error=ERROR:

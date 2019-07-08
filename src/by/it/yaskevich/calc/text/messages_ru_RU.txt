@@ -1,0 +1,10 @@
+message.incorrectformat=Неверный формат:
+message.invalidvectordimension=Неверная размерность векторов
+message.invalidarraydimension=Неверная размерность массивов
+message.theadditionoperationisnotpossible=Операция сложения %s + %s невозможна
+message.thesubtractionoperationisnotpossible=Операция вычитания %s - %s невозможна
+message.themultiplyoperationisnotpossible=Операция умножения %s + %s невозможна
+message.thedivisionoperationisnotpossible=Операция деления %s + %s невозможна
+message.unabletocreate=Невозможно создать
+message.divisionbyzero=Деление на ноль
+message.error=Ошибка:

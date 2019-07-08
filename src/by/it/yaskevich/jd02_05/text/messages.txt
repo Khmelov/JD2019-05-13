@@ -1,0 +1,4 @@
+message.welcome=Welcome!
+message.question=How do you do?
+message.today=Today
+user.name=Mikhail Yaskevich

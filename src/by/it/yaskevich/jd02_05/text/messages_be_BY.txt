@@ -1,0 +1,4 @@
+message.welcome=Прывiтaнне!
+message.question=Як справы?
+message.today=Сення
+user.name=Мiхаiл Яскевiч

@@ -1,0 +1,10 @@
+message.incorrectformat=Няправільны фармат:
+message.invalidvectordimension=Няправільная памернасць вектараў
+message.invalidarraydimension=Няправільная памернасць масіваў
+message.theadditionoperationisnotpossible=Аперацыя складання %s +%s немагчымая
+message.thesubtractionoperationisnotpossible=Аперацыя аднімання %s -%s немагчымая
+message.themultiplyoperationisnotpossible=Аперацыя множання %s +%s немагчымая
+message.thedivisionoperationisnotpossible=Аперацыя дзялення %s +%s немагчымая
+message.unabletocreate=Немагчыма стварыць
+message.divisionbyzero=Дяленне на нуль
+message.error=Памылка:
