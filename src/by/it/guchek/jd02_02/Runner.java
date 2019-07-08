@@ -10,20 +10,40 @@ public class Runner {
         List<Thread> threads=new ArrayList<>();
         System.out.println("Магазин открыт");
 
-        for (int i = 0; i < 2; i++) {                //запускаем поток кассиров
+        for (int i = 0; i <2 ; i++) {                //запускаем поток кассиров
+
             Thread thread = new Thread(new Cashier(i));
             threads.add(thread);
             thread.start();
+
         }
 
         int numberBuyer=0;
-        while (Dispatcher.marketIsOpened()){
-            int count=RandCount.randFrTo(2);
+        int sec=0;
+        while (Dispatcher.marketIsOpened()) {
+            int count = 0;
+            sec=sec++;
+
+                if ((sec <= 30) && (sec % 3 == 0)) {
+
+                    count = RandCount.randFrTo(2);
+
+                } else if ((sec > 30) && (sec % 2 == 0)) {
+
+                    count = RandCount.randFrTo(2);
+
+                } else if ((sec > 30) && (sec % 3 == 0)) {
+
+                    count = RandCount.randFrTo(1);
+                }
+
+
             for (int i = 0; i < count && Dispatcher.marketIsOpened(); i++) { //добавили в условие проверку открыты ли
-                Buyer buyer=new Buyer(++numberBuyer);
+                Buyer buyer = new Buyer(++numberBuyer);
                 buyer.start();
                 threads.add(buyer);
             }
+
             RandCount.sleep(1000);
         }
 
