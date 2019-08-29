@@ -1,4 +1,0 @@
-message.welcome=Прывітанне!
-message.question=Як справы?
-user.name=Цімафей Рудніцки
-message.language=Беларуская

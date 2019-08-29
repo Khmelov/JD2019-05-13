@@ -1,8 +1,0 @@
-message.welcome=Прывiтанне!
-message.question=Як справы?
-message.username=Цiмур Бабiч
-message.date=Бягучая дата:
-message.set.language=Усталявана беларуская мова
-error.calc.exception=ПАМЫЛКА:
-message.error=Не разумею, что такое
-message.operation.error=Аперацыя %s + %s немагчымая%n

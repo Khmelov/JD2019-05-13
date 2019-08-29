@@ -1,4 +1,0 @@
-message.hello = Привет!
-message.question = Как дела?
-message.user = Адамович Антон
-message.language = Русский

@@ -1,5 +1,0 @@
-message.welcome=Вiтаю!
-message.question=Як справы?
-message.changeLanguage=Мова зменена на беларускую
-message.unknown=Невядомая каманда
-user.name=Аляксей Адамовiч

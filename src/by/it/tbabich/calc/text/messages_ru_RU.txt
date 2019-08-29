@@ -1,8 +1,0 @@
-message.welcome=Привет!
-message.question=Как дела?
-message.username=Тимур Бабич
-message.date=Текущая дата:
-message.set.language=Установлен русский язык
-error.calc.exception=ОШИБКА:
-message.error=Не понимаю, что такое
-message.operation.error=Операция %s + %s невозможна%n

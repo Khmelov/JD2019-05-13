@@ -1,5 +1,0 @@
-message.error=Ошибка:
-message.dms=Разный размер матриц
-message.dbz= деление на ноль
-message.iduwii=не понимаю что такое
-message.operationimpossible= Операция %s + %s невозможна%n

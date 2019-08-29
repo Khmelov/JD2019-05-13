@@ -1,5 +1,0 @@
-message.welcome=Прывiтанне!
-message.question=Як справы?
-message.username=Цiмур Бабiч
-message.date=Бягучая дата:
-messages.set.language=Усталявана беларуская мова

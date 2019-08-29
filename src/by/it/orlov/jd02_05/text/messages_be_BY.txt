@@ -1,3 +1,0 @@
-message.welcome=Прывiтaнне!!!
-message.q=Як справы?
-user.name=Арлоу Дзимитрый

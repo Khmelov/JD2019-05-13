@@ -1,3 +1,0 @@
-message.welcome = Привет!
-message.question = Как ты?
-user.name = Яна Кобринец

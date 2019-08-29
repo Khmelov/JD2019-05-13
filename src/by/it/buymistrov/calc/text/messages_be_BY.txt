@@ -1,5 +1,0 @@
-message.error=Памылка:
-message.dms=Розны памер матрыц
-message.dbz= дзяленне на нуль
-message.iduwii=не разумею што такое
-message.operationimpossible= Аперацыя %s + %s немагчымая%n

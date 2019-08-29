@@ -1,4 +1,0 @@
-message.welcome = Прывiтaнне!
-message.date = Дата:
-message.question = Як справы?
-user.name = Іван Зайкоу.
